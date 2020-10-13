@@ -1,0 +1,23 @@
+<!--pages/editInfo/editInfo.wxml-->
+<view class='editInfo'>
+  <view class="e_body">
+  <navbar page-name="修改{{editTit}}"  bg-color="linear-gradient(to right, #e34c26, #e13816)" icon-color="#fff" show-title='true' show-nav='true' show-index='false'></navbar>
+    <view class="section" wx:if="{{editcode!='address'}}">
+      <input placeholder="请输入{{placeholder}}" type='text' value='{{value}}' bindinput='editInfo' />
+    </view>
+    <view class='info_tips' wx:if="{{editcode!='address'}}">
+      <text wx:if="{{editcode=='wx_number'}}">提示：{{editTit}}由6-20位数字、字母组成且必须以字母开头或者11位手机号组成</text>
+      <text wx:if="{{editcode!='wx_number'}}">提示：{{editTit}}由2-35位中文，英文字母和数字及点号下划线组成</text>
+    </view>
+    <view class="section section_flex" wx:if="{{editcode=='address'}}" bindtap='chooseAddress'>
+      <text wx:if="{{isChose==0}}" class="section_area">所在区域</text>
+      <text wx:if="{{isChose==1}}" class="section_area">{{areaShow[0]}}，{{areaShow[1]}}，{{areaShow[2]}}</text>
+      <icon class="iconfont icon-right"></icon>
+    </view>
+    <view class="section saveInfo">
+      <view size='default' bindtap='saveInfo'>保存</view>
+    </view>
+  </view>
+</view>
+<nyz_area_picker show="{{show}}" class="model_style area_chose" bind:sureSelectArea="sureSelectAreaListener" data-name="area" data-validator="required" showValue="{{areaShowId}}">
+</nyz_area_picker>

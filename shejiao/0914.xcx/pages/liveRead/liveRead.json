@@ -1,0 +1,10 @@
+{
+    "navigationBarTitleText": "直播室",
+    "usingComponents": {
+        "skeleton": "/component/skeleton/skeleton",
+        "mlvb-live-room": "/component/mlvb-live-room/mlvbliveroomview",
+        "barrage": "/component/barrage/index"
+    },
+    "navigationStyle": "custom",
+    "backgroundTextStyle": "dark"
+}

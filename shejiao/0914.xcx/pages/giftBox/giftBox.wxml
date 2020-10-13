@@ -1,0 +1,45 @@
+<!--pages/giftBox/giftBox.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<view class="gift skeleton">
+   <navbar page-name="限量礼盒"  bg-color="#ffffff" icon-color="#000000" show-title='true' show-nav='true' show-index='false'></navbar>
+   <view class="gift_body">
+      <view class="gift_body_padding">
+        <scroll-view class="gift_scroll" style="height:{{scrollHeight}}px;background:url({{staticUrl}}flash/box_2.png) repeat" scroll-y lower-threshold='120' bindscrolltolower="loadMore" bindscroll="scroll" scroll-top='{{topNum}}' scroll-with-animation>
+          <view class="gift_banner">
+            <image src="{{staticUrl}}flash/box_1.png" class="skeleton-rect"></image>
+          </view>
+          <view class="gift_body_wraper">
+            <view class="gift_body_block" >
+              <view class="gift_body_list skeleton-rect" wx:for="{{activityList}}" wx:key="index"  bindtap="goLink" data-link='../flashDetail/flashDetail?id={{item.id}}'>
+                <image src="{{item.image}}" class="gift_img skeleton-rect"></image>
+                <view class="gift_body_list_wra">
+                  <view class="gift_body_titi skeleton-rect">
+                    <text style="background:{{line_bg_color}}" class="limit_label">限量</text>{{item.goods_name}}
+                  </view>
+                  <view class="i_limit_r_bar">
+                    <view class='i_limit_r_bar_line bg_theme_gray'>
+                      <view style="background:{{line_bg_color}}" style='width:{{(item.total_count-item.count)/item.total_count*100}}%' wx:if='{{(item.total_count-item.count)/item.total_count*100<100}}'></view>
+                      <view style="background:{{line_bg_color}}" style='width:100%' wx:if='{{(item.total_count-item.count)/item.total_count*100>=100}}'></view>
+                    </view>
+                    <text class="i_limit_sales">{{(item.total_count-item.count)/item.total_count*100}}%</text>
+                  </view>
+                  <view class="gift_body_pri skeleton-rect">
+                    <view class="pri_num">
+                      <text class="sale_pri color_theme_red">￥<text class="pri_count">{{filters.formatMoney(item.original_price)}}</text></text>
+                      <text class="mark_pri">￥{{filters.formatMoney(item.market_price)}}</text>
+                    </view>
+                    <icon class="iconfont icon-car"></icon>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <null-data id="null-data" loadingText="加载中..." loadingShow="{{hasData&&is_load}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无活动" dataShow="{{!hasData}}"></null-data>
+          </view>
+        </scroll-view>
+      </view>
+   </view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+  <icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

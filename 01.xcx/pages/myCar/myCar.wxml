@@ -1,0 +1,141 @@
+<!--pages/myCar/myCar.wxml-->
+<!-- <reload bind:relaod="_relaod" id='reload'></reload> -->
+<view class='my_car' wx:if='{{isShow}}'>
+  <view class='car_header' wx:if='{{carNum}}'>
+    <text>共有<text class='car_num'>{{total}}</text>件商品</text>
+    <text class='car_edit' bindtap='edit' wx-if='{{!isEdit}}'>编辑</text>
+    <text class='car_edit' bindtap='edit' wx-if='{{isEdit}}'>完成</text>
+  </view>
+  <view class='car_body' wx:if='{{carNum}}'>
+    <!-- <view class='editDel' wx-if='{{isEdit}}' bindtap='delCar'>
+      <button size='mini'>删除</button>
+    </view> -->
+    <!-- <view class="{{!isEdit?'car_list':'car_list car_list_height'}}"> -->
+    <view class='car_list'>
+      <checkbox-group bindchange="chosePro">
+        <view class='car_pro' wx:for="{{carList}}" wx:key="index">
+          <label for='{{item.product_id}}'>
+            <view class='pro_chose'>
+              <checkbox value="{{item.product_id}}" checked="{{item.checked}}" id='{{item.product_id}}' />
+            </view>
+          </label>
+          <view class='pro_img' bindtap='goPro' data-link='../proDetail/proDetail?type=normal&id={{item.goods_id}}' id='{{item.goods_id}}'>
+            <image src='{{item.goods.img}}'></image>
+          </view>
+          <view class='pro_info'>
+            <view class='pro_title' bindtap='goPro' data-link='../proDetail/proDetail?type=normal&id={{item.goods_id}}' id='{{item.goods_id}}'>
+              <!-- <text wx:if="{{item.goods.is_third>0}}" class="pro_price_third">{{item.goods.third_name}}</text> -->
+              <text wx:if="{{item.goods.is_third>0}}" class="pro_price_third">{{item.goods.third_name}}</text>
+              <text wx:else class="pro_price_third">平台自营</text>{{item.name}}
+            </view>
+            <text class='pro_spec_info' wx:if="{{item.title!=''}}">规格：{{item.title}}</text>
+            <view class='pro_spec'>
+              <view class='pro_price'>
+                <view>
+                  <!-- <text class='peo_nowprice' wx:if='{{item.deal_type==1||item.deal_type==3}}'>￥{{item.price_sell}} </text> -->
+                  <!-- <text class='peo_nowprice' wx:if='{{item.deal_type>=4}}'>￥{{item.price_combine}} </text> -->
+                  <view class='peo_nowprice' wx:if='{{item.deal_type!=2&&item.deal_type!=3}}'>￥{{item.price_cart}} </view>
+                  <view class='pro_inter_img' wx:if='{{item.deal_type==2||item.deal_type==3||item.deal_type>=4}}'>
+                    <icon class='iconfont icon-jifen1'></icon>
+                  </view>
+                  <text class='pro_integral' wx:if='{{item.deal_type==2||item.deal_type==3||item.deal_type>=4}}'>{{item.point}}</text>
+                </view>
+              </view>
+              <view class='pro_icon'>
+                <button size='mini' class='pro_btn' id='{{item.product_id}}' bindtap='lessNum' data-value='{{item.quantity}}'>-</button>
+                <input value='{{item.quantity}}' id='{{item.product_id}}' bindblur='changeValue' type='number' bindconfirm='changeValue' />
+                <button size='mini' class='pro_btn' id='{{item.product_id}}' bindtap='addNum' data-value='{{item.quantity}}'>+</button>
+              </view>
+            </view>
+          </view>
+        </view>
+      </checkbox-group>
+    </view>
+  </view>
+  <view class='car_body_null' wx:if='{{!carNum}}'>
+    <text>您的购物车是空的，快去选购吧~</text>
+    <button class='btn_red' bindtap='goLink'>去首页看看</button>
+  </view>
+  <view class='recom_info'>
+    <text class='i_title'>—————— 大家都在找 ——————</text>
+    <view class='recom_list'>
+      <view class='i_pro' wx:for="{{recomList}}" wx:key="index">
+        <view class='pro_img' bindtap='goPro' data-link='../proDetail/proDetail?type=normal&id={{item.goods_id}}' id='{{item.goods_id}}'>
+          <image src='{{item.img}}'></image>
+        </view>
+        <view class='pro_title' bindtap='goPro' data-link='../proDetail/proDetail?type=normal&id={{item.goods_id}}' id='{{item.goods_id}}'>
+          <!-- <view class='pro_level'>
+                <icon class='iconfont icon-huiyuanquanyi'></icon>
+                <text>{{item.lv}}</text>
+              </view> -->
+          {{item.name}}</view>
+        <view class='pro_price'>
+          <view style='display:inline-flex'>
+            <view class='pro_flex' wx:if="{{item.deal_type==1||item.deal_type>=4}}">
+              <text class='peo_nowprice' wx:if='{{item.deal_type==1}}'>￥{{item.price_sell}} </text>
+              <text class='peo_nowprice' wx:if='{{item.deal_type>=4}}'>￥{{item.price_sell}}+</text>
+            </view>
+            <view class='pro_flex' wx:if="{{item.deal_type!=1||item.deal_type>=4}}">
+              <view class='pro_inter_img'>
+                <icon class='iconfont icon-jifen1'></icon>
+              </view>
+              <text class='pro_integral' wx:if='{{item.deal_type==2||item.deal_type==3}}'>{{item.point}}</text>
+              <text class='pro_integral' wx:if='{{item.deal_type!=1&&item.deal_type!=2&&item.deal_type!=3}}'>{{item.point}}</text>
+            </view>
+          </view>
+          <view class='pro_flex'>
+            <icon class='iconfont icon-car' bindtap='addCar' id='{{item.product_id}}' data-type='{{item.deal_type}}'></icon>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='order-car' wx:if='{{carNum}}'>
+    <text>—————— 我是有底线的 ——————</text>
+  </view>
+  <!-- <view class='null_height'></view> -->
+  <!-- <include src="../footer/footer.wxml" wx:if='{{!carNum}}'/> -->
+  <!-- ' -->
+  <view class='car_score' wx-if="{{isChose&&full_amount!=null&&!isEdit}}">
+    <view wx-if='{{scoreNum>0&&!isEdit}}' class='score'>
+      <text>消耗积分</text>
+      <text class='total_score'>{{scoreNum}}</text>
+      <text>点</text>
+    </view>
+    <view class='shipping' hidden='{{difference<=0}}'>
+      <text>自营商品满</text>
+      <text class='total_score'>{{full_amount}}</text>
+      <text>元包邮,</text>
+      <text>还差</text>
+      <text class='total_score'>{{difference}}</text>
+      <text>元</text>
+      <text bindtap='goPro' data-link='../single/single' class='total_score join_total'>立即凑单</text>
+    </view>
+    <view class='shipping' hidden='{{difference>0||full_amount==null}}'>
+      <text>自营商品已享受满</text>
+      <text class='total_score'>{{full_amount}}</text>
+      <text>元包邮</text>
+    </view>
+  </view>
+  <view class='car_score' wx-if="{{isChose&&full_amount==null&&scoreNum>0&&!isEdit}}">
+    <view wx-if='{{scoreNum>0&&!isEdit}}' class='score'>
+      <text>需消费积分</text>
+      <text class='total_score'>{{scoreNum}}</text>
+      <text>点</text>
+    </view>
+  </view>
+  <view class='car_edit_more' wx:if='{{carNum}}'>
+    <view class='allCheck'>
+      <checkbox-group bindchange="checkAll">
+        <checkbox value='{{allchose}}' checked='{{allchose==1}}' />
+      </checkbox-group>
+      <text>全选</text>
+      <view class='car_pro_total' wx:if='{{!isEdit}}'>合计：￥
+        <text>{{priceAll}}</text>
+      </view>
+    </view>
+    <button size='mini' bindtap='sureOrder' wx:if='{{!isEdit&&miss_point==false}}'>结算({{choseNum}}件)</button>
+    <button size='mini' wx:if='{{!isEdit&&miss_point==true}}' style='background:#d3d3d3'>积分不足</button>
+    <button size='mini' bindtap='delCar' wx:if='{{isEdit}}'>删除</button>
+  </view>
+</view>

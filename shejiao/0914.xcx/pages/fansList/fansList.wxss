@@ -1,0 +1,124 @@
+/* pages/fansList/fansList.wxss */
+page{
+  background: #f9f9f9;
+}
+.fans_body{
+  padding: 0 24rpx;
+}
+.fans_top{
+  padding-bottom: 10rpx;
+}
+.fans_nav{
+  padding-top: 25rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.fans_nav text{
+  display: inline-block;
+  color: #333;
+  font-size: 26rpx;
+  text-align: center;
+  line-height: 56rpx;
+  width: 339rpx;
+  height: 56rpx;
+  border-radius: 6rpx;
+  background: #EFEFEF;
+}
+.fans_nav .nav_active{
+  background: #ff0000;
+  color: #fff;
+}
+.fans_search{
+  padding-top: 20rpx;
+}
+.fans_search .search_input {
+  width:662rpx;
+  padding: 0 20rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  border-radius: 32rpx;
+  background: #fff;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.search_input icon {
+  font-size: 30rpx;
+  color: #C1C1C1;
+  margin-right: 15rpx;
+}
+.search_header .search_input input {
+  font-size: 24rpx;
+  width: 84%;
+  margin-left: 10rpx;
+  height: 64rpx;
+}
+.search_input .input-placeholder {
+  font-size: 24rpx;
+  color: #C1C1C1;
+}
+.fans_block{
+  
+}
+.fans_block .fans_block_list{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 140rpx;
+  border-bottom: 1px solid #EAEAEA;
+}
+.fans_block .fans_block_list:last-child{
+  border-bottom:0
+}
+.fans_block .fans_block_list .fans_block_list_l{
+  display: inline-flex;
+  align-items: center;
+}
+.fans_block .fans_block_list .fans_block_list_l image{
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  margin-right: 10rpx;
+}
+.fans_block_list .fans_block_list_l .fans_info{
+  font-size: 18rpx;
+  color: #999;
+}
+.fans_block_list .fans_block_list_l .fans_info text:nth-child(1){
+  display: block;
+  width: 420rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+  font-size: 24rpx;
+}
+.fans_block_list .fans_block_list_l .fans_info text:nth-child(2){
+  padding-top: 10rpx;
+  display: block;
+}
+.fans_block_list_r text{
+  font-size: 24rpx;
+  width: 132rpx;
+  height: 48rpx;
+  color: #999;
+  border-radius: 24rpx;
+  display: block;
+  text-align: center;
+  line-height: 48rpx;
+}
+.fans_block_list_r .follow{
+  border: 1px solid #E5E5E5;
+}
+.fans_block_list_r .each_follow{
+  background: #EAEAEA;
+}
+.fans_block_list_r .come_follow{
+  color: #FF0000;
+  border:1px solid #FF0000
+}
+/* 重置样式 */
+.weui-tabs-bar__wrp{
+  height: 0 !important;
+}

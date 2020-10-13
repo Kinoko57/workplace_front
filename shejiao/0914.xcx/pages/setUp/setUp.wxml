@@ -1,0 +1,12 @@
+<!--pages/about/about.wxml-->
+<view class="about_bg">
+	<navbar page-name="账户安全" bg-color="#fff" icon-color="#000" show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class="about_body">
+    <view class="about_list" wx:for="{{aboutList}}" wx:key="index" wx:for-item="block">
+      <view class="about_block" wx:for="{{block}}" wx:key="index" data-link="{{item.link}}" data-id="{{item.id}}" bindtap="goLink">
+        <text>{{item.name}}</text>
+        <icon class="iconfont  icon-right"></icon>
+      </view>
+    </view>
+  </view>
+</view>

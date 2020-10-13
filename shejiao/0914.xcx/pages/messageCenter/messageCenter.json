@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "navbar": "/component/navbar/index",
+    "skeleton": "/component/skeleton/skeleton"
+  },
+  "navigationStyle": "custom",
+  "enablePullDownRefresh":true,
+  "backgroundTextStyle": "dark"
+}

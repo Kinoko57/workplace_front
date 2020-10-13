@@ -1,0 +1,650 @@
+<!--pages/proDetail/proDetail.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+
+<import src="/wxParse/wxParse.wxml" />
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<navbar page-name="商品详情" bg-color="transparent" icon-color="#fff" show-title='false' show-nav='false'></navbar>
+<view class="detail_bg skeleton">
+  <view class="pro_body">
+    <!-- 顶部返回按钮 -->
+    <view class="pro_head {{showNav?'pro_head_fixed':''}}" style='height:{{navHeight}}px'>
+      <view class="pro_head_body top_style" style="margin-top:{{navTop}}px">
+        <view class="top_icon" style="width:{{menuHeight}}px;height:{{menuHeight}}px" bindtap="goBack">
+          <icon class="iconfont icon-left"></icon>
+        </view>
+        <!-- <view class="top_icon" style="width:{{menuHeight}}px;height:{{menuHeight}}px;margin-left:20rpx;">
+          <icon class="iconfont icon-car"></icon>
+        </view> -->
+      </view>
+    </view>
+
+    <!-- 顶部选择标签，页面滑动一定距离显示 商品、评价、详情、推荐 -->
+    <view class="pro_tabs color_theme_gray" style='top:{{navHeight}}px' wx:if="{{showNav}}">
+      <view bindtap="srcollPage" data-value="pro" class=" {{choseNav=='pro'?'color_theme_red':''}}">
+        <text>商品</text>
+        <view class="nav_chose {{choseNav=='pro'?'bg_theme_red':''}}"></view>
+      </view>
+      <view bindtap="srcollPage" data-value="comment" class=" {{choseNav=='comment'?'color_theme_red':''}}">
+        <text>评价</text>
+        <view class="nav_chose {{choseNav=='comment'?'bg_theme_red':''}}"></view>
+      </view>
+      <view bindtap="srcollPage" data-value="detail" class=" {{choseNav=='detail'?'color_theme_red':''}}">
+        <text>详情</text>
+        <view class="nav_chose {{choseNav=='detail'?'bg_theme_red':''}}"></view>
+      </view>
+      <view bindtap="srcollPage" data-value="recommend" class=" {{choseNav=='recommend'?'color_theme_red':''}}"
+        wx:if="{{hasData}}">
+        <text>推荐</text>
+        <view class="nav_chose {{choseNav=='recommend'?'bg_theme_red':''}}"></view>
+      </view>
+    </view>
+
+    <!-- 商品信息，包括banner,价格等 -->
+    <view class="pro_info block_bottom" style="margin-top:{{-navHeight+statusBarHeight}}px">
+      <view class="pro_banner">
+        <swiper indicator-dots="true" autoplay='false' indicator-color='rgba(255, 255, 255, .3)'
+          indicator-active-color='#fff' interval='5000' circular='true' wx:if="{{proInfo.imgList.length>0}}">
+          <block wx:for="{{proInfo.imgList}}" wx:key="index">
+            <swiper-item>
+              <image lazy-load="true" src="{{item.url}}" mode="scaleToFill"></image>
+              <view class="fixed_player" wx:if="{{index==0}}" bindtap="playVideo">
+                <icon class="iconfont icon-bofang"></icon>
+              </view>
+              <view class="pro_banner_icon" wx:if="{{tagInfo.ico_img!=undefined&&tagInfo.ico_img!=''}}">
+                <image src="{{tagInfo.ico_img}}" wx:if="{{tagInfo.location==1}}" class="pro_icon"
+                  style="left:{{filters.StrToArr(tagInfo.distance,',')[0]}}rpx;top:{{filters.StrToArr(tagInfo.distance,',')[1]}}rpx">
+                </image>
+                <image src="{{tagInfo.ico_img}}" wx:if="{{tagInfo.location==2}}" class="pro_icon"
+                  style="right:{{filters.StrToArr(tagInfo.distance,',')[0]}}rpx;top:{{filters.StrToArr(tagInfo.distance,',')[1]}}rpx">
+                </image>
+                <image src="{{tagInfo.ico_img}}" wx:if="{{tagInfo.location==3}}" class="pro_icon"
+                  style="left:{{filters.StrToArr(tagInfo.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(tagInfo.distance,',')[1]}}rpx">
+                </image>
+                <image src="{{tagInfo.ico_img}}" wx:if="{{tagInfo.location==4}}" class="pro_icon"
+                  style="right:{{filters.StrToArr(tagInfo.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(tagInfo.distance,',')[1]}}rpx">
+                </image>
+              </view>
+              <view class="pro_banner_frame" wx:if="{{tagInfo.min_img!=undefined&&tagInfo.min_img!=''}}">
+                <image src="{{tagInfo.min_img}}"></image>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+        <view class="fixed_video" wx:if="{{videoShow}}">
+          <video id="proVideo" src="{{proInfo.video}}" object-fit="contain" controls direction="0" autoplay></video>
+          <view class="exit_player">
+            <text class="btn" bindtap="exitPlayer">退出播放</text>
+          </view>
+        </view>
+      </view>
+      <view class="activity_pro_price ">
+        <view class="activity_left">
+          <view class="pro_activity_price">
+            ￥
+            <text>{{filters.formatMoney(proInfo.buy_price)}}</text>
+          </view>
+          <view class="pro_other">
+            <text class="line_through">市场价：￥{{filters.formatMoney(proInfo.market_price)}}</text>
+            <text class="activity_tag" wx:if="{{formType==1}}">限时促销</text>
+            <text class="activity_tag" wx:if="{{formType==2}}">体验专区</text>
+            <text class="activity_tag" wx:if="{{formType==3}}">限量礼盒</text>
+            <text class="activity_tag" wx:if="{{formType==4}}">每日秒杀</text>
+            <text class="activity_tag" wx:if="{{formType==5}}">超值拼团</text>
+          </view>
+        </view>
+        <view class="activity_right">
+          <view class="activity_status" wx:if="{{activityStatus==0}}">
+            <view class="title">开抢时间</view>
+            <view>{{filters.formatDateTime(startTime)}}</view>
+          </view>
+          <view class="activity_status" wx:if="{{activityStatus==2}}">
+            <view>距结束还剩</view>
+            <view class="activity_time">
+              <text class='time'>{{saleTime.day}}</text>
+              <text class='text'>天</text>
+              <text class='time'>{{saleTime.hou}}</text>
+              <text class='text'>:</text>
+              <text class='time'>{{saleTime.min}}</text>
+              <text class='text'>:</text>
+              <text class='time'>{{saleTime.sec}}</text>
+            </view>
+          </view>
+          <view class="activity_status" wx:if="{{activityStatus==1}}">
+            <view>活动已结束</view>
+          </view>
+        </view>
+      </view>
+      <view class="pro_info_top">
+        <view class="pro_news">
+          <view class="pro_news_left">
+            <!-- <view class="pro_price">
+              <view>
+                <text class="color_theme_red price_icon">￥</text>
+                <text class="color_theme_red price">{{filters.formatMoney(proInfo.retail_price)}}</text>
+              </view>
+              <text class="color_theme_gray" style="margin-left:16rpx;">会员价</text>
+              <text class="color_theme_gray" style="margin-left:16rpx;">￥{{filters.formatMoney(56.5)}}</text>
+              <view class="color_theme_red price_memeber">
+                <text>收益￥{{filters.formatMoney(2.5)}}</text>
+              </view>
+            </view> -->
+            <view class="pro_name">
+              {{proInfo.name}}
+            </view>
+            <view class="pro_desc">
+              {{proInfo.intro}}
+            </view>
+            <view class="pro_tags" wx:if="{{tagInfo.button_tag!=undefined&&tagInfo.button_tag.length>0}}">
+              <text wx:for="{{tagInfo.button_tag}}" wx:key="index">{{item.text}}</text>
+            </view>
+          </view>
+          <view class="pro_news_right">
+            <view class="coll_bg {{proInfo.collect==false?'normal_bg color_theme_red':'color_theme_red'}}"
+              bindtap="collPro">
+              <icon class="iconfont icon-{{proInfo.collect==false?'coll':'coll1'}}"></icon>
+              <text wx:if="{{proInfo.collect==false}}">收藏</text>
+              <text wx:else>已收藏</text>
+            </view>
+          </view>
+        </view>
+        <view class="pro_desc" bindtap="showServer">
+          <view class="pro_decs_left">
+            <view class="pro_desc_tag">
+              <icon class="iconfont icon-gou"></icon>
+              <text>售后无忧</text>
+            </view>
+            <view class="pro_desc_tag">
+              <icon class="iconfont icon-gou"></icon>
+              <text>7天无理由退款</text>
+            </view>
+            <view class="pro_desc_tag">
+              <icon class="iconfont icon-gou"></icon>
+              <text>24小时发货</text>
+            </view>
+          </view>
+          <view class="right_icon ">
+            <icon class="iconfont icon-right color_theme_gray"></icon>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 商品优惠信息等 -->
+    <view class="pro_discount color_theme_gray block_bottom" bindtap="showDiscount">
+      <view class="pro_block_left">
+        <view class="left_title">优惠</view>
+        <view class="pro_block_info">
+          <!-- <image src="{{staticUrl}}pro/pro_discount.png"></image> -->
+          <view class="discount_info" wx:for="{{couList}}" wx:if="{{index<1}}" wx:key="index">
+            <icon class="left_radio"></icon>
+            <icon class="right_radio"></icon>
+            <text
+              class="discount_price">满{{filters.formatMoney(item.price)}}减{{filters.formatMoney(item.discount_price)}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="right_icon">
+        <text>领券</text>
+        <icon class="iconfont icon-right"></icon>
+      </view>
+    </view>
+
+    <!-- 商品规格，配送，售后等 -->
+    <view class="pro_spec color_theme_gray block_bottom">
+      <view class="pro_spec_block" bindtap="showSpec">
+        <view class="pro_block_left">
+          <view class="left_title">已选</view>
+          <view class="pro_block_info">
+            <text>{{choseNames}}</text>
+          </view>
+        </view>
+        <view class="right_icon">
+          <icon class="iconfont icon-right"></icon>
+        </view>
+      </view>
+      <view class="pro_spec_block" bindtap="showDelivery">
+        <view class="pro_block_left">
+          <view class="left_title">配送</view>
+          <view class="pro_block_info">
+            <text>{{proInfo.freight_explain_title}}</text>
+          </view>
+        </view>
+        <view class="right_icon">
+          <icon class="iconfont icon-right"></icon>
+        </view>
+      </view>
+      <view class="pro_spec_block" bindtap="showAfter">
+        <view class="pro_block_left">
+          <view class="left_title">售后</view>
+          <view class="pro_block_info">
+            <text>{{proInfo.after_explain}}</text>
+          </view>
+        </view>
+        <view class="right_icon">
+          <icon class="iconfont icon-right"></icon>
+        </view>
+      </view>
+    </view>
+    <!-- 拼团相关 -->
+    <view class='pro_group_title' wx:if="{{teamList.length>0}}">
+      <text>{{teamList.length}}人在拼团</text>
+      <view bindtap='moreGroup'>
+        <text>查看更多</text>
+        <icon class="iconfont iconright" style="color:#777"></icon>
+      </view>
+    </view>
+    <view class="pro_group pro_bottom_group" wx:if="{{teamList.length>0}}">
+      <view wx:for='{{teamList}}' wx:key='index' wx:if="{{index<3}}" class="pro_group_block">
+        <view class='group' style='padding:20rpx 0;'>
+          <view class='group_user'>
+            <image src='{{item.image}}' class='group_img'></image>
+            <text class="name">{{item.username}}</text>
+            <text>的团</text>
+          </view>
+          <view>
+            <view>
+              <text>已有</text>
+              <text class='group_num'>{{filters.formatCount(item.num)}}</text>
+              <text>人拼团</text>
+            </view>
+          </view>
+          <view class="group_btn" data-link='../groupResult/groupResult?type=view' data-tid="{{item.id}}"
+            data-gid="{{item.group_id}}" bindtap='goGroupResult'>去拼团</view>
+        </view>
+      </view>
+    </view>
+    <!-- 商品评价 -->
+    <view class="pro_comment block_bottom">
+      <view class="comment_title" wx:if="{{comment.rows.length>0}}">
+        <text class="title_left">商品评价({{comment.total}})</text>
+        <view class="comment_title_right color_theme_gray" bindtap="goComment"
+          data-link="../commentList/commentList?id={{proInfo.goods_id}}">
+          <text class="color_theme_red">好评率{{comment.perfect}}%</text>
+          <icon class="iconfont icon-right"></icon>
+        </view>
+      </view>
+      <view class="comment_title" wx:if="{{comment.rows==undefined}}">
+        <text class="title_left">暂无商品评价</text>
+      </view>
+      <view class="comment_tag" wx:if="{{comment.rows.length>0}}">
+        <!-- <text>质量好（23）</text>
+				<text>颜色漂亮（23）</text>
+				<text>服务不错（23）</text> -->
+      </view>
+      <view class="comment_example" wx:if="{{comment.rows.length>0}}">
+        <view class="example_left">
+          <image src="{{comment.rows[0].member_image}}"></image>
+        </view>
+        <view class="example_right">
+          <view class="user_name">{{comment.rows[0].username}}</view>
+          <view class="user_spec">
+            <view class="spec">
+              <text>{{filters.formatDateTime(comment.rows[0].create_time)}}</text>
+              |
+              <text>{{comment.rows[0].spec}}</text>
+            </view>
+            <view class="comm_star">
+              <icon class="iconfont icon-gray-star {{comment.rows[0].goods_mark>=1?'color_theme_red':''}}"></icon>
+              <icon class="iconfont icon-gray-star {{comment.rows[0].goods_mark>=2?'color_theme_red':''}}"></icon>
+              <icon class="iconfont icon-gray-star {{comment.rows[0].goods_mark>=3?'color_theme_red':''}}"></icon>
+              <icon class="iconfont icon-gray-star {{comment.rows[0].goods_mark>=4?'color_theme_red':''}}"></icon>
+              <icon class="iconfont icon-gray-star {{comment.rows[0].goods_mark==5?'color_theme_red':''}}"></icon>
+            </view>
+          </view>
+          <view class="comm_text">
+            {{comment.rows[0].content}}
+          </view>
+          <view class="comm_img">
+            <image src="{{item}}" wx:for="{{comment.rows[0].image}}" bindtap="viewImage" id="{{index}}"></image>
+          </view>
+        </view>
+      </view>
+      <view class="comment_more" wx:if="{{comment.rows.length>0}}" bindtap="goComment"
+        data-link="../commentList/commentList?id={{proInfo.goods_id}}">
+        <text>全部热评</text>
+      </view>
+    </view>
+    <!-- 商品详细信息 -->
+    <view class="pro_detail_block">
+      <!-- <view class="pro_shop">
+        <view class="shop_info">
+          <view class="shop_info_left">
+            <view class="shop_info_img">
+              <image src="{{shopDetail.shop_img}}"></image>
+            </view>
+            <view class="shop_info_other">
+              <text>{{shopDetail.shop_name}}</text>
+              <view class="shop_info_star">
+                <text>综合体验</text>
+                <icon class="iconfont icon-gray-star color_theme_red" wx:if="{{shopDetail.shop_star>=1}}"></icon>
+                <icon class="iconfont icon-xingxingbange color_theme_red" wx:if="{{shopDetail.shop_star==0.5}}"></icon>
+
+                <icon class="iconfont icon-gray-starcolor_theme_red" wx:if="{{shopDetail.shop_star>=2}}"></icon>
+                <icon class="iconfont icon-xingxingbange color_theme_red" wx:if="{{shopDetail.shop_star==1.5}}"></icon>
+                <icon class="iconfont icon-xingxing color_theme_red" wx:if="{{shopDetail.shop_star<=1}}"></icon>
+
+                <icon class="iconfont icon-gray-star color_theme_red" wx:if="{{shopDetail.shop_star>=3}}"></icon>
+                <icon class="iconfont icon-xingxingbange color_theme_red" wx:if="{{shopDetail.shop_star==2.5}}"></icon>
+                <icon class="iconfont icon-xingxing color_theme_red" wx:if="{{shopDetail.shop_star<=2}}"></icon>
+
+                <icon class="iconfont icon-gray-star color_theme_red" wx:if="{{shopDetail.shop_star>=4}}"></icon>
+                <icon class="iconfont icon-xingxingbange color_theme_red" wx:if="{{shopDetail.shop_star==3.5}}"></icon>
+                <icon class="iconfont icon-xingxing color_theme_red" wx:if="{{shopDetail.shop_star<=3}}"></icon>
+
+                <icon class="iconfont icon-gray-star color_theme_red" wx:if="{{shopDetail.shop_star==5}}"></icon>
+                <icon class="iconfont icon-xingxingbange color_theme_red" wx:if="{{shopDetail.shop_star==4.5}}"></icon>
+                <icon class="iconfont icon-xingxing color_theme_red" wx:if="{{shopDetail.shop_star<=4}}"></icon>
+
+              </view>
+            </view>
+          </view>
+          <view class="shop_info_right">
+            <text>进入店铺</text>
+            <icon class="iconfont icon-right color_theme_gray"></icon>
+          </view>
+        </view>
+				<view class="shop_score">
+					<view>
+						<text>商品描述: {{shopDetail.desc}}</text>
+						<text class="high">高</text>
+					</view>
+					<view>
+						<text>卖家服务: {{shopDetail.desc}}</text>
+						<text class="high">高</text>
+					</view>
+					<view>
+						<text>物流服务: {{shopDetail.desc}}</text>
+						<text class="high">高</text>
+					</view>
+				</view>
+      </view> -->
+      <view class="pro_detail">
+        <view class="pro_more_title">
+          <!-- <view class="more_line"></view> -->
+          <text>商品详情</text>
+        </view>
+        <view class='pro_img'>
+          <template is="wxParse" data="{{wxParseData:proDetail.nodes}}" />
+        </view>
+        <view class='pro_img'>
+          <template is="wxParse" data="{{wxParseData:afterDetail.nodes}}" />
+        </view>
+      </view>
+    </view>
+
+    <!-- 商品下的推荐 -->
+    <view class="pro_recommend" wx:if="{{hasData}}">
+      <view class="pro_recommend_title">
+        <!-- <text>热门推荐</text> -->
+        <text>推荐商品</text>
+        <!-- <view class="recommend_right color_theme_red">
+					<text>查看全部</text>
+					<icon class="iconfont icon-right"></icon>
+				</view> -->
+			</view>
+			<view class="pro_recommend_list">
+				<view class="recommend_pro_block" wx:for="{{recommendList}}" wx:key="index" wx:for-item="blocklist">
+					<view class="recommend_pro" wx:for="{{blocklist}}" wx:key="index" bindtap="goProDetail" data-type="{{item.activity_type}}" id="{{item.activity_type==0?item.goods_id:item.activity_id}}">
+						<image src="{{item.image}}"></image>
+						<view class="title">{{item.goods_name}}</view>
+						<view class="price color_theme_red">￥{{filters.formatMoney(item.buy_price)}}</view>
+						<view class="count color_theme_gray">{{item.sales_volume}}人已买</view>
+					</view>
+				</view>
+			</view>
+			<null-data id="null-data" loadingText="加载中..." loadingShow="{{hasData&&!is_end}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无推荐商品" dataShow="{{!hasData}}"></null-data>
+		</view>
+    <view class="pro_fixed_null_height {{isiPhoneX?'iphone_x_padding':''}}"></view>
+    <!-- 商品底部fiexed按钮 -->
+    <view class="pro_btn {{isiPhoneX?'iphone_x_padding':''}}">
+      <view class="link_icon">
+        <!-- <button class="link_icon_block btn_clear">
+          <icon class="iconfont icon-dianpu1"></icon>
+          <text>店铺</text>
+        </button> -->
+        <button class="link_icon_block btn_clear" open-type="contact">
+          <icon class="iconfont icon-xiaoxi3"></icon>
+          <text>客服</text>
+        </button>
+        <button class="link_icon_block btn_clear" bindtap="goLink" data-link='../car/car'>
+          <icon class="iconfont icon-gouwuche"></icon>
+          <text>购物车</text>
+          <text class="num_icon" wx:if="{{carNum>0}}">{{carNum}}</text>
+        </button>
+      </view>
+      <view class="buy_btn">
+        <button class="btn_clear buy" bindtap="showSpec">
+          <view>
+            <text class="btn_text">购买</text>
+            <text wx:if="{{proInfo.save_price>0}}">（省¥{{filters.formatMoney(proInfo.save_price)}}）</text>
+          </view>
+        </button>
+        <button class="btn_clear share" bindtap="showShare">
+          <view>
+            <text class="btn_text">分享</text>
+            <text wx:if="{{proInfo.earn_price>0}}">（赚¥{{filters.formatMoney(proInfo.earn_price)}}）</text>
+          </view>
+        </button>
+      </view>
+    </view>
+  </view>
+  <!-- 弹出框的底部背景 -->
+  <view class="model_bg" wx:if="{{showModel}}" bindtap="hidenModel"></view>
+  <!-- 商品分享底部向上弹框 -->
+  <view class="share_model model_style" hidden="{{!shareShow||!showModel}}">
+    <view class="model_title">分享</view>
+    <view class="model_body">
+      <view>分享到：</view>
+      <view class="share_btn_block">
+        <!-- <button class="share_block btn_clear">
+          <image src="{{staticUrl}}pro/sina.png"></image>
+          <text>新浪</text>
+        </button> -->
+        <button class="share_block btn_clear">
+          <image src="{{staticUrl}}pro/wx.png"></image>
+          <text>微信好友</text>
+        </button>
+        <!-- <button class="share_block btn_clear">
+          <image src="{{staticUrl}}pro/quan.png"></image>
+          <text>朋友圈</text>
+        </button> -->
+      </view>
+    </view>
+    <view class="model_footer">
+      <view class="cancel_btn" bindtap="hidenModel">取消</view>
+    </view>
+  </view>
+
+  <!-- 商品服务弹框 -->
+  <view class="server_model model_style" hidden="{{!serverShow||!showModel}}">
+    <view class="model_title">服务说明</view>
+    <view class="model_body">
+      <scroll-view style="height:56vh;" scroll-y>
+        <view class="server_block" wx:for="{{serverList}}" wx:key="index">
+          <view class="server_block_title">
+            <icon class="iconfont icon-dui1-copy-copy color_theme_red"></icon>
+            <text>{{item.title}}</text>
+          </view>
+          <view class="server_block_tips">
+            <text>{{item.content}}</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="model_footer">
+      <view class="sure_btn bg_theme_linear_red" bindtap="sureModel">关闭</view>
+    </view>
+  </view>
+  <!-- 商品配送说明弹框 -->
+  <view class="delivery_model model_style" hidden="{{!deliveryShow||!showModel}}">
+    <view class="model_title">配送说明</view>
+    <view class="model_body">
+      <scroll-view style="height:36vh;" scroll-y>
+        <!-- <view class="delivery_block" wx:for="{{deliveryList}}" wx:key="index">
+          <view class="delivery_block_tips">
+            <text>{{item.name}}</text>
+          </view>
+        </view> -->
+        <view class='pro_img'>
+          <template is="wxParse" data="{{wxParseData:deliveryDetail.nodes}}" />
+        </view>
+      </scroll-view>
+    </view>
+    <view class="model_footer">
+      <view class="sure_btn bg_theme_linear_red" bindtap="sureModel">关闭</view>
+    </view>
+  </view>
+
+  <!-- 商品售后说明 -->
+  <view class="after_model model_style" hidden="{{!afterShow||!showModel}}">
+    <view class="model_title">售后说明</view>
+    <view class="model_body">
+      <scroll-view style="height:56vh;" scroll-y>
+        <!-- <view class="after_block" wx:for="{{afterList}}" wx:key="index">
+          <view class="after_block_title">
+            <text>{{item.name}}</text>
+          </view>
+          <view class="after_block_tips">
+            <text>{{item.desc}}</text>
+          </view>
+        </view> -->
+        <view class='pro_img'>
+          <template is="wxParse" data="{{wxParseData:explainDetail.nodes}}" />
+        </view>
+      </scroll-view>
+    </view>
+    <view class="model_footer">
+      <view class="sure_btn bg_theme_linear_red" bindtap="sureModel">关闭</view>
+    </view>
+  </view>
+
+  <!-- 商品优惠弹框 -->
+  <view class="discount_model model_style" hidden="{{!discountShow||!showModel}}">
+    <view class="model_title">优惠</view>
+    <view class="model_body">
+      <scroll-view style="height:56vh;" scroll-y>
+        <view class="model_body_title">领券</view>
+        <view class="coupon_block" wx:for="{{couList}}" wx:key="index">
+          <view class="coupon_body">
+            <view class="coupon_body_left">
+              <view class="coupon_title">{{item.name}}</view>
+              <view class="coupon_price color_theme_red">
+                ￥
+                <text class="price">{{filters.formatMoney(item.discount_price)}}</text>
+                <text class="amount">满{{filters.formatMoney(item.price)}}可用</text>
+              </view>
+            </view>
+            <view class="coupon_body_middle" wx:if="{{item.is_get==0}}"></view>
+            <view class="coupon_body_right {{item.is_get==1?'bg_theme_red':''}}" bindtap="getCou" id="{{item.id}}"
+              data-get="{{item.is_get}}" data-index="{{index}}">
+              <view class="coupon_btn coupon_get" wx:if="{{item.is_get==0}}">立即领取</view>
+              <view class="coupon_btn coupon_use" wx:if="{{item.is_get==1}}">去使用</view>
+              <icon class="iconfont icon-yilingqu" wx:if="{{item.is_get==1}}"></icon>
+              <!-- <icon class="iconfont icon-yilingqu" wx:if="{{item.is_get==1&&item.is_snatch==1}}"></icon> -->
+            </view>
+            <view class="coupon_circle circle_top"></view>
+            <view class="coupon_circle circle_bottom"></view>
+          </view>
+        </view>
+        <view class="model_body_title">优惠</view>
+        <!-- wx:for="{{discountList}}" wx:key="index" -->
+        <view class="discount_block">
+          <view class="discount_block_tips">
+            <text class="free_tag">包邮</text>
+            <text>满{{filters.formatMoney(sendByPost.price)}}包邮</text>
+          </view>
+          <view class="discount_btn" bindtap="goComment" data-link="../couProList/couProList?type=-1">
+            <text>去凑单</text>
+            <icon class="iconfont icon-right"></icon>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="model_footer">
+      <view class="btn_tips">以上价格计算仅为初步预估，不代表最终购买价格</view>
+      <view class="sure_btn bg_theme_linear_red" bindtap="sureModel">关闭</view>
+    </view>
+  </view>
+  <!-- 商品购买弹框 -->
+  <view class="spec_model model_style" hidden="{{!specShow||!showModel}}">
+    <view class="model_body">
+      <view class="spec_pro">
+        <view class="spec_pro_img">
+          <image src="{{proInfo.imgList[0].url}}"></image>
+        </view>
+        <view class="spec_pro_price">
+          <view class="price">￥{{filters.formatMoney(proInfo.buy_price)}}</view>
+          <view class="store">库存{{proInfo.inventory}}件</view>
+          <view class="spec_info">已选 {{choseNames}}</view>
+          <view class="spec_info" wx:if="{{proInfo.purchase_limits>0}}">单人限购 <text
+              class="color_theme_red">{{proInfo.purchase_limits}}</text>件</view>
+        </view>
+        <icon class="iconfont icon-guanbicopy close_btn" bindtap="hidenModel"></icon>
+      </view>
+      <scroll-view style="height:40vh;" scroll-y>
+        <view class="spec_list" wx:for="{{specList}}" wx:key="index">
+          <view class="spec_title">{{item.spec_name}}</view>
+          <view class="spec_block_list">
+            <view class="spec_block {{spec.chose==1?'spec_active':''}} {{spec.disabled?'spec_disable':''}}"
+              wx:for="{{item.spec_value_name}}" wx:key="index" wx:for-item="spec" data-disable="{{spec.disabled}}"
+              data-id="{{spec.spec_value_id}}" data-parentid="{{item.spec_id}}" bindtap="choseSpec">
+              <text>{{spec.spec_value_name}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="spec_num">
+          <view>购买数量</view>
+          <view class="num_input">
+            <icon class="iconfont icon-less" id='0' bindtap='lessNum' data-value='less'></icon>
+            <input type="number" value="{{specNum}}" bindblur='changeValue'></input>
+            <icon class="iconfont icon-add" id='1' bindtap='addNum' data-value='add'></icon>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="model_footer">
+      <!-- <button class="add_car_btn spec_btn btn_clear" bindtap="addCar">加入购物车</button> -->
+      <button class="buy_now_btn spec_btn btn_clear" bindtap="goBuy"
+        wx:if="{{activityStatus==2&&proInfo.product_status==1&&proInfo.inventory>0&&proInfo.is_up==1}}">立即购买</button>
+      <button class="buy_disable_btn spec_btn btn_clear" wx:if="{{activityStatus==0&&proInfo.is_up==1}}">等待抢购</button>
+      <button class="buy_disable_btn spec_btn btn_clear" wx:if="{{activityStatus==1&&proInfo.is_up==1}}">活动已结束</button>
+      <button class="buy_disable_btn spec_btn btn_clear"
+        wx:if="{{(activityStatus==2&&proInfo.product_status==0)||proInfo.is_up==0}}">已下架</button>
+      <button class="buy_disable_btn spec_btn btn_clear"
+        wx:if="{{activityStatus==2&&proInfo.inventory<=0&&proInfo.product_status==1&&proInfo.is_up==1}}">已抢完</button>
+    </view>
+  </view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+  <icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>
+
+
+<!-- 拼团列表弹框 -->
+<view class='group_model_bg' hidden='{{groupShow}}' bindtap='closeGroup'  catchtouchmove="true"></view>
+<view class='group_model' hidden='{{groupShow}}' >
+	<icon class='iconfont icon-guanbicopy group_model_icon' bindtap='closeGroup'>
+	</icon>
+	<view class='group_model_body'>
+		<view class='group_model_title'>正在拼团</view>
+		<scroll-view class='group_model_list' scroll-y style="max-height:600rpx" >
+			<view wx:for='{{teamList}}' wx:key='index'>
+				<view class='group_block'>
+					<view class='group_block_left'>
+						<image src='{{item.image}}' class='group_img'></image>
+						<view class='group_right'>
+							<view style='display:flex;align-items:center;'>
+								<text class='group_name'>{{item.nickname}}</text>
+								<text class='group_num'>已有<text style="color:#0d8d37">{{filters.formatCount(item.num)}}</text>人参团</text>
+							</view>
+						</view>
+					</view>
+					<view class='group_block_right'>
+						<view class="group_btn" data-link='../groupResult/groupResult?type=view' data-tid="{{item.id}}" data-gid="{{item.group_id}}" bindtap='goGroupResult'>去拼团</view>
+					</view>
+				</view>
+
+      </view>
+    </scroll-view>
+  </view>
+</view>

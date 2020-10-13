@@ -1,0 +1,51 @@
+<!--pages/myVip/myVip.wxml-->
+<view class='my_vip' wx:if='{{isShow}}'>
+  <view class='vip_bg'>
+    <image src='{{vipBg}}' mode='widthFix' class="vip_bg_01"></image>
+    <!-- <image src='../../static/img/member/vip_bg.jpg' mode='widthFix' class="vip_bg_01"></image> -->
+  </view>
+  <view class='vip_body'>
+    <image src='../../static/img/member/b_top.png' mode='widthFix' class="list_img"></image>
+    <view class='vip_list_bg'>
+      <view class='vip_list'>
+        <view class='vip_pro' wx:for="{{vipList}}" wx:key="index">
+          <view class='pro_img' bindtap='goPro' data-link='../proDetail/proDetail?type=birthday&id={{item.goods_id}}' id='{{item.goods_id}}'>
+            <image src='{{item.img}}'></image>
+          </view>
+          <view class='pro_info'>
+            <view class='pro_title' bindtap='goPro' data-link='../proDetail/proDetail?type=birthday&id={{item.goods_id}}' id='{{item.goods_id}}'>{{item.name}}</view>
+            <view class='pro_spec'>
+              <view class='pro_price'>
+                <view style='display:flex;align-items:center;'>
+                  <view class='pro_inter_img' wx:if='{{item.deal_type!=1}}'>
+                    <icon class='iconfont icon-jifen1'></icon>
+                  </view>
+                  <text class='pro_integral' wx:if='{{item.deal_type==2||item.deal_type==3}}'>{{item.point}}</text>
+                  <text class='pro_integral' wx:if='{{item.deal_type>=4}}'>{{item.point}}</text>
+                  <text class='pro_integral' wx:if='{{item.deal_type>=4}}'>+</text>
+                  <view class='peo_nowprice' wx:if='{{item.deal_type==1}}'>
+                    <text>￥{{item.price_sell}}</text>
+                  </view>
+                  <view class='peo_nowprice' wx:if='{{item.deal_type>=4}}'>
+                    <text>￥{{item.price_sell}}</text>
+                  </view>
+                </view>
+                <view class='pro_orig'>
+                  <text class='nowprice'>{{item.price_market_from}} </text>
+                  <text class='nowprice line'>￥{{item.price_market}} </text>
+                </view>
+              </view>
+              <view class='pro_btn'>
+                <button size='mini' bindtap='goPro' data-link='../proDetail/proDetail?type=birthday&id={{item.goods_id}}' id='{{item.goods_id}}'>立即兑换</button>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <image src='../../static/img/member/b_bottom.png' mode='widthFix' class="list_img"></image>
+  </view>
+</view>
+<view class='goIndex' bindtap='goIndex' data-link='../index/index'>
+  <icon class='iconfont icon-home'></icon>
+</view>

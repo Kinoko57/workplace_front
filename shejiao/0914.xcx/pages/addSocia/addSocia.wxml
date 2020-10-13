@@ -1,0 +1,25 @@
+<!--pages/addArticle/addArticle.wxml-->
+<view class="add_bg skeleton">
+  <navbar page-name="发布动态" bg-color="#ffffff" icon-color="#000000" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class="add_socia">
+    <view class="add_body">
+      <view class="add_detail">
+        <textarea bindblur="bindTextAreaBlur" bindinput="bindTextAreaBlur" placeholder-class="input_placeholder" auto-height placeholder="这一刻的想法..." maxlength="200" />
+      </view>
+      <view class="add_imgs">
+        <view class='img_block' wx:for="{{imgs}}" wx:for-item="item" wx:key="*this">
+          <icon class='iconfont icon-cha' data-index="{{index}}" catchtap='delImg'></icon>
+          <image src='{{item.image}}' wx:if="{{type==1}}" data-index="{{index}}" bindtap="previewImg"></image>
+          <video id="myVideo" wx:if="{{type==2}}" show-fullscreen-btn auto-pause-if-navigate auto-pause-if-open-native show-play-btn show-center-play-btn object-fit='fill' src="{{item.image}}"></video>
+        </view>
+        <view class="add_img_stytle" bindtap='addImg' hidden='{{imgs.length>=9}}'>
+          <icon class="iconfont icon-add"></icon>
+        </view>
+      </view>
+    </view>
+    <view class="add_btn">
+      <view class="sure" bindtap="saveSocia" style="background:{{line_bg_color}}">发布</view>
+    </view>
+
+  </view>
+</view>

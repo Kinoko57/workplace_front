@@ -1,0 +1,68 @@
+<!--pages/couponArea/couponArea.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="cou_area skeleton">
+	<navbar page-name="领券专区" bg-color="#ffffff" icon-color="#333333" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+	<view class="cop_banner">
+		<!-- 轮播图宽718rpx高300rpx固定 -->
+		<image lazy-load="true" src="{{staticUrl}}flash/coupon_top.jpg" mode="scaleToFill" class="index_radius"></image>
+	</view>
+	<view class="cop_nav">
+		<scroll-view scroll-x scroll-with-animation="true" class="nav_scroll" scroll-into-view="{{choseId}}">
+			<view wx:for="{{navList}}" wx:key="index" bindtap="choseNavId" id="{{item.id}}" data-key="{{item.key}}" class="{{choseId==item.id?'nav_active color_theme_red':''}} nav_text">{{item.name}}</view>
+		</scroll-view>
+	</view>
+	<view class="cop_body">
+		<scroll-view class="order_scroll" style="height:{{scrollHeight}}px" scroll-y bindscroll="scroll" lower-threshold='120' bindscrolltolower="loadMore" scroll-top='{{topNum}}' scroll-with-animation>
+			<view class="cop_body_list" wx:for="{{showList}}" wx:for-index="pindex" wx:key="pindex" wx:for-item="listblock">
+				<view class="cop_block" wx:for="{{listblock}}" wx:key="index">
+					<view class="cop_body_list_content">
+						<view class="cop_body_list_content_l color_theme_red">
+							<view class="pri_top">
+								<text>￥</text>
+								<text>{{filters.formatMoney(item.discount_price)}}</text>
+							</view>
+							<view class="pri_bot">
+								满{{filters.formatMoney(item.price)}}元可用
+							</view>
+						</view>
+						<view class="cop_body_list_content_r">
+							<view class="cop_body_list_content_r_tit">
+                <text wx:if="{{item.goods_type==4}}" class="cou_tips">指定商品</text>
+                <text wx:if="{{item.goods_type==3}}" class="cou_tips">指定分类</text>
+                <text wx:if="{{item.goods_type==2}}" class="cou_tips">指定品牌</text>
+                <text wx:if="{{item.goods_type==1}}" class="cou_tips">全品类</text>
+                <text>{{item.name}}</text>
+							</view>
+							<view class="cop_body_list_content_r_time">
+                {{filters.formatDate(item.start_time)}} - {{filters.formatDate(item.end_time)}}
+							</view>
+							<view class="cop_body_list_content_r_btn">
+								<view class="coupon_process">
+									<view class='i_limit_r_bar_line bg_theme_gray'>
+										<view wx:if='{{(item.num-item.residue_num)/item.num*100<100}}' style="width:{{(item.num-item.residue_num)/item.num*100}}%;background:{{line_bg_color}}"></view>
+										<view wx:if='{{(item.num-item.residue_num)/item.num*100>=100}}' style="width:100%;background:{{line_bg_color}}"></view>
+									</view>
+									<text class="i_limit_sales" >剩余{{(item.residue_num)/item.num*100}}%</text>
+								</view>
+								<view wx:if="{{item.is_get==0}}" class="coupon_btn" style="background:{{line_bg_color}}" bindtap="getCou" id="{{item.id}}" data-index="{{index}}" data-pindex="{{pindex}}">
+									立即领取
+								</view>
+                <view wx:if="{{item.is_get==1}}" class="coupon_btn bg_theme_gray" >
+									已领取
+								</view>
+							</view>
+						</view>
+					</view>
+					<image src="{{staticUrl}}flash/coupon_1.png" class="cop_body_list_img"></image>
+				</view>
+
+			</view>
+			<null-data id="null-data" bottomText="已经到底啦~" bottomShow="{{hasData}}" dataText="暂无优惠券" dataShow="{{!hasData}}"></null-data>
+		</scroll-view>
+	</view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+	<icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

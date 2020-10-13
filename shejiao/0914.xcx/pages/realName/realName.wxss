@@ -1,0 +1,149 @@
+/* pages/realName/realName.wxss */
+page{
+  background: #ffffff;
+}
+.real_body{
+ padding: 0 24rpx;
+ border-top: 1px solid #ccc;
+}
+.real_body .section{
+  background: #fff;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ECECEC;
+  height: 120rpx;
+  padding: 0 20rpx;
+}
+.section .form_title {
+  font-size:26rpx;
+  color: #999;
+  float: left;
+  padding-top: 5rpx;
+}
+.section .text_left {
+  width: 180rpx;
+}
+.section input{
+  float: left;
+  font-size: 30rpx;
+  width:480rpx;
+  height: 100rpx;
+  /* width: 456rpx; */
+}
+.place-holder{
+  color: #333;
+  font-size: 26rpx;
+}
+/*radio按钮*/
+.sex{
+  margin-right: 40rpx;
+}
+.radio-group{
+  width: 390rpx;
+  font-size:30rpx;
+  color: #333;
+}
+radio .wx-radio-input {
+  border-radius: 50%;
+  width: 34rpx;
+  height: 34rpx;
+  border: 1px solid #a1a1a1;
+
+}
+radio .wx-radio-input.wx-radio-input-checked {
+  border: 1px solid transparent;
+  background: #e13816;
+}
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+  border-radius: 50;
+  width: 34rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  text-align: center;
+  font-size: 30rpx;font-weight: bold;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+
+.saveInfo {
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+.save_bottom{
+   margin-bottom: 68rpx;
+}
+.saveInfo button {
+  width:710rpx;
+  height: 86rpx;
+  line-height: 86rpx;
+  border: none;
+  color: #fff;
+  outline: none;
+  margin: 0 auto;
+  font-size: 40rpx;
+  border-radius: 20rpx;
+}
+.invalid {
+  /* position: fixed; */
+  width: 100%;
+  color: #fff;
+  /* bottom: 0; */
+  background: #e86d56;
+  text-align: center;
+}
+.upBank{
+  background: #fff;
+  border-radius: 20rpx;
+  margin-top: 20rpx;
+  padding-top: 28rpx;
+  text-align: center;
+}
+.up_load{
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 668rpx;
+  height:420rpx;
+  margin-bottom: 38rpx;
+  background: #f3f3f3;
+  border-radius: 12rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+.up_load image.up_load_positive{
+  position: absolute;
+  width: 101rpx;
+  height: 105rpx;
+  left: 42rpx;
+  top: 42rpx;
+}
+.up_load image.up_load_reverse{
+  position: absolute;
+  width: 102rpx;
+  height: 97rpx;
+  right: 42rpx;
+  top: 42rpx;
+}
+.card_image{
+  max-width: 668rpx;
+  max-height:420rpx;
+}
+.up_load view icon{
+  font-size: 24rpx;
+  padding-right: 6rpx;
+}
+.saveInfo text{
+  width:656rpx;
+  height:80rpx;
+  display: block;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  color: #fff;
+  text-align: center;
+  font-size: 28rpx;
+  margin: 0 auto;
+}

@@ -1,0 +1,215 @@
+<!--pages/payment/payment.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="pay skeleton">
+    <navbar page-name="确认订单"  bg-color="#fff" icon-color="#333" show-title='true' show-nav='true' show-index='false'></navbar>
+    <view class="pay_body">
+      <view class="pay_address skeleton-rect" bindtap="choseAddress">
+        <view class="pay_address_flex"  wx:if="{{address==''||address==undefined}}">
+            <icon class="iconfont icon-add"></icon>
+            <text>增加收货地址</text>
+        </view>
+        <view wx:else class="pay_address_flex">
+          <view class="pay_address_info">
+            <view class="pay_address_info_l">
+              <view class="ship_area"><text style="background:{{line_bg_color}}" wx:if="{{address.label!=''}}">{{address.label}}</text>{{address.ship_area}}</view>
+              <view class="ship_addr">{{address.ship_addr}}</view>
+              <view><text class="ship_name">{{address.ship_name}}</text> {{address.ship_mobile}}</view>
+            </view>
+            <icon class="iconfont icon-right"></icon>
+          </view>
+        </view>
+      </view>
+      <view class="pay_body_padding">
+       <view class="pay_body_wraper"  wx:for="{{orderInfo.suppliers}}" wx:for-item="blockitem" wx:for-index="blockindex" wx:key="blockindex">
+         <view class="pay_body_block" wx:if="{{blockitem.goods.length>1}}">
+            <view class="pay_body_border">
+              <view class="pay_titi">
+                <text class="pay_address_name red_gradient" wx:if="{{blockitem.is_self!=0}}">{{blockitem.name}}</text>
+                <text class="pay_address_name red_gradient" wx:if="{{blockitem.is_self==0}}">{{blockitem.name}}</text>
+                {{blockitem.name}}
+              </view>
+              <view class="pay_pro" bindtap='showdisc' data-type="pro">
+                <view>
+                  <scroll-view class="pay_pro_l" scroll-x scroll-with-animation="true" >
+                    <image src="{{item.img[0].url}}" mode="scaleToFill"  wx:for="{{blockitem.goods}}" wx:key="index"></image>
+                  </scroll-view>
+                </view>
+                <view class="pay_pro_r">
+                    <text>共{{pro_allNum}}件</text>
+                    <icon class="iconfont icon-right"></icon>
+                </view>
+              </view>
+              <view class="pay_delivery">
+                <text class="pub_lcolor">配送</text>
+                <text class="pub_rcolor" wx:if="{{blockitem.distribution_price==0}}">快递 免邮</text>
+                <text class="pub_rcolor" wx:if="{{blockitem.distribution_price!=0}}">快递 不包邮</text>
+              </view>
+            </view>
+            <view class="pay_msg">
+              <text class="pub_lcolor">留言</text>
+              <input class="pub_rcolor" placeholder="请填写留言" type='text' value='{{blockitem.message}}'  data-id="{{blockitem.id}}" data-index="{{blockindex}}" bindblur="bindblur" bindinput='bindinput' placeholder-class="placeholder-class"/>
+            </view>
+         </view>
+         <view class="pay_body_other pay_body_block" wx:if="{{blockitem.goods.length<2}}">
+          <view class="pay_body_border">
+            <view class="pay_titi">
+              <text class="pay_address_name bg_theme_red" wx:if="{{blockitem.is_self==0}}">第三方</text>
+              <text class="pay_address_name bg_theme_red" wx:if="{{blockitem.is_self==1}}">自营</text>
+              {{blockitem.name}}
+            </view>
+            <view class="pay_other_cont">
+              <view class="pay_other_list" wx:for="{{blockitem.goods}}" wx:key="index" >
+                <view class="pay_other_list_flex">
+                 <image src="{{item.img[0].url}}" mode="scaleToFill"></image>
+                 <view class="pay_other_cont_r">
+                   <view class="pay_other_tit">{{item.goods_name}}</view>
+                   <view class="pay_other_spec">规格：{{item.spec}}</view>
+                   <view class="pay_other_pri">
+                    <text class="color_theme_red">￥{{filters.formatMoney(item.item_price)}}</text>
+                    <text class="pay_other_spec">x{{item.num}}</text>
+                   </view>
+                 </view>
+                </view>
+                 <view class="show_tips" wx:if="{{false}}"><text>不支持七天无理由退货</text></view>
+              </view>
+              <view class="pay_delivery">
+                <text class="pub_lcolor">配送</text>
+                <text class="pub_rcolor" wx:if="{{blockitem.distribution_price==0}}">快递 免邮</text>
+                <text class="pub_rcolor" wx:if="{{blockitem.distribution_price!=0}}">快递 不包邮</text>
+              </view>
+            </view>
+          </view>
+           <view class="pay_msg">
+              <text class="pub_lcolor">留言</text>
+              <input class="pub_rcolor" placeholder="请填写留言" type='text' value='{{blockitem.message}}' data-id="{{blockitem.id}}" data-index="{{blockindex}}" bindblur="bindblur" bindinput='bindinput' placeholder-class="placeholder-class"/>
+            </view>
+         </view>
+       </view>
+       <!-- <view class="pay_body_pub">
+         <view class="pay_disc">
+            <text class="pub_lcolor">发票</text>
+            <view class="pub_rcolor">未申请 <icon class="iconfont icon-right"></icon></view>
+          </view>
+          <view class="pay_disc">
+            <text class="pub_lcolor">优惠券</text>
+            <view class="pub_rcolor">不可用 <icon class="iconfont icon-right"></icon></view>
+          </view>
+       </view> -->
+       <view class="pay_body_pub">
+         <view class="pay_disc">
+            <text class="pub_lcolor">总商品金额</text>
+            <view class="pub_lcolor">￥{{filters.formatMoney(orderInfo.goods_price)}}</view>
+          </view>
+          <view class="pay_disc">
+            <text class="pub_lcolor">总运费</text>
+            <view class="pub_lcolor">￥{{filters.formatMoney(orderInfo.distribution_price)}}</view>
+          </view>
+          <view class="pay_disc"  bindtap="showDiscount">
+            <text class="pub_lcolor">优惠券</text>
+            <!-- 不可用 -->
+            <view class="pub_rcolor"> <icon class="iconfont icon-right"></icon></view>
+          </view>
+           <view class="pay_disc" bindtap='showdisc' data-type="dis">
+             <text class="pub_lcolor">优惠减免</text>
+            <view class="pub_lcolor color_theme_red">-￥{{filters.formatMoney(orderInfo.discount_price)}}<icon class="iconfont icon-right"></icon></view>
+          </view>
+           <view class="pay_disc">
+             <text class="pub_lcolor">会员减免</text>
+            <view class="pub_lcolor color_theme_red">-￥{{filters.formatMoney(orderInfo.vip_discount)}} <icon class="iconfont icon-right"></icon></view>
+          </view>
+       </view>
+      </view>
+      <view style="height:200rpx"></view>
+      <view wx:if="{{is_iphonex}}" style="height:68rpx"></view>
+    </view>
+    <!-- 固定底部 -->
+    <view class="pay_bot_fixed" >
+      <view class="fixed_addr" wx:if="{{address.ship_name!=undefined}}">{{address.ship_area}} {{address.ship_addr}}</view>
+      <view class="fixd_btn {{is_iphonex?'iphone_x_padding':''}}">
+        <view class="all_price color_theme_red">合计:￥{{filters.formatMoney(orderInfo.price)}}</view>
+        <view class="sub_order" style="background:{{line_bg_color}}" bindtap="subOrder">提交订单</view>
+      </view>
+    </view>    
+</view>
+  <!-- 清单弹框 -->
+<view class='model_bg' hidden='{{detailshow}}' bindtap='closedisc' scroll-with-animation='true' catchtouchmove="ture">
+</view>
+<view class='pro_disc_detail' animation="{{animation}}" scroll-with-animation='true' catchtouchmove="ture">
+  <icon class="iconfont icon-guanbicopy"  bindtap='closedisc'></icon>
+  <view class='pro_disc_detail_t' wx:if="{{show_type=='pro'}}">商品清单（{{pro_allNum}}件）</view>
+  <view class='pro_disc_detail_t' wx:if="{{show_type=='dis'}}">减免明细</view>
+  <view wx:if="{{show_type=='dis'}}" class="dis_info">
+    <view class='pro_disc_tips color_theme_red'>温馨提示：在享受优惠活动的基础上还可享受会员减免</view>
+    <view class='pro_disc_buy_pro'>
+        购买<text class="color_theme_red">37</text>件商品，原商品总额总计<text class="color_theme_red">￥5.00</text>
+    </view>
+    <view class='pro_disc_buy_pro'>
+        本次为您节省<text class="color_theme_red">￥350</text>，截至目前累计为您节省<text class="color_theme_red">￥3500</text>
+    </view>
+  </view>
+  <view class='pro_disc_detail_c'>
+    <scroll-view scroll-y scroll-with-animation='true' class="pro_scroll {{show_type=='pro'?'pro_height':'dis_height'}}">
+      <view wx:for="{{orderInfo.suppliers}}" wx:for-item="blockitem" wx:for-index="blockindex" wx:key="blockindex">
+        <view class="pro_disc_block" wx:for="{{blockitem.goods}}" wx:key="index">
+          <view class="pro_disc_list">
+            <image src="{{item.img[0].url}}"></image>
+            <view class="pro_disc_list_r">
+              <view class="pay_disc_tit">
+                <text class="pay_disc_name">{{item.goods_name}}</text>
+                <text class="pay_other_num">x{{item.num}}</text>
+              </view>
+              <view class="pay_disc_spec">
+                <text>规格：{{item.spec}}</text>
+              </view>
+              <view class="pay_disc_pri">
+                  <text class="pay_disc_num color_theme_red">￥{{filters.formatMoney(item.buy_price)}}</text>
+              </view>
+            </view>
+          </view>
+          <view class="color_theme_red show_msg" wx:if="{{false}}"><text>不支持7天无理由退货</text></view>
+        </view>
+      </view>
+      <view style="height:100rpx;width:100%"></view>
+    </scroll-view>
+  </view>
+</view>
+<view wx:if="{{showErr}}" class="model_bg"></view>
+<view  wx:if="{{showErr}}" class="err_tips_dia">
+    {{showErrContent}}
+</view>
+
+	<view class="model_bg" wx:if="{{showModel}}" bindtap="hidenModel" catchtouchmove="ture"></view>
+	<!-- 商品优惠弹框 -->
+	<view class="discount_model model_style" hidden="{{!discountShow||!showModel}}" catchtouchmove="ture">
+		<view class="model_title">优惠券</view>
+		<view class="model_body">
+			<scroll-view style="height:46vh;" scroll-y>
+				<view class="model_body_title">领券</view>
+				<view class="coupon_block" wx:for="{{couList}}" wx:key="index">
+					<view class="coupon_body">
+						<view class="coupon_body_left">
+							<view class="coupon_title">{{item.name}}</view>
+							<view class="coupon_price color_theme_red">
+								￥
+								<text class="price">{{filters.formatMoney(item.discount_price)}}</text>
+								<text class="amount">满{{filters.formatMoney(item.price)}}可用</text>
+							</view>
+						</view>
+						<view class="coupon_body_middle" wx:if="{{item.is_get==0}}"></view>
+						<view class="coupon_body_right {{item.is_get==1?'bg_theme_red':''}}" bindtap="getCou" id="{{item.id}}" data-get="{{item.is_get}}" data-index="{{index}}">
+							<view class="coupon_btn coupon_get" wx:if="{{item.is_get==0}}">立即领取</view>
+							<view class="coupon_btn coupon_use" wx:if="{{item.is_get==1}}">去使用</view>
+							<icon class="iconfont icon-yilingqu" wx:if="{{item.is_get==1}}"></icon>
+						</view>
+						<view class="coupon_circle circle_top"></view>
+						<view class="coupon_circle circle_bottom"></view>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+		<view class="model_footer">
+			<view class="btn_tips">以上价格计算仅为初步预估，不代表最终购买价格</view>
+			<view class="sure_btn bg_theme_linear_red" bindtap="sureModel">关闭</view>
+		</view>
+	</view>

@@ -1,0 +1,234 @@
+<!--pages/flashSalesDetail/flashSalesDetail.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<import src="/wxParse/wxParse.wxml" />
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class='courseDetail skeleton'>
+	<scroll-view scroll-y scroll-with-animation='true' style='height:{{height}}px' bindscroll="scroll" scroll-top='{{topNum}}' class="scroll">
+		<view class='i_wraper'>
+			<swiper indicator-color='#efeff0' indicator-active-color="#0d8d37" indicator-dots="{{indicatorDots}}" circular autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+				<block wx:for="{{imgUrls}}" wx:key="index">
+					<swiper-item>
+						<image src="{{item}}" class="slide-image" lazy-load='true' />
+					</swiper-item>
+				</block>
+			</swiper>
+		</view>
+		<view class='f_content'>
+			<view class='f_con_tit'>
+				<view class="f_con_tit_text">
+					{{courseDetail.name}}
+				</view>
+				<view class="f_con_tit_collect">
+					<view class="coll_bg" bindtap="collPro">
+						<icon class="iconfont {{courseDetail.isCollect==1?'iconcoll1':'iconcoll'}}"></icon>
+						<view>{{like_num}}</view>
+					</view>
+				</view>
+			</view>
+			<view class='f_con_remark'>
+				<view class="f_con_tit_remark">
+					{{courseDetail.title}}
+				</view>
+			</view>
+			<view class='f_con_pri'>
+				<text class='f_con_pri_l'>￥<text class='price_num'>{{filters.formatMoney(courseDetail.price_sell)}}</text></text>
+				<text class='f_con_pri_c'>原价：￥{{filters.formatMoney(courseDetail.price_market)}}</text>
+				<text class='f_con_pri_r'>{{filters.formatCount(courseDetail.people_num)}}人已报名</text>
+			</view>
+			<view class="pro_tag" wx:if="{{courseDetail.tag.length>0}}">
+				<text wx:for="{{courseDetail.tag}}" wx:key="index" class="skeleton-rect">{{item.tag_name}}</text>
+			</view>
+		</view>
+		<view class="pro_spec" style='color:#444' wx:if="{{specList.length>0}}">
+			<view style='display:inline-flex;color:#444'>
+				已选
+				<view style='display:inline-block;'>
+					<text>营期：{{filters.formatDate(showSpec.camp_time)}}【{{showSpec.camp_day}}天】</text>
+				</view>
+			</view>
+			<view style='display:inline-flex;'>
+				<view style='display:inline-flex;margin-right:20rpx;justify-content:flex-end;'>
+					<text>{{specNum}}个</text>
+				</view>
+				<view class='spec_icon' bindtap='showguiModel'>
+					<icon class='iconfont iconyuandianzhong'></icon>
+					<icon class='iconfont iconyuandianzhong'></icon>
+					<icon class='iconfont iconyuandianzhong'></icon>
+				</view>
+			</view>
+		</view>
+		<view class="pro_recommend" wx:if="{{recommPros.length>0}}">
+			<view class="pro_recommend_title">
+				<text>热门推荐</text>
+			</view>
+			<view class="pro_recommend_list">
+				<view class="recommend_pro" wx:for="{{recommPros}}" bindtap="goLink" data-link="../proDetail/proDetail?id={{item.id}}" wx:key="index">
+					<image src="{{item.image}}"></image>
+					<view class="title">{{item.name}}</view>
+					<view class="price color_theme_red">￥{{filters.formatMoney(item.price_sell)}}</view>
+					<view class="count color_theme_gray">{{item.people_num}}人已买</view>
+				</view>
+			</view>
+		</view>
+		<view class='f_proDetail'>
+			<view class='f_proDetail_title'>
+				<text>课程介绍</text>
+			</view>
+			<view class='f_proDetail_img' style='min-height:800rpx'>
+				<template is="wxParse" data="{{wxParseData:proDetail.nodes}}" />
+			</view>
+			<!-- 商品下的推荐 -->
+			<!-- <view class='bott_footer'>
+      <text class='lxian xian'></text>
+      <text>到底了</text>
+      <text class='rxian xian'></text>
+    </view> -->
+		</view>
+		<view class="page_footer">已经到底啦~</view>
+		<view class="{{is_iphonex?'bottom_height_iphone':'bottom_height'}}"></view>
+	</scroll-view>
+	<!-- 商品底部fiexed按钮 -->
+	<view class="pro_btn {{is_iphonex?'iphone_x':''}}">
+		<view class="link_icon">
+			<button class="link_icon_block btn_clear" open-type="contact">
+				<icon class="iconfont iconxiaoxi3"></icon>
+				<text>客服</text>
+			</button>
+			<button class="link_icon_block btn_clear" wx:if="{{!isLogin}}" bindtap="toshare">
+				<icon class="iconfont iconzhuanfa1"></icon>
+				<text>分享</text>
+			</button>
+			<button class="link_icon_block btn_clear" open-type="share" wx:if="{{isLogin}}">
+				<icon class="iconfont iconzhuanfa1"></icon>
+				<text>分享</text>
+			</button>
+		</view>
+		<view class="buy_btn" wx:if="{{specList.length>0}}">
+			<button class="btn_clear buy {{courseDetail.status==0||(courseDetail.num-courseDetail.people_num<=0)?'bg_theme_gray':''}}" bindtap="closeModel">
+				<view>
+					<text class="btn_text" wx:if="{{courseDetail.status==1&&(courseDetail.num-courseDetail.people_num>0)}}">购买</text>
+					<text class="btn_text" wx:if="{{courseDetail.status==0}}">已下架</text>
+					<text class="btn_text" wx:if="{{courseDetail.status==1&&(courseDetail.num-courseDetail.people_num<=0)}}">已售完</text>
+					<!-- <text wx:if="{{proInfo.save_price>0}}">（省¥{{filters.formatMoney(proInfo.save_price)}}）</text> -->
+				</view>
+			</button>
+			<!-- <button class="btn_clear share" wx:if="{{isLogin}}" open-type="share">
+				<view>
+					<text class="btn_text">立即分享</text>
+				</view>
+			</button>
+			<button class="btn_clear share" wx:if="{{!isLogin}}" bindtap="toshare">
+				<view>
+					<text class="btn_text">立即分享</text>
+				</view>
+			</button> -->
+		</view>
+		<view class="buy_btn" wx:if="{{specList.length<=0}}">
+			<button class="btn_clear buy bg_theme_gray">
+				<view>
+					<text class="btn_text">购买</text>
+				</view>
+			</button>
+		</view>
+	</view>
+</view>
+<view class="goTop {{is_iphonex?'goTop_bottom':''}}" hidden="{{isTop}}" bindtap="returnTop">
+	<icon class='iconfont iconhuidaodingbu'></icon>
+</view>
+<!-- 立即抢购弹框 -->
+<view class='pro_spec_model' hidden='{{modelShow}}' bindtap='closeGui' catchtouchmove="ture">
+</view>
+<view class="pro_spec_detail" hidden='{{modelShow}}' catchtouchmove="ture">
+	<view class='spec_head'>
+		<view class='spec_pro_img' bindtap='viewImg' data-url='{{courseDetail.image[0]}}'>
+			<image src='{{courseDetail.image[0]}}' lazy-load='true'></image>
+		</view>
+		<view class='spec_close' bindtap='closeGui'>
+			<icon class='iconfont iconguanbi'></icon>
+		</view>
+		<view class='spec_pro_price'>
+			<text class='spec_pro_integral'>￥{{filters.formatMoney(showSpec.price_sell)}}</text>
+		</view>
+		<view class='spec_pro_code'>
+			<view>
+				<text>原价：</text>
+				<text class='spec_pro_orig'>￥{{filters.formatMoney(showSpec.price_market)}}</text>
+			</view>
+		</view>
+		<view class='spec_pro_code'>
+			<view>
+				<text>剩余人数：</text>
+				<text>{{courseDetail.num-courseDetail.people_num_static<=0?'0':courseDetail.num_static-courseDetail.people_num_static}}</text>
+			</view>
+		</view>
+	</view>
+	<view class='spec_body'>
+		<!-- <view wx:if="{{specList.length>0}}">
+			<view class='spec_title' bindtap="choseCamp">
+				<text>营期</text>
+				<view><text class="color_theme_blue" style="font-weight:600">{{filters.formatDate(showSpec.camp_time)}}【{{showSpec.camp_day}}天】</text>
+					<icon class="iconfont iconright"></icon>
+				</view>
+			</view>
+			<view class='spec_type'>
+				<button size='mini' bindtap="choseType" wx:for="{{specList}}" wx:key='index' id='{{item.id}}' data-pid='{{item.id}}' class="{{item.ischose? 'button_click': ''}}">{{filters.formatDate(item.camp_time)}}【{{item.camp_day}}天】</button>
+			</view>
+		</view> -->
+		<view class="spec_list">
+			<view class='spec_title'>
+				<text>营期</text>
+			</view>
+			<view class="camp_block">
+				<scroll-view scroll-y class="camp_block_left" scroll-into-view="type_{{campId}}">
+					<view wx:for="{{allDayList}}" wx:key="index" bindtap="choseType" id='type_{{item.camp_day}}' data-pid="{{item.camp_day}}" class="camp_block_left_list camp_block_list {{campId==item.camp_day?'camp_block_left_list_active':''}}">{{item.camp_day}}天</view>
+				</scroll-view>
+				<scroll-view scroll-y class="camp_block_right" scroll-into-view="type_{{dayId}}">
+					<view wx:for="{{dayList}}" wx:key="index" class="camp_block_right_list camp_block_list" bindtap="choseDay" id="type_{{item.id}}" data-pid="{{item.id}}">
+						<text class="{{dayId==item.id?'color_theme_blue':''}}">{{filters.formatDate(item.day)}}</text>
+						<icon class="iconfont icondui color_theme_blue" wx:if="{{dayId==item.id}}"></icon>
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+
+		<view class='spec_num'>
+			<text>数量</text>
+			<view class='pro_icon'>
+				<button size='mini' class='pro_spec_btn' id='0' bindtap='lessNum' data-value='less' disabled='{{specNum==0||specNum==1}}'>-</button>
+				<input value='{{specNum}}' type='number' bindblur='changeValue' />
+				<button size='mini' class='pro_spec_btn' id='1' bindtap='addNum' data-value='add'>+</button>
+			</view>
+		</view>
+		<view style="height:120rpx;"></view>
+		<view style="height:68rpx;" wx:if="{{is_iphonex}}"></view>
+	</view>
+	<view class="spec_btn_bg {{is_iphonex?'spec_btn_height':''}}">
+		<view class="spec_btn">
+			<button class='surebtn' wx:if="{{courseDetail.status==1&&(courseDetail.num_static-courseDetail.people_num_static>0)}}" bindtap="rightBuy" data-link="../sureOrder/sureOrder">确认</button>
+			<button class='surebtn_null' wx:if="{{courseDetail.status==1&&(courseDetail.num_static-courseDetail.people_num_static<=0)}}">已售完</button>
+			<button class='surebtn_null' wx:if="{{courseDetail.status==0}}">已下架</button>
+		</view>
+	</view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+	<icon class="iconfont iconhuidaodingbuxianxing"></icon>
+</view>
+<!-- 营期弹框 -->
+<view class="camp_bg" hidden="{{showCamp}}" bindtap='closeCamp' catchtouchmove="ture" bindtap="closeCamp"></view>
+<view class="camp_body" hidden="{{showCamp}}" catchtouchmove="ture">
+	<view class="camp_titi">选择营期</view>
+	<view class="camp_block">
+		<scroll-view scroll-y class="camp_block_left" scroll-into-view="type_{{campId}}">
+			<view wx:for="{{allDayList}}" wx:key="index" bindtap="choseType" id='type_{{item.camp_day}}' data-pid="{{item.camp_day}}" class="camp_block_left_list camp_block_list {{campId==item.camp_day?'camp_block_left_list_active':''}}">{{item.camp_day}}天</view>
+		</scroll-view>
+		<scroll-view scroll-y class="camp_block_right" scroll-into-view="type_{{dayId}}">
+			<view wx:for="{{dayList}}" wx:key="index" class="camp_block_right_list camp_block_list" bindtap="choseDay" id="type_{{item.id}}" data-pid="{{item.id}}">
+				<text class="{{dayId==item.id?'color_theme_blue':''}}">{{filters.formatDate(item.day)}}</text>
+				<icon class="iconfont icondui color_theme_blue" wx:if="{{dayId==item.id}}"></icon>
+			</view>
+		</scroll-view>
+	</view>
+	<view class="camp_fixed {{is_iphonex?'iphone_x_padding':''}}">
+		<view class="camp_btn bg_theme_blue_line" bindtap="sureCamp">确定</view>
+	</view>
+</view>

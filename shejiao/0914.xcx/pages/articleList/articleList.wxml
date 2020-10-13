@@ -1,0 +1,65 @@
+<!--pages/articleList/articleList.wxml-->
+<!-- <view style="display:none">
+  <image wx:for="{{articleList}}" mode="widthFix" wx:key="id" id="{{item.id}}" src="{{item.image}}" bindload="onImageLoad" style="width:346rpx;"></image>
+</view> -->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="article_bg skeleton">
+  <navbar page-name="种草专区" bg-color="#fff" icon-color="#333333" show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class="article_body">
+    <view class="article_top">
+      <scroll-view class="article_typelist" scroll-with-animation='true' scroll-x scroll-into-view="{{activityType}}">
+        <view class="type_block {{activityType==item.key?'color_theme_red':''}} skeleton-rect" wx:for="{{typeList}}" wx:key="index" id="{{item.key}}" data-type="{{item.id}}" bindtap="choseTypeId" data-banner="{{item.banner}}">{{item.name}}</view>
+      </scroll-view>
+    </view>
+    <scroll-view class="article_bottom" style="height:{{scrollHeight}}px" scroll-y scroll-y lower-threshold='120' bindscrolltolower="loadMore" bindscroll="scroll" scroll-top='{{topNum}}' scroll-with-animation>
+      <view class="article_banner">
+        <image src="{{activityBanner}}" mode="widthFix"></image>
+      </view>
+      <view class="article_lists" wx:if="{{articleList.length>0}}">
+        <view class="article_block_left">
+          <view class="article_block" wx:for="{{col1}}" wx:key="index" bindtap="goLink" data-link="../articleDetail/articleDetail?id={{item.id}}">
+            <view class="article_img">
+              <image src="{{item.image}}" style="width:100%;height:{{item.height}}rpx"></image>
+            </view>
+            <view class="article_title">
+              {{item.title}}</view>
+            <view class="article_user"></view>
+            <view class="article_like">
+              <view class="read">
+                <text>{{item.read_num==null?0:item.read_num}}浏览</text>
+              </view>
+              <view class="like">
+                <icon class="iconfont icon-coll"></icon>
+                <text>{{item.like_num==null?0:item.like_num}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="article_block_right">
+          <view class="article_block" wx:for="{{col2}}" wx:key="index" bindtap="goLink" data-link="../articleDetail/articleDetail?id={{item.id}}">
+            <view class="article_img">
+              <image src="{{item.image}}" style="width:100%;height:{{item.height}}rpx"></image>
+            </view>
+            <view class="article_title">
+              {{item.title}}</view>
+            <view class="article_user"></view>
+            <view class="article_like">
+              <view class="read">
+                <text>{{item.read_num==null?0:item.read_num}}浏览</text>
+              </view>
+              <view class="like">
+                <icon class="iconfont icon-coll"></icon>
+                <text>{{item.like_num==null?0:item.like_num}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false&&articleList.length>0}}" bottomText="已经到底啦~" bottomShow="{{is_end&&articleList.length>0}}" dataText="暂无种草文章" dataShow="{{articleList.length==0}}"></null-data>
+    </scroll-view>
+
+  </view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+  <icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

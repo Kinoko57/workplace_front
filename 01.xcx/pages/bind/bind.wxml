@@ -1,0 +1,33 @@
+<!--pages/bind/bind.wxml-->
+<view class='bind'>
+  <view class='b_jump'>
+    <text bindtap='skipBind' hidden="{{visited=='1'}}">跳过</text>
+  </view>
+  <view class='b_content'>
+    <view class='b_title'>
+      <text>绑定手机号</text>
+    </view>
+    <view class='b_tips'>
+      <text>忘记密码或账号有异常，可以通过手机号寻回账号</text>
+    </view>
+    <view class='b_form'>
+      <form bindsubmit="formSubmit" bindreset="formReset">
+        <view class="section mobile">
+          <text>+86</text>
+          <!-- <icon class='iconfont icon-plus-select-down'></icon> -->
+          <input name="input" type='number' placeholder="输入手机号码" bindblur='getMobile' bindinput='getMobile' class='width' />
+        </view>
+        <view class="section getcode">
+          <input name="input" type='number' placeholder="输入验证码" bindblur='getCode' bindinput='getCode' />
+          <button size="mini" disabled='{{isDisabled}}' bindtap='sendCode' style="background-color:{{color}}">{{text}}</button>
+        </view>
+        <view class="section next">
+          <!-- <button form-type='submit' size='default' wx:if="{{visited=='0'}}">下一步</button> -->
+          <button form-type='submit' size='default'>完成</button>
+        </view>
+      </form>
+    </view>
+
+  </view>
+</view>
+<!-- <reload bind:relaod="_relaod" id='reload'></reload> -->

@@ -1,0 +1,366 @@
+/* pages/sureOrder/sureOrder.wxss */
+
+.sure_order {
+  /* font-family: SimHei; */
+  background: #f2f2f2;
+  overflow-x: hidden;
+}
+
+.sure_body {
+  background: #f2f2f2;
+}
+
+.sure_body .sure_head {
+  /* height: 160rpx; */
+  position: relative;
+  margin-bottom: 12rpx;
+}
+
+.sure_head .sure_addr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 152rpx;
+  padding: 16rpx 24rpx;
+  background: #fff;
+}
+
+.add_tips {
+  font-size: 32rpx;
+  color: #555;
+  font-family: 'DIN';
+}
+
+.sure_addr .sure_addr_info {
+  font-size: 24rpx;
+  color: #888;
+  font-family: 'DIN';
+  display: flex;
+  align-items: center;
+}
+
+.sure_addr_info view .add_more {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.sure_addr_info view .static {
+  width: 56rpx;
+  height: 24rpx;
+  line-height: 24rpx;
+  border: 2rpx solid #ff8d97;
+  font-size: 20rpx;
+  color: #ff8d97;
+  border-radius: 5rpx;
+  display: inline-block;
+  text-align: center;
+  margin-left: 52rpx;
+}
+
+.sure_head image {
+  position: absolute;
+  width: 100%;
+  height: 8rpx;
+  bottom: 0;
+}
+
+.sure_pro {
+  /* height: 358rpx; */
+  background: #fff;
+  margin-bottom: 20rpx;
+}
+
+.sure_pro .sure_pro_title {
+  font-size: 30rpx;
+  padding: 0 26rpx;
+  height: 86rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.sure_pro .sure_pro_title .third_title {
+  color: #444;
+  font-weight: bold;
+}
+
+.sure_pro .sure_pro_title .order_tag {
+  background: #ff8d97;
+  height: 28rpx;
+  padding: 0 8rpx;
+  font-size: 20rpx;
+  color: #fff;
+  border-radius: 8rpx;
+  line-height: 28rpx;
+  text-align: center;
+  display: inline-block;
+  margin-right: 10rpx;
+}
+
+.sure_pro .car_pro {
+  padding: 0 26rpx;
+  height: 262rpx;
+  background: #fff;
+  border-bottom: 1px solid #ebebeb;
+  display: flex;
+  align-items: center;
+}
+
+.car_pro .pro_img {
+  float: left;
+  /* margin-left: 18rpx; */
+  margin-right: 30rpx;
+  position: relative;
+}
+
+.pro_img image {
+  width: 190rpx;
+  height: 186rpx;
+}
+
+.pro_img .pro_tips {
+  width: 190rpx;
+  height: 52rpx;
+  background: rgba(0, 0, 0, 0.6);
+  line-height: 52rpx;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+}
+
+.pro_tips text {
+  color: #fff;
+  font-size: 24rpx;
+}
+
+.car_pro .pro_info {
+  width: 100%;
+}
+
+.pro_info .pro_title {
+  font-size: 30rpx;
+  /* font-weight: bold; */
+  color: #444;
+  /* margin-top: 30rpx; */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.pro_info .pro_spec {
+  overflow: hidden;
+  /* height: 64rpx; *//* display: flex;
+  align-items: center;
+  justify-content: space-between; */
+}
+
+.pro_spec .pro_price {
+  font-family: 'DIN';
+  display: flex;
+  justify-content: space-between;
+  /* width: 240rpx; */
+}
+
+.pro_price .pro_icon {
+  color: #888;
+  font-size: 28rpx;
+}
+
+.pro_price .peo_nowprice {
+  color: #ff8d97;
+  font-size: 30rpx;
+  font-weight: bold;
+  /* margin-right: 8rpx; */
+}
+
+.pro_price .pro_integral {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #ff8d97;
+  /* margin-left: 8rpx; */
+}
+
+.pro_price .pro_integral_add {
+  color: #ff8d97;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.pro_price .pro_inter_img {
+  display: inline-flex;
+  align-items: flex-end;
+}
+
+.pro_price .pro_inter_img .iconfont {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #ff8d97;
+  display: inline-flex;
+}
+
+.pro_price .pro_inter_img image {
+  width: 24rpx;
+  height: 20rpx;
+}
+
+.pro_price .pro_orig {
+  font-size: 24rpx;
+  color: #b8b8b8;
+  text-decoration: line-through;
+}
+
+.pro_weight text {
+  font-size: 28rpx;
+  color: #888;
+  font-weight: 'DIN';
+}
+
+.pro_block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 26rpx;
+  height: 86rpx;
+  border-bottom: 1px dashed #ebebeb;
+}
+
+.pro_block:last-child {
+  border-bottom: none;
+}
+
+.pro_block text {
+  color: #999;
+  font-size: 24rpx;
+}
+
+.pro_block .pro_tips {
+  margin-right: 4rpx;
+  display: flex;
+}
+
+.pro_tips text {
+  font-size: 26rpx;
+  /* color: #565656; */
+  color: #ff8d97;
+}
+
+/* .pro_icon button {
+  width: 44rpx;
+  height: 44rpx;
+  line-height: 42rpx;
+  padding: 0 22rpx;
+  margin: 0;
+  color: #9f9f9f;
+  font-size: 38rpx;
+  display: flex;
+  justify-content: center;
+  border-radius: 0;
+  background: #f3f3f3;
+}
+
+.pro_icon  button::after {
+  border: none;
+}
+
+.pro_icon input {
+  width: 70rpx;
+  height: 44rpx;
+  min-height: 44rpx;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  padding: 0;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #565656;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  font-family: 'DIN';
+} */
+
+.sure_other {
+  background: #fff;
+}
+
+.sure_other .other_blcok {
+  padding: 0 26rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-bottom: 2rpx solid #e0e0e0;
+  color: #999;
+  font-size: 24rpx;
+}
+
+.other_blcok .type text {
+  color: #999;
+  font-size: 24rpx;
+}
+
+.other_blcok view text {
+  color: #555;
+  font-size: 24rpx;
+  font-family: 'DIN';
+}
+
+.other_blcok view icon {
+  margin-left: 30rpx;
+}
+
+.other_blcok view .sure_score {
+  font-size: 30rpx;
+  /* font-weight: bold; */
+  color: #666;
+  /* margin-right: 30rpx; */
+}
+
+.other_blcok view .sure_price {
+  font-size: 50rpx;
+  color: #ff8d97;
+}
+
+/* 空白的块，解决底部导航占领高度 */
+
+.null_height {
+  height: 100rpx;
+}
+
+.null_height_iphonex {
+  height: 168rpx;
+}
+
+.sure_btn {
+  box-shadow: 0 8rpx 20rpx 16rpx #dadada;
+  position: fixed;
+  bottom: 0;
+  height: 100rpx;
+  width: 100%;
+  z-index: 100;
+}
+
+.sure_btn_height {
+  height: 168rpx;
+  background: #fff;
+}
+
+.sure_btn button {
+  background: #ff8d97;
+  color: #fff;
+  font-size: 40rpx;
+  border-radius: 0;
+}
+
+.surecountdown {
+  position: absolute;
+  color: #fff;
+  top: 16rpx;
+  right: 26rpx;
+}
+
+.surecountdown icon {
+  margin-right: 6rpx;
+}

@@ -1,0 +1,14 @@
+<view class="null_bg">
+  <view class="loading" wx:if="{{loadingShow}}">
+    {{loadingText}}
+  </view>
+  <view class="is_bottom" wx:if="{{bottomShow}}">
+    {{bottomText}}
+  </view>
+  <view class="no_data" wx:if="{{dataShow}}">
+    <!-- <icon class="iconfont icon-zanwushuju1"></icon> -->
+    <image src="{{staticUrl}}index/null_bg.png" mode="widthFix" style="width: 400rpx;margin: 0 auto;" wx:if="{{showNullImg}}"></image>
+    <ss-icon name="icon-zanwushuju" color="#888" size="140px" block="{{true}}" wx:else></ss-icon>
+    <view class="tips">{{dataText}}</view>
+  </view>
+</view>

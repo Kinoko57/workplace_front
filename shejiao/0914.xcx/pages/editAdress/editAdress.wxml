@@ -1,0 +1,80 @@
+<!--pages/editAdress/editAdress.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class='editClientInfo skeleton'>
+  <navbar page-name="{{adddressText}}收获地址" bg-color="linear-gradient(to right, #e34c26, #e13816)" icon-color="#fff" show-title='true' show-nav='true' show-index='false'></navbar>
+   <view wx:if="{{form.$invalidMsg && form.$dirty}}" class="invalid">
+    {{form.$invalidMsg}}
+  </view>
+  <!-- <view style="height:31px" wx:if="{{form.$invalidMsg && form.$dirty}}"></view> -->
+  <view class='edit_info_t'>
+    <form bindsubmit="formSubmit">
+      <view class="edit_top">
+        <view class='section'>
+            <input placeholder="姓名" name='name' bindblur="validate" type="text" data-name="name" data-validator="required" confirm-type="next" value="{{addInfo.name}}" placeholder-class="{{form.name&&form.name!=undefined?'placeholder-class':'placeholder-class-default'}}"></input>
+            <view class="text_right">
+            <image src="{{staticUrl}}my/name.png"></image>
+          </view>
+        </view>
+        <view class='section'>
+          <input placeholder="联系电话" type='number' placeholder-class="{{form.phone&&form.phone!=undefined?'placeholder-class':'placeholder-class-default'}}" name='phone' bindblur="validate" data-name="phone" data-validator="required,phone" confirm-type="next" value="{{addInfo.phone}}"></input>
+          <view class="concat text_right">
+          +86 
+          </view>
+        </view>
+        <view class='section' bindtap='chooseAddress'>
+          <view name='area' class='picker' data-name="area" data-validator="required" value="{{areaShow}}">
+            <text wx:if="{{isChose==0}}" class="{{form.area&&form.area!=undefined?'placeholder-class':'picker_placeholder'}}">所在区域</text>
+            <text wx:if="{{isChose==1}}">{{areaShow[0]}}，{{areaShow[1]}}，{{areaShow[2]}}</text>
+          </view>
+          <view class="text_right">
+            <icon class="iconfont icon-right"></icon>
+          </view>
+        </view>
+        <view class='section'>
+          <input placeholder="请填写详细地址" name='addr' class="addr_input" placeholder-class="{{form.addr&&form.addr!=undefined?'placeholder-class':'placeholder-class-default'}}" bindblur="validate" type="text" data-name="addr" data-validator="required" confirm-type="next" value="{{addInfo.addr}}"></input>
+        </view>
+      </view>
+      <view class="edit_c">
+        <view class='edit_c_text'>
+          <textarea placeholder="{{placeholdertext}}" placeholder-class="text_class" value='{{isInput}}' bindinput="inputAction" bindblur="lostblur"></textarea>
+          <view class='edit_c_btn'>
+            <text class="clear_null" bindtap='clearInput'>清空</text>
+            <text class="text_active" bindtap='autoDiscern' style="background:{{line_bg_color}};color:{{color}}">识别</text>
+          </view>
+        </view>
+      </view>
+      <view style="width:750rpx;height:20rpx;background:#ECECEC"></view>
+      <view class="edit_b">
+        <view class='section'>
+          <text class='form_title text_left'>地址标签</text>
+          <view class="edit_lable">
+           <view class="edit_lable_block">
+              <text wx:for="{{labelList}}" class="{{item.id==choseId?'active_text':''}}" bindtap="clickLabel" name='labelname' data-name="labelname" value="{{labelname}}" wx:key="index" data-id="{{item.id}}">{{item.name}}</text>
+              <view class="label_input {{show_label_edit?'label_input_text':''}}">
+                <input placeholder="请输入标签名称，最多5个字" disabled="{{show_label_edit}}" confirm-type="next" type="text" value="{{labelvalue}}" bindinput="getInput" bindblur="burlInput"></input>
+                <text class="sure_text {{labelvalue!=''?'sure_text_color':''}}" wx:if="{{!show_label_edit}}" bindtap="sureLabel">确定</text>
+                <text class="sure_text sure_text_color" bindtap="sureLabel" wx:if="{{show_label_edit}}" bindtap="editLabel">编辑</text>
+              </view>
+           </view>
+          </view>
+        </view>
+        <view class='section'>
+          <text class='form_title'>设为默认地址</text>
+          <switch checked='{{addInfo.is_default}}' color="#e13917" name='is_default' data-name="required"/>
+        </view>
+      </view>
+      <!-- <view class="edit_cancel color_theme_red" bindtap="delAdd" wx:if="{{type=='edit'}}">
+        删除收货地址
+      </view> -->
+      <view class='saveInfo {{is_iphonex?"iphone_x_margin":""}}'>
+        <button formType="submit" disabled="{{!showSubmit}}" style="background:{{line_bg_color}};color:{{color}}">保存</button>
+        <view bindtap="delAdd" wx:if="{{type=='edit'}}" class="cancel_button">删除收货地址</view>
+      </view>
+    </form>
+  </view>
+</view>
+<nyz_area_picker show="{{show}}" class="model_style area_chose" bind:sureSelectArea="sureSelectAreaListener" data-name="area" data-validator="required" showValue="{{areaShowId}}">
+</nyz_area_picker>
+
+<view>
+</view>

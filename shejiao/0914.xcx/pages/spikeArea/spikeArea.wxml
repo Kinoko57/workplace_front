@@ -1,0 +1,96 @@
+<!--pages/flashSale/flashSale.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="spike_bg skeleton">
+  <navbar page-name="每日秒杀" bg-color="#fff" icon-color="#333333" show-search='false' show-title='true' show-nav='true'
+    show-index='false'></navbar>
+  <view class="spike_body">
+    <view class="spike_body_time">
+      <image src="{{staticUrl}}flash/day.png" class="spike_hot"></image>
+      <scroll-view scroll-x scroll-with-animation="true" class="spike_timelist">
+        <view class="spike_time_block {{item.id==choseId?'time_block_active color_theme_red':''}}" wx:for="{{timeList}}"
+          wx:key="index" bindtap="choseActivity" data-id="{{item.id}}" data-status="{{item.status}}">
+          <view class="time">{{item.name}}</view>
+          <view wx:if="{{item.status==2}}" class="tips">已结束</view>
+          <view wx:if="{{item.status==1}}" class="tips">抢购中</view>
+          <view wx:if="{{item.status==3}}" class="tips">即将开始</view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="spike_pro_body">
+      <scroll-view class="spike_prolist" style="height:{{scrollHeight}}px" scroll-y>
+        <block wx:for="{{activityList}}" wx:key="index" wx:for-item="blockItem">
+          <view class="activity_block" wx:for="{{blockItem}}" wx:key="index" bindtap="goLink"
+            data-link='../flashDetail/flashDetail?id={{item.id}}'>
+            <view class="act_pro">
+              <view class="act_pro_left">
+                <image src="{{item.tag.ico_img}}"
+                  wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==1}}" class="pro_icon"
+                  style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+                </image>
+                <image src="{{item.tag.ico_img}}"
+                  wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==2}}" class="pro_icon"
+                  style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+                </image>
+                <image src="{{item.tag.ico_img}}"
+                  wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==3}}" class="pro_icon"
+                  style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+                </image>
+                <image src="{{item.tag.ico_img}}"
+                  wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==4}}" class="pro_icon"
+                  style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+                </image>
+                <image src="{{item.image}}" class="pro_main_image"></image>
+                <image src="{{item.tag.min_img}}" wx:if="{{item.tag.min_img!=undefined&&item.tag.min_img!=''}}"
+                  class="pro_min_frame"></image>
+              </view>
+              <view class="act_pro_right">
+                <view class="act_pro_name">
+                  <text>{{item.goods_name}}</text>
+                </view>
+                <view class="act_pro_tips">
+                  <text>{{item.goods_intro}}</text>
+                </view>
+                <view class="act_pro_progress">
+                  <!-- 进度条小于100 -->
+                  <view class="sale_progress" wx:if="{{((item.total_stock-item.count)/item.total_stock)*100<100}}"
+                    style='width:{{((item.total_stock-item.count)/item.total_stock)*100}}%;background:{{line_bg_color}}'>
+                    <text class="sale_num">已抢{{item.total_stock-item.count}}件</text>
+                  </view>
+                  <text class="whole_num"
+                    wx:if="{{((item.total_stock-item.count)/item.total_stock)*100<100}}">{{((item.total_stock-item.count)/item.total_stock)*100}}%</text>
+                  <!-- 进度条大于100 -->
+                  <view class="sale_progress" wx:if="{{((item.total_stock-item.count)/item.total_stock)*100>=100}}"
+                    style='width:100%;background:{{line_bg_color}}'>
+                    <text class="sale_num">已抢{{item.total_stock-item.count}}件</text>
+                  </view>
+                  <text class="whole_num"
+                    wx:if="{{((item.total_stock-item.count)/item.total_stock)*100>=100}}">100%</text>
+                </view>
+                <view class="act_pro_tips" wx:if="{{item.tag.button_tag!=undefined&&item.tag.button_tag.length>0}}">
+                  <text class="act_pro_dis" style="border:1px solid {{bg_color}};color:{{bg_color}}" wx:for="{{item.tag.button_tag}}" wx:key="index" wx:if="{{index<3}}">{{item.text}}</text>
+                </view>
+                <view class="act_pro_price">
+                  <view class="pro_price">
+                    <text class="sale_price">￥<text class="sale">{{filters.formatMoney(item.buy_price)}}</text></text>
+                    <text class="market_price">￥{{item.market_price}}</text>
+                  </view>
+                  <view class="pro_btn {{choseType==0?'disable_btn bg_theme_gray':''}}" wx:if="{{choseType==0}}">已结束
+                  </view>
+                  <view class="pro_btn" wx:if="{{choseType==1}}" style="background:{{line_bg_color}}">去秒杀</view>
+                  <view class="pro_btn {{choseType==2?'wait_btn':''}}" style="background:{{line_bg_color}}"
+                    wx:if="{{choseType==2}}">未开始</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+        <null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false&&hasData}}" bottomText="已经到底啦~"
+          bottomShow="{{is_end&&hasData}}" dataText="暂无数据" dataShow="{{!hasData}}"></null-data>
+      </scroll-view>
+    </view>
+  </view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+  <icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

@@ -1,0 +1,75 @@
+<!--pages/evaluateOrder/evaluateOrder.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="evaluate_bg skeleton">
+   <navbar page-name="评价晒单" bg-color="#fff" icon-color="#333333" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class="evaluate_body">
+    <view class="evaluate_block" wx:for="{{proList}}" wx:for-item="blockitem" wx:for-index="blockindex" wx:key="blockindex">
+      <view class="evaluate_top">
+        <image src="{{blockitem.goods_image[0]}}"></image>
+         <view class="evaluate_top_r">
+            <view class="evaluate_top_r_titi">商品评价</view>
+            <view class="evaluate_top_r_start">
+              <icon class="iconfont {{item?'icon-gray-star':'icon-xingxing '}}" data-index="{{index}}" data-blockindex="{{blockindex}}" bindtap="clickStart" wx:for="{{commentMark[blockindex].goods_mark}}" wx:key="index"></icon>
+              <text wx:if="{{commentMark[blockindex].start_true==1}}">非常差</text>
+              <text wx:if="{{commentMark[blockindex].start_true==2}}">差</text>
+              <text wx:if="{{commentMark[blockindex].start_true==3}}">一般</text>
+              <text wx:if="{{commentMark[blockindex].start_true==4}}">好</text>
+              <text wx:if="{{commentMark[blockindex].start_true==5}}">非常好</text>
+            </view>
+         </view>
+      </view>
+      <view class="evaluate_block_center">
+         <view class="evaluate_block_center_text">
+           <textarea bindblur="bindTextAreaBlur" bindinput="bindTextAreaBlur" data-blockindex="{{blockindex}}" placeholder-class="input_placeholder" auto-height placeholder="符合评论规则，评价超过10个字即可~" maxlength="200" />
+           <!-- <image src="{{staticUrl}}my/edit.png" class="evaluate_block_center_text_image"></image> -->
+         </view>
+         <view class="evaluate_block_center_name">
+          <view  bindtap="choseHidden" data-blockindex="{{blockindex}}" class="evaluate_block_center_name_flex">
+            <icon class="iconfont {{commentMark[blockindex].is_true?'icon-dui1-copy-copy':'icon-dui1'}}"></icon>匿名评价
+          </view>
+         </view>
+         <view class="evaluate_block_center_upload">
+          <view class="evaluate_block_center_list" wx:if="{{commentMark[blockindex].imgs.length>0}}">
+             <scroll-view  scroll-x scroll-with-animation="true" class="nav_scroll">
+                <view class="image_list_block" wx:for="{{commentMark[blockindex].imgs}}" wx:key="index">
+                  <icon class="iconfont icon-cha" data-index="{{index}}" catchtap='delImg'></icon>
+                  <image src="{{filePath+item}}"></image>
+                </view>
+             </scroll-view>
+          </view>
+           <view class="evaluate_block_center_add" bindtap="addImg" data-blockindex="{{blockindex}}">
+               <image src="{{staticUrl}}my/upload_phone.png"></image>
+              <view>请添加合规的图片</view>
+           </view>
+         </view>
+      </view>
+    </view>
+    <view class="evaluate_block">
+       <view class="evaluate_block_bottom">
+          <view class="evaluate_block_bottom_titi">
+             <image src="{{staticUrl}}my/order_2.png"></image>
+             <text>物流服务评价</text>
+          </view>
+          <view class="evaluate_block_bottom_type">
+             <view class="evaluate_block_bottom_type_l">快递包装</view>
+             <view class="evaluate_block_bottom_type_r">
+                <icon class="iconfont {{item?'icon-gray-star':'icon-xingxing '}}" data-index="{{index}}" data-type="packing"  bindtap="clickTrack" wx:for="{{packingList}}" wx:key="index"></icon>
+             </view>
+          </view>
+          <view class="evaluate_block_bottom_type">
+             <view class="evaluate_block_bottom_type_l">送货速度</view>
+             <view class="evaluate_block_bottom_type_r">
+                <icon class="iconfont {{item?'icon-gray-star':'icon-xingxing '}}" data-index="{{index}}" data-type="speed" bindtap="clickTrack" wx:for="{{speedList}}" wx:key="index"></icon>
+             </view>
+          </view>
+          <view class="evaluate_block_bottom_type">
+             <view class="evaluate_block_bottom_type_l">配送员服务</view>
+             <view class="evaluate_block_bottom_type_r">
+                <icon class="iconfont {{item?'icon-gray-star':'icon-xingxing '}}" data-index="{{index}}" data-type="server"  bindtap="clickTrack" wx:for="{{serverList}}" wx:key="index"></icon>
+             </view>
+          </view>
+       </view>
+    </view>
+    <view class="save_btn {{is_iphonex?'iphone_x_margin':''}}" bindtap="gosubmit" style="background:{{line_bg_color}}">提交</view>
+  </view>
+</view>

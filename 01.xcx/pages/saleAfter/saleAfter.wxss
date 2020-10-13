@@ -1,0 +1,281 @@
+/* pages/saleAfter/saleAfter.wxss */
+
+.sale_after {
+  padding-bottom: 30rpx;
+}
+
+.after_head {
+  font-size: 26rpx;
+  text-align: center;
+  background: #f2f2f2;
+  height: 50rpx;
+  color: #808080;
+  line-height: 50rpx;
+}
+
+.after_head .name {
+  color: #ff8d97;
+  margin: 0 8rpx;
+}
+
+.after_type {
+  background: #fff;
+  font-size: 30rpx;
+  padding: 20rpx 26rpx;
+  margin-bottom: 20rpx;
+}
+
+.after_type .type_list {
+  overflow: hidden;
+  height: 70rpx;
+  line-height: 70rpx;
+  margin-top: 10rpx;
+}
+
+.after_type .type_list text {
+  padding: 10rpx 30rpx;
+  border: 1px solid #c9c9c9;
+  margin-right: 20rpx;
+  font-size: 26rpx;
+}
+
+.type_tips {
+  color: #a4a4a4;
+  font-size: 24rpx;
+  margin-right:0.1rem;
+
+}
+
+.after_type .type_list .text_active {
+  border: 1px solid #ff8d97;
+  color: #ff8d97;
+}
+
+.after_pro .car_pro {
+  padding: 0 26rpx;
+  height: 262rpx;
+  background: #fff;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+.car_pro .pro_img {
+  float: left;
+  /* margin-left: 18rpx; */
+  margin-right: 30rpx;
+  position: relative;
+}
+
+.pro_img image {
+  width: 190rpx;
+  height: 186rpx;
+}
+
+.car_pro .pro_info {
+  width: 100%;
+}
+
+.pro_info .pro_title {
+  font-size: 26rpx;
+  color: #444;
+  /* margin-top: 30rpx; */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.pro_title .title_icon {
+  /* border: 2rpx solid #ff8d97; */
+  background: #ff8d97;
+  height: 26rpx;
+  /* width: 48rpx; */
+  font-size: 20rpx;
+  color: #fff;
+  border-radius: 8rpx;
+  line-height: 26rpx;
+  text-align: center;
+  display: inline-block;
+  margin-right: 10rpx;
+  padding: 0 6rpx;
+}
+
+.pro_info .pro_spec {
+  overflow: hidden;
+  /* height: 64rpx; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14rpx;
+}
+
+.pro_spec .pro_price {
+  font-family: 'DIN';
+  width: 240rpx;
+}
+
+.pro_price .peo_nowprice {
+  color: #ff8d97;
+  font-size: 30rpx;
+}
+
+.pro_price .pro_integral {
+  font-size: 30rpx;
+  color: #ff8d97;
+}
+
+.pro_price .pro_inter_img {
+  display: inline-flex;
+  align-items: flex-end;
+  /* margin-left: 20rpx; *//* margin-right: 30rpx; */
+}
+
+.pro_price .pro_inter_img .iconfont {
+  font-size: 30rpx;
+  color: #ff8d97;
+  display: inline-flex;
+}
+
+.pro_price .pro_orig {
+  font-size: 24rpx;
+  color: #b8b8b8;
+  text-decoration: line-through;
+}
+
+.pro_price .spec_info {
+  font-size: 20rpx;
+  color: #999;
+}
+
+.pro_weight text {
+  font-size: 20rpx;
+  color: #888;
+  font-weight: 'DIN';
+}
+
+.pro_spec .pro_btn {
+  display: inline-flex;
+  align-items: center;
+}
+
+.pro_spec .pro_btn button {
+  min-width: 150rpx;
+  height: 52rpx;
+  border: 1px solid #808080;
+  color: #808080;
+  background: transparent;
+  font-size: 24rpx;
+  padding: 0rpx 20rpx;
+  line-height: 52rpx;
+  border-radius: 18rpx;
+}
+
+.pro_spec .pro_btn button::after {
+  border: none;
+}
+
+.after_com {
+  padding: 26rpx;
+  background: #fff;
+  margin-bottom: 10rpx;
+}
+
+.after_com .phcolor {
+  font-size: 30rpx;
+}
+
+.after_com textarea {
+  min-height: 180rpx;
+  width: 100%;
+}
+
+.com_imgList {
+  /* display: flex;
+  justify-content: flex-start;
+  align-items: center; */
+  overflow: hidden;
+  padding: 10rpx 0;
+}
+
+.com_imgList .imgBlock {
+  position: relative;
+  margin: 10rpx;
+  /* display: inline-flex; */
+  float: left;
+}
+
+.imgBlock .iconfont {
+  position: absolute;
+  top: -28rpx;
+  right: 0;
+  color: #ff8d97;
+  z-index: 20;
+}
+
+.imgBlock text {
+  display: blcok;
+  position: absolute;
+  top: -3rpx;
+  right: 6rpx;
+  background: #fff;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.imgBlock image {
+  width: 130rpx;
+  height: 130rpx;
+}
+
+.com_imgList .addicon {
+  font-size: 125rpx;
+  color: #a4a4a4;
+}
+
+.after_tips {
+  color: #a4a4a4;
+  font-size: 24rpx;
+  padding: 10rpx 20rpx;
+}
+
+.after_tracking {
+  background: #fff;
+  margin: 20rpx 0;
+  padding-left: 26rpx;
+  display: flex;
+  align-items: center;
+  height: 80rpx;
+}
+
+.after_tracking text {
+  font-size: 28rpx;
+  width: 21%;
+}
+
+.after_tracking input {
+  font-size: 28rpx;
+}
+
+.after_tracking .trackText {
+  font-size: 28rpx;
+}
+
+.comBtn {
+  margin-top: 30rpx;
+  margin-bottom: 40rpx;
+}
+
+.comBtn button {
+  width: 460rpx;
+  height: 86rpx;
+  line-height: 86rpx;
+  border: none;
+  background: #ff8d97;
+  color: #fff;
+  outline: none;
+  font-size: 40rpx;
+  border-radius: 20rpx;
+}

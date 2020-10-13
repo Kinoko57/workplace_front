@@ -1,0 +1,161 @@
+<!--pages/myOrder/myOrder.wxml-->
+<!-- <reload bind:relaod="_relaod" id='reload'></reload> -->
+
+<view class='myOrder' wx:if='{{isShow}}'>
+  <view class='order_body'>
+    <scroll-view class='order_type' scroll-x scroll-with-animation='true' scroll-into-view='{{active_type_id}}'>
+      <text class="{{orderStatusCode==0?'text_active':''}}" bindtap='choseOrder' id='type0' data-tid='0'>全部</text>
+      <text class="{{orderStatusCode==1?'text_active':''}}" bindtap='choseOrder' id='type1' data-tid='1'>待付款</text>
+      <text class="{{orderStatusCode==5?'text_active':''}}" bindtap='choseOrder' id='type5' data-tid='5'>待发货</text>
+      <text class="{{orderStatusCode==2?'text_active':''}}" bindtap='choseOrder' id='type2' data-tid='2'>待收货</text>
+      <text class="{{orderStatusCode==7?'text_active':''}}" bindtap='choseOrder' id='type7' data-tid='7'>退换/售后</text>
+      <text class="{{orderStatusCode==6?'text_active':''}}" bindtap='choseOrder' id='type6' data-tid='6'>待评价</text>
+      <text class="{{orderStatusCode==3?'text_active':''}}" bindtap='choseOrder' id='type3' data-tid='3'>已完成</text>
+      <text class="{{orderStatusCode==4?'text_active':''}}" bindtap='choseOrder' id='type4' data-tid='4'>已取消</text>
+    </scroll-view>
+    <view class='order_list' wx:if='{{orderNum}}'>
+      <view class='order_single' wx:for='{{orderList}}' wx:key='index' wx:for-item="order">
+        <view class='order_head'>
+          <view class='order_code'>
+            <text wx:if="{{order.t_type==1}}">订单号：</text>
+            <!-- <text wx:if="{{order.third_id>0&&order.t_type!=1}}" class="order_tag">{{order.third_name}}</text> -->
+            <text wx:if="{{order.third_id>0&&order.t_type!=1}}" class="order_tag">{{order.third_name}}</text>
+            <text wx:if="{{order.third_id==0&&order.t_type!=1}}" class="order_tag">平台自营</text>
+            <text>{{order.order_id}}</text>
+          </view>
+          <view class='order_states' wx:if='{{orderStatusCode!=7}}'>
+            <view wx:if="{{(order.t_type==1&&order.countdown!=undefined&&order.countdown>0)||(endTimeList.length>0&&order.t_type==1&&order.countdown>0)}}">等待付款</view>
+            <view wx:if="{{order.t_type==5}}">买家已付款</view>
+            <view wx:if="{{order.t_type==2}}">待收货</view>
+            <view wx:if="{{order.t_type==6}}">交易成功</view>
+            <view wx:if="{{order.t_type==3}}">交易完成</view>
+            <view wx:if="{{(order.t_type==1&&endTimeList.length<=0&&order.countdown!=undefined&&order.countdown<=0)||(order.t_type==4)}}">已取消</view>
+            <view wx:if="{{order.t_type==7}}">交易关闭</view>
+            <!-- <text class="{{orderStatusCode==6||orderStatusCode==3?'delOrder':'view_hidden'}}">|</text>
+            <view class="{{orderStatusCode==6||orderStatusCode==3?'delOrder':'view_hidden'}}">
+              <image src='../../static/img/com/del.png'></image>
+            </view> -->
+          </view>
+          <view class='order_states' wx:if='{{orderStatusCode==7}}'>
+            <view wx:if="{{order.after_type=='refunds'}}">退款订单</view>
+            <view wx:if="{{order.after_type=='reship'}}">退货订单</view>
+            <view wx:if="{{order.after_type=='barter'}}">换货订单</view>
+          </view>
+        </view>
+        <view class="order_child" wx:for='{{order.rows}}' wx:key='index' wx:for-item="child">
+          <view class="order_child_head">
+            <view class='order_code' wx:if="{{order.t_type==1}}">
+              <!-- 订单号： -->
+              <text>{{child.order_id}}</text>
+            </view>
+          </view>
+          <view class='order_pro_info' wx:for='{{child.order_items}}' wx:key='index' bindtap='goPro' data-flag='{{item.flag}}' data-orderid='{{child.order_id}}' id='{{item.product_id}}' data-type='{{child.t_type}}'>
+            <view class='pro_img'>
+              <image src='{{item.product_img_src}}' wx:if="{{item.product_img_src!=null&&item.product_img_src!=''}}"></image>
+              <image src='../../static/img/pro/static.png' wx:else></image>
+            </view>
+            <view class='pro_info'>
+              <view class='pro_title'>
+                <text class='title_icon' wx:if="{{child.order_refer=='tuangou'}}">拼购</text>
+                <text class='title_icon' wx:if="{{child.order_refer=='qianggou'}}">促销</text>
+                <text class='title_icon' wx:if="{{child.order_refer=='exchange'}}">抽奖</text>
+                <text class='title_icon' wx:if="{{child.order_refer=='super'}}">超级转盘</text>
+                <text class='title_icon' wx:if="{{child.order_refer=='try'}}">试用</text>
+                <text class='title_icon' wx:if="{{child.order_refer=='scantry'}}">扫码试用</text>
+                <text class='title_icon' wx:if="{{child.order_refer=='point'}}">兑换</text>
+                <text class='title_icon' wx:if="{{child.order_refer=='birthday'}}">生日兑换</text>
+                <text class='title_icon' wx:if="{{child.order_refer=='scan'}}">扫码抽奖</text>
+                <text class='title_icon' wx:if="{{child.order_refer=='fruits'}}">水果</text>
+                <text>{{item.name}}</text>
+              </view>
+              <view class='pro_color' wx:if="{{item.title!=''&&item.title!=null}}">规格：{{item.title}}</view>
+              <view class='pro_spec'>
+                <view class='pro_price'>
+                  <text class='peo_nowprice' wx:if='{{item.price>0}}'>￥{{item.price}} </text>
+                  <text class='pro_integral' wx:if='{{item.point>0&&item.price>0}}'>+</text>
+                  <view class='pro_inter_img' wx:if='{{item.point>0}}'>
+                    <icon class='iconfont icon-jifen1'></icon>
+                  </view>
+                  <text class='pro_integral' wx:if='{{item.point>0}}'>{{item.point}}</text>
+                </view>
+                <view class='pro_num'>数量：{{item.nums}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='order_info'>
+          共{{order.goods_num}}件商品 合计：
+          <text>￥{{order.total_price}}</text>
+          <text wx:if='{{order.total_point>0}}'>+</text>
+          <!-- <icon class='iconfont icon-jifen1' wx:if='{{order.point_use>0}}'></icon> -->
+          <text wx:if='{{order.total_point>0}}'>{{order.total_point}}积分</text> （含运费￥{{order.cost_freight}}）
+        </view>
+        <view class="{{order.t_type == 1&&orderStatusCode!=7 ? 'order_oper':'view_hidden'}}">
+          <view wx:if="{{orderStatusCode==1&&order.countdown>0}}" class='countdown'>
+            <icon class='iconfont icon-jinriqianggou'></icon>
+            <text>支付剩余</text>
+            <text>{{saleTimeList[index].hou}}:{{saleTimeList[index].min}}:{{saleTimeList[index].sec}}</text>
+          </view>
+          <view wx:if='{{endTimeList.length<=0}}'>
+            <button size='mini' id='{{order.order_id}}' data-paymentid='{{order.payment_id}}' bindtap='cancelOrder' data-index="{{order.time.name}}" wx:if="{{order.countdown>0}}">取消订单</button>
+            <button size='mini' id='{{order.order_id}}' class='btn_red' bindtap='wxPay' data-paymentid='{{order.payment_id}}'  data-payId='{{order.pay_id}}' wx:if="{{order.countdown>0}}">立即支付</button>
+            <button size='mini' wx:if="{{order.countdown<=0}}">已取消</button>
+          </view>
+          <view wx:else>
+            <button size='mini' id='{{order.order_id}}' data-paymentid='{{order.payment_id}}' bindtap='cancelOrder' wx:if="{{order.countdown>0}}" data-index="{{order.time.name}}">取消订单</button>
+            <button size='mini' id='{{order.order_id}}' class='btn_red' bindtap='wxPay' data-paymentid='{{order.payment_id}}'  data-payId='{{order.pay_id}}' wx:if="{{order.countdown>0}}">立即支付</button>
+            <button size='mini' wx:if="{{order.countdown<=0}}">已取消</button>
+          </view>
+        </view>
+        <view class="{{order.t_type == 5&&orderStatusCode!=7 ? 'order_oper':'view_hidden'}}">
+          <button size='mini' id='{{order.order_id}}' data-isremind='{{order.remind}}' class="{{order.remind==1?'':'btn_red'}}" bindtap='remind'>提醒发货</button>
+        </view>
+        <view class="{{order.t_type == 2&&orderStatusCode!=7 ? 'order_oper':'view_hidden'}}">
+          <!-- <button size='mini' id='{{item.order_id}}'>再次购买</button> -->
+          <!-- <button size='mini' id='{{item.order_id}}'>我要催单</button> -->
+          <!-- <button size='mini' id='{{order.order_id}}' bindtap='afterSale'>申请售后</button> -->
+          <button size='mini' bindtap='viewtrack' id='{{order.order_id}}'>查看物流</button>
+          <button size='mini' class='btn_red' id='{{order.order_id}}' bindtap='sureOrder'>确认收货</button>
+        </view>
+        <view class="{{order.t_type == 6&&orderStatusCode!=7 ? 'order_oper':'view_hidden'}}">
+          <!-- <button size='mini' id='{{item.order_id}}'>再次购买</button> -->
+          <button size='mini' id='{{order.order_id}}' bindtap='viewtrack'>查看物流</button>
+          <button size='mini' id='{{order.order_id}}' class='btn_red' bindtap='goComm' data-num='{{order.goods_num}}' data-url='../addComment/addComment'>立即评价</button>
+        </view>
+        <view class="{{order.t_type == 3&&orderStatusCode!=7 ? 'order_oper':'view_hidden'}}">
+          <!-- <button size='mini' id='{{order.order_id}}' bindtap='afterSale'>申请售后</button> -->
+          <button size='mini' bindtap='viewtrack' id='{{order.order_id}}'>查看物流</button>
+          <!-- <button size='mini' class='btn_red' id='{{item.order_id}}'>再次购买</button> -->
+        </view>
+        <view class="{{order.t_type == 4&&orderStatusCode!=7 ? 'order_oper':'view_hidden'}}">
+          <button size='mini'>已取消</button>
+        </view>
+        <view class="{{order.t_type == 7&&orderStatusCode!=7 ? 'order_oper':'view_hidden'}}">
+          <button size='mini'>售后完成</button>
+        </view>
+        <!-- <view class="{{order.ship_status == 3 ? 'order_oper':'view_hidden'}}">
+          <button size='mini'>部分退货</button>
+        </view>
+        <view class="{{order.pay_status == 3 ? 'order_oper':'view_hidden'}}">
+          <button size='mini'>部分退款</button>
+        </view>
+        <view class="{{order.pay_status == 4 ? 'order_oper':'view_hidden'}}">
+          <button size='mini'>已退款</button>
+        </view> -->
+        <!-- <view class="{{orderStatusCode == 6 ? 'order_oper':'view_hidden'}}">
+          <button size='mini' class='btn_red'>再次购买</button>
+        </view> -->
+      </view>
+      <button type="default" size="default" loading plain hidden='{{orderList.length==total}}' class="loading_style">正在加载中，请稍后...</button>
+    </view>
+    <view class='order_list_null' wx:if='{{!orderNum}}'>
+      <text>当前类别下暂无订单，快去选购吧~</text>
+      <button class='btn_red' bindtap='goIndex' data-link='../index/index'>去首页看看</button>
+    </view>
+    <view class='order-foot' wx:if='{{orderList.length==total&&orderNum}}'>
+      <text>—————— 我是有底线的 ——————</text>
+    </view>
+  </view>
+  <include src="../footer/footer.wxml" />
+
+</view>

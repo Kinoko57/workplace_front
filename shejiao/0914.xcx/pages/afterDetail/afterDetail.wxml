@@ -1,0 +1,113 @@
+<!--pages/saleAfter/saleAfter.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<view class="After_detail skeleton">
+   <navbar page-name="服务单详情"  bg-color="#fff" icon-color="#333" show-title='true' show-nav='true' show-index='false'></navbar>
+   <view class="after_detail_body">
+     <view class="after_detail_top">
+        <view class="after_detail_status">
+          <text>{{afterDeatil.status[afterDeatil.status.length-1]}}</text>
+        </view>
+        <view class="after_datail_progress">
+            <view class="vip_sign_date_wraper skeleton-rect">
+              <view class="vip_sign_block" wx:for="{{afterDeatil.status}}" wx:key="index">
+                  <view class="vip_sign_t">
+                    <icon class="iconfont icon-duihao"></icon>
+                    <text class="progress_line"></text>
+                  </view>
+                  <view class="vip_sign_b">{{item}}</view>
+              </view>
+            </view>
+        </view>
+     </view>
+     <view class="after_detail_bot" data-link="../salesLog/salesLog" bindtap="goLink">
+      <view class="after_detail_block after_detail_block_other">
+         <view class="server_msg">
+            <text wx:if="{{afterDeatil.after.status==1&&afterDeatil.after.audit!=2}}">商品退回中，感谢你对夷购的支持</text>
+            <text wx:if="{{afterDeatil.after.status==2&&afterDeatil.after.audit!=2}}">商品待收货，感谢你对夷购的支持</text>
+            <text wx:if="{{afterDeatil.after.status==3&&afterDeatil.after.audit!=2}}">商品待发货，感谢你对夷购的支持</text>
+            <text wx:if="{{afterDeatil.after.status==5&&afterDeatil.after.audit!=2}}">服务已完成，感谢你对夷购的支持</text>
+            <text wx:if="{{afterDeatil.after.status==4&&afterDeatil.after.audit!=2}}">正在退款中，感谢你对夷购的支持</text>
+            <text wx:if="{{afterDeatil.after.status==6&&afterDeatil.after.audit!=2}}">售后已取消，感谢你对夷购的支持</text>
+            <text wx:if="{{afterDeatil.after.audit==2}}">审核被驳回，感谢你对夷购的支持</text>
+            <text wx:if="{{afterDeatil.after.log!=null&&afterDeatil.after.log!=''}}">审核留言：{{afterDeatil.after.log}}</text>
+         </view>
+          <icon class="iconfont icon-right"></icon>
+      </view>
+      <view class="after_detail_block">
+         <view class="pro_block">
+            <view class="pro_block_titi">商品信息</view>
+            <view class="pro_block_list" wx:for="{{afterDeatil.goods}}" wx:key="index">
+               <image class="pro_block_list_img" src="{{item.image}}"></image>
+               <view class="pro_block_list_info">
+                 <view class="pro_block_list_titi">
+                   {{item.goods_name}}
+                 </view>
+                  <view class="pro_block_list_pri">
+                    <view class="list_pri">规格：<text>{{item.spec}}</text></view>
+                 </view>
+                 <view class="pro_block_list_pri">
+                    <view class="list_pri">单价：<text class="pri">￥{{filters.formatMoney(item.item_price)}}</text></view>
+                 </view>
+               </view>
+            </view>
+         </view>
+      </view>
+      <view class="after_detail_block">
+         <view class="server_order">
+             <view class="server_order_block">
+              <text class="server_order_block_l">订单号：</text>
+              <text class="server_order_block_r">{{afterDeatil.after.oid}}</text>
+             </view>
+              <view class="server_order_block">
+                <text class="server_order_block_l">申请数量：</text>
+                <text class="server_order_block_r">{{afterDeatil.after.nums}}</text>
+              </view>
+              <view class="server_order_block">
+                <text class="server_order_block_l">运费：</text>
+                <text class="server_order_block_r">￥{{filters.formatMoney(afterDeatil.order_data.distribution_price)}}</text>
+              </view>
+              <view class="server_order_block">
+                <text class="server_order_block_l">申请时间：</text>
+                <text class="server_order_block_r">{{filters.formatDateTime(afterDeatil.after.create_time)}}</text>
+              </view>
+             <view class="server_order_block">
+              <text class="server_order_block_l">服务类型：</text>
+              <text class="server_order_block_r" wx:if="{{afterDeatil.after.type==1}}">退款</text>
+              <text class="server_order_block_r" wx:if="{{afterDeatil.after.type==2}}">退货</text>
+              <text class="server_order_block_r" wx:if="{{afterDeatil.after.type==3}}">换货</text>
+            </view>
+            <view class="server_order_block">
+              <text class="server_order_block_l">申请原因：</text>
+              <text class="server_order_block_r">{{afterDeatil.after.remark}}</text>
+            </view>
+            <view class="server_order_block" wx:if="{{afterDeatil.after.type!=3}}">
+              <text class="server_order_block_l">退款方式：</text>
+              <text class="server_order_block_r">原返</text>
+            </view>
+         </view>
+         <view class="server_order" wx:if="{{afterDeatil.after.type!=1}}">
+            <view class="server_order_block">
+              <text class="server_order_block_l">取件地址：</text>
+              <text class="server_order_block_r">{{afterDeatil.address.ship_area}}{{afterDeatil.address.ship_addr}}</text>
+            </view>
+             <view class="server_order_block">
+              <text class="server_order_block_l">联系人：</text>
+              <text class="server_order_block_r">{{afterDeatil.address.ship_name}}</text>
+            </view>
+            <view class="server_order_block">
+              <text class="server_order_block_l">联系电话：</text>
+              <text class="server_order_block_r">{{afterDeatil.address.ship_mobile}}</text>
+            </view>
+         </view>
+      </view>
+     </view>
+     <!-- <view class="server_delet">删除服务单</view> -->
+   </view>
+   <view style="height:50px" wx:if="{{(afterDeatil.after.audit==0&&afterDeatil.after.status!=6)||afterDeatil.after.audit==1&&afterDeatil.after.type!=1&&(afterDeatil.after.logi_no==null||afterDeatil.after.logi_no=='')}}"></view>
+</view>
+<view class="server_fixed" wx:if="{{(afterDeatil.after.audit==0&&afterDeatil.after.status!=6)||afterDeatil.after.audit==1&&afterDeatil.after.type!=1&&(afterDeatil.after.logi_no==null||afterDeatil.after.logi_no=='')}}">
+  <text class="cancel" bindtap="cancelSales" wx:if="{{afterDeatil.after.audit==0&&afterDeatil.after.type!=1}}">取消售后</text>
+  <text class="active color_theme_red" bindtap="goSales" wx:if="{{afterDeatil.after.audit==0&&afterDeatil.after.type!=1}}" data-link="../saleDetail/saleDetail?id={{options.id}}&sale_type=change&page_name=修改售后&type={{afterDeatil.after.type}}">修改售后</text>
+  <text class="active color_theme_red"  wx:if="{{afterDeatil.after.audit==1&&afterDeatil.after.type!=1&&(afterDeatil.after.logi_no==null||afterDeatil.after.logi_no=='')}}" bindtap="goSales" data-link="../saleDetail/saleDetail?id={{options.id}}&sale_type=track&page_name=填写物流">填写物流</text>
+</view>

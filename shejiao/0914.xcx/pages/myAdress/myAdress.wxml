@@ -1,0 +1,31 @@
+<!--pages/myAdress/myAdress.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="my_address skeleton">
+  <navbar page-name="我的收货地址"  bg-color="linear-gradient(to right, #e34c26, #e13816)" icon-color="#fff" show-title='true' show-nav='true' show-index='false'></navbar>
+  <scroll-view class="e_add_body" style='height:{{scrollHeight}}px' scroll-y bindscroll="scroll" scroll-top='{{topNum}}' scroll-with-animation='true'>
+    <view wx:if="{{addrList.length>0}}">
+      <view class="add_section" wx:for='{{addrList}}' wx:key='index'>
+        <view class='add_info'>
+          <view class="add_info_l" id='{{item.id}}' data-info="{{item}}"  bindtap="chosAdd">
+            <view class='info_people'>
+              <text class='peop_name'>{{item.ship_name}}</text>
+              <text class='peop_tel'>{{item.ship_mobile}}</text>
+              <text class="default" wx:if="{{item.is_default==1}}" style="background:{{bg_color}};color:{{color}}">默认</text>
+              <text class="label" wx:if="{{item.label!=''}}" style="background:{{line_bg_color}};color:{{color}}">{{item.label}}</text>
+            </view>
+            <view class='info_addr'>
+              <text style='margin-right:10rpx;'>{{item.ship_area}}</text>{{item.ship_addr}}
+            </view>
+          </view>
+          <view class="add_info_r"  data-id='{{item.id}}' data-info="{{item}}"  bindtap="editAdd" data-type="edit">
+             <image src="{{staticUrl}}my/edit.png" ></image>
+          </view>
+        </view>
+      </view>
+    </view>
+     <null-data id="null-data" bottomText="已经到底啦~" bottomShow="{{addrList.length>0}}" dataText="暂无收货地址" dataShow="{{addrList.length==0}}"></null-data>
+  </scroll-view>
+  <view class='add_saveInfo {{is_iphonex?"iphone_x_padding":""}}'>
+    <view  bindtap='editAdd' data-type="add" data-id="-2" style="background:{{line_bg_color}};color:{{color}}">添加新地址</view>
+  </view>
+</view>

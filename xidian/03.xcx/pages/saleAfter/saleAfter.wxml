@@ -1,0 +1,82 @@
+<!--pages/saleAfter/saleAfter.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="saleAfter skeleton">
+   <view class="saleAfter_body">
+      <view class="saleAfter_body_top">
+         <view class="saleAfter_body_top_pro">
+            <image class="saleAfter_body_top_pro_img skeleton-rect" src="{{saleAfter.curriculum.image[0]}}"></image>
+            <view class="saleAfter_body_top_pro_r">
+               <view class="saleAfter_body_top_pro_titi skeleton-rect">{{saleAfter.curriculum.name}}</view>
+               <view class="saleAfter_body_top_pro_info skeleton-rect">
+                  <view class="saleAfter_info_pri">营期：{{filters.formatDate(saleAfter.camp.camp_time)}}【{{saleAfter.camp.camp_day}}天】</view>
+               </view>
+               <view class="saleAfter_body_top_pro_info skeleton-rect">
+                  <view class="saleAfter_info_pri"><text>金额：￥{{filters.formatMoney(saleAfter.curriculum.price_sell)}} </text><text>数量：{{saleAfter.order.num}}</text></view>
+               </view>
+               
+            </view>
+         </view>
+          <view class="saleAfter_body_top_cost">
+            <button open-type="contact" class="concat_server bg_theme_blue">联系客服</button>
+            <text>实际支付金额：￥{{filters.formatMoney(saleAfter.order.amount_payed)}}</text>
+         </view>
+      </view>
+      <view class="saleAter_block">
+         <view class="saleAfter_tit">
+           <text class="text_left">售后类型：<text>修改营期</text></text>
+         </view>
+         <!-- <radio-group bindchange="choseType">
+            <view class="sale_type">
+              <label class="sale_info" wx:for="{{saleType}}" wx:key='index'>
+                  <view class="sale_more skeleton-rect">
+                      <icon class="iconfont {{item.id==1?'icontuikuan':'iconxiugai-copy'}}"></icon>
+                      <view class="sale_name">{{item.name}}</view>
+                  </view>
+               </label>
+            </view>
+         </radio-group> -->
+      </view>
+      <view class="saleAter_cause saleAter_block">
+         <view class="saleAfter_tit  skeleton-rect">
+           <text class="text_left">申请原因</text>
+           <text class="text_right">请填写申请原因</text>
+         </view>
+         <view class="saleAfter_teaxtarea  skeleton-rect">
+            <textarea placeholder="请输入申请售后的具体原因，不少于5个字" placeholder-class="text_class" value='{{afterInput}}' bindinput="inputAction" bindblur="lostblur" maxlength='200'></textarea>
+            <view class="saleAfter_teax_num">{{inputLength}}/200</view>
+         </view>
+      </view>
+      <view class="saleAter_block" wx:if="{{saleAfter.student.length>0}}">
+         <view class="saleAfter_tit">
+           <text class="text_left">售后人选</text>
+         </view>
+         <!-- <checkbox-group bindchange="chose"> -->
+            <view class="new_info skeleton-rect" wx:for='{{saleAfter.student}}' wx:key='index'>
+              <label for="{{item.id}}" class="new_info">
+                  <!-- <view class='info_chose skeleton-radius'>
+                     <checkbox value="{{item.id}}" checked="{{item.checked}}" id="{{item.id}}" disabled="{{choseType==2}}"/>
+                  </view> -->
+                  <view class="news_more skeleton-rect" id='{{item.id}}'>
+                     <icon class="iconfont iconnan add_info_l_ku add_info_l_ku_man" wx:if="{{item.gender==1&&item.image==''}}"></icon>
+                     <icon class="iconfont icongirl add_info_l_ku add_info_l_ku_sex" wx:if="{{item.gender==0&&item.image==''}}"></icon>
+							<image wx:if="{{item.image!=''}}" class="{{item.gender==0?'add_info_l_ku_sex':'add_info_l_ku_man'}} add_info_l_ku" src="{{item.image}}"></image>
+                     <view class="people_name">{{item.name}}</view>
+                     <!-- <text class='news_title'>{{item.name}}</text> -->
+                  </view>
+              </label>
+            </view>
+         <!-- </checkbox-group> -->
+      </view>
+   </view>
+   <view class="fixed_sub">
+     <view class="sale_submit bg_theme_blue" wx:if="{{from=='orderDetail'}}" bindtap="subSale">提交</view>
+     <view class="sale_submit" wx:if="{{from!='orderDetail'}}">
+       <view class="sale_submit_flex">
+         <view class="sale_submit_l bg_theme_gray">取消售后</view>
+         <view class="sale_submit_r bg_theme_blue">提交修改</view>
+       </view>
+     </view>
+       <view class="sale_submit bg_theme_blue" wx:if="{{false}}">取消售后</view>
+   </view>
+</view>

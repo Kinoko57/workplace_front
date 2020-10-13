@@ -1,0 +1,36 @@
+<!--pages/previewDetail/previewDetail.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="preView_bg skeleton">
+  <navbar page-name="" bg-color="transparent" icon-color="#ffffff" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+  <view  class="image_bg">
+    <!-- <image src="{{viewDetail.notice_img[0].image}}"></image> -->
+    <image src="{{staticUrl}}anchor/notice_bg.png" mode="aspectFill"></image>
+  </view>
+  <view class="preView_body" style="height:{{scrollHeight}}px">
+    <view class="view_fiexd_follow">
+      <image class="follow_image skeleton-radius" wx:if="{{viewDetail.image==''}}" src="{{staticUrl}}common/avatar.png" ></image>
+		  <image class="follow_image skeleton-radius" wx:if="{{viewDetail.image!=''}}" src="{{viewDetail.image}}"></image>
+		  <view class="follow_name">
+			  <text>{{viewDetail.nickname}}</text>
+				<!-- <text>{{filters.formatCount(viewDetail.like_num)}} 点赞</text> -->
+			</view>
+		</view>
+    <view class="view_fiexd_center">
+      <view class="view_fiexd_center_image">
+        <image src="{{viewDetail.notice_img[0].image}}" ></image>
+      </view>
+      <view class="view_fiexd_center_language">{{viewDetail.notice_title}}</view>
+      <view class="view_fiexd_center_anchor">直播倒计时</view>
+      <view class="view_fiexd_center_anchorTime" wx:if="{{viewDetail.live_data==null}}">{{saleTime.day}}天 {{saleTime.hou}}时 {{saleTime.min}}分 {{saleTime.sec}}秒</view>
+       <view class="view_fiexd_center_anchorTime" wx:if="{{viewDetail.live_data!=null}}">已开播</view>
+      <view wx:if="{{viewDetail.live_data==null}}">
+        <view class="view_fiexd_center_btn" style="background:{{line_bg_color}}" bindtap="remindBtn" wx:if="{{viewDetail.is_notice==0}}">开播提醒</view>
+        <view class="view_fiexd_center_btn" style="background:{{line_bg_color}}" wx:if="{{viewDetail.is_notice==1}}">已提醒</view>
+      </view>
+      <view wx:if="{{viewDetail.live_data!=null}}">
+        <view class="view_fiexd_center_btn" style="background:{{line_bg_color}}" bindtap="goView" data-live_data="{{viewDetail.live_data}}">进入直播间</view>
+      </view>
+    </view>
+  </view>
+</view>

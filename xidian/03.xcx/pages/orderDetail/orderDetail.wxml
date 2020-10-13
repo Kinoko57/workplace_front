@@ -1,0 +1,140 @@
+<!--pages/orderDetail/orderDetail.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="or_detail skeleton">
+	<scroll-view class="scroll" scroll-y style="height:{{scrollHeight}}px">
+		<view class="bg_theme_blue or_top">
+			<icon class="iconfont icondaifukuan" wx:if="{{orderInfo.status==0}}"></icon>
+			<icon class="iconfont icondengdai" wx:if="{{(orderInfo.status==1||orderInfo.status==3)&&orderInfo.class_status==0}}"></icon>
+			<icon class="iconfont icondengdaikaike" wx:if="{{(orderInfo.status==1||orderInfo.status==3)&&orderInfo.class_status==1}}"></icon>
+			<icon class="iconfont icondui1-copy-copy" wx:if="{{orderInfo.status==10}}"></icon>
+			<icon class="iconfont iconquxiao1" wx:if="{{orderInfo.status==5}}"></icon>
+			<view>
+				<view class="or_top_status" wx:if="{{orderInfo.status==0}}">等待付款</view>
+				<view class="or_top_status" wx:if="{{orderInfo.status!=0}}">
+					<text wx:if="{{(orderInfo.status==1||orderInfo.status==3)&&orderInfo.class_status==0}}">已付款<text wx:if="{{orderInfo.status==1&&orderInfo.rush_purchase_id<=0}}">(尾款未支付)</text></text>
+					<text wx:if="{{(orderInfo.status==1||orderInfo.status==3)&&orderInfo.class_status==1}}">等待开课</text>
+					<text wx:if="{{orderInfo.status==10}}">订单已完成</text>
+					<text wx:if="{{orderInfo.status==5}}">订单已取消</text>
+				</view>
+				<view class="or_top_pay" wx:if="{{orderInfo.status!=5}}">
+					<text wx:if="{{orderInfo.status==0}}">需要支付￥{{orderInfo.is_front==1?filters.formatMoney(orderInfo.total_front_money):filters.formatMoney(orderInfo.total_amount)}}</text>
+					<text wx:if="{{orderInfo.status!=0}}">已支付￥{{filters.formatMoney(orderInfo.payed_money)}}</text>
+					<text wx:if="{{orderInfo.status==1&&orderInfo.rush_purchase_id<=0}}">，还需支付尾款￥{{filters.formatMoney(orderInfo.pay_money)}}</text>
+				</view>
+			</view>
+		</view>
+		<view class="countdown_bg color_theme_blue" wx:if="{{orderInfo.status==0&&endtime!=0}}">
+			<view class="countdown_block">
+				订单将在
+				<text class="time">{{saleTime.day}}</text>
+				<text>天</text>
+				<text class="time">{{saleTime.hou}}</text>
+				<text>:</text>
+				<text class="time">{{saleTime.min}}</text>
+				<text>:</text>
+				<text class="time">{{saleTime.sec}}</text>
+				后自动取消，请尽快提交
+			</view>
+		</view>
+		<view class="or_wra">
+			<view class="or_cont">
+				<view class="pay_other_list">
+					<view class="pay_other_list_flex">
+						<image src="{{orderInfo.currImage[0]}}" mode="scaleToFill"></image>
+						<view class="pay_other_cont_r">
+							<view class="pay_other_tit"><text wx:if="{{orderInfo.rush_purchase_id>0}}" class="pro_type color_theme_blue">团购</text>{{orderInfo.currName}}</view>
+							<view class="pay_other_spec">营期：{{filters.formatDate(orderInfo.camp.camp_time)}}【{{orderInfo.camp.camp_day}}天】</view>
+							<view class="pay_other_pri">
+								<text class="color_theme_red">￥{{filters.formatMoney(orderInfo.discount_price)}}</text>
+								<text class="pay_other_mun">x{{orderInfo.num}}</text>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="or_status">
+				<view class="pay_child_title">
+					<text>我的学员</text>
+				</view>
+        <view class="pay_child_list">
+          <view class="child_block" wx:for="{{orderInfo.item}}" wx:key="index">
+            <view class="block_left">
+              <icon class="iconfont iconnan add_info_l_ku add_info_l_ku_man" wx:if="{{item.gender==1&&item.image==''}}"></icon>
+              <icon class="iconfont icongirl add_info_l_ku add_info_l_ku_sex" wx:if="{{item.gender==0&&item.image==''}}"></icon>
+							<image wx:if="{{item.image!=''}}" class="{{item.gender==0?'add_info_l_ku_sex':'add_info_l_ku_man'}} add_info_l_ku" src="{{item.image}}"></image>
+              <view class="people_name">{{item.student_name}}</view>
+            </view>
+            <view class="block_right" bindtap="visitImg" data-time="{{orderInfo.camp.camp_time}}" data-after_status="{{item.after_status}}" data-name="{{item.student_name}}" data-barrack="{{orderInfo.barrack_name}}">
+                <!-- <text wx:if="{{item.is_perfect==0}}" bindtap="goWrite" data-item="{{item}}">补充信息</text> -->
+								<!-- <text wx:if="{{orderInfo.status!=5&&orderInfo.status!=10&&item.after_status!=0}}" style="padding:0 14rpx">|</text> -->
+								<text wx:if="{{item.after_status==0&&orderInfo.status!=5&&orderInfo.status!=0}}">查看入伍通知</text>
+								<text wx:if="{{item.after_status==2}}" style="color:#999">已售后</text>
+								<text wx:if="{{item.after_status==1}}" style="color:#999">售后中</text>
+                <!-- <icon  wx:if="{{item.after_status==0&&orderInfo.status!=5}}" class='iconfont iconright'></icon> -->
+            </view>
+          </view>
+        </view>
+			</view>
+			<view class="or_status">
+				<view class="pay_discount" wx:if="{{orderInfo.related_name!=''}}">
+					<view class="pay_disc" wx:if="{{orderInfo.related_name!=''}}">
+						<text class="pub_lcolor">分班要求</text>
+						<view class="pub_lcolor">希望和{{orderInfo.related_name}}在同一班</view>
+					</view>
+				</view>
+				<view class="pay_discount pay_bottom">
+					<view class="pay_disc">
+						<text class="pub_lcolor">订单总额</text>
+						<view class="color_theme_red">￥{{filters.formatMoney(orderInfo.total_amount)}}</view>
+					</view>
+					<view class="pay_disc" wx:if="{{orderInfo.rush_purchase_id>0}}">
+						<text class="pub_lcolor">线下减免金额</text>
+						<view class="color_theme_red">￥{{filters.formatMoney(orderInfo.discount_free_price)}}</view>
+					</view>
+						<view class="pay_disc" wx:if="{{orderInfo.rush_purchase_id>0}}">
+						<text class="pub_lcolor">线下支付金额</text>
+						<view class="color_theme_red">￥{{filters.formatMoney(orderInfo.paygroup_price)}}</view>
+					</view>
+					<view class="pay_disc">
+						<text class="pub_lcolor">付款方式</text>
+						<view class="pub_lcolor" wx:if="{{orderInfo.is_front==1}}">定金<text wx:if="{{orderInfo.status==1&&orderInfo.rush_purchase_id<=0}}">(尾款未支付)</text></view>
+						<view class="pub_lcolor" wx:if="{{orderInfo.is_front==0}}">全款</view>
+					</view>
+					<view class="pay_disc" wx:if="{{orderInfo.payment_type!=0}}">
+						<text class="pub_lcolor">支付方式</text>
+						<!-- <view class="pub_lcolor">微信</view>
+                <view class="pub_lcolor">支付宝</view> -->
+						<icon class="iconfont iconbig-WeChat" wx:if="{{orderInfo.payment_type==1}}" style="color:#0d8d37"></icon>
+						<icon class="iconfont iconumidd17" wx:if="{{orderInfo.payment_type==6}}" style="color:#409eff"></icon>
+					</view>
+				</view>
+			</view>
+			<view class="or_status">
+				<view class="or_height" wx:if="{{orderInfo.invite_code!=''&&orderInfo.invite_code!=null}}">教官码：{{orderInfo.invite_code}} <text class="copy color_theme_blue" bindtap="copyInviter" id="{{orderInfo.invite_code}}">复制</text></view>
+				<view class="or_height">订单编号：{{orderInfo.order_id}} <text class="copy color_theme_blue" bindtap="copyOrd" id="{{orderInfo.order_id}}">复制</text></view>
+				<text class="or_height">创建订单时间：{{filters.formatDateTime(orderInfo.create_time)}}</text>
+				<!-- <text class="or_height">创建订单时间：{{filters.formatDateTime(orderInfo.create_time)}}</text> -->
+			</view>
+		</view>
+		<view style="height:34px;width;100%" wx:if="{{is_iphonex}}"></view>
+		<view style="height:63px;width;100%" wx:if="{{orderInfo.status==0||(orderInfo.status==1&&orderInfo.rush_purchase_id<=0&&orderInfo.after_status==0)||orderInfo.after_status==0}}"></view>
+	</scroll-view>
+	<view class="or_fixed {{is_iphonex?'iphone_x':''}}" wx:if="{{orderInfo.status==0||(orderInfo.status==1&&orderInfo.rush_purchase_id<=0&&orderInfo.after_status==0)||orderInfo.after_status==0}}">
+		<view class="or_fixed_flex">
+			<button wx:if="{{orderInfo.status==0}}" class="cancel_text button" bindtap="cancelBtn" data-order_id="{{orderInfo.order_id}}">取消支付</button>
+			<button open-type="contact" class="cancel_text btn_color" wx:if="{{orderInfo.after_status==0}}" data-order_id="{{orderInfo.order_id}}">联系客服</button>
+			<view wx:if="{{orderInfo.status==0}}" class="bg_theme_blue active_text btn_color picker" bindtap="bindPickerpay" data-order_id="{{orderInfo.order_id}}" value="{{index}}" range="{{modeList}}" range-key="name">
+				<view class="picker_text">
+					立即支付
+				</view>
+			</view>
+			<view wx:if="{{orderInfo.status==1&&orderInfo.rush_purchase_id<=0&&orderInfo.after_status==0}}" bindtap="bindPickerpaySurplus" class="bg_theme_blue active_text btn_color picker" data-order_id="{{orderInfo.order_id}}" value="{{index}}" range="{{modeList}}" range-key="name">
+				<view class="picker_text">
+					支付尾款
+				</view>
+			</view>
+			<button class="bg_theme_blue active_text btn_color" wx:if="{{orderInfo.after_status==0}}" data-order_id="{{orderInfo.order_id}}" bindtap="goSales">申请售后</button>
+		</view>
+	</view>
+</view>

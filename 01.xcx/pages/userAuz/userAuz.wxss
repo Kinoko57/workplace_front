@@ -1,0 +1,25 @@
+/* pages/userAuz/userAuz.wxss */
+
+.auth {
+  text-align: center;
+  padding: 30% 29px;
+  height: 100vh;
+  background: #fff;
+}
+
+.head_icon .iconfont {
+  font-size: 150rpx;
+  color: #1aad16;
+}
+
+.head_title {
+  margin-top: 30rpx;
+  font-size: 48rpx;
+  color: #666;
+}
+
+.view_tips {
+  font-size: 32rpx;
+  color: #999;
+  margin: 60rpx 0;
+}

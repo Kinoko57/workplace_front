@@ -1,0 +1,19 @@
+/* pages/copyright/copyright.wxss */
+page{
+  background: #f9f9f9;
+}
+.copy_cont{
+  /* border-top:1px solid #CCCCCC */
+}
+.copy_cont image{
+  display: block;
+  width: 343rpx;
+  height: 319rpx;
+  margin:160rpx auto 0;
+}
+.copy_num{
+  font-size: 24rpx;
+  text-align: center;
+  color: #999;
+  padding-top: 83rpx;
+}

@@ -1,0 +1,56 @@
+/* pages/copyright/copyright.wxss */
+.copy_right{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+}
+.img_bg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1
+}
+.copy_cont{
+  position: relative;
+  z-index: 2
+}
+.copy_msg{
+  width: 100%;
+  text-align: center;
+  color: #333;
+  padding-top: 40rpx;
+  font-size: 38rpx;
+  font-weight: 600;
+  padding-top: 50rpx;
+}
+.copy_info image{
+  width: 148rpx;
+  height: 148rpx;
+  margin: 156rpx auto 30rpx;
+  display: block;
+}
+.copy_titi{
+  width: 100%;
+  text-align: center;
+  font-size: 30rpx;
+  color: #4c4c4d;
+}
+.copy_logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 48rpx;
+}
+.copy_logo .xian{
+  width: 4rpx;
+  height: 22rpx;
+  background: #888;
+  margin: 0 15rpx;
+  display: inline-block;
+}
+.copy_logo .text{
+  color: #4c4c4d;
+  font-size: 24rpx;
+}

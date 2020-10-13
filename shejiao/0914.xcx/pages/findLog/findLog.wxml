@@ -1,0 +1,33 @@
+<!--pages/findLog/findLog.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="log_bg skeleton">
+   <navbar page-name="查看物流" bg-color="#fff" icon-color="#333333" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+   <view class="log_body">
+      <view class="log_body_top">
+        <view class="log_body_top_image">
+          <image src="{{logObj.goods_image}}"></image>
+          <view class="log_body_top_text">共{{logObj.nums}}件</view>
+        </view>
+        <view class="log_body_top_r">
+          <view class="log_body_top_r_com">物流状态：<text style="color:#f20" wx:if="{{list.LogisticCode!=''&&list.LogisticCode!=null}}">已发货</text></view>
+          <view class="log_body_top_r_com">物流公司：{{list.ShipperName}}</view>
+          <view class="log_body_top_r_oid"><text>物流单号：{{list.LogisticCode}}</text><text class="copy" id="{{list.LogisticCode}}" wx:if="{{list.LogisticCode!=''&&list.LogisticCode!=null}}" bindtap="copyOrd">复制</text></view>
+        </view>
+      </view>
+      <view class="log_body_progress">
+        <view class="log_body_progress_titi">物流信息</view>
+        <view class="log_body_block" wx:if="{{list.Traces.length>0}}" wx:for="{{list.Traces}}" wx:key="index">
+           <view class="log_body_block_l">
+             <text class="{{index==0?'text_active':''}}"></text>
+             <text wx:if="{{index!=list.Traces.length-1}}"></text>
+           </view>
+           <view class="log_body_block_r {{index==0?'log_body_block_r_active':''}}">
+             <text>{{item.AcceptStation}}</text>
+             <text>{{item.AcceptTime}}</text>
+           </view>
+        </view>
+         <null-data id="null-data" loadingText="" loadingShow="{{false}}" bottomText="" bottomShow="{{false}}" dataText="暂无物流信息" dataShow="{{list.Traces.length==0}}"></null-data>
+      </view>
+   </view>
+</view>

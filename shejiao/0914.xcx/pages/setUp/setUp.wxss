@@ -1,0 +1,35 @@
+/* pages/about/about.wxss */
+
+page {
+  background: #f9f9f9;
+}
+.about_body {
+  border-top: 1px solid #CCCCCC;
+}
+
+.about_body .about_list {
+  padding: 0 22rpx;
+  background: #fff;
+  margin-bottom: 20rpx;
+}
+
+.about_body .about_list .about_block {
+  border-bottom: 2rpx solid #e0e0e0;
+  height: 114rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size:28rpx;
+  color: #333;
+}
+
+.about_body .about_list .about_block .iconfont {
+  display: inline-flex;
+  align-items: center;
+  font-size: 40rpx;
+  color: #B9B9B9;
+}
+
+.about_body .about_list .about_block:last-child {
+  border-bottom: 0;
+}

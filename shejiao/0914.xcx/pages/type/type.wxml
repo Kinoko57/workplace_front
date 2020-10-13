@@ -1,0 +1,30 @@
+<!--pages/type/type.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="type_bg skeleton">
+  <navbar page-name="分类" bg-color="#fff" icon-color="#666666" text-color="#e13b18" show-title='false' show-nav='false' show-index='true' un-read="{{unread}}"></navbar>
+  <!-- <navbar page-name="分类" bg-color="#fff" show-search='true' icon-color="#666666" text-color="#e13b18" show-title='true' show-nav='false'></navbar> -->
+  <view class="type_body">
+    <scroll-view scroll-y='true' class="type_left skeleton-rect" style="height:{{topHeight}}px">
+      <view wx:for='{{typeTopNav}}' wx:key='index' class="type_left_nav {{nowchose==item.id?'active':''}}" id='{{item.id}}' bindtap="choseNav">
+        <view class="line" wx-if="{{nowchose == item.id}}"></view>
+        <!-- <image wx-if="{{nowchose == item.id&&index==0}}" src="{{hot_url}}"></image> -->
+        <text class="{{nowchose==item.id?'text_active':''}}">{{item.name}}</text>
+      </view>
+    </scroll-view>
+    <!-- 分类的右侧包含banner和子分类(二级分类标题，三级分类图片，三级分类标题) -->
+    <scroll-view scroll-y='true' class="type_right" style="height:{{topHeight}}px">
+      <view class="type_banner">
+        <image src="{{selectNavList.banner}}" mode="widthFix" class="skeleton-rect"></image>
+      </view>
+      <view class="type_navlist" wx:for="{{selectNavList.child}}" wx:key="index" wx:for-item="nav">
+        <view class="nav_title">{{nav.name}}</view>
+        <view class="nav_list">
+          <view class="nav_block" wx:for="{{nav.child}}" wx:key="index" bindtap='goLink' data-link='../proList/proList?type=display_id&value={{item.id}}'>
+            <image src="{{item.icon}}" class="skeleton-radius"></image>
+            <text>{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

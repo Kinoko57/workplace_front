@@ -1,0 +1,549 @@
+/* pages/payment/payment.wxss */
+page{
+  background: #f6f6f6;
+}
+.pub_lcolor{
+  font-size: 26rpx;
+  color: #333;
+}
+.pub_rcolor{
+  font-size: 24rpx;
+   color: #999;
+}
+.pay_address{
+ padding:30rpx 24rpx;
+ background: #fff;
+ border-top: 1px solid #ececec;
+}
+/* .pay_address_flex{
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  color: #666;
+} */
+/* .pay_address_icon{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-right:20rpx; 
+  background: linear-gradient(to bottom, #ff9b05, #fe6702);
+} */
+.pay_address_icon icon{
+  display: flex;
+  color: #fff;
+  align-items: center;
+}
+.icon-add{
+  display: inline-flex;
+  align-items: center;
+  font-size: 30rpx;
+  padding-right: 10rpx;
+}
+.pay_address_name{
+  padding: 0 10rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 22rpx;
+  border-radius: 817rpx;
+  margin-right: 10rpx;
+}
+.pay_address_info{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pay_address_info .pay_address_info_l{
+ font-size: 30rpx;
+ color: #020202;
+ width:630rpx;
+}
+.pay_address_info .pay_address_info_l view{
+  display: block
+}
+.pay_address_info .pay_address_info_l view:nth-child(1){
+  word-break: break-all;
+  width:580rpx;
+  font-size: 23rpx;
+  color: #333;
+ }
+ .pay_address_info .pay_address_info_l view:nth-child(1) text{
+   display: inline-flex;
+   height: 24rpx;
+   color: #fff;
+   padding: 0 8rpx;
+   border-radius: 12rpx;
+   font-size: 16rpx;
+   line-height: 24rpx;
+   margin-right: 8rpx;
+ } 
+.pay_address_info .pay_address_info_l view:nth-child(2){
+ font-size: 32rpx;
+ /* font-weight: bold; */
+ color: #333;
+ margin-top: 18rpx;
+}
+.pay_address_info .pay_address_info_l view:nth-child(3){
+  font-size: 23rpx;
+  color: #333;
+  padding-top: 18rpx;
+  display: inline-flex;
+  align-items: center;
+ }
+.pay_address_info .pay_address_info_l view .ship_name{
+  max-width: 300rpx;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ white-space:nowrap;
+ display: inline-block;
+ margin-right: 30rpx;
+}
+.pay_body_padding{
+  padding: 0 20rpx;
+}
+.pay_body_block{
+  background: #fff;
+  padding:40rpx 24rpx;
+  border-radius: 20rpx;
+  margin-top: 20rpx;
+}
+.pay_body_border{
+  border-bottom: 1px solid #f7f7f7
+}
+.pay_body_block .pay_titi{
+ font-size: 28rpx;
+ color: #333;
+ padding-bottom:10rpx;
+ display: flex;
+ align-items: center;
+ padding-left: 8rpx;
+ border-bottom: 1px solid #F7F7F7;
+}
+.pay_body_block .pay_pro{
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ padding: 0 4rpx;
+ margin-top: 22rpx;
+}
+.pay_body_block .pay_pro .pay_pro_l{
+  width: 520rpx;
+  white-space: nowrap;
+}
+.pay_body_block .pay_pro .pay_pro_l image{
+  width: 124rpx;
+  height: 124rpx;
+  margin-right: 10rpx;
+  display: inline-block
+}
+.pay_body_block .pay_pro .pay_pro_r{
+ font-size: 24rpx;
+ color: #333;
+}
+.pay_body_block .pay_pro .pay_pro_r icon{
+  color: #999;
+  font-size: 24rpx;
+  padding-left: 6rpx;
+}
+.pay_delivery{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 45rpx 0 35rpx 0;
+}
+.pay_msg{
+   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 26rpx;
+  margin-top: 32rpx;
+}
+.pay_msg input{
+  text-align: right;
+  width: 580rpx;
+}
+.placeholder-class{
+  text-align: right;
+  color: #999;
+}
+.pay_body_other .pay_other_cont{
+
+}
+.pay_body_other .pay_other_list{
+ 
+  margin-top: 26rpx;
+}
+.pay_body_other .pay_other_list_flex{
+   display: flex;
+}
+.pay_body_other .pay_other_list image{
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 8rpx;
+  margin-right: 22rpx;
+}
+.pay_body_other .pay_other_cont_r{
+ 
+}
+.pay_other_tit{
+ font-size: 24rpx;
+ color: #333;
+ padding-top: 8rpx;
+ width: 468rpx;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+}
+.pay_other_spec{
+ font-size: 22rpx;
+ color: #999;
+ padding-top: 20rpx;
+}
+.pay_other_pri{
+ font-size: 28rpx;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ padding-top: 20rpx;
+}
+.show_tips text{
+  display: inline-block;
+ background: #434343;
+ height: 44rpx;
+ line-height: 44rpx;
+ padding: 0 16rpx;
+ color: #fff;
+ font-size: 22rpx;
+ margin-top: 15rpx;
+}
+.pay_body_pub{
+   background: #fff;
+  padding:0rpx 24rpx;
+  border-radius: 20rpx;
+  margin-top: 20rpx;
+}
+.pay_disc{
+  display: flex;
+  font-size: 24rpx;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #f7f7f7;
+  line-height: 96rpx;
+}
+.pay_disc:last-child{
+   border-bottom:0;
+}
+.pay_disc view icon{
+  font-size: 22rpx;
+}
+.pay_bot_fixed{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  z-index: 2;
+}
+.pay_bot_fixed .fixed_addr{
+ background: #FFF2B8;
+ text-align: center;
+ font-size: 26rpx;
+ color: #534401;
+ height: 70rpx;
+ line-height: 70rpx;
+ width: 750rpx;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+}
+.fixd_btn{
+  display: flex;
+  justify-content: space-between;
+  padding:0 24rpx;
+  background: #fff;
+  height: 100rpx;
+  align-items: center;
+  font-size: 30rpx;
+}
+.sub_order{
+  width:192rpx;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 74rpx;
+  color: #fff;
+  border-radius: 37rpx;
+  font-size: 26rpx;
+}
+.err_tips_dia{
+  position: fixed;
+  z-index: 999999;
+  max-width: 400rpx;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  padding: 20rpx 30rpx;
+  word-break: break-all;
+  color: #fff;
+  font-size:28rpx ;
+  background: rgba(0,0,0,.6);
+  border-radius: 10rpx;
+}
+/* 清单弹框 */
+.pro_disc_detail{
+  background: #fff;
+  border-radius: 20rpx 20rpx 0 0;
+  position: fixed;
+  bottom:-1028rpx;
+  width: 100%;
+  z-index: 9999;
+}
+.icon-guanbicopy{
+  position: absolute;
+  top: 24rpx;
+  right: 32rpx;
+  font-size: 40rpx;
+  color: #333;
+}
+.pro_disc_detail_t{
+  text-align: center;
+  font-size: 30rpx;
+  color: #333;
+  padding-top: 45rpx;
+  padding-bottom: 25rpx;
+}
+.dis_info{
+  padding-top: 28rpx;
+}
+.pro_disc_tips{
+  font-size: 26rpx;
+  width:678rpx;
+  height:48rpx;
+  line-height: 48rpx;
+  padding-left: 24rpx;
+  margin: 0 auto 0;
+  background:rgba(255,0,0,0.06);
+  margin-bottom: 26rpx;
+}
+.pro_disc_buy_pro{
+  font-size: 26rpx;
+  color: #333;
+  line-height: 1.7;
+  padding:0 24rpx;
+}
+.pro_disc_detail_c{
+  padding:20rpx 24rpx 0;
+}
+.pro_height{
+  height: 900rpx;
+}
+.dis_height{
+  height: 710rpx;
+}
+.pro_disc_detail_time{
+  text-align: center;
+  padding-top:25rpx;
+  padding-bottom: 40rpx; 
+  font-size: 24rpx;
+  color: #999;
+}
+.pro_disc_block{
+  border-bottom: 1px solid #F7F7F7;
+  padding-bottom: 20rpx;
+}
+.pro_disc_block:last-child{
+  border-bottom: 0;
+}
+.pro_disc_list{
+  display: flex;
+  padding: 20rpx 0 0;
+  align-items: center;
+}
+.pro_disc_list_r{
+  width: 474rpx;
+}
+.pro_disc_list_r .pay_disc_tit{
+  color: #333;
+  font-size: 24rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pro_disc_list_r .pay_disc_tit .pay_disc_name{
+  overflow: hidden;
+  width: 402rpx;  
+  text-overflow: ellipsis;
+  display: -webkit-box;-webkit-line-clamp: 2;  
+  -webkit-box-orient: vertical;
+  display: inline-block;
+}
+.pro_disc_list_r .pay_disc_tit .pay_other_num{
+  display: inline-block;
+   font-size: 22rpx;
+   color: #666;
+}
+.pro_disc_list_r .pay_disc_spec{
+  padding:10rpx 0 15rpx;
+}
+.pro_disc_list_r .pay_disc_spec text{
+  color: #999;
+  font-size: 24rpx;
+  padding: 4rpx 10rpx;
+  display: inline-block;
+  background: #F9F9F9;
+}
+.pro_disc_list image{
+  width: 188rpx;
+  height: 188rpx;
+  margin-right: 20rpx;
+}
+.pay_disc_pri{
+  display: flex;
+  justify-content: space-between;
+  align-items:flex-end;
+}
+.pay_disc_pri .pay_disc_num{
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  padding: 4rpx 0 8rpx;
+}
+.show_msg text{
+  display: inline-block;
+  height: 34rpx;
+  line-height: 34rpx;
+  padding: 0 10rpx;
+  font-size: 18rpx;
+  border:1px solid #e13816;
+  border-radius: 6rpx;
+}
+
+/* 优惠信息弹框 */
+
+.discount_model {
+  height: 65vh;
+  top: calc(100% - 65vh);
+  animation: discountSheet 300ms ease-out;
+}
+
+.discount_model .model_body {
+  font-size: 26rpx;
+  padding: 0 40rpx;
+}
+
+
+.discount_model .model_body .coupon_body {
+  height: 165rpx;
+  background: #fdf2ee;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.discount_model .model_body .coupon_body .coupon_circle {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background: #fff;
+  position: absolute;
+}
+
+.discount_model .model_body .coupon_body .circle_top {
+  top: -10rpx;
+  right: 150rpx;
+}
+
+.discount_model .model_body .coupon_body .circle_bottom {
+  bottom: -10rpx;
+  right: 150rpx;
+}
+
+.discount_model .model_body .coupon_body .coupon_body_left {
+  width: 514rpx;
+  height: 165rpx;
+  padding-left: 30rpx;
+}
+
+.discount_model .model_body .coupon_body .coupon_body_left .color_theme_red {
+  font-size: 36rpx;
+}
+
+.discount_model .model_body .coupon_body .coupon_body_left .coupon_title {
+  font-size: 24rpx;
+  color: #333;
+  margin-top: 36rpx;
+}
+
+.discount_model .model_body .coupon_body .coupon_body_left .price {
+  font-size: 58rpx;
+  margin-right: 14rpx;
+}
+
+.discount_model .model_body .coupon_body .coupon_body_left .amount {
+  font-size: 24rpx;
+}
+
+.discount_model .model_body .coupon_body .coupon_body_middle {
+  height: 126rpx;
+  width: 2rpx;
+  border-left: 2rpx dashed #e13816;
+}
+
+.discount_model .model_body .coupon_body .coupon_body_right {
+  width: 166rpx;
+  height: 165rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 16rpx;
+  border-bottom-right-radius: 16rpx;
+}
+
+.discount_model .model_body .coupon_body .coupon_body_right .coupon_btn {
+  width: 130rpx;
+  border-radius: 50rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 26rpx;
+}
+
+.discount_model .model_body .coupon_body .coupon_body_right  .coupon_get {
+  background: #e13816;
+  color: #fff;
+}
+
+.discount_model .model_body .coupon_body .coupon_body_right  .coupon_use {
+  color: #e13816;
+  background: #fff;
+  z-index: 20;
+}
+
+.discount_model .model_body .coupon_body .coupon_body_right .iconfont {
+  font-size: 90rpx;
+  position: absolute;
+  right: -20rpx;
+  bottom: -6rpx;
+  z-index: 10;
+  color: #fb8c62;
+}
+.discount_model .model_body .model_body_title {
+  font-size: 26rpx;
+  color: #999;
+  margin-bottom: 20rpx;
+  margin-left: 28rpx;
+}
+@keyframes discountSheet {
+  from {
+    top: 100%;
+  }
+  to {
+    top: calc(100% - 65vh);
+  }
+}

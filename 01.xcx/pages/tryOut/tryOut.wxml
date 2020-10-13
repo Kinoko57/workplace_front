@@ -1,0 +1,112 @@
+<!--pages/tryOut/tryOut.wxml-->
+<!-- <reload bind:relaod="_relaod" id='reload'></reload> -->
+<view class='try_out' wx:if='{{isShow}}'>
+  <view class='try_body'>
+    <view style='height:450rpx;'>
+      <image src='{{tryImg}} ' style='width:100%;height:450rpx;'></image>
+    </view>
+    <scroll-view scroll-x class='sale_tab' scroll-into-view='{{active_type_id}}' scroll-with-animation='true' wx:if="{{timeList.length>0}}">
+      <!-- scroll-left='{{leftLength}}' -->
+      <view class="{{item.id==choseId?'sale_nav sale_active':'sale_nav'}}" wx:for='{{timeList}}' wx:key='index' id='{{item.time_id}}' data-tid='{{item.id}}' bindtap='choseList' data-status='{{item.status}}'>
+        <text class='sale_time'>{{item.time_title}}</text>
+        <text class='sale_states'>{{item.salesname}}</text>
+      </view>
+    </scroll-view>
+    <view class='tryList' wx:if='{{tryList.length>0}}'>
+      <view class='try_blcok' wx:for='{{tryList}}' wx:key='index' bindtap='showDetail' id='{{item.id}}'>
+        <view class='t_b_img'>
+          <image src='{{item.img}}'></image>
+          <!-- <text wx:if='{{item.status==0}}'>未开始</text>
+          <text wx:if='{{item.status==1}}'>进行中</text>
+          <text wx:if='{{item.status==2}}'>已结束</text> -->
+        </view>
+        <view class='t_b_info'>
+          <view class='t_b_title'>{{item.name}}</view>
+          <view>
+            <view class='t_b_info_left'>
+              <view class='t_b_other'>
+                <view style='font-size:23rpx;color:#ff8d97;'>
+                  <text class='t_b_price'>¥{{item.price}}</text>
+                </view>
+                <view style='margin-bottom:30rpx;'>
+                  <text class='text_bg'>限领</text>
+                  <text class='t_b_num'>{{item.num}}份</text>
+                  <!-- <text class='t_b_num'>{{item.count}}</text>
+                  <text>人申请</text> -->
+                </view>
+              </view>
+            </view>
+            <view class='t_b_info_right'>
+              <view style='font-size:18rpx;color:#707070;'>
+                <!-- <text>提供</text>
+                  <text class='t_b_num'>{{item.num}}</text>
+                  <text style='margin-right:6rpx;'>份</text> -->
+                <text class='t_b_num'>{{item.count}}</text>
+                <text>人已申领</text>
+              </view>
+              <button size='mini' wx:if='{{item.status==0}}' class='start'>{{item.start_time}}开始</button>
+              <!-- <button size='mini' bindtap='showDetail' id='{{item.id}}' wx:if='{{item.status==0}}' class='start'>未开始</button> -->
+              <button size='mini' wx:if='{{item.status==1}}' class='running'>免费申领</button>
+              <button size='mini' wx:if='{{item.status==2}}' class='end'>已结束</button>
+            </view>
+          </view>
+
+        </view>
+      </view>
+    </view>
+    <!-- <view class='nulldata' wx:if='{{tryList.length<=0}}'>
+      <text>当前时间段暂无免费试用商品</text>
+    </view> -->
+    <!-- <view>
+    </view> -->
+    <view class='tryList' wx:if='{{boostList.length>0}}'>
+      <image src='../../static/img/pro/zhuli.png' style='width:158rpx;height:56rpx;margin:20rpx 0;'></image>
+      <view class='try_blcok' wx:for='{{boostList}}' wx:key='index' bindtap='showDetail' id='{{item.id}}'>
+        <view class='t_b_img'>
+          <image src='{{item.img}}'></image>
+          <!-- <text wx:if='{{item.status==0}}'>未开始</text>
+          <text wx:if='{{item.status==1}}'>进行中</text>
+          <text wx:if='{{item.status==2}}'>已结束</text> -->
+        </view>
+        <view class='t_b_info'>
+          <view class='t_b_title'>{{item.name}}</view>
+          <view>
+            <view class='t_b_info_left'>
+              <view class='t_b_other'>
+                <view style='font-size:23rpx;color:#ff8d97;'>
+                  <text class='t_b_price'>¥{{item.price}}</text>
+                </view>
+                <view style='margin-bottom:30rpx;'>
+                  <text class='text_bg'>限领</text>
+                  <text class='t_b_num'>{{item.num}}份</text>
+                  <!-- <text class='t_b_num'>{{item.count}}</text>
+                  <text>人申请</text> -->
+                </view>
+              </view>
+            </view>
+            <view class='t_b_info_right'>
+              <view style='font-size:18rpx;color:#707070;'>
+                <!-- <text>提供</text>
+                  <text class='t_b_num'>{{item.num}}</text>
+                  <text style='margin-right:6rpx;'>份</text> -->
+                <text class='t_b_num'>{{item.count}}</text>
+                <text>人已申领</text>
+              </view>
+              <button size='mini' wx:if='{{item.status==0}}' class='start'>未开始</button>
+              <button size='mini' wx:if='{{item.status==1}}' class='running'>免费申领</button>
+              <button size='mini' wx:if='{{item.status==2}}' class='end'>已结束</button>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- <view class='nulldata' wx:if='{{boostList.length<=0}}'>
+      <text>暂无助力试用商品</text>
+    </view> -->
+  </view>
+  <view class='null_block'></view>
+  <include src="../footer/footer.wxml" />
+</view>
+<view class='goTop' hidden='{{isSign}}' bindtap='returnTop'>
+  <icon class='iconfont icon-huidaodingbu'></icon>
+</view>

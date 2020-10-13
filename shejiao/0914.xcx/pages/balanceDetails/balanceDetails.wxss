@@ -1,0 +1,43 @@
+/* pages/balanceDetails/balanceDetails.wxss */
+page{
+  background: #fff;
+}
+.balance_body{
+  border-top: 1px solid #ccc;
+}
+.balance_block{
+  padding: 0 24rpx;
+}
+.balance_block .balance_list{
+  background: #fff;
+  padding:30rpx 6rpx;
+  border-bottom: 1px solid #f7f7f7;
+}
+.balance_list .balance_list_t{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.balance_list .balance_list_t text:nth-child(1){
+  font-size: 30rpx;
+  color: #333;
+}
+.balance_list .balance_list_t text:nth-child(2){
+  font-size: 32rpx;
+  font-weight: 600;
+}
+.balance_list .balance_list_b{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10rpx;
+  font-size: 24rpx;
+  color:#999
+}
+.balance_list .balance_list_b text:nth-child(1){
+  
+   
+}
+.balance_list .balance_list_b text:nth-child(2){
+  
+}

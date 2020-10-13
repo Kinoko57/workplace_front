@@ -1,0 +1,17 @@
+<!--pages/paymentGuide/paymentGuide.wxml-->
+<view class=" alipay_dia">
+	<view class="pay_one" wx:if="{{show_pay=='1'}}">
+	   <image src="../../image/member/pay_1.jpg" mode="widthFix"></image>
+		 <view class="copy_link view_btn" bindtap="copyOrd"></view>
+		 <view class="dianji view_btn" bindtap="copyOrd"></view>
+	</view>
+	<view class="pay_one pay_two" wx:if="{{show_pay=='2'}}">
+	   <image src="../../image/member/pay_2.jpg" mode="widthFix"></image>
+		<view class="step_2 view_btn" bindtap="nex_step"></view>
+	</view>
+	<view class="pay_one pay_three" wx:if="{{show_pay=='3'}}">
+	   <image src="../../image/member/pay_3.jpg" mode="widthFix"></image>
+		 	<view class="step_3 view_btn" bindtap="step_end"></view>
+	</view>
+	<!-- <view wx:if="{{is_iphonex}}" style="height:34px"></view> -->
+</view>

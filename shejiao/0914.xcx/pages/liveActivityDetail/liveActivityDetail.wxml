@@ -1,0 +1,114 @@
+<!--pages/liveActivity/liveActivity.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+
+<view class="gift_bg  skeleton">
+	<view class="gift_body">
+		<view class="gift_list" wx:if="{{showType==1}}">
+			<view class="gift_list_block">
+				<view class="gift_block_bottom">
+					<view class="win_activity">
+						<view class="win_pro">
+							<view class="pro_img">
+								<image src="{{detailInfo.image}}" mode="aspectFit"></image>
+							</view>
+							<view class="pro_info">
+								<text>{{detailInfo.name}}</text>
+							</view>
+						</view>
+
+					</view>
+					<view class="blcok_tips">
+						<text>活动类型</text>
+						<text>抽奖活动</text>
+					</view>
+					<view class="blcok_tips">
+						<text>活动时间</text>
+						<text>{{filters.formatDateTime(detailInfo.create_time)}}</text>
+					</view>
+				</view>
+			</view>
+			<view class="gift_list_block gift_result">
+				<view class="result_title">中奖用户</view>
+				<view class="result_list" wx:for="{{giftList}}" wx:key="index">
+					<view class="result_list_block">
+						<view class="name">{{item.username}}</view>
+						<view class="block_right block_btn">
+							<view class="view_btn disable_btn" wx:if="{{item.status==0}}">查看收货地址</view>
+							<view class="view_btn" wx:else bindtap="viewModel" id="addr" data-mid="{{item.id}}">查看收货地址</view>
+							<view class="send_btn disable_btn" wx:if="{{item.status==0}}">发货</view>
+							<view class="send_btn " wx:if="{{item.status==1}}" bindtap="viewModel" id="send" data-mid="{{item.id}}">发货</view>
+							<view class="view_btn" wx:if="{{item.status>1}}" bindtap="viewTrack" id="{{item.id}}" data-oid="{{item.id}}" data-url="{{detailInfo.image}}">查看物流信息</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<null-data id="null-data" loadingText="加载中..." loadingShow="{{false}}" bottomText="已经到底啦~" bottomShow="{{hasData}}" dataText="暂无数据" dataShow="{{!hasData}}"></null-data>
+		</view>
+		<view class="gift_list" wx:if="{{showType==2}}">
+			<view class="gift_list_block">
+				<view class="gift_block_bottom">
+					<view class="red_package">
+						<image src="{{staticUrl}}my/red_package.png"></image>
+						<text class="name">{{filters.formatMoney(detailInfo.money)}}元红包</text>
+					</view>
+					<view class="blcok_tips">
+						<text>活动类型</text>
+						<text>红包活动</text>
+					</view>
+					<view class="blcok_tips">
+						<text>活动时间</text>
+						<text>{{filters.formatDateTime(detailInfo.create_time)}}</text>
+					</view>
+				</view>
+			</view>
+			<view class="gift_list_block gift_result">
+				<view class="result_title">中奖用户</view>
+				<view class="result_list">
+					<view class="result_list_block" wx:for="{{giftList}}" wx:key="index">
+						<view class="name">{{item.nickname}}</view>
+						<view class="block_right">{{filters.formatMoney(item.money)}}元红包</view>
+					</view>
+				</view>
+			</view>
+			<null-data id="null-data" loadingText="加载中..." loadingShow="{{false}}" bottomText="已经到底啦~" bottomShow="{{hasData}}" dataText="暂无数据" dataShow="{{!hasData}}"></null-data>
+		</view>
+	</view>
+	<view class="model_bg" wx:if="{{showModel}}" bindtap="hidenModel" catchtouchmove="ture"></view>
+	<view class="view_addr model_style" wx:if="{{showAddr&&showModel}}" catchtouchmove="ture">
+		<view class="model_title">收货地址</view>
+		<view class="model_body">
+			<view>
+				<text style="margin-right:20rpx">{{choseInfo.ship_name}}</text>
+				<text>{{choseInfo.ship_mobile}}</text>
+			</view>
+			<view class="model_addr">{{choseInfo.ship_area}}{{choseInfo.ship_addr}}</view>
+		</view>
+		<view class="model_footer">
+			<button class="buy_disable_btn btn_clear" bindtap="hidenModel">关闭</button>
+		</view>
+	</view>
+	<view class="view_addr model_style" wx:if="{{showSend&&showModel}}" catchtouchmove="ture">
+		<view class="model_title">发货信息</view>
+		<view class="model_body">
+			<view class="model_block ">
+				<text style="margin-right:20rpx">快递公司</text>
+				<picker bindchange="bindPickerChange" value="{{index}}" range="{{companyList}}" range-key="name">
+					<view class="picker_text">
+						<text wx:if="{{index!=''}}">{{companyList[index].name}}</text>
+						<text wx:else>请选择快递公司</text>
+						<icon class="iconfont icon-right"></icon>
+					</view>
+				</picker>
+			</view>
+			<view class="model_block after_tracking">
+				<text style="margin-right:20rpx">物流单号</text>
+				<input placeholder="请输入物流单号" placeholder-class="text_class" type='text' bindinput='saveTrackNumber' value='{{track_number}}' />
+			</view>
+		</view>
+		<view class="model_footer">
+			<button class="buy_disable_btn btn_clear short_width" bindtap="hidenModel">取消</button>
+			<button class="buy_btn btn_clear short_width" bindtap="submitTrack">确认</button>
+		</view>
+	</view>
+</view>

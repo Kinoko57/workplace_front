@@ -1,0 +1,23 @@
+/* pages/protocol/protocol.wxss */
+/* 富文本解析组件 */
+@import "/wxParse/wxParse.wxss";
+page{
+  background: #fff;
+}
+.protocol_bg{
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  padding-top: 50rpx;
+}
+.protocol_bg_about{
+  padding-top: 0;
+}
+.protocol_bg .info{
+  font-size: 26rpx;
+  padding: 0 30rpx;
+  line-height: 2;
+}
+.protocol_bg .info_about{
+  /* padding: 0; */
+}

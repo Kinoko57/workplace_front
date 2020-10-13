@@ -1,0 +1,107 @@
+{
+  "pages": [
+    "pages/guidePage/guidePage",
+    "pages/index/index",
+    "pages/hotPush/hotPush",
+    "pages/proType/proType",
+    "pages/myCar/myCar",
+    "pages/memberCenter/memberCenter",
+    "pages/vipBirthday/vipBirthday",
+    "pages/search/search",
+    "pages/myCoupon/myCoupon",
+    "pages/footer/footer",
+    "pages/bind/bind",
+    "pages/lottery/lottery",
+    "pages/lotteryScan/lotteryScan",
+    "pages/fruitArea/fruitArea",
+    "pages/fruitDetail/fruitDetail",
+    "pages/orderTrack/orderTrack",
+    "pages/myOrder/myOrder",
+    "pages/mySignIn/mySignIn",
+    "pages/sureOrder/sureOrder",
+    "pages/orderDetail/orderDetail",
+    "pages/myGift/myGift",
+    "pages/myGiftList/myGiftList",
+    "pages/userAuz/userAuz",
+    "pages/addComment/addComment",
+    "pages/myComment/myComment",
+    "pages/groupBy/groupBy",
+    "pages/groupResult/groupResult",
+    "pages/mytryOut/mytryOut",
+    "pages/tryOut/tryOut",
+    "pages/scantryOut/scantryOut",
+    "pages/tryOutdetail/tryOutdetail",
+    "pages/scantryDetail/scantryDetail",
+    "pages/myScore/myScore",
+    "pages/flashSale/flashSale",
+    "pages/myGroupBy/myGroupBy",
+    "pages/useCoupon/useCoupon",
+    "pages/myCollection/myCollection",
+    "pages/proList/proList",
+    "pages/activityList/activityList",
+    "pages/myFootprint/myFootprint",
+    "pages/Interested/Interested",
+    "pages/personCenter/personCenter",
+    "pages/proDetail/proDetail",
+    "pages/paySuccess/paySuccess",
+    "pages/scanCode/scanCode",
+    "pages/improveInfo/improveInfo",
+    "pages/editInfo/editInfo",
+    "pages/editAddr/editAddr",
+    "pages/news/news",
+    "pages/saleAfter/saleAfter",
+    "pages/afterDetail/afterDetail",
+    "pages/single/single",
+    "pages/hotArticle/hotArticle",
+    "pages/errPage/errPage"
+  ],
+  "networkTimeout": {
+    "request": 5000
+  },
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#f7f7f7",
+    "navigationBarTitleText": "公主购",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#353535",
+    "selectedColor": "#ff6573",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "static/img/member/home.png",
+        "selectedIconPath": "static/img/member/home_c.png"
+      },
+      {
+        "pagePath": "pages/hotPush/hotPush",
+        "text": "发现",
+        "iconPath": "static/img/member/coll.png",
+        "selectedIconPath": "static/img/member/coll_c.png"
+      },
+      {
+        "pagePath": "pages/proType/proType",
+        "text": "分类",
+        "iconPath": "static/img/member/type.png",
+        "selectedIconPath": "static/img/member/type_c.png"
+      },
+      {
+        "pagePath": "pages/myCar/myCar",
+        "text": "购物车",
+        "iconPath": "static/img/member/car.png",
+        "selectedIconPath": "static/img/member/car_c.png"
+      },
+      {
+        "pagePath": "pages/memberCenter/memberCenter",
+        "text": "我的",
+        "iconPath": "static/img/member/my.png",
+        "selectedIconPath": "static/img/member/my_c.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

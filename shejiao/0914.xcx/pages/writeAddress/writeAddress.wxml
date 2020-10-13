@@ -1,0 +1,65 @@
+<!--pages/payment/payment.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="pay_body skeleton">
+  <view class="pay_address" bindtap="choseAddress">
+    <view class="pay_address_flex skeleton-rect pay_address_null"  wx:if="{{address.ship_name==undefined}}">
+        <icon class="iconfont icon-add"></icon>
+        <text>增加收货地址</text>
+    </view>
+    <view wx:else class="pay_address_flex">
+      <view class="pay_address_info">
+        <view class="pay_address_info_l">
+          <view class="ship_area skeleton-rect">
+            <text style="background:{{bg_color}}" wx:if="{{address.is_default==1}}">默认</text>
+            <text style="background:{{line_bg_color}}" wx:if="{{address.label!=''}}">{{address.label}}</text>
+            {{address.ship_area}}
+          </view>
+          <view class="ship_addr skeleton-rect">{{address.ship_addr}}</view>
+          <view><text class="ship_name skeleton-rect">{{address.ship_name}}</text> {{address.ship_mobile}}</view>
+        </view>
+        <icon class="iconfont icon-right" wx:if="{{options.type=='confirm'||orderInfo.can_modify_address==1}}"></icon>
+      </view>
+    </view>
+  </view>
+  <view class="pay_body_padding">
+    <view class="pay_body_wraper">
+      <view class="pay_body_other pay_body_block">
+      <view class="pay_body_border">
+        <view class="pay_other_cont">
+          <view class="pay_other_list">
+            <view class="pay_other_list_flex">
+              <image src="{{orderInfo.goods.image}}" mode="scaleToFill" class="skeleton-rect"></image>
+              <view class="pay_other_cont_r skeleton-rect">
+                <view class="pay_other_tit">{{orderInfo.goods.goods_name}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="pay_delivery">
+          <text class="pub_lcolor">奖品来源</text>
+          <text class="pub_rcolor">{{orderInfo.goods.source}}</text>
+        </view>
+      </view>
+        <view class="pay_msg skeleton-rect">
+          <text class="pub_lcolor">中奖时间</text>
+          <text class="pub_rcolor">{{filters.formatDateTime(orderInfo.goods.create_time)}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view style="height:200rpx"></view>
+  <view wx:if="{{is_iphonex}}" style="height:68rpx"></view>
+</view>
+<!-- 固定底部 -->
+<view class="pay_bot_fixed" wx:if="{{options.type=='confirm'}}">
+  <view class="fixed_addr" wx:if="{{address.ship_name!=undefined}}">{{address.ship_area}} {{address.ship_addr}}</view>
+  <view class="fixd_btn {{is_iphonex?'iphone_x_padding':''}}">
+    <view class="all_price color_theme_red"></view>
+    <view class="sub_order" style="background:{{line_bg_color}}" bindtap="subOrder">提交订单</view>
+  </view>
+</view>    
+<view wx:if="{{showErr}}" class="model_bg"></view>
+<view  wx:if="{{showErr}}" class="err_tips_dia">
+    {{showErrContent}}
+</view>

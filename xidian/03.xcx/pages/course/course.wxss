@@ -1,0 +1,109 @@
+/* pages/course/course.wxss */
+page{
+ background-color: #f7f7f7;
+}
+.course_block_wraper{
+  padding: 0 20rpx;
+}
+.course_select{
+ display: flex;
+ padding-bottom: 26rpx;
+}
+.camp_seed{
+  height: 58rpx;
+  border-radius: 29rpx;
+  background-color: #fff;
+  line-height: 58rpx;
+  padding: 0 28rpx;
+  font-size: 26rpx;
+  color: #333;
+  display: inline-flex;
+}
+.camp_seed icon{
+ display: inline-flex;
+}
+.camp_stage{
+  margin-left:23rpx;
+}
+.course_block{
+
+}
+.course_block .course_list{
+  display: flex;
+  padding-bottom: 20rpx;
+  margin-top:20rpx;
+  border-bottom: 1px solid #ededed;
+}
+.course_block .course_list:last-child{
+  border-bottom:0
+}
+.course_block .course_list:first-child{
+  margin-top:0
+}
+.course_block .course_list .course_list_img{
+   width: 225rpx;
+   height: 225rpx;
+}
+.course_block .course_list .course_list_r{
+   width: 440rpx;
+   padding-left: 30rpx;
+}
+.course_list_r .course_list_r_titi{
+  color: #333;
+  font-size: 30rpx;
+  white-space: nowrap;
+  width: 440rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.course_list_r .course_list_r_text{
+  color: #999;
+  font-size: 24rpx;
+  width: 440rpx;
+  white-space: nowrap;
+  padding-top:6rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.course_list_r .course_list_r_progress{
+  font-size: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.course_list_r_bar_line{
+  width: 240rpx;
+  height: 12rpx;
+  border-radius: 6rpx;
+  background:#d1e6d8;
+  margin: 20rpx 0;
+}
+.course_list_r_bar_line view{
+  height: 12rpx;
+  border-radius: 6rpx;
+  overflow: hidden;
+}
+.course_list_r .course_list_r_year{
+  color: #999999;
+  font-size: 22rpx;
+}
+.course_list_r_year text{
+  display: inline-block;
+  border: 1px solid #999;
+  height: 36rpx;
+  padding: 0 6rpx;
+  border-radius: 10rpx;
+  line-height:36rpx;
+  margin-right: 20rpx;
+  margin-bottom: 6rpx;
+}
+.course_list_r .course_list_r_pri{
+ color: #ff0000;
+ font-size: 42rpx;
+ padding-top: 10rpx;
+}
+.course_list_r .course_list_r_pri text{
+  font-size: 24rpx;
+}
+
+

@@ -1,0 +1,23 @@
+/* pages/errPage/errPage.wxss */
+
+.err_bg {
+  background: #f6f6f6;
+  height: 100vh;
+  position: relative;
+}
+.err{
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+  width: 80%;
+}
+.err_title{
+  font-size: 30rpx;
+  margin: 30rpx 0;
+}
+.err_link{
+  font-size: 30rpx;
+  color: #ff8d97;
+}

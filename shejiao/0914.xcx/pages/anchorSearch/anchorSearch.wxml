@@ -1,0 +1,77 @@
+<!--pages/search/search.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class='search_his skeleton'>
+  <navbar page-name="搜索"  bg-color="#fff" icon-color="#000" show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class='search_header'>
+    <view class='search_input'>
+      <icon class='iconfont icon-sousuo'></icon>
+      <input value='{{searchkey}}' bindinput='searchInput' confirm-type="search" bindconfirm='searchList' placeholder-class="input-placeholder" placeholder="搜索喜欢的商品"></input>
+      <icon class='iconfont icon-guanbi' wx:if="{{searchkey==''}}" style="color:#f5f5f5"></icon>
+      <icon class='iconfont icon-guanbi close' bindtap='clearSearch' wx:if="{{searchkey!=''}}"></icon>
+    </view>
+    <text bindtap='clearSearch'>取消</text>
+  </view>
+  <view class="scroll_height">
+    <view class="search_Height">
+    <view class='his_list' wx:if="{{keylist.length>0}}">
+      <view class='h_list'>
+        <view wx:for='{{keylist}}'  class="h_list_list"  wx:key='index'>
+        <view class="h_list_list_l" bindtap='goLink' data-link='../anchorSearchResult/anchorSearchResult?type=key&value={{item.name}}'>
+          <icon class="iconfont icon-jilu"></icon>
+          <text>{{item.name}}</text>
+        </view>
+        <icon class="iconfont icon-cha" bindtap="deletSearch" data-index="{{index}}"></icon>
+        </view>
+      </view>
+      <view class="search_all" bindtap="openLocationsercher" wx:if="{{allKeyList.length!=keylist.length}}">全部搜索记录</view>
+      <view class="search_all" bindtap="clearSearchStorage" wx:if="{{allKeyList.length==keylist.length}}">清除全部搜索记录</view>
+    </view>
+    </view>
+    <view class='search_List'>
+      <view class="search_nav" scroll-x="true" scroll-with-animation>
+        <view bindtap="choseNav" class="search_nav_text {{activeTab==index?'search_nav_active':''}}" wx:for="{{navList}}" wx:key="index" data-index="{{index}}">{{item.name}}</view>
+      </view>
+      <view class="search_content">
+        <block wx:for="{{tabs}}" wx:key="index" id="{{item.id}}" wx:for-item="tabBlock">
+          <scroll-view style="height:{{scrollHeight}}" wx:if="{{activeTab==index}}" class="anchorPer_scroll" scroll-y scroll-with-animation>
+            <view class="follow_block" wx:if="{{activeTab==0}}">
+                <view class="follow_block_list" wx:for="{{tabBlock.list}}" wx:key="index"><text class="text_active">{{item.name}}</text><image wx:if="{{index==0}}" src="{{staticUrl}}anchor/hot.png"></image></view>
+            </view>
+            <view class="find_block" wx:if="{{activeTab==1}}">
+              <view class="find_block_list" wx:for="{{tabBlock.list}}" wx:key="index">
+                <view class="find_block_list_l">
+                  <text class="anchor_text {{index<=2?'anchor_text_active':''}}">{{index+1}}.</text>
+                  <text class="find_block_list_l_tit">{{item.content}}</text>
+                  <text class="hot" style="background:{{line_bg_color}}" wx:if="{{index==0}}">热</text>
+                  <text class="hot" style="background:{{line_bg_color1}}" wx:if="{{index==1}}">爆</text>
+                  <text class="hot" style="background:{{line_bg_color2}}" wx:if="{{index==3}}">荐</text>
+                </view>
+                <view class="find_block_list_r">
+                  <image src="{{staticUrl}}anchor/fire.png"></image>
+                  <text>{{filters.formatCount(item.like_num)}}</text>
+                </view>
+              </view>
+            </view>
+            <view class="anchor_block" wx:if="{{activeTab==2}}">
+              <view class="anchor_block_list" wx:for="{{tabBlock.list}}" wx:key="index">
+                <view class="anchor_block_list_l">
+                  <text class="anchor_text {{index<=2?'anchor_text_active':''}}">{{index+1}}.</text>
+                  <image src="{{item.image}}"></image>
+                  <view class="anchor_info">
+                    <text>{{item.username}}</text>
+                    <text>{{filters.formatCount(item.scene_people_num)}}人观看直播</text>
+                  </view>
+                </view>
+                <view class="anchor_block_list_r">
+                  <text class="each_follow">进入</text>
+                </view>
+              </view>
+            </view>
+            <null-data id="null-data" loadingText="" loadingShow="{{false}}" bottomText="已经到底啦~" bottomShow="{{false}}" dataText="暂无数据" dataShow="{{tabBlock.list.length==0}}"></null-data>
+          </scroll-view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

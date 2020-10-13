@@ -1,0 +1,117 @@
+<!--pages/articleDetail/articleDetail.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<import src="/wxParse/wxParse.wxml" />
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="article_bg_style">
+	<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+		<icon class="iconfont iconhuidaodingbuxianxing"></icon>
+	</view>
+
+	<view class="article_bg skeleton">
+		<view class="article_top">
+			<view class="article_left">
+				<image src="../../image/icon/article_img.png" wx:if="{{articleDetail.source==0}}"></image>
+				<image src="{{articleDetail.create_img}}" wx:if="{{articleDetail.source==1}}"></image>
+			</view>
+			<view class="article_user article_right_width">
+				<view class="user_name" wx:if="{{articleDetail.source==0}}">西点小助手</view>
+				<view class="user_name" wx:if="{{articleDetail.source==1}}">{{articleDetail.create_by}}</view>
+				<button bindtap="toshare" class='hide_nav_block share_btn' hover-class="none" wx:if="{{!isLogin}}">
+					<icon class='iconfont iconzhuanfa1' style="color:#0d8d37"></icon>
+					<text>分享</text>
+				</button>
+				<button open-type='share' class='hide_nav_block share_btn' hover-class="none" wx:if="{{isLogin}}">
+					<icon class='iconfont iconzhuanfa1' style="color:#0d8d37"></icon>
+					<text>分享</text>
+				</button>
+			</view>
+		</view>
+		<!-- <view class="article_right"> -->
+		<view class="article_title article_right_width">
+			{{articleDetail.title}}
+		</view>
+		<view class="article_detail article_right_width">
+			<text>{{articleDetail.details}}</text>
+		</view>
+		<view class="article_images article_right_width">
+			<image src="{{item}}" data-url="{{item}}" wx:for="{{articleDetail.images}}" wx:key="index" mode="aspectFill" bindtap="viewImage"></image>
+		</view>
+		<view class="article_time article_right_width">
+			<text class="time">{{filters.formatDateTime(articleDetail.create_time)}}</text>
+			<!-- <text>删除</text> -->
+			<!-- <text class="concat" wx:if="{{commentList.length>0}}">评论</text> -->
+		</view>
+		<!-- -->
+		<view class="article_recommend" wx:if="{{recommPros.length>0}}">
+			<view class="pro_recommend_title">
+				<text>热门推荐</text>
+			</view>
+			<view class="pro_recommend_list">
+				<view class="recommend_pro" wx:for="{{recommPros}}" bindtap="goLink" data-link="../proDetail/proDetail?id={{item.id}}" wx:key="index" wx:if="{{index<3}}">
+					<image src="{{item.image}}"></image>
+					<view class="title">{{item.name}}</view>
+					<view class="price color_theme_red">￥{{filters.formatMoney(item.price_sell)}}</view>
+					<view class="count color_theme_gray">{{item.people_num}}人已买</view>
+				</view>
+			</view>
+		</view>
+		<view class="article_recommend" wx:if="{{commentList.length>0}}">
+			<view class="pro_recommend_title">
+				<text>评论列表</text>
+			</view>
+			<view class="article_comments">
+				<view class="article_comments_list">
+					<view class="comment_block" wx:for="{{commentList}}" wx:key="index">
+						<view class="comment_block_left">
+							<image src="{{item.image}}"></image>
+						</view>
+						<view class="comment_block_right">
+							<view class="comment_top_info">
+								<view class="comment_user_name">{{item.nickname}}</view>
+								<view class="comment_time">{{filters.formatCommentTime(item.create_time)}}</view>
+							</view>
+							<view class="comment_detail">
+								{{item.content}}
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- </view> -->
+	</view>
+	<null-data id="null-data" bottomText="已经到底啦~" bottomShow="true"></null-data>
+	<view style="height:100rpx" class="{{is_iphonex?'article_fixed_bottom':''}}"></view>
+	<view class="article_fixed {{is_iphonex?'article_fixed_bottom':''}}" wx:if="{{commentFocus==false}}">
+		<view class="comment_text">
+			<view class="comm_input" bindtap="showComment">
+				<icon class="iconfont iconbianji"></icon>
+				<text>说点什么...</text>
+			</view>
+		</view>
+		<view class="icon_list">
+			<view class="icon_block article_read">
+				<icon class="iconfont iconyuedu"></icon>
+				<text>{{filters.formatCount(articleDetail.read_num==null?0:articleDetail.read_num)}}浏览</text>
+			</view>
+			<view class="icon_block article_coll" bindtap="collArticle" id="{{articleDetail.id}}">
+				<icon class='iconfont iconcoll' wx:if="{{articleDetail.isCollect==0}}"></icon>
+				<icon class='iconfont iconcoll1' style="color:#ffa85e" wx:if="{{articleDetail.isCollect==1}}"></icon>
+				<text>{{filters.formatCount(articleDetail.like_num)}}点赞</text>
+			</view>
+			<view class="icon_block article_comm">
+				<icon class='iconfont iconxiaoxi3'></icon>
+				<text>{{filters.formatCount(articleDetail.comment_num)}}</text>
+			</view>
+		</view>
+
+	</view>
+	<view class="article_fixed_hidden {{is_iphonex?'article_fixed_bottom':''}}" style="bottom:{{keyBoardHeight}}px">
+		<view class="comment_input_style">
+			<view class="comment_input">
+				<input class="weui-input" value="{{sendValue}}" bindinput="getCommentValue" focus="{{commentFocus}}" placeholder="请发表你的评论，最多140个字~" bindconfirm="saveComment" confirm-type="send" bindblur="showComment" bindfocus="getHeight" adjust-position="{{false}}" />
+			</view>
+			<view class="send_btn {{sendValue!=''?'active':''}}" bindtap="saveComment">发送</view>
+		</view>
+	</view>
+</view>

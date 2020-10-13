@@ -1,0 +1,251 @@
+page{
+  background:#5F239B ;
+}
+.lotter_body_timg{
+  display: block;
+  width: 620rpx;
+  margin: 46rpx auto 0;
+}
+/*九宫格大转盘  */
+.lotter_bg{
+
+
+}
+.lotter_wraper{
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 1456rpx;
+  overflow-y: scroll;
+  overflow: hidden;
+  text-align: center;
+  width: 750rpx;
+}
+.lotter_body{
+  position: relative;
+  top: 0;
+  left: 0;
+  text-align: center;
+  width: 750rpx;
+}
+.lotter_bg_img{
+  position: absolute;
+  width: 750rpx;
+  height:3708rpx;
+  top: 0;
+  left: 0;
+  z-index:8;
+}
+.lotter_num{
+  padding: 0 30rpx;
+  display: inline-flex;
+  align-items: center;
+  height:56rpx;
+  background:rgba(78,22,116,1);
+  border:4px solid rgba(237,181,255,1);
+  border-radius:12rpx;
+  margin: -4rpx auto 0;
+  color: #fff;
+  font-size: 24rpx;
+}
+.lotter_num .color_num{
+  display: inline-block;
+   font-size: 36rpx;
+   padding: 0 6rpx;
+   text-shadow: 1px 2px 3px rgba(205, 14, 0, 0.75);
+}
+.lotter_block{
+  position: relative;
+  z-index:10;
+  height: 704rpx;
+}
+.lotter_block_bg{
+  position: absolute;
+  top: 0;
+  width: 750rpx;
+  height: 704rpx;
+  z-index: 11;
+}
+.lotter_block_bg image{
+  width: 100%;
+  height:100%;
+}
+.lotter_block_bg_inte{
+  position: absolute;
+  top:48rpx;
+  width: 750rpx;
+  font-weight: 600;
+  z-index: 3;
+  font-size: 24rpx;
+}
+.lottery{
+  width:456rpx;
+  height:398rpx;
+  margin:0 auto;
+  position:relative;
+  z-index:12;
+  top: 175rpx;
+  left:6rpx;
+  /* top: 88rpx; */
+}
+/* .lottery view{
+  width:200rpx;
+  height:200rpx;
+  line-height: 200rpx;
+  text-align:center;
+  font-size:24rpx;
+  color:#333; 
+  position: absolute;
+} */
+.lottery .lottery-unit{
+   width: 151rpx;
+   height: 125rpx;
+   font-size: 24rpx;
+   color: #333;
+   position: absolute;
+   /* background: #5F239B; */
+   box-sizing: border-box;
+   border-radius: 10rpx;
+   overflow: hidden;
+   display: inline-flex;
+   justify-content: center;
+   align-items: center;
+}
+.lottery .lottery-unit image{
+   width: 80%;
+   height: 80%;
+   display: block;
+}
+.lottery .lottery-unit-0{ 
+  left: 0rpx;
+  top: 0rpx;
+  }
+.lottery .lottery-unit-1{
+   left: 157rpx;
+  top: 0rpx;
+   }
+.lottery .lottery-unit-2{ 
+   left: 312rpx;
+   top: 0rpx;
+  }
+.lottery .lottery-unit-3{ 
+  left: 312rpx;
+  top: 129rpx;
+  }
+.lottery .lottery-unit-4{ 
+  left: 312rpx;
+  top: 256rpx;
+  }
+.lottery .lottery-unit-5{ 
+  left: 157rpx;
+  top: 256rpx;
+}
+.lottery .lottery-unit-6{ 
+  left: 0rpx;
+ top: 256rpx;
+  }
+.lottery .lottery-unit-7{ 
+   left: 0rpx;
+   top: 129rpx;
+  }
+
+.lottery view.select{
+  border: 5rpx solid #5F239B;
+}
+
+.lottery .start{ 
+  position:absolute; 
+  width: 150rpx;
+  height: 124rpx;
+  /* background:#5F239B; */
+  border-radius: 10rpx;
+  overflow: hidden;
+  left: 157rpx;
+  top: 129rpx;
+  font-size:28rpx; 
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color:#fff;
+  font-weight: 600;
+  text-shadow: 2px 3px 3px rgba(205, 14, 0, 0.75);
+}
+.lottery .start text{ 
+  display: block;
+}
+.lottery .start image{
+   width: 100%;
+   height: 100%;
+   display: block;
+}
+.lotter_rules{
+  position: absolute;
+  bottom: 0;
+  color: #fff;
+  height: 174rpx;
+  font-size: 28rpx;
+  text-align: center;
+  bottom: -2rpx;
+  width: 750rpx;
+}
+.lotter_rules text{
+  position: relative;
+  z-index: 2;
+  top: 100rpx;
+  
+}
+.lotter_rules image{
+  height: 174rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 750rpx;
+}
+
+/*规则弹框 */
+
+.lotter_dia_model {
+  height: 60vh;
+  top: calc(100% - 60vh);
+  animation: rulesSheet 300ms ease-out;
+}
+
+.lotter_dia_model .model_body {
+  font-size: 26rpx;
+  padding: 0 40rpx;
+}
+
+.lotter_dia_model .model_body .lotter_dia_block {
+  margin-bottom: 30rpx;
+}
+
+.lotter_dia_model .model_body .lotter_dia_block_title {
+  margin-bottom: 30rpx;
+}
+
+.lotter_dia_model .model_body .lotter_dia_block_title .iconfont {
+  margin-right: 30rpx;
+}
+
+.lotter_dia_model .model_body .lotter_dia_block_title text {
+  color: #333;
+}
+
+.lotter_dia_model .model_body .lotter_dia_block_tips {
+  margin-left: 60rpx;
+}
+
+.lotter_dia_model .model_body .lotter_dia_block_tips text {
+  color: #999;
+  line-height: 1.5;
+}
+@keyframes rulesSheet {
+  from {
+    top: 100%;
+  }
+
+  to {
+    top: calc(100% - 60vh);
+  }
+}
+

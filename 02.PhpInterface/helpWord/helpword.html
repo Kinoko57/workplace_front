@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>帮助文档</title>
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <style>
+    .title{
+      width: 100%;
+      line-height: 40px;
+      height: 40px;
+      text-align: center;
+    }
+    .top{
+      overflow: hidden;
+      padding: 0 50px;
+      margin-top: 15px;
+    }
+    .time{
+      float: left;
+    }
+    .time .deitTime{
+      font-size: 12px;
+      color: #333;
+      display: inline-block;
+      padding-left: 10px;
+    }
+    .downFile{
+      float: right;
+    }
+    .content{
+      padding: 0 50px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+      <div class="title"></div>
+      <div class="top">
+        <div class="time">
+          <span>编辑时间：</span>
+          <span class="deitTime"></span>
+        </div>
+        <a href="" target="_blank" class="downFile">附件下载</a>
+      </div>
+      <hr>
+      <p class="content">
+      </p>
+  </div>
+</body>
+<script type="text/javascript">
+//http://crmnew.nbseo.cn/
+//http://shenshoucrm.nbseo.cn/
+//http://crm.gongzhujia.net.cn/
+  $(document).ready(function () {
+    $.ajax({
+      type:"GET",
+      url: 'http://crm.gongzhujia.net.cn/oa/document-browse.json',
+      success:function(res){
+        console.log(res)
+        var req = JSON.parse(res)
+        if(req.code === 200 || req.code === '200'){
+          console.log(req)
+          var file=req.data.document.file
+            $('.title').html(req.data.document.title)
+            $('.deitTime').html(req.data.document.editedDate)
+            $('.content').append(req.data.document.content)
+            if(req.data.document.file==""){
+              $('.downFile').hide()
+            }else{
+              var href=JSON.parse(file)[0].url
+              var name=JSON.parse(file)[0].name
+              $('.downFile').attr('href','http://crm.gongzhujia.net.cn/data/upload/'+href); 
+            }
+        }
+      }
+    })
+  })
+</script>
+</html>

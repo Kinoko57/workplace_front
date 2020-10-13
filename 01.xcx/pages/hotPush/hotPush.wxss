@@ -1,0 +1,71 @@
+/* pages/hotPush/hotPush.wxss */
+
+.hot_push {
+  background: #fff;
+  /* padding: 0 20rpx; */
+  padding:20rpx;
+
+}
+
+.hot_block {
+  margin-bottom: 18rpx;
+  padding: 50rpx 12rpx 30rpx 12rpx;
+  background: #fff;
+  border-radius: 12rpx;
+  box-shadow: 0 3rpx 4rpx 2rpx #e7e7e7;
+}
+
+.hot_time {
+  padding: 0 16rpx 15rpx 16rpx;
+}
+
+.hot_time text {
+  color: #000;
+  font-family: 'DIN';
+}
+
+.hot_head {
+  height: 480rpx;
+}
+
+.hot_head image {
+  /* border-radius: 10rpx; */
+  width: 100%;
+  height: 480rpx;
+}
+
+.hot_title {
+  padding: 30rpx 16rpx 20rpx 16rpx;
+  /* border-bottom: 1px solid #e4e4e4; */
+}
+
+.hot_title .title_name {
+  font-size: 36rpx;
+  /* font-weight: 600; */
+  color: #000;
+}
+
+.hot_title text {
+  font-size: 24rpx;
+  /* font-weight: bold; */
+  color: #666;
+}
+
+.hot_operating {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  /* padding-top: 10rpx; */
+}
+
+.hot_operating .iconfont {
+  font-size: 38rpx;
+  display: inline-flex;
+  margin-right: 8rpx;
+}
+
+.hot_operating text {
+  font-size: 24rpx;
+  color: #666;
+  margin-right: 16rpx;
+}

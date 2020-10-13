@@ -1,0 +1,22 @@
+<!--pages/findLog/findLog.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="log_bg skeleton">
+   <navbar page-name="进度详情"  bg-color="#fff" icon-color="#333" show-title='true' show-nav='true' show-index='false'></navbar>
+   <view class="log_body">
+      <view class="log_body_progress">
+        <view class="log_body_block" wx:if="{{list.length>0}}" wx:for="{{list}}" wx:key="index">
+           <view class="log_body_block_l">
+             <text class="{{index==0?'text_active':''}}"></text>
+             <text wx:if="{{index!=list.length-1}}"></text>
+           </view>
+           <view class="log_body_block_r {{index==0?'log_body_block_r_active':''}}">
+             <text class="log_titi">{{item.log_content}}</text>
+             <text class="log_text">{{item.log_remark}}</text>
+             <text class="log_text">{{filters.formatDateTime(item.create_time)}}</text>
+           </view>
+        </view>
+         <null-data id="null-data" loadingText="" loadingShow="{{false}}" bottomText="" bottomShow="{{false}}" dataText="暂无进度详情" dataShow="{{list.length==0}}"></null-data>
+      </view>
+   </view>
+</view>

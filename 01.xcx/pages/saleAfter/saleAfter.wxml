@@ -1,0 +1,74 @@
+<!--pages/saleAfter/saleAfter.wxml-->
+<view class='sale_after'>
+  <view class='after_head'>
+    <text>本次售后服务由</text>
+    <text class='name'>公主购</text>为您提供
+  </view>
+  <view class='after_type'>
+    <view class="after_title">服务类型</view>
+    <view class='type_list'>
+      <text class="{{ischose=='refunds'?'text_active':''}}" bindtap='choseType' id='refunds' wx:if='{{order_type==5}}'>退款</text>
+      <text class="{{ischose=='reship'?'text_active':''}}" bindtap='choseType' id='reship' wx:if='{{order_type!=5}}'>退货退款</text>
+      <text class="{{ischose=='barter'?'text_active':''}}" bindtap='choseType' id='barter' wx:if='{{order_type!=5}}'>换货</text>
+      <text class="{{ischose=='refunds'?'text_active':''}}" bindtap='choseType' id='refunds' wx:if='{{order_type!=5}}'>仅退款</text>
+    </view>
+    <icon class='iconfont icon-jinggao type_tips' ></icon>
+    <text wx:if="{{ischose=='refunds'}}" class='type_tips'>此项仅在未收到货，或卖家协商同意前提下进行</text>
+    <text wx:if="{{ischose=='reship'}}" class='type_tips'>此项仅在已收到货，需要退换已收到的货物的情况下进行</text>
+    <text wx:if="{{ischose=='barter'}}" class='type_tips'>此项仅在商品存在质量问题，联系卖家协商换货的情况下进行</text>
+  </view>
+  <view class='after_pro'>
+    <view class='car_pro'>
+      <view class='pro_img'>
+        <image src='{{orderInfo.img}}' wx:if="{{orderInfo.img!=null&&orderInfo.img!=''}}"></image>
+        <image src='../../static/img/pro/static.png' wx:else></image>
+      </view>
+      <view class='pro_info'>
+        <view class='pro_title'>
+          <text>{{orderInfo.name}}</text>
+        </view>
+        <view class='pro_spec'>
+          <view class='pro_price'>
+            <view class='spec_info' wx:if="{{orderInfo.title!=''&&orderInfo.title!=null}}">规格:{{orderInfo.title}}</view>
+            <view style='display:flex;align-items:center;'>
+              <view class='pro_inter_img' wx:if='{{orderInfo.point>0}}'>
+                <!-- <image src='../../static/img/pro/score.png'></image> -->
+                <icon class='iconfont icon-jifen1'></icon>
+              </view>
+              <text class='pro_integral' wx:if='{{orderInfo.point>0}}'>{{orderInfo.point}}</text>
+              <text class='pro_integral' wx:if='{{orderInfo.point>0&&orderInfo.price>0}}'>+</text>
+              <text class='peo_nowprice' wx:if='{{orderInfo.price>0}}'>￥{{orderInfo.price}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='after_com'>
+    <textarea bindinput="bindTextAreaBlur" auto-height placeholder="请您在此描述您的问题,尽可能详细（大于10个字），通过的概率会更大" maxlength='-1' placeholder-class="phcolor" value='{{procomm}}' />
+    <view class='com_imgList'>
+      <view class='imgBlock' wx:for="{{imgs}}" wx:for-item="item" wx:key="*this">
+        <icon class='iconfont icon-to-remove' data-index="{{index}}" catchtap='delImg'></icon>
+        <text></text>
+        <image src='{{item}}' data-index="{{index}}" bindtap="previewImg"></image>
+      </view>
+      <icon class='iconfont icon-addpictures addicon' bindtap='addImg' hidden='{{imgs.length==9}}'></icon>
+    </view>
+  </view>
+  <view class='after_tips'>
+    提交服务单后，售后专员可能会和您电话联系，请保持电话畅通
+  </view>
+  <view class='after_tracking' wx:if="{{ischose!='refunds'&&flag>=2}}">
+    <text>快递公司：</text>
+    <input placeholder="请输入快递公司" placeholder-class="trackText" bindinput='saveTrackName' value='{{track_name}}' />
+  </view>
+  <view class='after_tracking' wx:if="{{ischose!='refunds'&&flag>=2}}">
+    <text>快递单号：</text>
+    <input placeholder="请输入物流单号" type='number' placeholder-class="trackText" bindinput='saveTrackNumber' value='{{track_number}}' />
+  </view>
+  <view class='comBtn'>
+    <button size='default' bindtap='saveAfter' id='{{orderInfo.goods_id}}' data-pid='{{orderInfo.product_id}}' wx:if='{{orderInfo.flag==0||orderInfo.flag==-1}}'>提交</button>
+    <button size='default' wx:else bindtap='saveAfter' id='{{orderInfo.goods_id}}' data-pid='{{orderInfo.product_id}}'>提交修改</button>
+  </view>
+
+</view>

@@ -1,0 +1,76 @@
+var filters = {
+  formatMoney: function (value) {
+    var money = (value / 100).toFixed(2)
+    return money
+  },
+  formatDate: function (date) {
+    var timer = '' + date
+    var date = getDate(timer * 1000);
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+    var day = date.getDate()
+    return [year, month, day].map(filters.formatNumber).join('-')
+  },
+  formatDateTime: function (date) {
+    var timer = '' + date
+    date = getDate(timer * 1000);
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+    var day = date.getDate()
+    var hour = date.getHours()
+    var minute = date.getMinutes()
+    var second = date.getSeconds()
+    return [year, month, day].map(filters.formatNumber).join('-') + ' ' + [hour, minute, second].map(filters.formatNumber).join(':')
+  },
+  formatCommentTime: function (time, option) {
+    time = +time * 1000
+    var d = getDate(time)
+    var now = Date.now()
+
+    var diff = (now - d) / 1000
+
+    if (diff < 30) {
+      return '刚刚'
+    } else if (diff < 3600) {
+      // less 1 hour
+      return Math.ceil(diff / 60) + '分钟前'
+    } else if (diff < 3600 * 24) {
+      return Math.ceil(diff / 3600) + '小时前'
+    } else if (diff < 3600 * 24 * 2) {
+      return '1天前'
+    }
+    if (option) {
+      return formatDateTime(time, option)
+    } else {
+      return (
+        d.getMonth() +
+        1 +
+        '月' +
+        d.getDate() +
+        '日' +
+        d.getHours() +
+        '时' +
+        d.getMinutes() +
+        '分'
+      )
+    }
+  },
+  formatCount: function (num) {
+    if (num > 10000) {
+      return (num / 10000).toFixed(2) + '万+'
+    } else {
+      return num
+    }
+  },
+  formatNumber: function (n) {
+    n = n.toString()
+    return n[1] ? n : '0' + n
+  },
+}
+module.exports = {
+  formatDate: filters.formatDate,
+  formatCommentTime:filters.formatCommentTime,
+  formatDateTime: filters.formatDateTime,
+  formatMoney: filters.formatMoney,
+  formatCount: filters.formatCount
+}

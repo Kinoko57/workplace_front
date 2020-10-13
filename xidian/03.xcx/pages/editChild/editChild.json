@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "nyz_area_picker": "../../components/nyz_area_picker/nyz_area_picker",
+    "skeleton": "/components/skeleton/skeleton"
+  }
+}

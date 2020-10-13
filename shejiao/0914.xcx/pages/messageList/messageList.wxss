@@ -1,0 +1,210 @@
+/* pages/messageCenter/messageCenter.wxss */
+
+page {
+  background: #fff;
+}
+
+.message_body {
+}
+
+.message_top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: #fff;
+  padding: 6rpx 36rpx;
+  position: fixed;
+  width: 90%;
+  z-index: 100;
+}
+
+.message_top view {
+  border-radius: 50rpx;
+  /* background: #f6f6f6; */
+  display: inline-flex;
+  align-items: center;
+  padding: 4rpx 16rpx;
+  margin-right: 10rpx;
+}
+
+.message_top view text {
+  color: #898888;
+  font-size: 24rpx;
+}
+
+.message_top view .iconfont {
+  display: inline-flex;
+  align-items: center;
+}
+
+.message_list {
+  /* background: #fff;  */
+  margin: 0 16rpx;
+}
+
+.message_list .message_block {
+  background: #fff;
+  /* border-radius: 10rpx; */
+  padding: 30rpx 26rpx;
+  /* padding: 20rpx 26rpx; */
+  /* margin-bottom: 10rpx; */
+  display: flex;
+  align-items: center;
+  /* border-left: 8rpx solid #fff; */
+  padding-left: 12rpx;
+  border-bottom: 2rpx solid #E9E9E9;
+
+  /* justify-content:  */
+}
+.message_list .message_block .message_icon{
+  position: relative;
+}
+.unread_radius{
+  position: absolute;
+  height: 20rpx;
+  width: 20rpx;
+  border-radius: 50%;
+  left: 84rpx;
+  top: -10rpx;
+  background: #ec4a51;
+}
+.message_list .message_unread{
+  /* border-left: 8rpx  solid #ec4a51; */
+  /* background: rgba(253,225,214,.3); */
+  /* background: rgb(248,240,237); */
+
+}
+.message_list .message_block .message_left .icon_bg {
+  height: 84rpx;
+  width: 84rpx;
+  border-radius: 10rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.type01 {
+  background: #ec4a51;
+}
+
+.type02 {
+  background: #61d9d4;
+}
+
+.type03 {
+  background: #e3b71e;
+}
+
+.type04 {
+  background: #60d94f;
+}
+
+.message_list .message_block .message_left .iconfont {
+  color: #fff;
+  font-size: 50rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message_list .message_block .message_right {
+  color: #999;
+  font-size: 24rpx;
+  margin-left: 30rpx;
+}
+
+.message_list .message_block .message_right .message_title {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.message_list .message_block .message_right .message_title .title {
+  font-size: 30rpx;
+  color: #333;
+  width: 330rpx;
+  white-space: nowrap; /*规定段落中的文本不进行换行*/
+  overflow: hidden; /*内容会被修剪，并且其余内容是不可见的。*/
+  text-overflow: ellipsis; /*显示省略号来代表被修剪的文本*/
+}
+
+.message_list .message_block .message_right .message_desc {
+  width: 580rpx;
+  margin-top: 10rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  word-break: break-all;
+}
+
+
+.message_model{
+  height: 60vh;
+  top: calc(100% - 60vh);
+  animation: modelSheet 300ms ease-out;
+}
+.message_model .model_body {
+  font-size: 26rpx;
+  padding: 0 60rpx;
+  margin-top: 100rpx;
+  margin-bottom: 60rpx;
+}
+.message_model .model_body .detail_type{
+  position: absolute;
+  top: -50rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 10rpx solid #fff;
+  border-radius: 50%;
+  box-shadow: 4rpx 8rpx 60rpx 0px rgba(4, 0, 0, 0.08);
+  text-shadow: 4rpx 8rpx 60rpx rgba(4, 0, 0, 0.08);
+}
+.message_model .model_body .detail_type .icon_bg{
+  height: 80rpx;
+  width: 80rpx;
+  border-radius: 50rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+.message_model .model_body .detail_type .iconfont{
+  color: #fff;
+  font-size: 50rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.message_model .model_body .detail{
+  margin-top: 60rpx;
+  line-height: 3;
+  color: #333;
+  height: 34vh;
+}
+.message_model .model_body .detail .title{
+  font-size: 24rpx;
+  color: #999;
+}
+.message_model .model_body .detail .detail_title{
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.message_model .model_body .detail .detail_time{
+  font-size: 26rpx;
+}
+.message_model .model_body .detail .detail_desc{
+  font-size: 26rpx;
+}
+
+
+@keyframes modelSheet {
+  from {
+    top: 100%;
+  }
+
+  to {
+    top: calc(100% - 60vh);
+  }
+}

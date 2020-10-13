@@ -1,0 +1,74 @@
+<!--pages/articleList/articleList.wxml-->
+<!-- <view style="display:none">
+  <image wx:for="{{articleList}}" mode="widthFix" wx:key="id" id="{{item.id}}" src="{{item.image}}" bindload="onImageLoad" style="width:346rpx;"></image>
+</view> -->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="article_bg skeleton">
+	<view class="article_body">
+		<view class="article_top">
+			<scroll-view class="article_typelist" scroll-with-animation='true' scroll-x scroll-into-view="{{activityType}}">
+				<view class="type_block {{activityType==item.key?'color_theme_blue type_activity':''}} skeleton-rect" wx:for="{{typeList}}" wx:key="index" id="{{item.key}}" data-type="{{item.id}}" bindtap="choseTypeId" data-banner="{{item.banner}}">{{item.name}}</view>
+			</scroll-view>
+		</view>
+		<scroll-view class="article_bottom" style="height:{{scrollHeight}}px;position: relative;" scroll-y lower-threshold='120' bindscrolltolower="loadMore" bindscroll="scroll" scroll-top='{{topNum}}' scroll-with-animation refresher-enabled="{{true}}" refresher-threshold="{{100}}" refresher-default-style="black" refresher-background="#f6f6f6" refresher-triggered="{{triggered}}" bindrefresherpulling="onPulling" bindrefresherrefresh="onRefresh" bindrefresherrestore="onRestore" bindrefresherabort="onAbort">
+			<!-- <view class="article_banner">
+        <image src="{{activityBanner}}" mode="widthFix"></image>
+      </view> -->
+			<view class="article_lists" wx:if="{{articleList.length>0}}">
+				<view class="article_block_left">
+					<view class="article_block" wx:for="{{col1}}" wx:key="index" bindtap="goLink" data-link="../viewArticle/viewArticle?id={{item.id}}">
+						<view class="article_img">
+							<image src="{{item.pic}}" mode="widthFix" style="width:100%;height:{{item.height}}rpx"></image>
+						</view>
+						<view class="article_title">
+							{{item.title}}</view>
+						<view class="article_like">
+							<view class="read">
+								<text>{{item.read_num==null?0:item.read_num}}浏览</text>
+							</view>
+							<view class="like">
+								<icon class="iconfont iconcoll" wx:if="{{item.isCollect==0}}"></icon>
+								<icon class="iconfont iconcoll1" wx:if="{{item.isCollect==1}}" style="color:#ffa85e"></icon>
+								<text>{{item.like_num==null?0:item.like_num}}</text>
+							</view>
+						</view>
+						<view class="article_user">
+							<image src="../../image/icon/article_img.png"></image>
+							<!-- <image src="{{item.image}}"></image> -->
+							<text class="color_theme_blue social_person_name">西点小助手</text>
+						</view>
+					</view>
+				</view>
+				<view class="article_block_right">
+					<view class="article_block" wx:for="{{col2}}" wx:key="index" bindtap="goLink" data-link="../viewArticle/viewArticle?id={{item.id}}">
+						<view class="article_img">
+							<image src="{{item.pic}}" mode="widthFix" style="width:100%;height:{{item.height}}rpx"></image>
+						</view>
+						<view class="article_title">
+							{{item.title}}</view>
+						<view class="article_like">
+							<view class="read">
+								<text>{{item.read_num==null?0:item.read_num}}浏览</text>
+							</view>
+							<view class="like">
+								<icon class="iconfont iconcoll" wx:if="{{item.isCollect==0}}"></icon>
+								<icon class="iconfont iconcoll1" wx:if="{{item.isCollect==1}}" style="color:#ffa85e"></icon>
+								<text>{{item.like_num==null?0:item.like_num}}</text>
+							</view>
+						</view>
+						<view class="article_user">
+							<!-- <image src="{{item.image}}"></image> -->
+							<image src="../../image/icon/article_img.png"></image>
+							<text class="color_theme_blue social_person_name">西点小助手</text>
+						</view>
+					</view>
+				</view>
+			</view>
+			<null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false&&(col2.length>0||col1.length>0)}}" bottomText="已经到底啦~" bottomShow="{{is_end&&(col2.length>0||col1.length>0)}}" dataText="暂无动态" dataShow="{{articleList.length==0}}"></null-data>
+			<view style="width:2rpx;height:2rpx;bottom:-2rpx;position:absolute;" />
+		</scroll-view>
+	</view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+	<icon class="iconfont iconhuidaodingbuxianxing"></icon>
+</view>

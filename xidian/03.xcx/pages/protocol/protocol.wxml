@@ -1,0 +1,12 @@
+<!--pages/protocol/protocol.wxml-->
+<import src="/wxParse/wxParse.wxml" />
+<view class="protocol_bg">
+    <view>
+      <view class="info pro_img">
+        <template is="wxParse" data="{{wxParseData:proDetail.nodes}}" />
+      </view>
+    </view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+	<icon class="iconfont iconhuidaodingbuxianxing"></icon>
+</view>

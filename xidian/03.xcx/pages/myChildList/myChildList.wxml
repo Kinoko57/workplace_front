@@ -1,0 +1,58 @@
+<!--pages/clientList/clientList.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class='client_Info skeleton'>
+	<scroll-view class="order_scroll" style="height:{{height}}px" scroll-y lower-threshold='120' bindscrolltolower="loadMore" bindscroll="scroll" scroll-top='{{topNum}}' scroll-with-animation>
+		<checkbox-group bindchange="chose">
+			<view wx:for="{{addrList}}" wx:for-item="blockitem" wx:for-index="blockindex" wx:key="blockindex">
+				<view class="add_section" wx:for='{{blockitem}}' wx:key='index'>
+					<view class="color_theme_blue add_status" wx:if="{{item.is_perfect==1}}" bindtap='newAdd' data-link="../editChild/editChild?type=edit&id={{item.id}}">待完善</view>
+					<view class='add_info'>
+						<label for="{{item.id}}" class="add_info_l">
+							<view class='info_chose skeleton-radius'>
+								<checkbox value="{{item.id}}" checked="{{item.checked}}" id="{{item.id}}" disabled="{{choseType==2}}" />
+							</view>
+							<view style="display: inline-flex;align-items: center;">
+								<view class="add_info_l_ku_sex add_info_l_ku" wx:if="{{item.gender==0}}">
+									<icon wx:if="{{item.image==''}}" class="iconfont icongirl"></icon>
+									<image wx:if="{{item.image!=''}}" src="{{item.image}}"></image>
+								</view>
+								<view class="add_info_l_ku_man add_info_l_ku" wx:if="{{item.gender==1}}">
+									<icon wx:if="{{item.image==''}}" class="iconfont iconnan"></icon>
+									<image wx:if="{{item.image!=''}}" src="{{item.image}}"></image>
+								</view>
+								<view class="add_info_l_ku_zhong add_info_l_ku" wx:if="{{item.gender==2}}">
+									<icon wx:if="{{item.image==''}}" class="iconfont iconquxiao1"></icon>
+									<image wx:if="{{item.image!=''}}" src="{{item.image}}"></image>
+								</view>
+								<text class="people_name">{{item.name}}</text>
+							</view>
+						</label>
+						<view class="add_info_r">
+							<view class='operating'>
+								<view bindtap='newAdd' data-link="../editChild/editChild?type=edit&id={{item.id}}" data-info='{{item}}'>
+									<image src='../../image/com/edit.png' class='oper_icon'></image>
+									<text>编辑</text>
+								</view>
+								<view bindtap='delAdd' id='{{item.id}}'>
+									<image src='../../image/com/del.png' class='oper_icon'></image>
+									<text>删除</text>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</checkbox-group>
+		<view class="student_add bg_theme_blue" bindtap='newAdd' data-link="../editChildOrder/editChildOrder">
+		  添加
+		</view>
+		<null-data id="null-data" loadingText="" loadingShow="{{is_end==false&&hasData}}" bottomText="" bottomShow="{{is_end&&hasData}}" dataText="暂无学员信息" dataShow="{{!hasData}}"></null-data>
+		<view style="width:100%;height:50px"></view>
+	</scroll-view>
+</view>
+<view class="add_saveInfo {{is_iphonex?'iphone_x':''}}">
+	<view bindtap='sureChild' class="bg_theme_blue" data-link="../editChild/editChild?type='new'">确认</view>
+</view>
+<!-- <view class="add_student"  >
+	<icon class="iconfont iconadd"></icon>
+</view> -->

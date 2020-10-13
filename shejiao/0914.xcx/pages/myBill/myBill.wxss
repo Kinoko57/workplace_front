@@ -1,0 +1,154 @@
+/* pages/myBill/myBill.wxss */
+page{
+  background: #fff;
+}
+
+.bill_body{
+  position: fixed;
+  top: 0;
+  z-index: 3;
+  width: 100%;
+}
+.bill_body_wraper{
+  position: relative;
+  z-index: 2;
+  height: 100%;
+}
+.bill_body_top{
+  display: flex;
+  align-items: center;
+  height: 204rpx;
+  justify-content: space-around;
+}
+.bill_body .bill_body_img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 750rpx;
+}
+.bill_center_xian{
+  width: 1px;
+  height:124rpx;
+  background: #ACCBDF;
+}
+.bill_body_pri{
+   color: #fff;
+}
+.bill_body_pri view{
+  text-align: center;
+
+}
+.bill_body_pri view:nth-child(1){
+  font-size: 28rpx;
+}
+.bill_body_pri view:nth-child(2){
+  font-size: 52rpx;
+  font-weight: 600;
+}
+.bill_body_pri view .symbol{
+  font-size: 36rpx;
+}
+.bill_nav{
+  display: flex;
+  width: 750rpx;
+  height: 92rpx;
+  line-height: 92rpx;
+}
+.nav_text{
+  width: 50%;
+  text-align: center;
+  color: #333;
+  background: #F5F5F5;
+  font-size: 30rpx;
+}
+.nav_active{
+  display: inline-block;
+  background: #ffffff;
+}
+.bill_type{
+  display: flex;
+  padding: 30rpx 24rpx 20rpx;
+  flex-wrap: wrap;
+  color: #666;
+}
+.bill_type .bill_type_list{
+  background: rgba(0,152,255,0.06);
+  margin-right: 16rpx;
+  margin-bottom:16rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  padding: 0 25rpx;
+  border-radius: 28rpx;
+  color: #0099FF;
+}
+.bill_type .bill_type_list_active{
+  background:#0099FF;
+  color: #fff;
+}
+.bill_block{
+  padding: 0 24rpx;
+}
+.bill_list{
+  background: #fff;
+  height: 142rpx;
+  box-sizing: border-box;
+  padding-top:10rpx;
+  display: flex;
+}
+.bill_list .bill_list_l image{
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+}
+.bill_list_r{
+  width: 620rpx;
+  padding-top:8rpx;
+  border-bottom: 1px solid #F7F7F7;
+  margin-left: 18rpx;
+}
+.bill_list_r_t{
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  color: #333;
+  padding-bottom: 22rpx;
+  justify-content: space-between;
+}
+.bill_list_r_t text:nth-child(2){
+  font-size: 32rpx;
+  font-weight: 600;
+}
+.bill_list_r_b{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24rpx;
+  color: #999;
+}
+.bill_fixed{
+  position: fixed;
+  bottom: 0;
+  width:100%;
+  background: #fff;
+  text-align: right;
+  box-shadow:0 0 24px 0 rgba(0, 0, 0, 0.19);
+}
+.bill_all{
+  height:100rpx;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+  width: 100%;
+  display: inline-flex;
+  font-size: 24rpx;
+  color: #333;
+  align-items: center;
+  justify-content: flex-end;
+}
+.bill_all .bill_all_count{
+  font-size: 48rpx;
+  color: #FE0000;
+}
+.bill_all .bill_all_count .symbol{
+  font-size: 28rpx;
+}

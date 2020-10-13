@@ -1,0 +1,26 @@
+<!--pages/paySuccess/paySuccess.wxml-->
+<view class='pay_success'>
+  <view class='pay_body'>
+    <view class='pay_title'>
+      <icon class='iconfont icon-duihaocheckmark17'></icon>
+      <view>
+        <text class='pay_states'>支付成功！</text>
+        <text class='pay_info'>您的订单已提交仓储中心，即将配送</text>
+      </view>
+    </view>
+    <view class='pay_addr'>
+      <view>
+        <text>收件人</text> {{addrInfo.ship_name}} {{addrInfo.ship_mobile}}
+      </view>
+      <view>
+        <text>收件地址</text> {{addrInfo.ship_area}}{{addrInfo.ship_addr}}
+      </view>
+    </view>
+    <view class='pay_btn'>
+      <button size='mini' bindtap='showOrder'>查看订单</button>
+      <button size='mini' bindtap='buy'>继续购物</button>
+    </view>
+    <image src='{{payImg}}' style='width:100%;height:182rpx;' wx:if="{{payImg!=''&&payImg!=null}}"></image>
+  </view>
+  <include src="../footer/footer.wxml" />
+</view>

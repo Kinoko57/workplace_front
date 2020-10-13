@@ -1,0 +1,381 @@
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<view class='container-box' style="width:100%;height: 100%;overflow-y: hidden;">
+	<mlvb-live-room id="id_liveroom" wx:if="{{showLiveRoom}}" roomurl="{{playUrl}}" roomid="{{roomID}}" role="{{role}}" roomname="{{roomName}}" pureaudio="{{pureAudio}}" debug="{{debug}}" muted="{{muted}}" beauty="{{beauty}}" template="float" bindRoomEvent="onRoomEvent">
+	</mlvb-live-room>
+	<!-- 弹幕 -->
+	<view class="barrage_show">
+	<barrage class="barrage"></barrage>
+		<!-- <view class="barrage_info" wx:for="{{barrageList}}" wx:key="index" style="top:{{item.top}}">
+			<image class="info_image" src="{{item.userAvatar}}"></image>
+			<text class="info_left">{{item.userName}}</text>
+			<text class="info_right">{{item.message}}</text>
+		</view> -->
+	</view>
+	<!-- 顶部返回健 -->
+	<!-- <view  class='close' style="top:{{(navHeight) - 26}}px;height:{{navHeight}}px">
+			<navbar page-name="直播间" bg-color="transparent" icon-color="#ffffff" show-search='false' show-title='false' show-nav='false' show-index='false'></navbar>
+		</view> -->
+	<!-- 主播详细信息 -->
+	<!-- <view  class="play_user_info" style="width:100%; position:absolute;bottom:0;" wx:if="{{showAnchor}}">
+			<image src="{{anchorInfo.image}}" class="user_head_image"></image>
+			<view class="user_info_body">
+				<view class="anchor_report" bindtap="visitLink" data-link="../reportType/reportType?scene=2&id={{id}}">
+					<image class="image" src="{{staticUrl}}anchor/anhor_report.png"></image>
+					<view class="text">举报</view>
+				</view>
+				<view class="user_name">
+					{{anchorInfo.nickname}}
+					<image src="{{staticUrl}}anchor/women.png" wx:if="{{anchorInfo.sex!=1}}"></image>
+					<image src="{{staticUrl}}anchor/man.png" wx:if="{{anchorInfo.sex==1}}"></image>
+				</view>
+				<view class="user_some_info">
+					<view class="user_info_block">
+						<view class="title">{{anchorInfo.fans}}</view>
+						<view>粉丝</view>
+					</view>
+					<view class="user_info_block">
+						<view class="title">{{anchorInfo.like_num}}</view>
+						<view>关注</view>
+					</view>
+					<view class="user_info_block">
+						<view class="title">{{anchorInfo.follow_num}}</view>
+						<view>动态</view>
+					</view>
+				</view>
+				<view class="user_btn">
+					<view class="user_like">+关注</view>
+					<view class="user_index" bindtap="visitLink" data-link="../anchorPerson/anchorPerson?member_id={{member_id}}">主页</view>
+				</view>
+			</view>
+		</view>
+		<view  class="play_user" style="width:100%; position:absolute;bottom:0;" wx:if="{{showAnchor}}"></view> -->
+	<!-- 弹框显示时的隐藏背景图 -->
+	<view class="play_bg" bindtap="hideModel" wx:if="{{showBag||showMore||showAnchor}}"></view>
+	<!-- 直播商品 -->
+	<view class="play_prolist" style="width:100%; position:absolute;bottom:0;" wx:if="{{showBag}}">
+		<view class="pro_title">共{{livePro.length}}件商品</view>
+		<view class="pro_list">
+			<view class="pro_block" wx:for="{{livePro}}" wx:key="index">
+				<view class="pro_block_left">
+					<image src="{{item.image}}" class="pro_image"></image>
+					<view class="fixed_sort">{{index+1}}</view>
+				</view>
+				<view class="pro_block_right">
+					<view class="pro_block_title">{{item.name}}</view>
+					<view class="pro_desc">{{item.spec}}</view>
+					<view class="pro_bottom">
+						<view class="pro_bottom_left">
+							<view class="pro_price">￥{{filters.formatMoney(item.price)}}</view>
+							<view class="pro_market">￥{{filters.formatMoney(item.price_market)}}</view>
+						</view>
+						<view class="pro_bottom_right" bindtap="visitLink" data-link="../proDetail/proDetail?livegoods_id={{item.id}}&member_id={{anchor_id}}&scene_id={{scene_id}}">
+							<view class="pro_btn">去看看</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<!-- 查看更多 -->
+	<view class="play_more" style="width:100%; position:absolute;bottom:0;" wx:if="{{showMore}}">
+		<view class="more_title">更多</view>
+		<view class="more_body">
+			<view class='more_block'>
+				<button open-type='share'>
+					<image class="more_btn" src="{{staticUrl}}anchor/share.png"></image>
+					<view class='more_text'>分享</view>
+				</button>
+			</view>
+			<view class='more_block' bindtap="visitLink" data-link="../reportType/reportType?id={{viewDetail.id}}&scene=2&id={{scene_id}}">
+				<image class="more_btn" src="{{staticUrl}}anchor/play_report.png"></image>
+				<view class='more_text'>举报</view>
+			</view>
+			<view class='more_block' bindtap="clearMsg">
+				<image class="more_btn" src="{{staticUrl}}anchor/clear.png"></image>
+				<view class='more_text'>清屏</view>
+			</view>
+		</view>
+	</view>
+	<!-- 直播推屏商品 -->
+	<view class="play_pro_push push_01" wx:if="{{push_01_show}}">
+		<image src="{{staticUrl}}anchor/close.png" class="push_close" bindtap="hidePush"></image>
+		<view bindtap="visitLink" data-link="../proDetail/proDetail?livegoods_id={{liveProPush.livegoods_id}}&member_id={{anchor_id}}&scene_id={{scene_id}}">
+			<image src="{{liveProPush.image}}" class="push_pro_image"></image>
+			<view class="push_pro_title">{{liveProPush.name}}</view>
+			<view class="push_pro_price">￥{{filters.formatMoney(liveProPush.price)}}</view>
+		</view>
+	</view>
+	<!-- 背景图 -->
+	<view class="bg_image" hidden="{{playing}}" style="background-image: url({{staticUrl}}anchor/live_bg.jpg)"></view>
+	<!-- 底部按钮 -->
+	<view class="play_fixed" style="width:100%; height: 64rpx; position:absolute;bottom:30px;" wx:if="{{playing}}">
+		<view class="input">
+			<view class="comm_input" bindtap="showComment">
+				<view class='comm_input_text' bindtap="showInput">说点什么...</view>
+			</view>
+		</view>
+		<view class='bottom_box' style="padding-right: 26rpx;">
+			<image class="bottom_button" src="{{staticUrl}}anchor/exit.png" data-type="exit" bindtap='returnBack'></image>
+		</view>
+		<view class='bottom_box'>
+			<image class="bottom_button" src="{{staticUrl}}anchor/more.png" data-type="more" bindtap='showModel'></image>
+		</view>
+		<view class="bottom_box" bindtap='collLive'>
+			<image class="bottom_button" src="{{staticUrl}}anchor/coll.png" data-type="coll" bindtap='collLive'></image>
+		</view>
+		<view class='bottom_box'>
+			<image class="bottom_button" src="{{staticUrl}}anchor/bag.png" data-type="bag" bindtap='showModel'></image>
+		</view>
+	</view>
+	<view class="like_animation animation {{animation ? 'start' : ''}}"></view>
+	<!-- 主播头部信息 -->
+	<view class="play_head_fixed" style="top:{{navHeight}}px" wx:if="{{playing}}">
+		<view class="play_anchor view_fiexd_follow">
+			<image class="follow_image" src="{{anchorInfo.avatar}}" wx:if="{{anchorInfo.avatar!=undefined&&anchorInfo.avatar!=''}}"></image>
+			<image class="follow_image" src="{{staticUrl}}common/avatar.png" wx:else></image>
+			<view class="follow_name">
+				<view class="title">{{anchorInfo.nickname}}</view>
+				<view>点赞数{{filters.formatCount(like_num)}}</view>
+			</view>
+		</view>
+		<view class="play_anchor_list" wx:if="{{mem_num>0}}">
+			<scroll-view scroll-x class="anchor_list" wx:if="{{mem_num>3}}">
+				<view class="anchor_info" wx:for="{{memberList}}" wx:key="index">
+					<image src="{{item.avatar}}" wx:if="{{item.avatar!=''}}"></image>
+					<image src="{{staticUrl}}common/avatar.png" wx:else></image>
+				</view>
+			</scroll-view>
+			<view class="anchor_list" wx:if="{{mem_num<=3}}">
+				<view wx:for="{{memberList}}" wx:key="index" class="anchor_info">
+					<image src="{{item.avatar}}" wx:if="{{item.avatar!=''}}"></image>
+					<image src="{{staticUrl}}common/avatar.png" wx:else></image>
+				</view>
+			</view>
+			<view class="achor_text">{{filters.formatCount(mem_num)}}</view>
+		</view>
+	</view>
+	<view class="play_comment_input" style="bottom:{{keyBoardHeight}}px">
+		<view class="input_style">
+			<input class="weui-input" value="{{sendValue}}" bindinput="getCommentValue" focus="{{commentFocus}}" placeholder="说点什么……" bindconfirm="saveComment" confirm-type="send" bindblur="hideComment" bindfocus="getHeight" adjust-position="{{false}}" />
+		</view>
+	</view>
+	<!-- 直播聊天记录 -->
+	<scroll-view class="play_comment" scroll-y scroll-into-view="{{toview}}" scroll-with-animation="true" wx:if="{{playing}}">
+		<view class="comment_block" wx:for="{{staticMsg}}" wx:key="index">
+			<text class="comment_content">{{item.message}}</text>
+		</view>
+		<view class="comment_block" wx:for="{{comment}}" wx:key="index" id="{{item.id}}">
+			<!-- <text class="comment_type type_style_01" wx:if="{{item.cmd==2||item.cmd==3}}">通知</text> -->
+			<!-- <text class="comment_content" wx:if="{{item.cmd==4}}">{{item.userName}}点了个赞</text> -->
+			<!-- <text class="comment_content" wx:if="{{item.cmd==2}}">{{item.userName}}加入直播</text> -->
+			<!-- <text class="comment_content" wx:if="{{item.cmd==3}}">{{item.userName}}退出直播</text> -->
+			<!-- <text class="comment_type" wx:if="{{item.type==0}}">{{item.userName}}：</text> -->
+			<!-- <text class="comment_type" wx:if="{{item.type==2}}">{{item.userName}}</text> -->
+			<!-- <text class="comment_type {{item.class}}" wx:if="{{item.cmd!=4&&item.cmd!=2&&item.cmd!=3&&item.cmd!=-1}}" >{{item.userName}}：</text>
+			<text class="comment_content" wx:if="{{item.cmd!=4&&item.cmd!=2&&item.cmd!=3&&item.cmd!=-1}}">{{filters.dealWord(item.message)}}</text>
+			<text class="comment_content" wx:if="{{item.cmd==-1}}">{{filters.dealWord(item.message)}}</text> -->
+			<text class="comment_type {{item.class}}" wx:if="{{item.cmd!=4&&item.cmd!=2&&item.cmd!=3&&item.cmd!=-1&&item.cmd!=7}}" >{{item.userName}}：</text>
+			<text class="comment_content" wx:if="{{item.cmd!=4&&item.cmd!=2&&item.cmd!=3&&item.cmd!=-1&&item.cmd!=7&&item.cmd!=7}}">{{filters.dealWord(item.message)}}</text>
+		</view>
+	</scroll-view>
+	<view class="end_bg" wx:if="{{end_show}}"></view>
+	<view class="end_body" wx:if="{{end_show}}">
+		<view class="end_title">直播结束啦~</view>
+		<view class="end_text">{{filters.formatTimes(live_time)}}</view>
+		<view class="end_tips">直播时长</view>
+		<view class="end_text">{{history_member_num}}</view>
+		<view class="end_tips">观看人数</view>
+		<view class="end_btn" bindtap="goIndex">
+			<view>返回首页</view>
+		</view>
+	</view>
+	<view class="end_bg" wx:if="{{err_show}}" style="background:rgba(0,0,0,1)"></view>
+	<view class="end_body" wx:if="{{err_show}}">
+		<view class="end_tips" style="margin-top: 200rpx;padding: 0 100rpx;font-size:34rpx;">该直播间已结束直播，快去看看其他的吧！！！</view>
+		<view class="err_btn" bindtap="goIndex">
+			<view>返回</view>
+		</view>
+	</view>
+
+	<!-- 右侧小图标-红包 -->
+	<view class="right_icon right_hot {{showHotBig?'right_hot_small_to_big':''}}" bindtap="showActModel" id='hot' wx:if="{{hideHotSmall&&red_id!=''&&red_id!=0}}">
+		<image src="{{staticUrl}}anchor/act_red_package.png"></image>
+		<!-- <image src="{{staticUrl}}anchor/red_package.png" wx:else></image> -->
+	</view>
+	<!-- 右侧小图标-抽奖 -->
+	<view class="right_icon right_win" bindtap="showActModel" id='win' wx:if="{{showLottery_small}}">
+		<image src="{{staticUrl}}anchor/act_win.png"></image>
+	</view>
+	<!-- 右侧小图标-二维码 -->
+	<view class="right_icon right_code" bindtap="showActModel" id='code' wx:if="{{showCode}}">
+		<image src="{{staticUrl}}anchor/act_code.png"></image>
+	</view>
+	<!-- 抽奖弹框 -->
+	<view class="act_model act_mode_win" wx:if="{{showWin}}">
+		<view class="act_model_bg">
+			<image src="{{staticUrl}}anchor/redy_win.png" style="width:100%" mode="widthFix" bindload="getWinHeight"></image>
+		</view>
+		<view class="act_win_body">
+			<view class="win_title" style="margin-top:{{winHeight}}px">
+				<image src="{{staticUrl}}anchor/redy_win_text.png" style="width:100%" mode="widthFix"></image>
+			</view>
+			<view class="win_time" wx:if="{{countdown>0}}">
+				<view class="time_left">开奖倒计时</view>
+				<view class="time_right">
+					<text class="num">{{saleTime.hou}}</text>
+					<text>：</text>
+					<text class="num">{{saleTime.min}}</text>
+					<text>：</text>
+					<text class="num">{{saleTime.sec}}</text>
+				</view>
+			</view>
+			<view class="win_time" wx:else>
+				<view class="time_left">抽奖已结束~</view>
+				<view class="time_right">
+				</view>
+			</view>
+			<view class="win_pro">
+				<view class="pro_body">
+					<view class="pro_left">
+						<image src="{{lotteryInfo.image}}"></image>
+					</view>
+					<view class="pro_right">
+						<view class="pro_title">{{lotteryInfo.name}}</view>
+						<view class="pro_win_text">{{lotteryInfo.num}}个名额</view>
+					</view>
+				</view>
+			</view>
+			<view class="win_join_num">已有{{lotteryInfo.join_num}}人参与</view>
+			<view class="win_btn" wx:if="{{countdown>0}}">
+				<button open-type='share' class="disable_btn" wx:if="{{can_lottery==false&&lotteryInfo.join_type==2&&is_participate==false&&lotteryInfo.is_transmit==0}}">转发获得机会</button>
+				<button wx:if="{{(can_lottery==true||lotteryInfo.join_type==1||(lotteryInfo.join_type==2&&lotteryInfo.is_transmit==1))&&is_participate==false}}" bindtap="joinLottery">立即参与</button>
+				<view wx:if="{{is_participate}}" class="win_tips_get">您已成功参与，等待开奖吧</view>
+			</view>
+			<view class="win_btn" wx:else>
+				<view class="win_tips_get">抽奖已结束~</view>
+			</view>
+			<view class="win_tips">
+				<text wx:if="{{!is_participate&&lotteryInfo.join_type==2}}">转发直播即可获得抽奖机会</text>
+				<text style="color:transparent" wx:else>转发直播即可获得抽奖机会</text>
+			</view>
+			<view class="act_close" bindtap="hideActModel" id='win'>
+				<icon class="iconfont icon-guanbicopy"></icon>
+			</view>
+		</view>
+	</view>
+	<!-- 抽奖结果页弹框 -->
+	<view class="act_model act_model_win_result" wx:if="{{showWinResult}}">
+		<view class="act_model_bg">
+			<image src="{{staticUrl}}anchor/win.png" style="width:100%" mode="widthFix" wx:if="{{is_win}}" bindload="getWinResultHeight"></image>
+			<image src="{{staticUrl}}anchor/no_win.png" style="width:100%" mode="widthFix" wx:else bindload="getWinResultHeight"></image>
+		</view>
+		<view class="act_win_body">
+			<view class="win_pro" style="margin-top:{{winResultHeight + 15}}px">
+				<view class="pro_body">
+					<view class="pro_left">
+						<image src="{{win_result_pro.image}}"></image>
+					</view>
+					<view class="pro_right">
+						<view class="pro_title">{{win_result_pro.name}}</view>
+						<view class="pro_win_text">共{{win_result_pro.join_num}}人参与</view>
+					</view>
+				</view>
+			</view>
+			<view class="win_join_num">中奖用户名单：{{win_list.length}}人</view>
+			<view class="act_win_scroll">
+				<scroll-view scroll-y class="win_result_list">
+					<view class="win_result_block" wx:for="{{win_list}}" wx:key="index">
+						<view class="user_index">{{index + 1}}</view>
+						<view class="user_image">
+							<!-- <image src="{{staticUrl}}anchor/hot_first.png" class="fixed_left_top" wx:if="{{index==0}}"></image> -->
+							<image src="{{item.image}}" class="user" wx:if="{{item.image!=''}}"></image>
+							<image src="{{staticUrl}}common/avatar.png" class="user" wx:else></image>
+						</view>
+						<view class="user_name">{{item.username}}</view>
+						<view class="user_price">{{item.tel}}</view>
+					</view>
+				</scroll-view>
+			</view>
+			<view class="act_close" bindtap="hideActModel" id='win_result'>
+				<icon class="iconfont icon-guanbicopy"></icon>
+			</view>
+		</view>
+	</view>
+	<!-- 抢红包弹框 -->
+	<view class="act_model act_model_hot" wx:if="{{!hideHotSmall&&!showHotResult&&red_id!=''&&red_id!=0}}">
+		<view class="act_model_bg">
+			<image src="{{staticUrl}}anchor/red_package.png" style="width:100%" mode="widthFix" bindload="getRedHeight"></image>
+		</view>
+		<view class="act_hot_body">
+			<view class="act_title" style="margin-top:{{firstTop}}px">
+				<text wx:if="{{red_type==0}}">立即抢红包</text>
+				<text wx:if="{{red_type!=0}}">输入口令，参与抢红包</text>
+			</view>
+			<view class="act_input" wx:if="{{red_type!=0}}">
+				<input placeholder="请输入口令" placeholder-class="place-holder" v-model="red_pwd" bindinput='inputKeyWord' bindfocus="getInputFocus"/>
+			</view>
+			<view class="act_input" wx:else style="background:transparent"></view>
+			<view class="act_get" bindtap="getHotPackage"></view>
+			<view class="act_tips" wx:if="{{red_type!=0}}">右上方二维码添加主播，即可获得口令</view>
+			<view class="act_tips" wx:else style="color:transparent">右上方二维码添加主播，即可获得口令</view>
+			<view class="act_close" bindtap="hideActModel" id='red'>
+				<icon class="iconfont icon-guanbicopy"></icon>
+			</view>
+		</view>
+	</view>
+	<!-- 抢红包结果页 -->
+	<view class="act_model act_model_hot_result" wx:if="{{!hideHotSmall&&showHotResult&&red_id!=''&&red_id!=0}}">
+		<view class="act_hot_result_bg">
+			<image src="{{staticUrl}}anchor/red_package_result.png" style="width:100%" mode="widthFix" bindload="getRedResultHeight"></image>
+		</view>
+		<view class="act_hot_result_body">
+			<view class="act_title" style="margin-top:{{firstTop - 50}}px" wx:if="{{red_is_get&&my_get_money>0}}">
+				<text>抢到红包啦~</text>
+			</view>
+			<view class="act_hot_price" wx:if="{{red_is_get&&my_get_money>0}}">
+				<text class="icon">￥</text>
+				<text class="price">{{filters.formatMoney(my_get_money)}}</text>
+			</view>
+			<view class="act_title_null" style="margin-top:{{firstTop - 20}}px" wx:if="{{red_is_get&&my_get_money==0}}">
+				<text>来晚一步，红包已派完~</text>
+			</view>
+			<view class="act_hot_scroll {{my_get_money>0?'red_get':''}}">
+				<scroll-view scroll-y class="hot_result_list">
+					<view class="hot_result_block" wx:for="{{red_get_list}}" wx:key="index">
+						<view class="user_image">
+							<!-- <image src="{{staticUrl}}anchor/hot_first.png" class="fixed_left_top" wx:if="{{index==0}}"></image> -->
+							<image src="{{item.member_image}}" class="user" wx:if="{{item.member_image!=''}}"></image>
+							<image src="{{staticUrl}}common/avatar.png" class="user" wx:else></image>
+						</view>
+						<view class="user_name">{{item.nickname}}</view>
+						<view class="user_price">￥{{filters.formatMoney(item.money)}}</view>
+					</view>
+				</scroll-view>
+			</view>
+			<view class="act_close" bindtap="hideActModel" id='red_result'>
+				<icon class="iconfont icon-guanbicopy"></icon>
+			</view>
+		</view>
+	</view>
+	<!-- 主播二维码弹框 -->
+	<view class="act_model_bg_model" wx:if="{{showAnchorCode}}" bindtap="hideActModel" id="code"></view>
+	<view class="act_model act_anchor_code" wx:if="{{showAnchorCode}}">
+		<view class="act_anchor_image">
+			<image class="follow_image" src="{{anchorInfo.avatar}}" wx:if="{{anchorInfo.avatar!=undefined&&anchorInfo.avatar!=''}}"></image>
+			<image class="follow_image" src="{{staticUrl}}common/avatar.png" wx:else></image>
+		</view>
+		<view class="act_anchor_code_body">
+			<view class="anchor_name">
+				{{anchorInfo.nickname}}
+			</view>
+			<view class="anchor_code_tips">添加主播二维码，获取红包口令</view>
+			<view class="anchor_code_image">
+				<image src="{{code_url}}"></image>
+				<!-- <image src="{{staticUrl}}common/avatar.png"></image> -->
+			</view>
+			<view class="anchor_btn" bindtap="downloadCode">
+				<button>保存图片</button>
+			</view>
+		</view>
+	</view>
+</view>

@@ -1,0 +1,54 @@
+<!--pages/bind/bind.wxml-->
+<view class='bind'>
+  <navbar page-name="{{phoneText}}"  bg-color="#ffffff" icon-color="#000000" show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class='b_content'>
+    <view class='b_title'>
+      <text wx:if="{{type!='bind'}}">{{phoneText}}</text>
+      <text wx:if="{{type=='bind'&&!bind_text}}">验证当前绑定手机号</text>
+      <text wx:if="{{type=='bind'&&bind_text}}">输入新绑定手机号</text>
+    </view>
+    <view class='b_tips' wx:if="{{type!='change'&&type!='bind'}}">
+      <text>为了体验更多功能，请先绑定手机号</text>
+    </view>
+    <view class="phoneFrom">
+      <view class='b_form' wx:if="{{type!='bind'}}">
+        <view class="{{mobile!=''?'form-item showRed':'form-item showW'}}" style="padding-right:32rpx">
+            <image src="{{staticUrl}}bind/phone_logo.png" style='width:36rpx;height:36rpx'></image>
+            <input name="input" type='text' style="padding-left: 16rpx" data-name="mobile" bindinput='getMobile' value='{{mobile}}' placeholder="请输入11位手机号" bindblur='getIsShow'></input>
+        </view>
+        <view class="{{code!=''?'form-item showRed':'form-item showW'}}">
+          <image src="{{staticUrl}}bind/yanzheng.png"></image>
+            <input name="input" type='number' style="padding-left: 16rpx" data-name="code" bindinput='getMobile' placeholder="请输入6位验证码"></input>
+            <button disabled='{{isDisabled}}' class="{{!isShowTime ? 'codeClick':'codeTime'}}" size="small" bindtap='sendCode'>{{text}}</button>
+        </view>
+      </view>
+      <view class='b_form' wx:if="{{type=='bind'&&!bind_text}}">
+        <view class="{{mobile!=''?'form-item showRed':'form-item showW'}}" style="padding-right:32rpx">
+            <image src="{{staticUrl}}bind/phone_logo.png" style='width:36rpx;height:36rpx'></image>
+            <input type='text' style="padding-left: 16rpx" value='{{mobile}}' placeholder="请输入11位手机号" disabled></input>
+        </view>
+        <view class="{{code!=''?'form-item showRed':'form-item showW'}}">
+          <image src="{{staticUrl}}bind/yanzheng.png"></image>
+            <input name="input" type='number' style="padding-left: 16rpx" data-name="code" bindinput='getMobile' placeholder="请输入6位验证码"></input>
+            <button disabled='{{isDisabled}}' class="{{!isShowTime ? 'codeClick':'codeTime'}}" size="small" bindtap='sendCodeMsg'>{{text}}</button>
+        </view>
+      </view>
+      <view class='b_form' wx:if="{{type=='bind'&&bind_text}}">
+        <view class="{{mobile!=''?'form-item showRed':'form-item showW'}}" style="padding-right:32rpx">
+            <image src="{{staticUrl}}bind/phone_logo.png" style='width:36rpx;height:36rpx'></image>
+            <input name="input" type='text' style="padding-left: 16rpx" data-name="mobile" value='{{mobile_bind}}' placeholder="请输入11位手机号" bindinput='getNewMobile'></input>
+        </view>
+        <view class="{{code!=''?'form-item showRed':'form-item showW'}}">
+          <image src="{{staticUrl}}bind/yanzheng.png"></image>
+            <input name="input" type='number' style="padding-left: 16rpx" data-name="code" bindinput='getNewMobile' placeholder="请输入6位验证码"></input>
+            <button disabled='{{isDisabled}}' class="{{!isShowTime ? 'codeClick':'codeTime'}}" size="small" bindtap='sendCode'>{{text}}</button>
+        </view>
+      </view>
+      <view class="login">
+        <view class="okLogin" style="background:{{line_bg_color}}" bindtap="goRegister" wx:if="{{type!='change'&&type!='bind'}}">完成</view>
+        <view class="okLogin" style="background:{{line_bg_color}}" bindtap="changePhone" wx:if="{{type=='change'}}">完成</view>
+        <view class="okLogin" style="background:{{line_bg_color}}" wx:if="{{type=='bind'}}" bindtap="goBind">{{bind_text_value}}</view>
+      </view>
+    </view>
+  </view>
+</view>

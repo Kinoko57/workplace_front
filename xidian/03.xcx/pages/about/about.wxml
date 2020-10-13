@@ -1,0 +1,11 @@
+<!--pages/about/about.wxml-->
+<view class="about_bg">
+  <view class="about_body">
+    <view class="about_list">
+      <view class="about_block" wx:for="{{aboutList}}" wx:key="index" data-link="{{item.link}}" bindtap="gonLink">
+        <text>{{item.name}}</text>
+        <icon class="iconfont iconright"></icon>
+      </view>
+    </view>
+  </view>
+</view>

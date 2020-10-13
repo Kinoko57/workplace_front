@@ -1,0 +1,46 @@
+<!--pages/search/search.wxml-->
+<!-- <view class='search'> -->
+  <!-- 搜索历史 -->
+  <view class='search_his'>
+    <view class='search_header'>
+      <!-- <icon class='iconfont icon-zuojiantou' bindtap='searchHidden' style='display:inline-flex;'></icon> -->
+      <view class='search_input'>
+        <icon class='iconfont icon-search'></icon>
+        <input focus='{{istrue}}' value='{{searchkey}}' bindinput='searchInput' confirm-type="search" bindconfirm='searchList'></input>
+        <icon class='iconfont icon-guanbi2 close' bindtap='clearSearch' hidden="{{searchkey==''}}"></icon>
+      </view>
+      <text bindtap='searchList'>搜索</text>
+    </view>
+    <view class='his_list'>
+      <view class='his_header' wx:if="{{keylist.length!==0}}">
+        <text>历史记录</text>
+        <text bindtap="clearSearchStorage" class='red_text'>清除</text>
+        <!-- <image src='../../static/img/com/del.png' style='width:36rpx;height:40rpx;' bindtap="clearSearchStorage"></image> -->
+      </view>
+      <view class='h_list'>
+        <text wx:for='{{keylist}}' bindtap='goLink' data-link='../proList/proList?type=key&value={{item.name}}' wx:key='index'>{{item.name}}</text>
+      </view>
+    </view>
+    <view class='hot_search'>
+      <view class='hot_header'>
+        <text>热门搜索</text>
+        <view class='hot_right'>
+          <icon class='iconfont icon-shuaxin'></icon>
+          <text bindtap='changeList' class='red_text'>换一批</text>
+        </view>
+      </view>
+      <view class='hot_list'>
+        <text bindtap='goLink' data-link='../proList/proList?type=key&value={{item.title}}' wx:for='{{hotSearch}}' wx:key='index'>{{item.title}}</text>
+        <!-- <text>土豆烧肉</text>
+      <text>爱他美</text>
+      <text>纸尿裤</text>
+      <text>安全座椅</text>
+      <text>衬衫</text>
+      <text>男士运动鞋</text>
+      <text>奶粉</text>
+      <text>安全裤</text>
+      <text>燕麦片</text> -->
+      </view>
+    </view>
+  </view>
+<!-- </view> -->

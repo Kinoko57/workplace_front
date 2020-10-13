@@ -1,0 +1,70 @@
+<!--pages/myGroupBy/myGroupBy.wxml-->
+<view class='sale' wx:if='{{isShow}}'>
+  <view class='sale_body'>
+    <view class='sale_banner'>
+      <image src='{{headbg}}'></image>
+    </view>
+    <!-- <scroll-view scroll-x class='sale_tab'>
+      <view class='sale_nav' wx:for='{{typeList}}' wx:key='index'>
+        <view class="{{choseTime==item.id?'active':''}}" id='{{item.id}}' bindtap='choseType'>
+          <text class='sale_states'>{{item.name}}</text>
+        </view>
+        <image src='../../static/img/pro/c-nav_01.png' wx:if='{{choseTime==item.id}}'></image>
+      </view>
+    </scroll-view> -->
+    <view class='sale_list' wx:if='{{total>0}}'>
+      <view class='sale_pro' wx:for="{{saleProList}}" wx:key="index" bindtap='goPro' data-link='../proDetail/proDetail?type=group&id={{item.id}}&goods_id={{item.goods_id}}' id='{{item.id}}'>
+        <view class='pro_img'>
+          <image src='{{item.img}}'></image>
+        </view>
+        <view class='pro_info'>
+          <view class='pro_title'>{{item.name}}</view>
+          <view class='pro_spec'>
+            <view class='pro_price'>
+              <view style='display:flex;align-items:center;'>
+                <text class='peo_nowprice' wx:if='{{item.deal_type==1||item.deal_type==3}}'>￥{{item.price}} </text>
+                <text class='peo_nowprice' wx:if='{{item.deal_type>=4}}'>￥{{item.price}} </text>
+                <text class='pro_integral_point' wx:if='{{item.deal_type!=1&&item.deal_type!=2&&item.deal_type!=3}}'>+</text>
+                <!-- <view class='pro_inter_img'> -->
+                <icon class='iconfont icon-jifen1 pro_inter_img' wx:if='{{item.deal_type!=1&&item.deal_type!=3}}'></icon>
+                <!-- </view> -->
+                <text class='pro_integral_point' wx:if='{{item.deal_type==2}}'>{{item.point}}</text>
+                <text class='pro_integral_point' wx:if='{{item.deal_type!=1&&item.deal_type!=2&&item.deal_type!=3}}'>{{item.point}}</text>
+              </view>
+              <view class='pro_orig'>
+                <!-- <text class='pro_integral'>{{item.startnum}}人拼</text> -->
+                <!-- <text>{{item.price_market_from}}</text> -->
+                <text class='line'>¥{{item.price_market}}</text>
+              </view>
+            </view>
+            <view class='pro_group'>
+              <text class='pro_integral'>{{item.startnum}}人团</text>
+              <text>·NEW</text>
+            </view>
+            <view class='pro_icon'>
+              <text>已拼{{item.join_num}}人</text>
+              <button size='mini' wx:if='{{item.is_past==2}}' class='end'>未开场</button>
+              <button size='mini' wx:if='{{item.is_past==0}}' class='active'>去开团</button>
+              <button size='mini' wx:if='{{item.is_past==1}}' class='end'>已结束</button>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <button type="default" size="default" loading plain wx:if='{{saleProList.length<total}}' class="loading_style">正在加载中，请稍后...</button>
+    <view class='order-foot' wx:if='{{saleProList.length==total&&isShow}}'>
+      <text>—————— 我是有底线的 ——————</text>
+    </view>
+    <view class='sale_list_null' wx:if='{{total<=0&&isShow}}'>
+      <view class='order-foot'>
+        <text>暂无数据</text>
+      </view>
+    </view>
+
+  </view>
+  <view class='null_height'></view>
+  <include src="../footer/footer.wxml" />
+</view>
+<view class='goTop' hidden='{{isSign}}' bindtap='returnTop'>
+  <icon class='iconfont icon-huidaodingbu'></icon>
+</view>

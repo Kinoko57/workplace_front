@@ -1,0 +1,136 @@
+<!--pages/vipCenter/vipCenter.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="vip skeleton">
+    <navbar page-name="会员中心"  bg-color="{{topBg}}" icon-color="#000" show-title='true' show-nav='false' show-index='false'></navbar>
+    <!-- <scroll-view scroll-y scroll-with-animation="true" class="vip_body" style="height:{{topHeight}}px"  bindscroll="scroll"> -->
+      <view class="vip_head" style="height:{{allnavHeight}}px">
+        <view style="height:{{navHeight}}px" class="vip_bg_color"></view>
+        <view class="vip_head_t">
+          <view class="vip_head_t_l">
+            <image src="{{staticUrl}}vip/bank.png" class="avater skeleton-radius"></image>
+            <view class="vip_head_info skeleton-rect">
+              <view class="vip_head_info_t">
+                <text class="vip_name">猫怕抓老鼠</text>
+                <image src="{{staticUrl}}vip/lever_1.png"></image>
+                <text class="lever_equity" style="background:{{line_bg_color2}}">等级权益</text>
+              </view>
+              <view class="vip_pro">
+                <view class="pro_color" style="width:60%;background:{{line_bg_color2}}"></view>
+                <!-- <view style='width:100%' wx:if='{{item.sale_num/item.all_quantity*100>=100}}'></view> -->
+              </view>
+              <view class="vip_mark">
+                距离下级等级差200积分
+              </view>
+            </view>
+          </view>
+          <image src="{{staticUrl}}vip/vip_1.png" class="skeleton-rect wallet" mode="widthFix" bindtap="goLink" data-url="../myWallet/myWallet"></image>
+        </view>
+        <view class="vip_head_bg">
+          <view class="vip_head_b {{is_iphonex?'vip_head_cont_iphonex':''}}" style="color:{{color}};top:{{topNavHeight}}px">
+            <view class="vip_head_cont skeleton-rect" >
+              <view class="vip_head_b_l">
+                  <view class="vip_head_b_l_block">
+                      <text>120.00</text>
+                      <text>已节省</text>
+                  </view>
+                  <text class="vip_head_b_l_block_add">今日+200</text>
+              </view>
+              <view class="vip_head_b_xian">    
+              </view>
+              <view class="vip_head_b_r vip_head_b_l">
+                  <view class="vip_head_b_l_block">
+                      <text>120.00</text>
+                      <text>已节省</text>
+                  </view>
+                  <text class="vip_head_b_l_block_add">今日+200</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view style="height:166px"></view>
+      <view class="vip_sign">
+        <view class="vip_sign_date">
+          <view class="vip_sign_date_wraper skeleton-rect">
+            <view class="vip_sign_block" wx:for="{{signList}}" wx:key="index">
+                <view class="vip_sign_t">
+                  <view class="vip_sign_t_xian {{item.status==0?'vip_sign_t_xian_active':''}}" wx:if="{{index!=0}}">
+                  </view>
+                  <view class="{{item.status==0?'sign_active':''}}  vip_sign_t_text" >
+                      <icon class="iconfont icon-changyongicon-" wx:if="{{item.status==0}}"></icon>
+                  </view>
+                  <view class="vip_sign_t_xian {{item.status==0?'vip_sign_t_xian_active':''}}" wx:if="{{(index+1)!=signList.length}}"></view>
+                </view>
+                <view class="vip_sign_b {{item.status==0?'vip_sign_b_active':''}}">{{item.data}}</view>
+            </view>
+          </view>
+        </view>
+        <image src="{{staticUrl}}vip/vip_5.png" class="vip_sign_image"></image>
+      </view>
+      <view class="vip_team">
+        <view class="vip_titi">
+          <text class="tit_text_l">每日任务</text>
+          <view class="tit_text_r">
+            查看全部
+            <icon class="iconfont icon-right"></icon>
+          </view>
+        </view>
+        <view class="vip_date">
+          <view class="vip_date_l"  style="background:{{line_bg_color2}}">
+           <view>
+              <text class="num">584</text>
+              <text class="text">客户总数</text>
+           </view>
+          </view>
+          <view class="vip_date_r" style="background:{{line_bg_color}}">
+             <view class="vip_date_r_every">
+                <text class="num">584</text>
+                <text class="text">今日新增</text>
+             </view>
+             <view class="vip_date_r_every">
+                <text class="num">584</text>
+                <text class="text">今日活跃</text>
+             </view>
+              <view class="vip_date_r_every">
+                  <text class="num">584</text>
+                  <text class="text">本月新增</text>
+              </view>
+              <view class="vip_date_r_every">
+                  <text class="num">584</text>
+                  <text class="text">本月活跃</text>
+              </view>
+          </view>
+        </view>
+      </view>
+      <view class="vip_things">
+        <view class="vip_titi">
+          <text class="tit_text_l">每日任务</text>
+        </view>
+        <view class="vip_things_block">
+          <view class="vip_things_list">
+             <image src="{{staticUrl}}vip/vip_2.png"></image>
+             <view class="vip_things_list_r">
+                <text>邀请一个客户</text>
+                <text>任务描述任务描述任务描述任务描述任务描述任</text>
+             </view>
+          </view>
+          <view class="vip_things_list">
+             <image src="{{staticUrl}}vip/vip_3.png"></image>
+             <view class="vip_things_list_r">
+                <text>邀请一个客户</text>
+                <text>任务描述任务描述任务描述任务描述任务描述任</text>
+             </view>
+          </view>
+          <view class="vip_things_list">
+             <image src="{{staticUrl}}vip/vip_4.png"></image>
+             <view class="vip_things_list_r">
+                <text>邀请一个客户</text>
+                <text>任务描述任务描述任务描述任务描述任务描述任</text>
+             </view>
+          </view>
+        </view>
+      </view>
+      <view style="height:34px" wx:if="{{is_iphonex}}"></view>
+    <!-- </scroll-view> -->
+</view>

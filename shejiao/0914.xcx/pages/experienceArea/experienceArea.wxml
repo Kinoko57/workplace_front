@@ -1,0 +1,54 @@
+<!--pages/flashSale/flashSale.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="flash_bg skeleton">
+  <navbar page-name="体验专区" bg-color="#fff" icon-color="#333333" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class="flash_body">
+    <view class="flash_body_time">
+      <scroll-view class="flash_timelist" scroll-x="true" style="width: 100%">
+        <view class="flash_time_block {{item.id==choseId?'time_block_active color_theme_red':''}}" wx:for="{{timeList}}" wx:key="index" bindtap="choseActivity" data-id="{{item.id}}" data-status="{{item.status}}">
+          <view class="time">{{item.text}}</view>
+        </view>
+      </scroll-view>
+    </view>
+    <view style="height:55px;width:100%"></view>
+    <view class="flash_pro_body">
+      <view class="flash_prolist">
+        <view class="flash_01">
+          <view class="activity_block_01" wx:for="{{activityList}}" wx:key="index" bindtap="goLink" data-link='../activeDetail/activeDetail?id={{item.id}}&type=2&active_type={{choseId}}'>
+            <view class="activity_banner">
+              <image src="{{item.big_image[0]}}" mode="aspectFill"></image>
+            </view>
+            <view class="activity_name">
+              <text>{{item.goods_name}}</text>
+            </view>
+            <view class="activity_price_block">
+              <view class="activity_price_block_l">
+                  <view class="activity_price">
+                    <text class="color_theme_red">体验价</text>
+                    <text class="price color_theme_red">￥{{filters.formatMoney(item.price)}}</text>
+                    <text class="line_through" style="margin-left:6rpx">￥{{filters.formatMoney(item.market_price)}}</text>
+                  </view>
+                  <view class="activity_other">
+                      已申请：{{item.total_count-item.count}}/{{item.total_count}}
+                  </view>
+              </view>
+              <view class="pro_btn">
+                  <view size="mini" class="btn_clear bg_theme_gray" wx:if="{{choseType==2}}" >已结束</view>
+                  <view size="mini" style="background:{{line_bg_color}}" class="btn_clear" wx:if="{{choseType==1}}">立即申领</view>
+                  <view size="mini" style="background:{{line_bg_color}}" class="btn_clear" wx:if="{{choseType==3}}">未开始</view>
+              </view>
+            </view>
+            <view class="limit_buy">
+              <text style="background:{{bg_color}}">限领{{item.purchase_limits}}份</text>
+            </view>
+          </view>
+        </view>
+        <null-data id="null-data" loadingText="加载中..." loadingShow="{{hasData&&is_load}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无体验活动" dataShow="{{!hasData}}"></null-data>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+  <icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

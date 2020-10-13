@@ -1,0 +1,53 @@
+<!--pages/fruitArea/fruitArea.wxml-->
+<view class='fruit' wx:if='{{isShow}}'>
+  <view class='fruit_head'>
+    <swiper indicator-dots="true" autoplay='true' indicator-color='rgba(255, 255, 255, .3)' indicator-active-color='#fff' interval='3000' circular='true'>
+      <block wx:for="{{imgUrls}}" wx:key='index'>
+        <swiper-item bindtap='imgLink' data-type='{{item.type}}' id='{{item.relevance_id}}' data-activityid='{{item.activity_id}}' data-imgid='{{item.id}}'>
+          <image src="{{item.image_pc}}" class="slide_image" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class='fruit_list'>
+    <view class='fruit_pro' wx:for="{{fruitProList}}" wx:key="index">
+      <view class='pro_img' id='{{item.goods_id}}' bindtap='goPro' data-link='../fruitDetail/fruitDetail?type=fruits&id={{item.goods_id}}'>
+        <image src='{{item.img}}'></image>
+      </view>
+      <view class='pro_info'>
+        <view class='pro_title' id='{{item.goods_id}}' bindtap='goPro' data-link='../fruitDetail/fruitDetail?type=fruits&id={{item.goods_id}}'>
+          {{item.name}}</view>
+        <view class='pro_tips' wx:if="{{item.summary!=''}}">
+          {{item.summary}}
+        </view>
+        <view class='pro_spec'>
+          <view class='pro_price'>
+            <view class='pro_inter_img' wx:if='{{item.deal_type!=2}}'>
+              <text class='peo_nowprice' wx:if='{{item.deal_type==1||item.deal_type==3}}'>￥{{item.price_sell}} </text>
+              <text class='peo_nowprice' wx:if='{{item.deal_type>=4}}'>￥{{item.price_sell}} </text>
+              <text class='pro_integral' wx:if='{{item.deal_type>=4}}'>+</text>
+              <icon class='iconfont icon-jifen1' wx:if='{{item.deal_type!=1&&item.deal_type!=3}}'></icon>
+            </view>
+            <text class='pro_integral' wx:if='{{item.deal_type==2}}'>{{item.point}}</text>
+            <text class='pro_integral' wx:if='{{item.deal_type!=1&&item.deal_type!=2&&item.deal_type!=3}}'>{{item.point}}</text>
+          </view>
+          <view style='display:flex;justify-content:space-between;align-items:center;'>
+            <view style='margin-top:-6px;'>
+              <text class='pro_orig'>已售{{item.count_num}}份</text>
+            </view>
+            <view class='pro_icon'>
+              <button size='mini' id='{{item.goods_id}}' bindtap='goPro' data-link='../fruitDetail/fruitDetail?type=fruits&id={{item.goods_id}}' class='active'>立即抢购</button>
+              <!-- <button size='mini' id='{{item.goods_id}}' bindtap='goPro' data-link='../proDetail/proDetail?type=normal&id={{item.goods_id}}' wx:if='{{status==1}}' class='start'>未开场</button> -->
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if='{{fruitProList.length>0}}' style='background:#f2f2f2;'>
+    <button type="default" size="default" loading plain hidden='{{fruitProList.length==total}}' class="loading_style">正在加载中，请稍后...</button>
+    <view class='order-foot' hidden='{{fruitProList.length<total}}'>
+      <text>—————— 我是有底线的 ——————</text>
+    </view>
+  </view>
+</view>

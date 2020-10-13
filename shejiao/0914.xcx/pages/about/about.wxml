@@ -1,0 +1,12 @@
+<!--pages/about/about.wxml-->
+<view class="about_bg">
+  <navbar page-name="关于我们" bg-color="#fff" icon-color="#333333" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class="about_body">
+    <view class="about_list">
+      <view class="about_block" wx:for="{{aboutList}}" wx:key="index" data-link="{{item.link}}" bindtap="gonLink">
+        <text>{{item.name}}</text>
+        <icon class="iconfont  icon-right"></icon>
+      </view>
+    </view>
+  </view>
+</view>

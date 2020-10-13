@@ -1,0 +1,26 @@
+<!--pages/manager/manager.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class='ma_contact skeleton'>
+  <navbar page-name="联系掌柜"  bg-color="#ffffff" icon-color="#000000" show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class="ma_info">
+    <view class="ma_cont">
+      <view class="ma_avatar">
+         <image src="{{manager.wx_team_image}}" class='pc_avatar' mode="scaleToFill"></image>
+         <view class="ma_avatat_info">
+           <text>{{manager.wx_team_name}}</text>
+           <text>虹口</text>
+           <!-- <text>上海 虹口</text> -->
+         </view>
+      </view>
+      <view class="ma_wx">
+           <image src="{{manager.code_image}}" class='pc_avatar' mode="scaleToFill"></image>
+           <view>微信号：{{manager.wx_number}}</view>
+      </view>
+    </view>
+    <view class="ma_opera">
+      <view bindtap="copyCode" style="background:{{line_bg_color}}" class="btn"  data-id="{{manager.wx_number}}">复制微信号</view>
+      <view bindtap="saveImg" style="background:{{line_bg_color1}}" class="btn">保存二维码</view>
+    </view>
+  </view>
+  
+</view>

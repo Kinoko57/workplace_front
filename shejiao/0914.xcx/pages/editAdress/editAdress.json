@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "navbar": "/component/navbar/index",
+    "skeleton": "/component/skeleton/skeleton",
+    "nyz_area_picker": "/component/nyz_area_picker/nyz_area_picker"
+  },
+  "navigationStyle": "custom"
+}

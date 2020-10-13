@@ -1,0 +1,309 @@
+/* pages/afterDetail/afterDetail.wxss */
+
+.sale_after {
+  padding-bottom: 30px;
+}
+
+.detail_title {
+  background: #ff8d97;
+  height: 60rpx;
+  line-height: 60rpx;
+  color: #fff;
+  font-size: 40rpx;
+  padding: 0 26rpx;
+}
+
+.after_head {
+  font-size: 26rpx;
+  text-align: center;
+  background: #f2f2f2;
+  height: 50rpx;
+  color: #808080;
+  line-height: 50rpx;
+}
+
+.after_head .name {
+  color: #ff8d97;
+  margin: 0 8rpx;
+}
+
+.title {
+  font-size: 28rpx;
+  border-bottom: 1px solid #e4e4e4;
+  padding-bottom: 16rpx;
+}
+
+/* 售后产品 */
+
+.after_pro {
+  background: #fff;
+  padding: 16rpx 26rpx;
+  margin-bottom: 26rpx;
+}
+
+.after_pro .car_pro {
+  /* height: 262rpx; */
+  display: flex;
+  align-items: center;
+  padding-top: 26rpx;
+}
+
+.car_pro .pro_img {
+  float: left;
+  /* margin-left: 18rpx; */
+  margin-right: 30rpx;
+  position: relative;
+}
+
+.pro_img image {
+  width: 190rpx;
+  height: 186rpx;
+}
+
+.car_pro .pro_info {
+  width: 100%;
+}
+
+.pro_info .pro_title {
+  font-size: 26rpx;
+  color: #444;
+  /* margin-top: 30rpx; */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.pro_title .title_icon {
+  background: #ff8d97;
+  height: 26rpx;
+  /* width: 48rpx; */
+  font-size: 20rpx;
+  color: #fff;
+  border-radius: 8rpx;
+  line-height: 26rpx;
+  text-align: center;
+  display: inline-block;
+  margin-right: 10rpx;
+  padding: 0 6rpx;
+}
+
+.pro_info .pro_spec {
+  overflow: hidden;
+  /* height: 64rpx; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14rpx;
+}
+
+.pro_spec .pro_price {
+  font-family: 'DIN';
+  width: 240rpx;
+}
+
+.pro_price .peo_nowprice {
+  color: #ff8d97;
+  font-size: 30rpx;
+  /* font-weight: bold; */
+  margin-right: 10rpx;
+}
+
+.pro_price .pro_integral {
+  font-size: 30rpx;
+  /* font-weight: bold; */
+  color: #ff8d97;
+  margin-left: 8rpx;
+}
+
+.pro_price .pro_inter_img {
+  display: inline-flex;
+  align-items: flex-end;
+  /* margin-left: 20rpx; *//* margin-right: 30rpx; */
+}
+
+.pro_price .pro_inter_img .iconfont {
+  font-size: 30rpx;
+  /* font-weight: bold; */
+  color: #ff8d97;
+  display: inline-flex;
+}
+
+/* .pro_price .pro_inter_img image {
+  width: 24rpx;
+  height: 20rpx;
+} */
+
+.pro_price .pro_orig {
+  font-size: 24rpx;
+  color: #b8b8b8;
+  text-decoration: line-through;
+}
+
+.pro_price .spec_info {
+  font-size: 20rpx;
+  color: #999;
+}
+
+.pro_weight text {
+  font-size: 20rpx;
+  color: #888;
+  font-weight: 'DIN';
+}
+
+.pro_spec .pro_btn {
+  display: inline-flex;
+  align-items: center;
+}
+
+.pro_spec .pro_btn button {
+  min-width: 150rpx;
+  height: 52rpx;
+  border: 1px solid #808080;
+  color: #808080;
+  background: transparent;
+  font-size: 24rpx;
+  padding: 0rpx 20rpx;
+  line-height: 52rpx;
+  border-radius: 18rpx;
+}
+
+.pro_spec .pro_btn button::after {
+  border: none;
+}
+
+/* 售后进度 */
+
+.after_progress {
+  background: #fff;
+  padding: 16rpx 26rpx;
+  margin-bottom: 26rpx;
+}
+
+.after_progress .progress_info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16rpx;
+}
+
+.progress_info .iconfont {
+  color: #51c560;
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+.progress_info .step {
+  text-align: center;
+}
+
+.progress_info .step_line {
+  margin: 0 10rpx;
+}
+
+.progress_info .step text {
+  display: block;
+  font-size: 28rpx;
+  margin-top: 6px;
+  color: #51c560;
+}
+
+/* 售后信息 */
+
+.after_info {
+  background: #fff;
+  padding: 16rpx 26rpx;
+  margin-bottom: 26rpx;
+}
+
+.after_info .after_info_list {
+  padding: 16rpx 0;
+}
+
+.after_info_list text {
+  font-size: 26rpx;
+}
+
+/* 问题描述 */
+
+.prob_descr {
+  background: #fff;
+  padding: 16rpx 26rpx;
+  margin-bottom: 26rpx;
+}
+
+.prob_descr .after_com {
+  padding: 10rpx 0;
+  background: #fff;
+}
+
+.after_com text {
+  font-size: 26rpx;
+  word-wrap:break-word;
+}
+
+.com_imgList {
+  /* display: flex;
+  justify-content: flex-start;
+  align-items: center; */
+  overflow: hidden;
+  padding: 10rpx 0;
+}
+
+.com_imgList .imgBlock {
+  position: relative;
+  margin: 10rpx;
+  /* display: inline-flex; */
+  float: left;
+}
+
+.imgBlock .iconfont {
+  position: absolute;
+  top: -28rpx;
+  right: 0;
+  color: #ff8d97;
+  z-index: 20;
+}
+
+.imgBlock text {
+  display: blcok;
+  position: absolute;
+  top: -3rpx;
+  right: 6rpx;
+  background: #fff;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.imgBlock image {
+  width: 130rpx;
+  height: 130rpx;
+}
+
+.com_imgList .addicon {
+  font-size: 125rpx;
+  color: #a4a4a4;
+}
+
+.comBtn {
+  margin-top: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.comBtn text {
+  width: 200rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border: 1px solid #e4e4e4;
+  background: #fff;
+  color: #282828;
+  font-size: 30rpx;
+  /* font-weight: bold; */
+  border-radius: 20rpx;
+  text-align: center;
+  margin-left: 20rpx;
+}

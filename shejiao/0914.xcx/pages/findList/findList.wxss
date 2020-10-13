@@ -1,0 +1,182 @@
+/* pages/findList/findList.wxss */
+page{
+  background: #f9f9f9;
+}
+.find_body{
+
+}
+.find_body_nav{
+  position: fixed;
+  z-index: 199999;
+  top: 0;
+  width: 100%;
+  padding: 0 24rpx;
+  background: #ffffff;
+}
+.find_body_top{
+  display: flex;
+  align-items: center;
+  width: 510rpx;
+}
+.find_body_top image{
+  width: 56rpx;
+  height: 56rpx;
+  margin-right: 15rpx;
+  border-radius: 50%;
+}
+.find_body_top .find_nav{
+  font-size: 28rpx;
+  color: #BCBCBC;
+  width: 400rpx;
+}
+.find_body_top .find_nav .find_nav_text{
+  display: inline-block;
+  width: 90rpx;
+  text-align: center;
+}
+.find_body_top .find_nav .find_nav_active{
+  color: #FF0000;
+  font-size: 34rpx;
+  font-weight: 600;
+}
+.find_body_top icon{
+  display: flex;
+  font-size: 32rpx;
+}
+.find_body_bottom{
+  padding: 30rpx 24rpx 0;
+}
+/* 重置样式 */
+.weui-tabs-bar__wrp{
+  height: 0 !important;
+}
+/* 重用样式 */
+.anchorPer_block{
+  overflow: hidden;
+}
+.anchorPer_block .anchorPer_block_left{
+  float: left;
+}
+.anchorPer_block .anchorPer_block_right{
+  float: right;
+}
+.anchorPer_block_list{
+  width: 340rpx;
+  background: #fff;
+  margin-bottom: 25rpx;
+  border-radius:12rpx;
+  overflow: hidden;
+  padding-bottom: 20rpx;
+}
+.anchorPer_block_list_img{
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  width: 340rpx;
+}
+.anchorPer_block_list_img image{
+  width: 340rpx;
+  height: 300rpx;
+  border-radius: 12rpx 12rpx 0 0;
+}
+.anchorPer_block_list_img video{
+  width: 340rpx;
+  position: relative;
+  border-radius: 12rpx 12rpx 0 0;
+  display: block;
+}
+.anchorPer_block_list_img .video_mask{
+  position: absolute;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.video_mask image{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 50%;
+  z-index: 9999;
+}
+.anchor_remind{
+  position: absolute;
+  top: 29rpx;
+  right: 26rpx;
+  height: 38rpx;
+  line-height: 38rpx;
+  padding: 0 15rpx;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 18rpx;
+  border-radius: 19rpx;
+  background: rgba(0,0,0,.5);
+}
+.anchor_remind icon{
+  display: inline-flex;
+  font-size: 24rpx;
+  margin-right: 6rpx;
+}
+.anchorPer_block_list_titi{
+  font-size: 24rpx;
+  padding: 18rpx 6rpx 0;
+  color: #333;
+  word-break: break-all;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.anchorPer_block_list_info{
+  display: flex;
+  align-items: center;
+  padding: 15rpx 6rpx 0;
+  color: #999;
+  justify-content: space-between;
+}
+.anchorPer_block_list_info .anchorPer_block_list_info_l{
+   font-size: 18rpx;
+   display: inline-flex;
+   align-items: center;
+}
+.anchorPer_block_list_info .anchorPer_block_list_info_l image{
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+.anchorPer_block_list_info_r{
+  font-size: 24rpx;
+}
+.anchorPer_block_list_info_r icon{
+  display: inline-flex;
+  font-size: 26rpx;
+  color: #FF0000;
+  margin-right: 15rpx;
+}
+/* 未登录信息 */
+.no_login_block{
+  color: #333;
+  text-align: center;
+  padding-top: 160rpx;
+}
+.no_login{
+  font-size: 40rpx;
+}
+.no_login_little{
+  font-size: 26rpx;
+  padding: 20rpx 0 40rpx;
+}
+.login{
+  width: 500rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  margin: 0 auto;
+  color: #fff;
+  font-size: 28rpx;
+  text-align: center;
+}

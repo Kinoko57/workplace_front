@@ -1,0 +1,102 @@
+<!--pages/lottery/lottery.wxml-->
+<!-- <scroll-view scroll-y="{{isScroll}}" style="height:{{height}}px" > -->
+<!-- <reload bind:relaod="_relaod" id='reload'></reload> -->
+
+<view class="lottery" wx:if='{{isShow}}'>
+  <scroll-view class='l_body' scroll-y="{{isScroll}}" style="height:{{height}}px" bindscroll="scroll">
+    <image class='l_bg' src='{{img}}' mode='widthFix'></image>
+    <!-- <image class='l_bg' src='../../static/img/bg.png' mode='widthFix'></image> -->
+    <view class='my_win_title' bindtap='gowinList'>
+      我的奖品
+      <icon class='iconfont icon-iconfontjiantou5' style='font-size:22rpx;margin-left:-6rpx'></icon>
+    </view>
+    <view class='l_turntable'>
+      <image src='../../static/img/order/l_t_s.png' class='l_open'></image>
+      <view class="canvas-container">
+        <view animation="{{animationData}}" class="canvas-content">
+          <image src='../../static/img/order/l_t_01_s.png' class="canvas-element"></image>
+          <view class="canvas-list" wx:for="{{awardsList}}" wx:key="unique">
+            <view class="canvas-item">
+              <text class="canvas-item-text" style="-webkit-transform: rotate({{item.turn}});transform: rotate({{item.turn}})">{{item.award}}</text>
+              <image src='{{item.imgUrl}}' class='canvas-item-img' style="-webkit-transform: rotate({{item.turn}});transform: rotate({{item.turn}});width:60rpx;height:60rpx;"></image>
+            </view>
+          </view>
+        </view>
+        <view bindtap="getLottery" class="canvas-btn">
+          <image src='../../static/img/order/l_03_s.png' style='width:175rpx;height:202rpx;'></image>
+        </view>
+      </view>
+    </view>
+    <view class='l_info'>
+      <!-- <icon class='iconfont icon-xiala' bindtap='viewWinlist'></icon> -->
+      <view class='l_title'>
+        您今天还有
+        <text>{{times}}</text>次抽奖机会
+      </view>
+      <!-- <view class='l_other'>已有{{total_people}}人参与抽奖</view> -->
+    </view>
+    <view class='win_list_bg' wx-if='{{winList.length>0}}'>
+      <!-- <image src='{{list_bg_top}}' mode='widthFix' class='win_list_bg_top'></image>
+      <view class='win_list' style="background-image:url({{list_bg_middle}})">
+        <view class='head_title'>
+          <view>中奖列表</view>
+        </view>
+        <view class='win_title'>
+          <text class='name'>手机号</text>
+          <text class='pro'>奖品</text>
+          <text class='time'>时间</text>
+        </view>
+        <view class='win_blcok' wx:for='{{winList}}' wx:key='index' wx-if='{{winList.length>0}}'>
+          <text class='name'>{{item.mobile}}</text>
+          <text class='pro'>{{item.name}}</text>
+          <text class='time'>{{item.lottery_time}}</text>
+        </view>
+        <view class='win_blcok' style='text-align:center' wx-if='{{winList.length==0}}'>
+          <text>暂无人获奖</text>
+        </view>
+      </view>
+      <image src='{{list_bg_bottom}}' mode='widthFix' class='win_list_bg_bottom'></image> -->
+      <image src='{{list_bg_top}}' mode='widthFix' class='win_list_bg_top'></image>
+      <view class='win_list'>
+        <view class='win_blcok' wx:for='{{winList}}' wx:key='index' wx-if='{{winList.length>0}}'>
+          <text class='name'>{{item.mobile}}</text>
+          <text class='pro'>{{item.name}}</text>
+          <text class='time'>{{item.lottery_time}}</text>
+        </view>
+        <view class='win_blcok' style='text-align:center' wx-if='{{winList.length==0}}'>
+          <text>暂无人获奖</text>
+        </view>
+      </view>
+      <!-- <image src='../../static/img/bg_bottom.png' mode='widthFix' class='win_list_bg_top'></image> -->
+    </view>
+  </scroll-view>
+</view>
+<view class='win_bg' hidden='{{modelShow}}'></view>
+<view class='myWin' hidden='{{modelShow}}'>
+  <icon class='iconfont icon-guanbi2' bindtap='close_model'></icon>
+  <view class='myWin_list'>
+    <view class='myWin_title'>
+      <text>中奖时间</text>
+      <text>奖品</text>
+      <text>是否领取</text>
+    </view>
+    <scroll-view scroll-y class='myWin_news'>
+      <view class='myWin_block' wx:for='{{myWinList}}' wx:key='index'>
+        <text>{{item.createtime}}</text>
+        <text>{{item.name}}</text>
+        <text wx:if='{{item.get_status==1}}'>已领取</text>
+        <text wx:if='{{item.get_status==2}}' data-link='../myOrder/myOrder?tid=1&id=type1' bindtap='goLink'>待付款</text>
+        <text wx:if='{{item.get_status==3}}'>已取消</text>
+        <text wx:if='{{item.get_status==4}}'>已失效</text>
+        <text wx:if='{{item.get_status==0}}' bindtap='winPro' id='{{item.pid}}' data-lid='{{item.id}}'>点击领取</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+<view class='goIndex' bindtap='goIndex' data-link='../index/index'>
+  <icon class='iconfont icon-home'></icon>
+</view>
+<!-- <button open-type='share' class='winShare'>
+  <image src='../../static/img/order/win_share.png' style='width:149rpx;height:149rpx;'></image>
+  <icon class='iconfont icon-fenxiang2'></icon>
+</button> -->

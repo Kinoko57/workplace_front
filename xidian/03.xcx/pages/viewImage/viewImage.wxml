@@ -1,0 +1,6 @@
+<!--pages/viewImage/viewImage.wxml-->
+<view class="view_bg">
+    <canvas canvas-id='share' style="top:{{top}}px;height:{{canvasH}}px;width:{{canvasW}}px"></canvas>
+    <!-- <image src="{{imgUrl}}"></image> -->
+    <button bindtap="authSave">保存图片</button>
+</view>

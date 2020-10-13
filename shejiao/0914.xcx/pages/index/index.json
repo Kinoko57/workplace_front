@@ -1,0 +1,11 @@
+{
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+      "navbar": "/component/navbar/index",
+      "skeleton": "/component/skeleton/skeleton",
+      "thematic": "/component/thematic-activity/index",
+      "designated": "/component/designated-activity/index"
+
+    },
+    "navigationStyle": "custom"
+}

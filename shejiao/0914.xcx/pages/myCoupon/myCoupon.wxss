@@ -1,0 +1,143 @@
+/* pages/myCoupon/myCoupon.wxss */
+page{
+  background-color:#fff;
+}
+.coupon{
+  position: relative;
+}
+.coupon_nav{
+  height: 90rpx;
+  background-color: #fff;
+  border-top: 1px solid #ededed;
+  color:#999 ;
+  font-size: 28rpx;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+.coupom_text{
+  height: 89rpx;
+  padding: 0 10rpx;
+  display: inline-block;
+  width: 33.3%;
+  text-align: center;
+}
+.coupom_text text{
+  display: block;
+}
+.coupom_text text:nth-child(1){
+  padding-top: 20rpx;
+}
+.coupom_text text:nth-child(2){
+  height: 4rpx;
+  margin: 14rpx auto 0;
+  width: 24rpx;
+  background: #FF0000;
+}
+.coupon_active{
+  color: #FF0000;
+  /* border-bottom: 3rpx solid #e34c26; */
+}
+.coupon_body{
+  margin-top: 15rpx;
+  padding-bottom: 40rpx;
+}
+.coupon_body_list{
+  width: 702rpx;
+  height: 176rpx;
+  margin: 0 auto 24rpx;
+  color: #FF0000;
+  position: relative;
+  top: 0;
+  left: 0;
+  border-radius: 12rpx;
+  background: #FFF7F3;
+}
+.coupon_body_list_cancel{
+  background: #F4F4F4;
+  color: #ABABAB;
+}
+.coupon_body_list_cont{
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+.coupon_tips{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 170rpx;
+  height: 38rpx;
+  line-height: 38rpx;
+  font-size:22rpx ;
+  text-align: center;
+  border-radius: 12rpx 0 12rpx 0;
+  text-align: center;
+}
+.coupon_tips_active{
+  background: #FFD9D9;
+  color: #FE0000;
+}
+.coupon_tips_cancel{
+  background: #DBDBDB;
+  color: #ABABAB;
+}
+.coupon_money_l{
+  display: flex;
+  padding-left: 10rpx;
+  align-items: center;
+}
+.coupon_money_l .coupon_num{
+  font-size: 24rpx;
+  font-weight: 600;
+  width: 180rpx;
+}
+.coupon_money_l .coupon_num .coupon_num_pri{
+  font-size: 44rpx;
+}
+.coupon_money_l .coupon_desc{
+  padding-left: 20rpx;
+  font-size: 28rpx;
+}
+.coupon_money_l .coupon_desc text{
+  display: block;
+}
+.coupon_money_l .coupon_desc .time{
+  font-size: 22rpx;
+  color: #999;
+  padding-top: 10rpx;
+}
+.coupon_money_r{
+  height: 132rpx;
+  width: 192rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  font-weight: 600;
+  border-left: 1px dotted #FF0000;
+}
+.coupon_body_list_cancel .coupon_money_r{
+  border-left: 1px dotted #B5B5B5;
+}
+.coupon_body_list_cancel .coupon_money_r .iconfont{
+  font-size: 150rpx;
+  transform: rotate(-45deg);
+  font-weight: normal;
+}
+.coupon_money_img_use{
+  position: absolute;
+  top: 52rpx;
+  right:-24rpx;
+}
+.coupon_money_img_old{
+  position: absolute;
+  top: 0;
+  right:0;
+}

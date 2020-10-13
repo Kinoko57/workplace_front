@@ -1,0 +1,128 @@
+<!--pages/hotArticle/hotArticle.wxml-->
+<import src="../../wxParse/wxParse.wxml" />
+<!-- <reload bind:relaod="_relaod" id='reload'></reload> -->
+<view class="hot_article">
+  <view class='hot_info'>
+    <view class='hot_title'>
+      {{articleInfo.title}}
+    </view>
+    <view class='hot_other'>
+      <view class='other_time'>{{articleInfo.updatetime}}</view>
+      <view class='other_icon'>
+        <icon class="iconfont icon-16pxyuedu"></icon>
+        <text>{{articleInfo.click_nums}}人已阅读</text>
+      </view>
+    </view>
+    <view class='hot_content' wx:for='{{articleInfo.content}}' wx:key='index'>
+      <view class='hot_rich' wx:if='{{item.type==1}}'>
+        <template is="wxParse" data="{{wxParseData:item.html}}" />
+      </view>
+      <view class='hot_pro' wx:if='{{item.type==2}}'>
+        <view class='pro' bindtap='goPro' id='{{item.content}}' data-link='../proDetail/proDetail?type=normal&id={{item.content}}'>
+          <image src='{{item.goods.img}}' style='width:700rpx;' mode='widthFix'></image>
+          <view class='pro_price'>
+            <text wx:if='{{item.goods.deal_type==1}}'>¥{{item.goods.price_sell}}</text>
+            <text wx:if='{{item.goods.deal_type>=4}}'>¥{{item.goods.price_sell}}+</text>
+            <icon class='iconfont icon-jifen1' wx:if='{{item.goods.deal_type!=1}}'></icon>
+            <text wx:if='{{item.goods.deal_type==2||item.goods.deal_type==3}}'>{{item.goods.point}}</text>
+            <text wx:if='{{item.goods.deal_type>=4}}'>{{item.goods.point}}</text>
+            <text>|去购买</text>
+          </view>
+        </view>
+      </view>
+      <view class='hot_pro' wx:if='{{item.type==3}}'>
+        <view class='pro' bindtap='goPro' id='{{item.activity_id}}' data-link='../proDetail/proDetail?type=group&id={{item.activity_id}}&goods_id={{item.content}}'>
+          <image src='{{item.goods.img}}' style='width:700rpx;' mode='widthFix'></image>
+          <view class='pro_price'>
+            <text wx:if='{{item.goods.deal_type==1}}'>¥{{item.goods.price_sell}}</text>
+            <text wx:if='{{item.goods.deal_type>=4}}'>¥{{item.goods.price_sell}}+</text>
+            <icon class='iconfont icon-jifen1' wx:if='{{item.goods.deal_type!=1}}'></icon>
+            <text wx:if='{{item.goods.deal_type==2||item.goods.deal_type==3}}'>{{item.goods.point}}</text>
+            <text wx:if='{{item.goods.deal_type>=4}}'>{{item.goods.point}}</text>
+            <text>|去购买</text>
+          </view>
+        </view>
+      </view>
+      <view class='hot_pro' wx:if='{{item.type==4}}'>
+        <view class='pro' bindtap='goPro' id='{{item.activity_id}}' data-link='../tryOutdetail/tryOutdetail?id={{item.activity_id}}&form_share=0&help_id=null'>
+          <image src='{{item.goods.img}}' style='width:700rpx;' mode='widthFix'></image>
+          <view class='pro_price'>
+            <text wx:if='{{item.goods.deal_type==1}}'>¥{{item.goods.price_sell}}</text>
+            <text wx:if='{{item.goods.deal_type>=4}}'>¥{{item.goods.price_sell}}+</text>
+            <icon class='iconfont icon-jifen1' wx:if='{{item.goods.deal_type!=1}}'></icon>
+            <text wx:if='{{item.goods.deal_type==2||item.goods.deal_type==3}}'>{{item.goods.point}}</text>
+            <text wx:if='{{item.goods.deal_type>=4}}'>{{item.goods.point}}</text>
+            <text>|去购买</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view style='height:68rpx' wx:if='{{is_iphonex}}'></view>
+</view>
+<!-- <view class='hot_btn'>
+  <button class='pro_share' open-type='share'>
+    <icon class='iconfont icon-fenxiang1' style='margin-right:20rpx;'></icon>
+    分享</button>
+  <button class='pro_buy'>商品列表</button>
+</view> -->
+<view class='pro_list_bg' hidden='{{!listShow}}' bindtap='hideList' catchtouchmove="ture"></view>
+<scroll-view class='pro_list' scroll-y hidden='{{!listShow}}' catchtouchmove="ture">
+  <view class='pro_list_title'>
+    <text>文中商品</text>
+    <icon class='iconfont icon-guanbi' bindtap='hideList'></icon>
+  </view>
+  <view class='pro_info_list'>
+    <view class='pro_info_article' wx:for='{{articleInfo.content}}' wx:key='index' wx:if='{{item.type==2}}'>
+      <view class='pro_img'>
+        <image src='{{item.goods.img}}' wx:if="{{item.goods.img!=null&&item.goods.img!=''}}"></image>
+        <image src='../../static/img/pro/static.png' wx:else></image>
+      </view>
+      <view class='pro_info'>
+        <view class='pro_title'>
+          <text>{{item.goods.name}}</text>
+        </view>
+        <view class='pro_spec'>
+          <view class='pro_price'>
+            <view style='display:flex;align-items:center;'>
+              <text class='peo_nowprice'>￥{{item.goods.price_sell}}</text>
+            </view>
+          </view>
+          <view class='pro_icon'>
+            <icon class='iconfont icon-car' bindtap='goPro' data-link='../proDetail/proDetail?type=normal&id={{item.goods_id}}' id='{{item.goods_id}}'></icon>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='pro_info_article' wx:for='{{articleInfo.content}}' wx:key='index' wx:if='{{item.type==2}}'>
+      <view class='pro_img'>
+        <image src='{{item.goods.img}}' wx:if="{{item.goods.img!=null&&item.goods.img!=''}}"></image>
+        <image src='../../static/img/pro/static.png' wx:else></image>
+      </view>
+      <view class='pro_info'>
+        <view class='pro_title'>
+          <text>{{item.goods.name}}</text>
+        </view>
+        <view class='pro_spec'>
+          <view class='pro_price'>
+            <view style='display:flex;align-items:center;'>
+              <text class='peo_nowprice'>￥{{item.goods.price_sell}}</text>
+            </view>
+          </view>
+          <view class='pro_icon'>
+            <icon class='iconfont icon-car' bindtap='goPro' data-link='../proDetail/proDetail?type=normal&id={{item.goods_id}}' id='{{item.goods_id}}'></icon>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+<view class='goTop' hidden='{{isSign}}' bindtap='returnTop'>
+  <icon class='iconfont icon-huidaodingbu'></icon>
+</view>
+<view class='goIndex' bindtap='goIndex' data-link='../index/index'>
+  <icon class='iconfont icon-home'></icon>
+</view>
+<button open-type='share' class='goShare'>
+  <icon class='iconfont icon-fenxiang2'></icon>
+</button>

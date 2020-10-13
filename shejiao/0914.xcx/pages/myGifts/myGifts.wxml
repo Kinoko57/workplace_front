@@ -1,0 +1,61 @@
+<!--pages/myGifts/myGifts.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<navbar page-name="我的奖品" bg-color="#fff" icon-color="#666666" text-color="#e13b18" show-title='true' show-nav='true' show-index='false'></navbar>
+<view class="gift_bg skeleton">
+  <view class="gift_head">
+    <view class="head_block {{chose_id==1?'head_block_active':'null'}}" id="1" bindtap="choseTab"><text>实物奖品</text></view>
+    <view class="head_block {{chose_id==2?'head_block_active':'null'}}" id="2" bindtap="choseTab"><text>红包</text></view>
+  </view>
+  <view class="gift_head_null" style="height:90rpx"></view>
+  <view class="gift_body">
+    <view class="gift_list" wx:if="{{chose_id==1}}">
+      <view class="gift_list_block" wx:for="{{giftList}}" wx:key="index">
+        <view class="gift_block_top">
+          <view>{{item.anchor_name}}</view>
+          <view class="status" wx:if="{{item.status==0}}">待确认</view>
+          <view class="status " wx:if="{{item.status==1}}">待发货</view>
+          <view class="status" wx:if="{{item.status==2}}">已发货</view>
+          <view class="status" wx:if="{{item.status==3}}">已完成</view>
+        </view>
+        <view class="gift_block_bottom">
+          <view class="win_activity">
+            <view class="win_pro">
+              <view class="pro_img">
+                <image src="{{item.image}}" mode="aspectFit"></image>
+              </view>
+              <view class="pro_info">
+                <text>{{item.goods_name}}</text>
+              </view>
+            </view>
+            <view class="win_btn">
+              <view wx:if="{{item.status>0}}" class="btn disable_status" bindtap="viewAddr" id="{{item.id}}">查看详情</view>
+              <view wx:if="{{item.status==0}}" class="btn" bindtap="confirmAddr" id="{{item.id}}">填写收货信息</view>
+              <!-- <view wx:if="{{item.status==1}}" class="btn disable_status">填写收货信息</view> -->
+              <view wx:if="{{item.status==2||item.status==3}}" class="btn" bindtap="viewTrack" id="{{item.id}}" data-oid="{{item.id}}" data-url="{{item.image}}">查看物流</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无消息" dataShow="{{!hasData}}"></null-data>
+    </view>
+    <view class="gift_list" wx:if="{{chose_id==2}}">
+      <view class="gift_list_block" wx:for="{{giftList}}" wx:key="index">
+        <view class="gift_block_top">
+          <view>{{item.room_name}}</view>
+          <view class="time">{{filters.formatDateTime(item.create_time)}}</view>
+        </view>
+        <view class="gift_block_bottom">
+          <view class="red_package">
+            <image src="{{staticUrl}}my/red_package.png"></image>
+            <text class="name">{{filters.formatMoney(item.money)}}元红包</text>
+          </view>
+        </view>
+      </view>
+      <null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无消息" dataShow="{{!hasData}}"></null-data>
+    </view>
+  </view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+  <icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

@@ -1,0 +1,270 @@
+/* pages/messageCenter/messageCenter.wxss */
+
+page {
+  background: #fff;
+}
+.message_bg{
+  /* background: #fff; */
+}
+.message_body {
+}
+
+.message_top {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  padding: 26rpx 24rpx 20rpx;
+  position: fixed;
+  width: 90%;
+  background: #fff;
+  z-index: 100;
+}
+
+.message_top view {
+  /* border-radius: 50rpx; */
+  /* background: #f6f6f6; */
+  display: inline-flex;
+  align-items: center;
+  padding-right: 46rpx;
+  /* padding: 4rpx 16rpx; */
+}
+
+.message_top view text {
+  color: #999;
+  font-size: 24rpx;
+}
+
+.message_top view .iconfont {
+  display: inline-flex;
+  align-items: center;
+}
+
+.message_nav {
+  background: #fff;
+  padding: 42rpx 36rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 12rpx 16rpx 20rpx;
+  border-radius: 20rpx;
+  box-shadow: 0px 0px 21rpx 0px rgba(217, 217, 217, 0.5);
+  /* text-shadow: 4rpx 8rpx 60rpx rgba(4, 0, 0, 0.08); */
+}
+
+.message_nav .nav_block {
+  width: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-strat;
+}
+
+.message_nav .nav_block .nav_icon {
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message_nav .nav_block .nav_icon .iconfont {
+  font-size: 44rpx;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.message_nav .nav_block .nav_icon  .iconkaituan{
+  font-size: 38rpx;
+}
+
+.message_nav .nav_block .blue {
+  /* background: #2287ef; */
+  background: -webkit-linear-gradient(top,#ffbc64,#f78e04);
+}
+
+.message_nav .nav_block .red {
+  /* background: #fd6f67; */
+  background: -webkit-linear-gradient(top,#52acff,#1890ff);
+}
+
+.message_nav .nav_block text {
+  font-size: 30rpx;
+  color: #333;
+  margin-left: 20rpx;
+}
+
+.message_list {
+  /* background: #fff;  */
+  margin: 0 16rpx;
+}
+
+.message_list .message_block {
+  padding: 28rpx 20rpx;
+  border-bottom: 1px solid #ededed;
+  display: flex;
+  align-items: center;
+  /* padding-left: 12rpx; */
+}
+
+.message_list .message_list_block .message_block:last-child{
+  border-bottom:0
+}
+.message_list .message_unread{
+  position: relative;
+  top: 0;
+  /* border-left: 8rpx  solid #ec4a51; */
+  /* background: rgba(253,225,214,.3); */
+  /* background: rgb(248,240,237); */
+
+}
+.message_list .message_unread .unread_msg{
+  position: absolute;
+  right:18rpx;
+  top:50%;
+  transform: translateY(-50%);
+  width: 15rpx;
+  height: 15rpx;
+  border-radius: 50%;
+  /* background: #f20; */
+}
+.message_list .message_block .message_left .icon_bg {
+  /* height: 80rpx;
+  width: 80rpx; */
+  border-radius: 10rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.type01 {
+  /* background: #ec4a51; */
+  background: #ffbc64;
+}
+
+.type02 {
+  /* background: #61d9d4; */
+  background: #52acff;
+}
+
+.type03 {
+  background: #e3b71e;
+}
+
+.type04 {
+  background: #60d94f;
+}
+
+.message_list .message_block .message_left .iconfont {
+  color: #ffbc64;
+  /* color: -webkit-linear-gradient(top,#ffbc64,#f78e04); */
+  font-size: 50rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message_list .message_block .message_left .iconkaituan {
+  color: #52acff;
+}
+
+.message_list .message_block .message_right {
+  color: #999;
+  font-size: 24rpx;
+  margin-left: 18rpx;
+}
+
+.message_list .message_block .message_right .message_title {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.message_list .message_block .message_right .message_title .title {
+  font-size: 30rpx;
+  color: #333;
+  width: 330rpx;
+  white-space: nowrap; /*规定段落中的文本不进行换行*/
+  overflow: hidden; /*内容会被修剪，并且其余内容是不可见的。*/
+  text-overflow: ellipsis; /*显示省略号来代表被修剪的文本*/
+}
+
+.message_list .message_block .message_right .message_desc {
+  width: 580rpx;
+  margin-top: 10rpx;
+  white-space: nowrap; /*规定段落中的文本不进行换行*/
+  overflow: hidden; /*内容会被修剪，并且其余内容是不可见的。*/
+  text-overflow: ellipsis; /*显示省略号来代表被修剪的文本*/
+}
+
+
+.message_model{
+  height: 60vh;
+  top: calc(100% - 60vh);
+  animation: modelSheet 300ms ease-out;
+}
+.message_model .model_body {
+  font-size: 26rpx;
+  padding: 0 80rpx;
+  margin-top: 100rpx;
+  margin-bottom: 60rpx;
+}
+.message_model .model_body .detail_type{
+  position: absolute;
+  top: -50rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 10rpx solid #fff;
+  border-radius: 50%;
+  box-shadow: 4rpx 8rpx 60rpx 0px rgba(4, 0, 0, 0.08);
+  text-shadow: 4rpx 8rpx 60rpx rgba(4, 0, 0, 0.08);
+}
+.message_model .model_body .detail_type .icon_bg{
+  height: 80rpx;
+  width: 80rpx;
+  border-radius: 50rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.message_model .model_body .detail_type .iconfont{
+  color: #fff;
+  font-size: 50rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.message_model .model_body .detail{
+  margin-top: 60rpx;
+  line-height: 3;
+  color: #333;
+  height: 34vh;
+}
+.message_model .model_body .detail .title{
+  font-size: 24rpx;
+  color: #999;
+}
+.message_model .model_body .detail .detail_title{
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.message_model .model_body .detail .detail_time{
+  font-size: 26rpx;
+}
+.message_model .model_body .detail .detail_desc{
+  font-size: 26rpx;
+  word-break: break-all;
+  width: 100%;
+}
+
+
+@keyframes modelSheet {
+  from {
+    top: 100%;
+  }
+
+  to {
+    top: calc(100% - 60vh);
+  }
+}

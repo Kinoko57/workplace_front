@@ -1,0 +1,68 @@
+<!--pages/myFootprint/myFootprint.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+
+<import src="../../components/calendar/index.wxml" />
+<view class='my_footprint'>
+	<!-- <navbar page-name="我的足迹" bg-color="#fff" iconcolor="#666666" text-color="#e13b18" show-title='true' show-nav='true' show-index='false'></navbar> -->
+	<view class='foot_header' style="top:{{navHeight}}px">
+		<text>共浏览<text class='foot_num'>{{total}}</text>件商品</text>
+		<text class='foot_edit' bindtap='edit' hidden='{{isEdit}}'>管理</text>
+		<text class='foot_edit' bindtap='edit' hidden='{{!isEdit}}'>完成</text>
+	</view>
+	<view style="height:86rpx"></view>
+	<view class="foot_body {{footList.length>0?'':'top'}}">
+		<view class="foot_date">
+			<template is="calendar" data="{{...calendar}}" />
+			<view class="down_open {{date_show==false?'down_more':'down_more_down'}}" bindtap='dataShow'>
+				<icon class='iconfont iconright'></icon>
+			</view>
+		</view>
+		<checkbox-group bindchange="chosefoot">
+			<view class="foot_list" wx:for-item="listblock" wx:for="{{footList}}" wx:key="index">
+				<view class="foot_pro_block {{item.last_time?'clear':''}} {{item.show_right?'':'hide_right'}}" wx:for="{{listblock}}" wx:key="index">
+					<view class="chose_date {{item.last_time?'show':'hidden'}}" wx:if="{{item.show_last_time}}">{{item.month}}月{{item.day}}日</view>
+					<view class='foot_pro'>
+						<label for='{{item.id}}'>
+							<view class='pro_chose' wx:if='{{isEdit}}'>
+								<checkbox id='{{item.id}}' value="{{item.id}}" checked="{{item.checked}}" />
+							</view>
+							<view class='pro_img'  bindtap="goProDetail" data-type="{{item.type}}" id="{{item.type==1?item.g_id:item.c_id}}">
+								<image src='{{item.curriculum.image[0]}}'></image>
+								<view class='pro_tips' wx:if='{{item.type==0&&item.curriculum.status==0}}'>
+									<text>已下架</text>
+								</view>
+							</view>
+							<view class='pro_info'>
+								<!-- <view class='pro_title'>{{item.name}}</view> -->
+								<view class='pro_spec'>
+									<view class='pro_price'>
+										<text class='peo_nowprice'>￥{{filters.formatMoney(item.curriculum.price_sell)}} </text>
+									</view>
+									<view class='pro_icon' wx:if='{{!isEdit}}'>
+										<icon class="iconfont iconmore" bindtap="showActionSheet" id="{{item.id}}" data-cid="{{item.c_id}}" data-index="index"></icon>
+									</view>
+								</view>
+							</view>
+						</label>
+					</view>
+				</view>
+			</view>
+		</checkbox-group>
+		<null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false}}" bottomText="没有更多了~" bottomShow="{{is_end&&hasData}}" dataText="暂无数据" dataShow="{{!hasData}}"></null-data>
+	</view>
+	<view class="{{is_iphonex?(isEdit?'editDel_null editDel_iphonex':'editDel_iphonex'):'editDel_null'}}"></view>
+	<view class="foot_edit_more {{is_iphonex?'editDel_iphonex':''}}" wx:if='{{isEdit&&footList.length>0}}'>
+		<view class='allCheck'>
+			<checkbox bindtap='checkAll' checked='{{allchose==1}}' />
+			<text>全选</text>
+		</view>
+		<view class="del_btn">
+			<button class="bg_theme_red {{check_ids.length==0?'disbale_btn':''}}" bindtap="delFoot">删除</button>
+		</view>
+	</view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+	<icon class="iconfont iconhuidaodingbuxianxing"></icon>
+</view>
+<!--底部弹出菜单-->
+<action-sheet id="action-sheet" actionList="{{actionList}}" bind:cancelEvent="_cancelEvent" bind:actionEvent="_actionEvent"></action-sheet>

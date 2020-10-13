@@ -1,0 +1,87 @@
+/* pages/addCar/addCar.wxss */
+page{
+  background: #fff;
+}
+.c_addCar_body{
+  border-top: 1px solid #ccc;
+  padding: 0 24rpx;
+}
+.c_addcar{
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+.sub{
+  position: fixed;
+  width: 702rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom:58rpx;
+  font-size: 28rpx;
+  color: #fff;
+}
+.sub text{
+  display: block;
+  height: 80rpx;
+  width: 100%;
+  text-align: center;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+}
+.section{
+  border-bottom: 1px solid #ECECEC;
+  overflow: hidden;
+  height: 129rpx;
+  padding: 0 6rpx;
+  display: flex;
+  align-items: center;
+}
+
+.section .form_title {
+  font-size:28rpx;
+  color: #999;
+  float: left;
+}
+.section .text_left {
+  width: 160rpx;
+}
+.section input,.picker{
+  padding-left: 15rpx;
+  float: left;
+  font-size: 28rpx;
+  height: 100rpx;
+  display: inline-flex;
+  align-items: center;
+   width:480rpx;
+}
+.section .picker{
+  float: right;
+  width:520rpx ;
+}
+.section .picker view{
+  display: inline-block;
+  width: 480rpx;
+}
+.section .picker icon{
+  display: inline-flex;
+}
+.section image{
+  width: 43rpx;
+  height: 34rpx;
+  display: inline-flex;
+}
+.place-holder{
+  color: #333;
+  font-size: 28rpx;
+}
+.invalid {
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  height: 60rpx;
+  font-size: 38rpx;
+  line-height: 60rpx;
+  background: #e86d56
+}

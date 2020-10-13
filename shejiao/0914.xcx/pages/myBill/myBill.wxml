@@ -1,0 +1,58 @@
+<!--pages/myBill/myBill.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<view class="bill_bg skeleton">
+    <navbar bg-color="{{toBg}}" custom-name="{{showchoseDate}}" chose-date="{{choseDate}}" icon-color="#fff" show-icon="{{showIcon}}" show-custom="true" show-title='false' bind:bindView="showDate" bind:bindDateChange="bindDateChange" show-nav='true' show-index='false' ></navbar>
+    <view class="bill_body" style="height:{{navHeight}}px">
+      <view class="bill_body_wraper">
+        <view style="height:{{topnavHeight}}px"></view>
+        <view class="bill_body_top">
+            <view class="bill_body_pri">
+              <view>收入{{billObj.total_income==undefined?'0':billObj.total_income}}笔</view>
+              <view><text class="symbol">￥</text>{{filters.formatMoney(billObj.total_income_money)}}</view>
+            </view>
+            <view class="bill_center_xian"></view>
+            <view class="bill_body_pri">
+              <view>支出{{billObj.total_pay==undefined?'0':billObj.total_pay}}笔</view>
+              <view><text class="symbol">￥</text>{{filters.formatMoney(billObj.total_pay_money)}}</view>
+            </view>
+        </view>
+      </view>
+       <image src="{{staticUrl}}vip/bill.png" class="bill_body_img" style="height:{{navHeight}}px"></image>
+    </view>
+    <view style="height:204rpx"></view>
+    <view class="bill_nav">
+       <view wx:for="{{navList}}" wx:key="index" bindtap="choseNavId" id="{{item.id}}" class="{{choseId==item.id?'nav_active':''}} nav_text">{{item.name}}</view>
+    </view>
+    <!-- <view class="bill_type" wx:if="{{label_List!=''}}">
+      <view class="bill_type_list {{label_key==item.id?'bill_type_list_active':''}}" wx:for="{{label_List}}" wx:key="index" data-item="{{item.id}}" bindtap="goLabel">{{item.name}}</view>
+    </view> -->
+    <view style="height:15px;width:100%"></view>
+    <scroll-view style="height:{{scrollHeight}}px" scroll-y lower-threshold='120' bindscrolltolower="loadMore" bindscroll="scroll" scroll-top='{{topNum}}' scroll-with-animation>
+        <view class="bill_block" wx:if="{{billList.length>0}}" wx:for="{{billList}}" wx:key="blockindex" wx:for-item="blockitem" wx:for-index="blockindex">
+         <view class="bill_list" wx:for="{{blockitem}}" wx:key="index">
+           <view class="bill_list_l">
+              <image src="{{staticUrl}}vip/bill_1.png" wx:if="{{choseId==1}}"></image>
+               <image src="{{staticUrl}}vip/bill_2.png" wx:if="{{choseId==2}}"></image>
+           </view>
+           <view class="bill_list_r">
+              <view class="bill_list_r_t">
+                 <text wx:if="{{choseId==1}}">订单结算收益自动转入</text>
+                 <text wx:if="{{choseId==2}}">提现金额</text>
+                 <text wx:if="{{choseId==1}}">+{{filters.formatMoney(item.profit_price)}}</text>
+                 <text wx:if="{{choseId==2}}">-{{filters.formatMoney(item.profit_price)}}</text>
+              </view>
+              <view class="bill_list_r_b">
+                <text wx:if="{{choseId==1}}">订单：{{item.oid}}</text>
+                <text>{{filters.formatDateTime(item.update_time)}}</text>
+              </view>
+           </view>
+         </view>
+        </view>
+        <null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false&&hasData}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无数据" dataShow="{{!hasData}}"></null-data>
+        <view wx:if="{{isiPhoneX}}" style="height:34px;width:100%"></view>
+    </scroll-view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+  <icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

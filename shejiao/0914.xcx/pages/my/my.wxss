@@ -1,0 +1,330 @@
+/* pages/my/my.wxss */
+
+page {
+  background: #f6f6f6;
+}
+.my_bg_image{
+  position: absolute;
+  top: 0;
+  width: 750rpx;
+  overflow: hidden;
+}
+.my_top {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.my_top .my_info {
+  position: relative;
+  z-index: 1;
+
+}
+.my_info_top{
+  padding: 20rpx 24rpx 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.my_info .info_left {
+  display: inline-flex;
+  align-items: center;
+}
+
+.my_info .info_left .info_user {
+  width: 116rpx;
+  height: 116rpx;
+  border-radius: 50%;
+  margin-right: 28rpx;
+}
+
+.my_info .info_left .info_name {
+  color: #fff;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+.info_name .info_name_info{
+  
+}
+.info_name_logon{
+  color: #fff;
+  font-size: 36rpx;
+  font-weight: 600;
+}
+.info_name .info_name_info text{
+  font-size: 30rpx;
+  display: inline-block;
+  max-width: 376rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.info_name .info_name_info image{
+  width: 43rpx;
+  height: 46rpx;
+}
+.info_name .info_name_name{
+  font-size: 22rpx;
+}
+.my_info .info_right {
+  color: #fff;
+  font-size: 26rpx;
+  padding-right: 10rpx;
+}
+.my_info .info_right icon{
+  display: inline-flex;
+  font-size: 36rpx;
+  margin-right: 10rpx;
+}
+
+
+.my_about {
+  height: 135rpx;
+  color: #fff;
+  width: 726rpx;
+  border-radius: 20rpx;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.my_about .about_pro {
+  width: 220rpx;
+  text-align: center;
+}
+
+.my_about .about_pro text {
+  display: block;
+}
+
+.my_about .about_pro .num {
+  
+  font-size: 44rpx;
+}
+
+.my_about .about_pro .title {
+  font-size: 24rpx;
+  margin-top: 10rpx;
+}
+.my_discount{
+  position: absolute;
+  bottom: 14rpx;
+  z-index: 2;
+  padding: 0 24rpx;
+  width: 702rpx;
+}
+.my_discount_block{
+  padding: 0 24rpx;
+  display: flex;
+  align-items: center;
+  height: 56rpx;
+  justify-content: space-between;
+}
+.my_discount .my_discount_l{
+  color: #EFD09A;
+  display: inline-flex;
+  align-items: center;
+  font-size: 22rpx;
+}
+.my_discount .my_discount_l image{
+  width: 30rpx;
+  height: 27rpx;
+  margin-right: 15rpx;
+}
+.my_discount .my_discount_l text:nth-child(3){
+  display: inline-flex;
+  align-items: center;
+  width:1px;
+  height:20rpx;
+  margin: 3rpx 15rpx 0;
+  background:#E0C08A;
+}
+.my_discount .my_discount_r{
+  background: linear-gradient(to right,#eeddbc 0%,#dbb679 100%);
+  color: #333;
+  width: 124rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  text-align: center;
+  border-radius: 18rpx;
+  font-size: 20rpx;
+}
+
+
+.my_block{
+  padding: 0 24rpx;
+}
+ .my_order {
+  background: #fff;
+  padding: 0 12rpx 15rpx;
+  border-radius: 12rpx;
+  margin-bottom: 30rpx;
+}
+
+ .my_order .my_order_title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30rpx 10rpx 15rpx;
+  color: #333;
+  font-size: 26rpx;
+}
+
+ .my_order .my_order_title .order_more {
+  color: #999;
+  font-size: 24rpx;
+}
+
+ .my_order .my_order_title .order_more .iconfont {
+  font-size: 26rpx;
+  color: #b9b9b9;
+  /* font-weight: bold; */
+  display: inline-flex;
+  align-items: center;
+}
+
+ .my_order  .my_order_block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 34rpx;
+  padding-bottom: 26rpx;
+}
+
+ .my_order  .my_order_block view {
+  width: 144rpx;
+  text-align: center;
+  position: relative;
+}
+
+ .my_order  .my_order_block .order_num {
+  width: 22rpx;
+  height: 22rpx;
+  line-height: 22rpx;
+  background: #fff;
+  border: 2rpx solid #e13816;
+  border-radius: 50%;
+  color: #e13816;
+  font-size: 18rpx;
+  position: absolute;
+  left: 66%;
+  transform: translateX(-50%);
+  top: -10rpx;
+  text-align: center;
+  padding: 3rpx;
+}
+
+ .my_order  .my_order_block .order_img {
+  width: 50rpx;
+  height: 40rpx;
+}
+
+ .my_order  .my_order_block .order_text {
+  color: #333;
+  font-size: 22rpx;
+  display: block;
+  padding-top: 20rpx;
+}
+.my_banner{
+  width: 702rpx;
+  height: 282rpx;
+  display: block;
+  margin: 0 auto 30rpx;
+}
+ .my_use {
+  background: #fff;
+  padding: 0 12rpx 5rpx;
+  border-radius: 12rpx;
+  margin-bottom: 30rpx;
+}
+
+ .my_use .my_use_title {
+  display: flex;
+  align-items: center;
+  padding: 30rpx 10rpx 15rpx;
+  color: #333;
+  font-size: 26rpx;
+}
+
+.my_use_block {
+  padding-top:30rpx;
+}
+.my_use_block_list{
+  position: relative;
+}
+.new_unread{
+  position: absolute;
+  right:44rpx;
+  top:-6rpx;
+  background: #fff;
+  border: 2rpx solid #e13816;
+  border-radius: 50%;
+  color: #e13816;
+  font-size: 24rpx;
+  width: 28rpx;
+  height: 28rpx;
+  line-height: 28rpx;
+  text-align: center;
+  padding: 3rpx;
+}
+.my_use .my_use_block view {
+  width: 25%;
+  text-align: center;
+  display: inline-block;
+  padding-bottom:30rpx;
+}
+
+.my_use .my_use_block .use_img {
+  width: 72rpx;
+}
+
+.my_use .my_use_block  .use_name {
+  color: #333;
+  font-size: 22rpx;
+  padding-bottom: 10rpx;
+  display: block;
+}
+
+/* 收益样式 */
+.my_income{
+  background: #fff;
+  padding: 8rpx 22rpx 26rpx;
+  margin-bottom: 30rpx;
+  margin-top: 25rpx;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+}
+.my_income .my_income_l{
+  display: inline-flex;
+  width: 520rpx;
+  justify-content: space-around;
+  align-items: center;
+}
+.my_income .my_income_l .my_income_l_info{
+  font-size: 22rpx;
+  color: #333;
+  text-align: center;
+}
+.my_income .my_income_l .my_income_l_info text:nth-child(1){
+  display: block;
+  font-size: 44rpx;
+  padding-bottom: 15rpx;
+}
+.my_income_shadow{
+  width: 46rpx;
+  height: 142rpx;
+  margin-left: -20rpx;
+}
+.my_income .my_income_r{
+  font-size: 22rpx;
+  width: 140rpx;
+  text-align: center;
+  color: #333;
+}
+.my_income .my_income_r image{
+  width: 48rpx;
+  height: 38rpx;
+  margin:10rpx 0 25rpx;
+}

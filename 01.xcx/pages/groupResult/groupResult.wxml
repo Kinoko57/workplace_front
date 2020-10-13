@@ -1,0 +1,101 @@
+<!--pages/groupResult/groupResult.wxml-->
+<view class='result_group'>
+  <view class="result_title" wx:if='{{GroupOrder.isleader&&GroupOrder.status==1}}'>
+    <icon class='iconfont icon-duihaocheckmark17'></icon>
+    <view>
+      <text class='title_top'>恭喜你，开团成功!</text>
+      <text>快去邀请小伙伴参团吧~</text>
+    </view>
+  </view>
+  <view class="result_title" wx:if='{{!GroupOrder.isleader&&GroupOrder.status==1}}'>
+    <icon class='iconfont icon-duihaocheckmark17'></icon>
+    <view>
+      <text class='title_top'>团长邀请你加入该团~</text>
+    </view>
+  </view>
+  <view class="result_title" wx:if='{{GroupOrder.status==2}}'>
+    <icon class='iconfont icon-duihaocheckmark17'></icon>
+    <view>
+      <text class='title_top'>恭喜，拼购成功!</text>
+    </view>
+  </view>
+  <view class='result_title fail' wx:if='{{GroupOrder.status==-1}}'>
+    <icon class='iconfont icon-guanbi2'></icon>
+    <view>
+      <text class='title_top'>该团未能按时凑齐人数，拼购失败!</text>
+    </view>
+  </view>
+  <view class='group_order'>
+    <view class='sale_pro'>
+      <view class='pro_img' bindtap='goPro' data-link='../proDetail/proDetail?type=group&id={{item.id}}' id='{{item.id}}'>
+        <image src='{{GroupOrder.img}}'></image>
+      </view>
+      <view class='pro_info'>
+        <view class='pro_title' bindtap='goPro' data-link='../proDetail/proDetail?type=group&id={{item.id}}' id='{{item.id}}'>{{GroupOrder.name}}</view>
+        <view class='pro_spec'>
+          <view class='pro_price'>
+            <icon class='iconfont icon-tuangou3'></icon>
+            <text class='pro_integral'>{{GroupOrder.startnum}}人拼</text>
+            <text class='peo_nowprice'>¥{{GroupOrder.price}}</text>
+          </view>
+          <!-- <view class='pro_icon'>
+            <button size='mini' bindtap='goPro' data-link='../proDetail/proDetail?type=group&id={{item.id}}' id='{{item.id}}'>去开团</button>
+          </view> -->
+        </view>
+        <view class='pro_orig'>
+          市场价
+          <text>¥{{GroupOrder.price_market}}</text>
+        </view>
+      </view>
+    </view>
+    <view class='sale_time'>
+      <view class='group_spec' hidden='{{GroupOrder.status==-1||GroupOrder.startnum<=groupPeople.length}}'>
+        <text class='spec_text'>还剩</text>
+        <text class='spec_text spec_red'>{{GroupOrder.startnum-groupPeople.length}}人</text>
+        <text class='spec_text'>拼购成功，剩余时间</text>
+        <text class='sepc_block'>{{saleTime.day}}</text>
+        <text class='spec_text'>天</text>
+        <text class='sepc_block'>{{saleTime.hou}}</text>
+        <text class='spec_text'>:</text>
+        <text class='sepc_block'>{{saleTime.min}}</text>
+        <text class='spec_text'>:</text>
+        <text class='sepc_block'>{{saleTime.sec}}</text>
+      </view>
+      <view class='group_person'>
+        <view class='group_img' wx:for='{{groupPeople}}' wx:key='index' wx:if="{{index<4}}">
+          <text class='leader' wx:if='{{item.leader==1}}'>团长</text>
+          <image src='{{item.image}}' wx:if="{{item.image!=null&&item.image!=''}}"></image>
+          <image src='../../static/img/com/pc_avatar.png' wx:if="{{item.image==null||item.image==''}}"></image>
+        </view>
+        <view class='group_img' wx:for='{{GroupOrder.startnum-groupPeople.length}}' wx:key='index'>
+          <view class='img_bg'></view>
+          <image src='../../static/img/member/avatar.png' hidden='true'></image>
+        </view>
+        <view class='group_img' wx:if='{{groupPeople.length>5}}'>
+          <text>...</text>
+        </view>
+      </view>
+    </view>
+    <view class='sale_btn' hidden='{{GroupOrder.status==-1||GroupOrder.startnum<=groupPeople.length}}'>
+      <button bindtap='golink' wx:if='{{GroupOrder.isleader!=1}}' data-link='../proDetail/proDetail?type=group&id={{GroupOrder.group_id}}&gid={{GroupOrder.id}}' id='{{GroupOrder.id}}' class='width'>我要参团</button>
+      <button open-type="share" class='width'>邀请好友参团</button>
+      <view bindtap='goindex' data-link='../index/index' id='{{GroupOrder.id}}'>商城首页</view>
+      <!-- <buttonclass='width goindex'>商城首页</button> -->
+    </view>
+    <view class='sale_btn' wx:if='{{GroupOrder.status==-1}}'>
+      <button class='fail'>拼购失败</button>
+      <view bindtap='goindex' data-link='../index/index' id='{{GroupOrder.id}}'>商城首页</view>
+    </view>
+    <view class='sale_btn' wx:if='{{GroupOrder.status==2}}'>
+      <button class='width'>拼购成功</button>
+      <view bindtap='goindex' data-link='../index/index' id='{{GroupOrder.id}}'>商城首页</view>
+    </view>
+  </view>
+
+  <view class='group_help'>
+    <view class='help_title'>拼购规则</view>
+    <view class='help_detail'>
+      <text>{{GroupOrder.rule}}</text>
+    </view>
+  </view>
+</view>

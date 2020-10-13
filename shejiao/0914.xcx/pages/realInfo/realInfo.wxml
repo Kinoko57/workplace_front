@@ -1,0 +1,47 @@
+<!--pages/personCenter/personCenter.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<view class='p_center skeleton'>
+  <navbar page-name="实名信息"  bg-color="#ffffff" icon-color="#000000" show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class='pc_body'>
+    <view class='pc_info'>
+      <text class='info_title'>姓名</text>
+      <view class='info_more'>
+        <text>{{realInfo.name}}</text>
+      </view>
+    </view>
+    <view class='pc_info'>
+      <text class='info_title'>性别</text>
+      <view class='info_more'>
+        <text>{{realInfo.sex==0?'女':'男'}}</text>
+      </view>
+    </view>
+    <view class='pc_info'>
+      <text class='info_title'>国籍(区域)</text>
+      <view class='info_more'>
+        <text>{{realInfo.area}}</text>
+      </view>
+    </view>
+  </view>
+  <view style="width:750rpx;height:18rpx;background:#ececec"></view>
+  <view class="pc_body pc_top">
+    <view class='pc_info' >
+      <text class='info_title'>证件类型</text>
+      <view class='info_more'>
+        <text>身份证</text>
+      </view>
+    </view>
+    <view class='pc_info'>
+      <text class='info_title'>证件号码</text>
+      <view class='info_more'>
+       {{realInfo.id_card_no}}
+      </view>
+    </view>
+    <view class='pc_info'>
+      <text class='info_title'>证件有效期</text>
+      <view class='info_more'>
+        <text>{{realInfo.expiry_end}}</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,27 @@
+<view class='wx_dialog_container' hidden="{{!isShow}}">
+	<view class='wx-mask' bindtap="hide"></view>
+	<view class="{{isAllScreen ? 'as-wx-action-sheet':'wx-action-sheet'}}">
+		<view class="wx-select">
+			<view catchtap="_actionEvent" id="{{item.id}}" wx:for="{{actionList}}" wx:key="index" wx:if="{{actionList.length>0}}" class="wx-select-block">
+				<view class="del_bg">
+					<ss-icon name="{{item.actionIcon}}" color="#333" size="30px" block="{{true}}"></ss-icon>
+				</view>
+				<view class="text">
+					{{item.actionTips}}
+				</view>
+			</view>
+			<view wx:if="{{actionList.length==0}}" id="0" catchtap="_actionEvent">
+				<view class="del_bg">
+					<ss-icon name="{{actionIcon}}" color="#333" size="30px" block="{{true}}"></ss-icon>
+				</view>
+				<view class="text">
+					{{actionTips}}
+				</view>
+			</view>
+		</view>
+		<view class="wx-cancel" catchtap="_cancelEvent">
+			<text class="cancel">取消</text>
+		</view>
+		<view class="safe-area" wx:if="{{isAllScreen}}"></view>
+	</view>
+</view>

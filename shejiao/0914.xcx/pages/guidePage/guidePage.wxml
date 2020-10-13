@@ -1,0 +1,12 @@
+<!--pages/guidePage/guidePage.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="guide_bg skeleton">
+   <navbar page-name=""  bg-color="transparent" icon-color="#000000" show-title='false' show-nav='false' show-index='false'></navbar>
+  <view class="countdown" bindtap="goLink">
+   <view style="height:{{navHeight}}px"></view>
+   <view class="countdown_time">
+    <text>跳过</text><text wx:if="{{sec_num!=0}}">{{sec_num}}s</text>
+   </view>
+  </view>
+  <image src="{{showImg}}" class="guide_img" width="750" mode='aspectFill'></image>
+</view>

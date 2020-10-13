@@ -1,0 +1,13 @@
+<!--pages/reportType/reportType.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="report_bg skeleton">
+  <navbar page-name="举报类型" bg-color="#333333" icon-color="#ffffff" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class="report_body">
+      <view class="report_body_block_list" wx:for="{{reportList}}" wx:key="index" bindtap="goLink" data-link='../report/report?type={{item.type}}&cause={{item.name}}'>
+         <view class="report_body_block_list_l">
+           {{item.name}}
+         </view>
+         <icon class="iconfont icon-right"></icon>
+      </view>
+  </view>
+</view>

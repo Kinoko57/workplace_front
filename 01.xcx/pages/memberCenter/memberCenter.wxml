@@ -1,0 +1,142 @@
+<!--pages/memberCenter/memberCenter.wxml-->
+<import src="/wxParse/wxParse.wxml" />
+<view class='member'>
+  <view class='m_header'>
+    <view class="{{userInfo.isShow == 0 ? 'm_info':'view_hidden'}}">
+      <button open-type="getUserInfo" bindgetuserinfo='wx_login' class='login_btn'>
+        <image src="{{avatarUrl}}" class='m_avatar' mode='aspectFit'></image>
+      </button>
+      <button open-type="getUserInfo" bindgetuserinfo='wx_login' class='login_btn'>
+        <text>登录</text>
+      </button>
+      <!-- <button open-type="openSetting" bindopensetting='refuse_login' class='login_btn' wx:if='{{refuse}}'>
+        <text>登录</text>
+      </button> -->
+      <!-- <text open-type="getUserInfo"  bindgetuserinfo='wx_login'>登陆</text>  -->
+    </view>
+    <view class="{{userInfo.isShow == 1 ? 'm_info_login':'view_hidden'}}">
+      <image src="{{userInfo.avatar}}" class='m_avatar' mode='scaleToFill' data-url='../personCenter/personCenter' bindtap='linkGo'></image>
+      <view class='m_info_title'>
+        <!-- <text>{{userInfo.username}}</text> -->
+        <view class='m_info_name'>
+          <text>{{userInfo.nickname}}</text>
+        </view>
+        <view class='m_info_level'>
+          <view style='display:inline-flex;align-items:center;'>
+            <icon class='iconfont icon-huiyuanquanyi' bindtap='showLevel'></icon>
+            <text>{{userInfo.level}}</text>
+          </view>
+          <view style='display:inline-flex;align-items:center;margin-left:16rpx;'>
+            <icon class='iconfont icon-jifen1'></icon>
+            <text>{{score}}</text>
+          </view>
+        </view>
+        <!-- <image src='../../static/img/member/level.png' style='width:160rpx;height:52rpx;' mode='aspectFit'></image> -->
+      </view>
+      <view class='m_score'>
+        <!-- <text>总积分:{{score}}</text> -->
+        <!-- <icon class='iconfont icon-qiandaojiluchaxun'></icon> -->
+        <icon class='iconfont icon-iconqiandaowenzi' data-url='../mySignIn/mySignIn' bindtap='goSign'></icon>
+        <!-- <icon class='iconfont icon-qiandao'></icon> -->
+        <!-- <image src='../../static/img/member/signIn.png' style='width:214rpx;height:56rpx;' mode='aspectFit' data-url='../mySignIn/mySignIn' bindtap='linkGo'></image> -->
+      </view>
+    </view>
+  </view>
+  <view class='m_body'>
+    <view class='m_order'>
+      <view class='m_order_top'>
+        <text>我的订单</text>
+        <view class='m_order_right' data-url='../myOrder/myOrder?tid=0&id=type0' bindtap='linkGo'>
+          <text>查看全部订单</text>
+          <icon class='iconfont icon-youjiantou1'></icon>
+        </view>
+      </view>
+      <view class='m_order_more'>
+        <view class='has_msg' data-url='{{item.link}}' bindtap='linkGo' wx:for='{{orderNav}}' wx:key='index'>
+          <image src='{{item.imgUrl}}' class='more_icon' mode='aspectFit'></image>
+          <view class="{{(userInfo.isShow == 1&&item.num>0) ? ' msg_bg ':'msg_bg_hidden '}}">
+            <text>{{item.num}}</text>
+          </view>
+          <text>{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+    <view class='m_birthday' wx:if='{{is_birthday}}'>
+      <image src='{{birthday_img}}' mode='aspectFit' bindtap='linkGo' data-url='../vipBirthday/vipBirthday'></image>
+      <!-- <image src='https://apishenshou.71360.com/data/public/201811/20181123/2018112317074432512.png' mode='aspectFit'></image> -->
+    </view>
+    <view class='m_more_feature'>
+      <view class='m_more_f_top'>
+        <view data-url='../myCollection/myCollection' bindtap='linkGo'>
+          <image src='../../static/img/member/shoucang.png' class='more_icons' mode='aspectFit'></image>
+          <text>我的收藏</text>
+        </view>
+        <view data-url='../myFootprint/myFootprint' bindtap='linkGo'>
+          <image src='../../static/img/member/zuji.png' class='more_icons' mode='aspectFit'></image>
+          <text>我的足迹</text>
+        </view>
+        <view data-url='../myCoupon/myCoupon' bindtap='linkGo'>
+          <image src='../../static/img/member/quan.png' class='more_icons' mode='aspectFit'></image>
+          <text>我的优惠券</text>
+        </view>
+        <view data-url='../editInfo/editInfo?code=address&codename=我的地址&isInput=1' bindtap='linkGo'>
+          <image src='../../static/img/member/dizhi.png' class='more_icons' mode='aspectFit'></image>
+          <text>收货地址</text>
+        </view>
+      </view>
+      <view class='m_more_f_top'>
+        <view data-url='../news/news' bindtap='linkGo' class='newsNav'>
+          <!-- <icon class='iconfont icon-yuandianzhong1' wx:if='{{newNews}}'></icon> -->
+          <view class="{{newNews ? ' msg_bg ':'msg_bg_hidden '}}">
+            <text>{{news_num}}</text>
+          </view>
+          <image src='../../static/img/member/xiaoxi.png' class='more_icons' mode='aspectFit'></image>
+          <text>消息中心</text>
+        </view>
+        <view data-url='../personCenter/personCenter' bindtap='linkGo'>
+          <image src='../../static/img/member/set.png' class='more_icons' mode='aspectFit'></image>
+          <text>我的资料</text>
+        </view>
+        <view data-url='../myScore/myScore' bindtap='linkGo'>
+          <image src='../../static/img/member/jifen.png' class='more_icons' mode='aspectFit'></image>
+          <text>我的积分</text>
+        </view>
+        <view data-url='../myComment/myComment' bindtap='linkGo'>
+          <image src='../../static/img/member/pingjia.png' class='more_icons' mode='aspectFit'></image>
+          <text>我的评价</text>
+        </view>
+      </view>
+      <view class='m_more_f_bottom'>
+        <view data-url='../mytryOut/mytryOut' bindtap='linkGo'>
+          <image src='../../static/img/member/shiyong.png' class='more_icons' mode='aspectFit'></image>
+          <text>我的试用</text>
+        </view>
+        <view data-url='../groupBy/groupBy' bindtap='linkGo'>
+          <image src='../../static/img/member/tuan.png' class='more_icons' mode='aspectFit'></image>
+          <text>我的拼团</text>
+        </view>
+        <view data-url='../myGift/myGift' bindtap='linkGo'>
+          <image src='../../static/img/member/zeng.png' class='more_icons' mode='aspectFit'></image>
+          <text>我的赠品</text>
+        </view>
+        <view data-url='../myGiftList/myGiftList' bindtap='linkGo'>
+          <image src='../../static/img/member/gift.png' class='more_icons' mode='aspectFit'></image>
+          <text>我的奖品</text>
+        </view>
+      </view>
+
+    </view>
+  </view>
+  <!-- <include src="../footer/footer.wxml" /> -->
+</view>
+<view class='vipDetail_bg' wx:if='{{vipShow}}'></view>
+<view class='vipDetail' wx:if='{{vipShow}}'>
+  <view class='vip_head'>会员等级规则说明</view>
+  <scroll-view class='richtext' scroll-y style="height: 200px;">
+    <!-- <template is="wxParse" data="{{wxParseData:proDetail.nodes}}" /> -->
+    <text>{{vipTitle}}</text>
+  </scroll-view>
+  <view class='vip_btn' bindtap='hiddenVip'>
+    <button>我知道了</button>
+  </view>
+</view>

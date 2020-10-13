@@ -1,0 +1,93 @@
+<!--pages/viewDetail/viewDetail.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<import src="/wxParse/wxParse.wxml" />
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="article_bg_style">
+  <navbar page-name="{{viewDetail.nickname}}" bg-color="#ffffff" icon-color="#000000" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+	<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+		<icon class="iconfont icon-huidaodingbuxianxing"></icon>
+	</view>
+	<view class="article_bg skeleton">
+		<view class="article_left">
+			<image src="{{viewDetail.image}}"></image>
+		</view>
+		<view class="article_right">
+			<view class="article_user">
+				<view class="user_name">{{viewDetail.nickname}}</view>
+			</view>
+			<view class="article_detail">
+				<text>{{viewDetail.content}}</text>
+			</view>
+			<view class="article_images" wx:if="{{viewDetail.type==1}}">
+				<image src="{{item.image}}" class="{{viewDetail.viewing.length==4?'image_4':(viewDetail.viewing.length==1?'image_1':'image_f')}}" data-url="{{item.image}}" wx:for="{{viewDetail.viewing}}" wx:key="index" mode="aspectFill" bindtap="viewImage"></image>
+			</view>
+			<view class="article_images" wx:if="{{viewDetail.type==2}}">
+			  <video id="myVideo" style="height:{{305/viewDetail.viewing[0].width*viewDetail.viewing[0].height}}px" show-fullscreen-btn auto-pause-if-navigate auto-pause-if-open-native show-play-btn show-center-play-btn object-fit='fill' src="{{viewDetail.viewing[0].image}}"></video>
+			</view>
+			<view class="article_time">
+				<view class="time">
+				  <text>{{filters.formatDateTime(viewDetail.create_time)}}</text>
+				  <text class="delet_Evaluate" bindtap="deletEvaluate" wx:if="{{userInfo_id==viewDetail.member_id}}">删除</text>
+				</view>
+				<!-- <text>删除</text> -->
+				<view class="collect" bindtap="collView" id="{{viewDetail.id}}">
+				  <icon class='iconfont icon-coll' wx:if="{{viewDetail.is_like==0}}"></icon>
+					<icon class='iconfont icon-coll1' wx:if="{{viewDetail.is_like==1}}"></icon> 
+				 	<text>{{filters.formatCount(viewDetail.like_num)}}</text>
+				</view>
+			</view>
+			<view class="article_comments" wx:if="{{commentList.length>0}}">
+				<view class="article_comments_list">
+					<view class="comment_block" wx:for="{{commentList}}" wx:key="index">
+						<view class="comment_block_left">
+							<image src="{{item.member_image}}"></image>
+						</view>
+						<view class="comment_block_right">
+							<view class="comment_top_info">
+								<view class="comment_user_name">{{item.member_name}}</view>
+								<view class="comment_time">{{filters.formatCommentTime(item.create_time)}}</view>
+							</view>
+							<view class="comment_detail">
+								{{item.content}}
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<null-data id="null-data" bottomText="已经到底啦~" bottomShow="true" wx:if="{{commentList.length>0}}"></null-data>
+	<view style="height:100rpx" class="{{is_iphonex?'article_fixed_bottom':''}}"></view>
+	<view class="article_fixed {{is_iphonex?'article_fixed_bottom':''}}" wx:if="{{commentFocus==false}}">
+		<view class="comment_text">
+			<view class="comm_input" bindtap="showComment">
+				<icon class="iconfont iconbianji"></icon>
+				<text>说点什么...</text>
+			</view>
+		</view>
+		<view class="icon_list">
+			<!-- <view class="icon_block article_read">
+				<icon class="iconfont iconyuedu"></icon>
+				<text>{{filters.formatCount(viewDetail.read_num==null?0:viewDetail.read_num)}}浏览</text>
+			</view> -->
+			<view class="icon_block article_coll" bindtap="collView" id="{{viewDetail.id}}">
+				<icon class='iconfont iconcoll' wx:if="{{viewDetail.isCollect==0}}"></icon>
+				<icon class='iconfont iconcoll1' style="color:#ffa85e" wx:if="{{viewDetail.isCollect==1}}"></icon>
+				<text>{{filters.formatCount(viewDetail.like_num)}}点赞</text>
+			</view>
+			<view class="icon_block article_comm">
+				<icon class='iconfont iconxiaoxi3'></icon>
+				<text>评论 {{filters.formatCount(viewDetail.evaluate_num)}}</text>
+			</view>
+		</view>
+
+	</view>
+	<view class="article_fixed_hidden {{is_iphonex?'article_fixed_bottom':''}}" style="bottom:{{keyBoardHeight}}px" wx:if="{{commentFocus==true}}">
+		<view class="comment_input_style">
+			<view class="comment_input">
+				<input class="weui-input" value="{{sendValue}}" bindinput="getCommentValue" focus="{{commentFocus}}" placeholder="请发表你的评论，最多140个字~" bindconfirm="saveComment" confirm-type="send" bindblur="showComment" bindfocus="getHeight" adjust-position="{{false}}"/>
+			</view>
+			<view class="send_btn {{sendValue!=''?'active':''}}" bindtap="saveComment">发送</view>
+		</view>
+	</view>
+</view>

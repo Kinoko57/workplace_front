@@ -1,0 +1,292 @@
+/**app.wxss**/
+@import 'style/iconfont.wxss';
+/* 去除button默认边框 */
+button::after {
+  border: none;
+}
+button{
+  background-color:none !important;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+  
+/* 主题背景色-红色 */
+.bg_theme_red {
+  background: #0d8d37;
+}
+.bg_theme_red1{
+  background: #e13816;
+}
+.bg_theme_blue {
+  background: #0d8d37;
+}
+/* 主题色-红色 */
+.color_theme_red {
+  color: #e13816;
+}
+.color_theme_blue {
+  color: #0d8d37;
+}
+.pro_tag_list_style {
+  height: 27rpx;
+  color: #fff;
+  padding: 2rpx 4rpx;
+  font-size: 20rpx;
+  margin-right: 6rpx;
+  border-radius: 4rpx;
+}
+.bg_theme_blue_line{
+  background: -webkit-linear-gradient(left,#94ecb1,#0d8d37);
+}
+
+/* 主题背景色-灰色 */
+
+.bg_theme_gray {
+  background: #dedbde;
+}
+/* iphonex 样式 */
+.iphone_x{
+  padding-bottom: 68rpx !important;
+}
+/* 回到顶部样式 */
+.return_top{
+  position: fixed;
+  width: 80rpx;
+  height: 80rpx;
+  background:linear-gradient(to bottom, #94ecb1,#0d8d37);
+  right: 16rpx;
+  bottom: 15%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+.return_top icon{
+  font-size: 48rpx;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* 回到首页 */
+
+.goIndex {
+  position: fixed;
+  width: 80rpx;
+  height: 80rpx;
+  background: rgba(0, 0, 0, 0.5);
+  right: 16rpx;
+  bottom: 11%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+.goIndex_bottom{
+  bottom: 15%;
+}
+.goIndex .iconfont {
+  color: #fff;
+  font-size: 50rpx;
+}
+
+/* 去除页面滚动条 */
+::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+  color: transparent;
+  display: none;
+}
+.conform_model_bg{
+  position: fixed;
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 201;
+}
+
+/* 顶部nav切换公共样式 */
+.block_nav{
+  width: 694rpx;
+  padding: 0 8rpx 20rpx;
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  color: #999;
+  margin: 0 auto;
+  height:90rpx; 
+}
+.nav_text{
+  font-size: 28rpx;
+  padding: 0 24rpx;
+  height: 89rpx;
+  display: inline-block;
+}
+.nav_active{
+  display: inline-block;
+  font-size: 34rpx;
+  font-weight: 600;
+}
+.block_nav text:nth-child(1){
+  display: block;
+  padding-top: 30rpx;
+}
+.block_nav .line{
+   width: 40rpx;
+   height: 4rpx;
+   display: block;
+   margin: 12rpx auto;
+}
+/* 格式化checkbox */
+checkbox .wx-checkbox-input {
+  border-radius: 50%;
+  width: 34rpx;
+  height: 34rpx;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  border: 1px solid transparent;
+  background: #0d8d37;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  border-radius: 50%;
+  width: 34rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+/* 滚动条样式隐藏 */
+::-webkit-scrollbar {
+  width:0;
+  height:0;
+  color:transparent;
+}
+
+/* 公共样式 */
+
+.model_bg {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.model_style {
+  position: fixed;
+  z-index: 1001;
+  background: #fff;
+  width: 100%;
+  border-top-left-radius: 40rpx;
+  border-top-right-radius: 40rpx;
+  /* bottom: 0; */
+}
+
+.model_style .model_title {
+  padding: 40rpx 0;
+  text-align: center;
+  color: #333;
+  font-size: 30rpx;
+}
+
+.model_style .model_body {
+  padding: 0 38rpx;
+  color: #333;
+  font-size: 26rpx;
+}
+
+.share_model {
+  height: 40vh;
+  background: #f7f7f7;
+  top: calc(100% - 40vh);
+  animation: shareSheet 150ms ease-out;
+  /* background: rgba(255,255,255,.8); */
+  background: rgba(247,247,247);
+}
+
+.share_model .model_body .share_btn_block {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 30rpx;
+}
+
+.share_model .model_body .share_btn_block .share_block {
+  margin-right: 36rpx;
+  font-weight: normal;
+  margin: 0;
+  width: 30%;
+}
+
+.share_model .model_body .share_btn_block .share_block image {
+  width: 100rpx;
+  height: 100rpx;
+  background: #fff;
+  border-radius: 50%;
+  margin-bottom: 22rpx;
+}
+
+.share_model .model_body .share_btn_block .share_block text {
+  font-size: 24rpx;
+  color: #333;
+  display: block;
+}
+
+.model_style  .model_footer {
+  margin-top: 40rpx;
+}
+.model_style  .model_footer .btn_tips{
+  color: #999999;
+  font-size: 22rpx;
+  text-align: center;
+  margin-bottom: 10rpx;
+
+}
+
+.model_style  .model_footer .cancel_btn {
+  width: 100%;
+  background: #fff;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #333;
+}
+.model_style  .model_footer .sure_btn{
+  width: 60%;
+  color: #fff;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 30rpx;
+  margin: 0 auto;
+  border-radius: 50rpx;
+}
+/* 价格下划线 */
+.line_through {
+  text-decoration: line-through;
+}
+/* 底部样式 到底了 */
+.page_footer {
+  width: 100%;
+  text-align: center;
+  color: #666;
+  font-size: 26rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+}

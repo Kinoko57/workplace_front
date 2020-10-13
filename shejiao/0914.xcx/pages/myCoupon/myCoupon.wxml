@@ -1,0 +1,45 @@
+<!--pages/myCoupon/myCoupon.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="coupon skeleton">
+   <navbar page-name="我的优惠券"  bg-color="#fff" icon-color="#000000" show-title='true' show-nav='true' show-index='false'></navbar>
+   <view class="coupon_nav" style="top:{{navHeight}}px">
+     <view wx:for="{{couponList}}" data-id="{{item.id}}" class="{{item.id==choseId?'coupon_active':''}} coupom_text" wx:key="index" bindtap="choseNavId">
+       <text>{{item.name}}</text>
+       <text wx:if="{{item.id==choseId}}"></text>
+     </view>
+   </view>
+   <view style="height:90rpx"></view>
+   <view class="coupon_body">
+      <view class="coupon_scroll">
+        <view class="coupon_body_list {{item.status!=0?'coupon_body_list_cancel':''}}" wx:for="{{couList}}" wx:key="index">
+           <!-- <image src="{{staticUrl}}my/coupon.png" class="skeleton-rect"></image> -->
+           <view class="coupon_body_list_cont">
+             <view class="coupon_money_l">
+                <text class="coupon_num">￥<text class="coupon_num_pri">{{filters.formatMoney(item.discount_price)}}</text></text>
+                <text class="coupon_desc">
+                   <text>{{item.name}}</text>
+                   <text class="time">满{{filters.formatMoney(item.price)}}可用</text>
+                   <text class="time">{{filters.formatDate(item.start_time)}} - {{filters.formatDate(item.end_time)}}</text>
+                </text>
+             </view>
+             <view class="coupon_money_r" bindtap="goLink" data-link="../couProList/couProList?type={{item.coupon_id}}" id="{{item.coupon_id}}" data-status="{{item.status}}">
+               <text wx:if="{{item.status==0}}">立即使用</text>
+               <icon class="iconfont icon-yishixiao" wx:if="{{item.status==2}}"></icon>
+               <icon class="iconfont icon-yishiyong" wx:if="{{item.status==1}}"></icon>
+             </view>
+           </view>
+           <!-- coupon_tips_active 领取 coupon_tips_cancel 使用或者失效 -->
+           <view class="coupon_tips coupon_tips_active {{item.status!=0?'coupon_tips_cancel':''}}">
+             <!-- <text wx:if="{{item.goods_type==1}}">全品类</text>
+             <text wx:if="{{item.goods_type==4}}">指定商品</text>
+             <text wx:if="{{item.goods_type==3}}">指定分类</text>
+             <text wx:if="{{item.goods_type==2}}">指定品牌</text> -->
+             <text>{{item.goods_type_name}}</text>
+           </view>
+        </view>
+        <null-data id="null-data" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无优惠券" dataShow="{{!hasData}}"></null-data>
+      </view>
+   </view>
+</view>

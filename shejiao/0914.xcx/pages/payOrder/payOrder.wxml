@@ -1,0 +1,59 @@
+<!--pages/payOrder/payOrder.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="pay_bg skeleton">
+    <navbar page-name="收银台"  bg-color="#ffffff" icon-color="#333333" show-title='true' show-nav='true' show-index='false'></navbar>
+    <view class="pay_body">
+       <view class="pay_body_t">
+        <view class="color_theme_red"><text class="money_mode">￥</text>{{filters.formatMoney(pay_price)}}</view>
+        <view class="countdown_bg">
+          <view class="countdown_block color_theme_red">
+            <text class="pay_coutdown">支付倒计时</text>
+            <text class="time">{{saleTime.day}}</text>
+            <text>天</text>
+            <text class="time">{{saleTime.hou}}</text>
+            <text>:</text>
+            <text class="time">{{saleTime.min}}</text>
+            <text>:</text>
+            <text class="time">{{saleTime.sec}}</text>
+          </view>
+        </view>
+       </view>
+       <view class="pay_body_b">
+          <view class="pay_body_title">
+            <text>快捷支付方式</text>
+          </view>
+          <radio-group bindchange="chose">
+            <view class="pay_type" wx:if="{{bankList.length>0}}">
+                <label for="{{item.id}}" class="pay_info" wx:for="{{bankList}}" wx:key="index">
+                    <view class="pay_more skeleton-rect" id='{{item.id}}'>
+                        <image src="" class="pay_image skeleton-radius"></image>
+                        <view class="pay_name">{{item.name}}</view>
+                    </view>
+                    <radio class='info_chose skeleton-radius' value="{{item.id}}" checked="{{choseId==item.id}}" id='{{item.id}}' color='#f2362c'>
+                    </radio>
+                </label>
+            </view>
+            <view class="pay_mode_chose" wx:if="{{bankList.length>0}}">
+              <view class="pay_more skeleton-rect">
+                <view class="pay_name">使用新卡支付</view>
+              </view>
+              <icon class="iconfont icon-right"></icon>
+            </view>
+            <view style="height:17rpx;background: #f6f6f6;" wx:if="{{bankList.length>0}}"></view>
+            <view class="pay_type">
+                <label for="{{item.id}}" class="pay_info" wx:for="{{payList}}" wx:key="index">
+                    <view class="pay_more skeleton-rect" id='{{item.id}}'>
+                        <image src="{{item.image}}" class="pay_image skeleton-radius"></image>
+                        <view class="pay_name">{{item.name}}</view>
+                        <!-- <view wx:if="{{item.id==2}}" class="dis_money">立减5元</view> -->
+                    </view>
+                    <radio class='info_chose skeleton-radius' value="{{item.id}}" checked="{{choseId==item.id}}" color='{{bg_color}}'>
+                    </radio>
+                </label>
+            </view>
+          </radio-group>
+       </view>
+    </view>
+    <view class="pay_btn" bindtap="topayMent" style="background:{{line_bg_color}}">支付￥{{filters.formatMoney(pay_price)}}</view>
+</view>

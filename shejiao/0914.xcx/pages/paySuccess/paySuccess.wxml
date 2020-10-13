@@ -1,0 +1,90 @@
+<!--pages/paySuccess/paySuccess.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="pay skeleton">
+  <navbar page-name="" bg-color="transparent" icon-color="#fff" show-title='true' show-nav='true' show-index='false'>
+  </navbar>
+  <view class="pay_block">
+    <view class="pay_top" style="height:540rpx">
+      <view style="height:{{navHeight}}px"></view>
+      <view class="pay_top_cont">
+        <view class="pay_success_text">
+          <icon class="iconfont icon-dui1"></icon>支付成功
+        </view>
+        <view class="pay_success_money"><text class="mode">￥</text>{{filters.formatMoney(pay_price)}}</view>
+        <view class="pay_success_type">微信支付</view>
+        <view class="pay_btn">
+          <text bindtap="findOrder">查看订单</text>
+          <text bindtap="backIndex">回到首页</text>
+        </view>
+      </view>
+      <image src="{{staticUrl}}my/pay_bg.png" class="pay_bg_image" style="height:540rpx"></image>
+    </view>
+    <view class="pay_pro">
+      <view style="height:{{zan_height}}px"></view>
+      <view class="pay_pro_titi">
+        <text class="xian"></text>
+        <text class="text_titi">为你推荐</text>
+        <text class="xian"></text>
+      </view>
+      <scroll-view style="height:{{scrollHeight}}px" scroll-y lower-threshold='120' bindscrolltolower="loadMore"
+        bindscroll="scroll" scroll-top='{{topNum}}' scroll-with-animation>
+        <view class="i_recomend_list activity_list_two_columns">
+          <view class="i_recommend_block pro_block_style" wx:for="{{recommendList}}" wx:key="index"
+            bindtap="goProDetail" data-type="{{item.activity_type}}"
+            id="{{item.activity_type==0?item.goods_id:item.activity_id}}">
+            <view class="pro_top">
+              <image src="{{item.tag.ico_img}}"
+                wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==1}}" class="pro_icon"
+                style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+              </image>
+              <image src="{{item.tag.ico_img}}"
+                wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==2}}" class="pro_icon"
+                style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+              </image>
+              <image src="{{item.tag.ico_img}}"
+                wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==3}}" class="pro_icon"
+                style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+              </image>
+              <image src="{{item.tag.ico_img}}"
+                wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==4}}" class="pro_icon"
+                style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+              </image>
+              <image class="pro_img" src="{{item.image}}"></image>
+              <image src="{{item.tag.min_img}}" wx:if="{{item.tag.min_img!=undefined&&item.tag.min_img!=''}}"
+                class="pro_min_frame"></image>
+            </view>
+            <view class="pro_middle">
+              <view class="title">
+                <text wx:if="{{item.activity_type==1}}" class="pro_tag_list_style red_gradient">限时促销</text>
+                <text wx:if="{{item.activity_type==2}}" class="pro_tag_list_style blue_gradient">体验专区</text>
+                <text wx:if="{{item.activity_type==3}}" class="pro_tag_list_style red_gradient">礼盒商品</text>
+                <text wx:if="{{item.activity_type==4}}" class="pro_tag_list_style blue_gradient">每日秒杀</text>
+                <text wx:if="{{item.activity_type==5}}" class="pro_tag_list_style blue_gradient">拼团</text>
+                {{item.goods_name}}
+              </view>
+              <view class="pro_tags" wx:if="{{item.tag.button_tag!=undefined&&item.tag.button_tag.length>0}}">
+                <view class="pro_tab_block" wx:for="{{item.tag.button_tag}}" wx:key="index" wx:if="{{index<4}}">
+                  {{item.text}}</view>
+              </view>
+              <view class="pro_tags" wx:else>
+                <view class="pro_tab_block_null">默认</view>
+              </view>
+            </view>
+            <view class="pro_bottom">
+              <view class="pro_bottom_left">
+                <text class="price_icon color_theme_red">￥</text>
+                <text class="price color_theme_red">{{filters.formatMoney(item.original_price)}}</text>
+              </view>
+              <view class="pro_bottom_right">
+                <text>{{item.sales_volume}}人已付款</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false}}" bottomText="已经到底啦~"
+          bottomShow="{{is_end&&hasData}}" dataText="暂无结果" dataShow="{{!hasData}}"></null-data>
+      </scroll-view>
+    </view>
+  </view>
+</view>

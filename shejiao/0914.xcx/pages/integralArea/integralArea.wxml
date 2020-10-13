@@ -1,0 +1,49 @@
+
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="integral_bg skeleton"  style="background:{{integralObj.bg_color}}">
+  <navbar page-name="积分专区" bg-color="#fff" icon-color="#333333" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class="integral_body">
+      <scroll-view class="integral_scroll" style="height:{{scrollHeight}}px;background:url({{staticUrl}}flash/inter_2.png) repeat" scroll-y lower-threshold='120' bindscrolltolower="loadMore" bindscroll="scroll" scroll-top='{{topNum}}' scroll-with-animation>
+         <image src="{{integralObj.poster}}" class="integral_poster_image"></image>
+          <view class="integral_wraper">
+            <view class="integral_body_block" wx:for="{{integralList}}" wx:key="index" wx:for-item="blockitem">
+              <view class="integral_body_list skeleton-rect" wx:for="{{blockitem}}" wx:key="index">
+                <image src="{{item.image}}" class="integral_img skeleton-rect"></image>
+                <view class="integral_body_list_wra">
+                  <view class="integral_body_titi skeleton-rect">{{item.goods_name}}</view>
+                  <view class="integral_body_pri skeleton-rect">
+                    <view class="pri_num">
+                      <view class="integral_buy_num">已兑换{{item.sales_volume}}件</view>
+                    </view>
+                  </view>
+                  <view class="integral_buy skeleton-rect">
+                    <text class="sale_pri color_theme_red">{{item.integral}}<text class="pri_count">积分</text></text>
+                    <view class="right_buy" style="background:{{line_bg_color}}">
+                      <text>兑换</text>
+                      <icon class="iconfont icon-right"></icon>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        <null-data id="null-data" loadingText="加载中..." loadingShow="{{hasData&&is_end==false}}" bottomText="已经到底啦~" bottomShow="{{hasData&&is_end==true}}" dataText="暂无订单" dataShow="{{!hasData}}"></null-data>
+       <!-- <view style="height:53px"></view> -->
+       <!-- <view wx:if="{{is_iphonex}}" style="height:34px"></view> -->
+      </scroll-view>
+  </view>
+  <image src="{{specialObj.bg_image}}" wx:if="{{integralObj.bg_image!=''}}" class="special_bg_image" mode="widthFix"></image>
+  <!-- <view class="area_fixed {{is_iphonex?'iphone_x_padding':''}}">
+    <view class="use_integral">可用积分：<text class="color_theme_red integral_num">288</text></view>
+    <view class="area_view">
+      <label for="all" bindtap="checkChose">
+          <checkbox checked='{{checkchose==1}}' id="all" class="check_width"/>
+          <text class="check_text">只看自己可申请的</text>
+      </label>
+    </view>
+  </view> -->
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+  <icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

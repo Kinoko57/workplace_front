@@ -1,0 +1,94 @@
+<!--pages/anchorPeopson/anchorPeopson.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="anchorPer_bg skeleton">
+   <navbar page-name="主页" bg-color="#fff" icon-color="#333333" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+   <view class="anchorPer_body">
+     <view class="anchorPer_body_top">
+       <image src="{{userInfo.image}}" class="anchorPer_body_top_img"></image>
+       <view class="anchorPer_body_top_r">
+         <view class="anchorPer_body_top_r_info">
+           <view class="anchorPer_name">{{userInfo.nickname}}</view>
+           <view class="anchorPer_label">
+             <view><icon class="iconfont icon-nv" wx:if="{{userInfo.sex==0}}"></icon><icon class="iconfont icon-nan" wx:if="{{userInfo.sex==1}}"></icon>{{userInfo.age}}岁</view>
+             <view wx:if="{{userInfo.city!=''}}">{{userInfo.city}}</view>
+           </view>
+           <view class="anchorPer_fans">
+              <view class="text_num"><text class="color_theme_red">{{userInfo.like_num}} </text>获赞</view>
+              <view class="text_num" bindtap="goLink" data-link='../fansList/fansList?member_id={{member_id}}&name={{userInfo.nickname}}&activeTab=0'><text class="color_theme_red">{{userInfo.follow_num}} </text>关注</view>
+              <view class="text_num" bindtap="goLink" data-link='../fansList/fansList?member_id={{member_id}}&name={{userInfo.nickname}}&activeTab=1'><text class="color_theme_red">{{userInfo.fans}} </text>粉丝</view>
+           </view>
+         </view>
+         <view class="anchorPer_body_top_r_edit">
+           <image src="{{staticUrl}}anchor/edit.png" wx:if="{{userInfo_id==member_id}}" bindtap="goLink" data-link="../editAnchorInfo/editAnchorInfo"></image>
+           <view wx:if="{{userInfo_id!=member_id}}" class="follow_btn">
+              <view wx:if="{{userInfo.is_follow==2}}" class="follow_for"  bindtap="followView"  data-type='cancelfollow'><icon class="iconfont icon-huxiangguanzhu" data-type='cancelfollow'></icon>互相关注</view>
+              <view wx:if="{{userInfo.is_follow==0}}" class="follow_for" bindtap="followView" data-type="follow"><icon class="iconfont icon-add"></icon>关注</view>
+              <view wx:if="{{userInfo.is_follow==1}}" class="cancel_follow" bindtap="followView"  data-type='cancelfollow'>取消关注</view>
+           </view>
+         </view>
+       </view>
+     </view>
+     <view class="anchorPer_nav">
+      <text bindtap="choseNav" wx:for="{{navList}}" wx:key="index" class="{{activeTab==index?'nav_active':''}}" data-index="{{index}}">{{item.name}}</text>
+     </view>
+      <scroll-view class="anchorPer_scroll" style="height:{{scrollHeight}}" scroll-y lower-threshold='120' bindscrolltolower="loadMore" bindscroll="scroll" scroll-top='{{topNum}}' scroll-with-animation>
+          <view class="anchorPer_block">
+            <view class="anchorPer_block_left">
+              <view class="anchorPer_block_list" wx:for="{{col1}}" wx:key="index">
+                <view class="anchorPer_block_list_img" bindtap="goDetail" data-link="../detailPreview/detailPreview?id={{item.id}}">
+                    <video id="myVideo"  wx:if="{{item.type==2&&item.is_up!=0}}" style="height:{{170/item.viewing[0].width*item.viewing[0].height}}px" show-fullscreen-btn auto-pause-if-navigate auto-pause-if-open-native show-play-btn="{{false}}" show-center-play-btn="{{false}}" object-fit='fill' src="item.viewing[0].image"></video>
+                    <image lazy-load="true"  src="{{item.viewing[0].image}}" mode="widthFix" wx:if="{{item.type!=2&&item.is_up!=0}}"></image>
+                    <view  wx:if="{{item.is_up==0&&activeTab==1}}" class="anchorPer_null_data">
+                        <icon class="iconfont icon-comiiszanwushuju" wx:if="{{item.is_up==0}}"></icon>
+                    </view>
+                    <view class="video_mask" wx:if="{{item.type==2&&item.is_up!=0}}">
+                      <image src="{{staticUrl}}anchor/bofang.png"  wx:if="{{item.type==2}}"></image>
+                   </view>
+                </view>
+                <view class="anchorPer_block_list_titi">{{item.content}}</view>
+                <view class="anchorPer_block_list_info">
+                  <view class="anchorPer_block_list_info_l">
+                    <image src="{{item.image}}"></image>
+                    <text>{{item.nickname}}</text>
+                  </view>
+                  <view class="anchorPer_block_list_info_r" >
+                    <icon class="iconfont icon-coll"></icon>
+                    <text>{{item.like_num}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view  class="anchorPer_block_right">
+              <view class="anchorPer_block_list" wx:for="{{col2}}" wx:key="index">
+                <view class="anchorPer_block_list_img" bindtap="goDetail" data-link="../detailPreview/detailPreview?id={{item.id}}">
+                    <video id="myVideo"  wx:if="{{item.type==2&&item.is_up!=0}}" style="height:{{170/item.viewing[0].width*item.viewing[0].height}}px" show-fullscreen-btn auto-pause-if-navigate auto-pause-if-open-native show-play-btn="{{false}}" show-center-play-btn="{{false}}" object-fit='fill' src="item.viewing[0].image"></video>
+                    <image lazy-load="true"  src="{{item.viewing[0].image}}" mode="widthFix" wx:if="{{item.type!=2&&item.is_up!=0}}"></image>
+                    <view  wx:if="{{item.is_up==0&&activeTab==1}}"  class="anchorPer_null_data">
+                        <icon class="iconfont icon-comiiszanwushuju" wx:if="{{item.is_up==0}}"></icon>
+                    </view>
+                    <view class="video_mask" wx:if="{{item.type==2&&item.is_up!=0}}">
+                      <image src="{{staticUrl}}anchor/bofang.png"  wx:if="{{item.type==2}}"></image>
+                   </view>
+                </view>
+                <view class="anchorPer_block_list_titi">{{item.content}}</view>
+                <view class="anchorPer_block_list_info">
+                  <view class="anchorPer_block_list_info_l">
+                    <image src="{{item.image}}"></image>
+                    <text>{{item.nickname}}</text>
+                  </view>
+                  <view class="anchorPer_block_list_info_r">
+                    <icon class="iconfont icon-coll"></icon>
+                    <icon class="iconfont icon-coll1" wx:if="{{false}}"></icon>
+                    <text>{{item.like_num}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false&&hasData}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无数据" dataShow="{{!hasData}}"></null-data>
+      </scroll-view>
+   </view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+  <icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

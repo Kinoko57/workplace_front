@@ -1,0 +1,153 @@
+/* pages/myCoupon/myCoupon.wxss */
+
+.my_coupon {
+  background: #f2f2f2;
+  overflow-x: hidden;
+}
+
+.coupon_body {
+  height: 100%;
+}
+
+.coupon_nav {
+  height: 90rpx;
+  background: #f6f6f6;
+  width: 100%;
+  z-index: 50;
+  position: fixed;
+  top: 0;
+}
+
+.coupon_nav text {
+  width: 33%;
+  display: inline-block;
+  color: #999;
+  font-size: 32rpx;
+  text-align: center;
+  border-bottom: 4rpx solid transparent;
+  border-top: 4rpx solid transparent;
+  height: 82rpx;
+  line-height: 82rpx;
+}
+
+.coupon_nav .text_active {
+  border-bottom: 4rpx solid #e21f11;
+  color: #333;
+}
+
+.cou_list {
+  margin-top: 116rpx;
+  padding: 0 26rpx;
+  /* background: #f6f6f6; */
+  height: 100%;
+}
+
+.nullTips {
+  font-size: 30rpx;
+  color: #999;
+}
+
+.cou_info {
+  margin-top: 16rpx;
+  background: #fff;
+  height: 200rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.cou_info image {
+  width: 240rpx;
+  height: 200rpx;
+}
+
+.cou_info .cou_more {
+  position: absolute;
+  text-align: center;
+  width: 240rpx;
+}
+
+.cou_more .cou_value {
+  font-size: 26rpx;
+  color: #fff;
+}
+
+.cou_value text {
+  font-size: 90rpx;
+  font-family: 'DIN';
+  margin-left: -16rpx;
+}
+
+.cou_more .cou_more_tips {
+  text-align: center;
+  margin-top: -19rpx;
+}
+
+.cou_more_tips text {
+  font-size: 22rpx;
+  color: #fff;
+  margin-right: 8rpx;
+}
+
+.cou_more_tips icon {
+  color: #fff;
+  font-size: 20rpx;
+}
+
+.cou_info .cou_tips {
+  /* margin-right: 126rpx; */
+  float: left;
+  width: 420rpx;
+}
+
+.cou_info .cou_tips text {
+  display: block;
+}
+
+.cou_info .cou_title {
+  color: #444;
+  font-size: 32rpx;
+}
+
+.cou_info .cou_type {
+  font-size: 24rpx;
+  margin: 15rpx 0;
+  margin-right: 10rpx;
+  width: 300rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.cou_info .cou_type_normal {
+  width: 400rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.cou_info .cou_time {
+  color: #999;
+  font-size: 24rpx;
+  margin: 15rpx 0;
+  /* width: 220rpx; */
+}
+
+.cou_time text {
+  /* float: right; */
+  font-size: 26rpx;
+}
+
+.cou_states {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.cou_states .iconfont {
+  font-size: 120rpx;
+  color: #999;
+}

@@ -1,0 +1,67 @@
+<!--pages/myCollection/myCollection.wxml-->
+<view class='my_collection' wx:if='{{isShow}}'>
+  <view class='coll_header'>
+    <text>共有<text class='coll_num'>{{total}}</text>件商品</text>
+    <text class='coll_edit' bindtap='edit' hidden='{{isEdit}}'>编辑</text>
+    <text class='coll_edit' bindtap='edit' hidden='{{!isEdit}}'>完成</text>
+  </view>
+  <view class='coll_body'>
+    <view class="editDel {{is_iphonex?'editDel_iphonex':''}}" wx:if='{{isEdit}}'>
+      <view class='allCheck'>
+        <checkbox bindtap='checkAll' checked='{{allchose==1}}' />
+        <text>全选</text>
+      </view>
+      <button size='mini' bindtap='delColl'>删除</button>
+    </view>
+    <view class='coll_list'>
+      <checkbox-group bindchange="choseColl">
+        <view class='coll_pro' wx:for="{{collList}}" wx:key="index">
+          <view class='pro_chose' wx:if='{{isEdit}}'>
+            <checkbox value="{{item.id}}" checked="{{item.checked}}" />
+          </view>
+          <view class="pro_block {{isEdit?'pro_block_short':''}}" bindtap='goPro' data-type="{{item.belong}}" data-link='../proDetail/proDetail?type=normal&id={{item.goods_id}}' id='{{item.goods_id}}'>
+            <view class='pro_img'>
+              <image src='{{item.img}}'></image>
+              <view class='pro_tips' hidden='{{!item.isExpired}}'>
+                <text>已过期</text>
+              </view>
+            </view>
+            <view class="{{isEdit==false?'pro_info':'pro_info pro_info_edit'}}">
+              <view class='pro_title'>
+                <view class='pro_level' wx:if='{{item.promotion==1}}'>
+                  <image src='../../static/img/member/cu.png' mode='aspectFit'></image>
+                  <text>限时购</text>
+                </view>
+                <view class='pro_icon' wx:if='{{item.belong==9}}'>
+                  <text>水果</text>
+                </view>
+                {{item.name}}</view>
+              <view class='pro_spec'>
+                <view class='pro_price'>
+                  <text class='peo_nowprice' wx:if='{{item.deal_type==1||item.deal_type==3}}'>￥{{item.price_sell}} </text>
+                  <text class='peo_nowprice' wx:if='{{item.deal_type>=4}}'>￥{{item.price_sell}} </text>
+                  <text class='pro_integral' wx:if='{{item.deal_type!=1&&item.deal_type!=2&&item.deal_type!=3}}'>+</text>
+                  <view class='pro_inter_img' wx:if='{{item.deal_type!=1&&item.deal_type!=3}}'>
+                    <icon class='iconfont icon-jifen1'></icon>
+                  </view>
+                  <text class='pro_integral' wx:if='{{item.deal_type==2}}'>{{item.point}}</text>
+                  <text class='pro_integral' wx:if='{{item.deal_type!=1&&item.deal_type!=2&&item.deal_type!=3}}'>{{item.point}}</text>
+                </view>
+                <view class='pro_icon' wx:if='{{!isEdit}}'>
+                  <image src='../../static/img/member/red_car.png' mode='aspectFit'></image>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </checkbox-group>
+      <button type="default" size="default" loading plain hidden='{{collList.length==total}}' class="loading_style">正在加载中，请稍后...</button>
+    </view>
+    <view class='order-foot' hidden='{{collList.length<total||total==0}}'>
+      <text>—————— 我是有底线的 ——————</text>
+    </view>
+    <view class='coll_list_null' wx:if='{{collList.length<=0}}'>暂无数据</view>
+    <view class='null_height'></view>
+  </view>
+  <include src="../footer/footer.wxml" />
+</view>

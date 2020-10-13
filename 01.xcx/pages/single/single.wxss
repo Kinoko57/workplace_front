@@ -1,0 +1,614 @@
+/* pages/single/single.wxss */
+
+.vip {
+  position: relative;
+  /* background: #fff; */
+}
+
+.bodyLock {
+  /* top: 0px;
+  left: 0px; */
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  z-index: 0;
+}
+
+.vip_body_list {
+  /* height: 100%; */
+  overflow: hidden;
+  margin-bottom: 100rpx;
+}
+
+.vip_body {
+  position: relative;
+  /* background: #f7f7f7; *//* margin-bottom: 120rpx; */
+}
+
+/* 筛选 */
+
+.red_fifter {
+  /* height: 66rpx;
+  line-height: 66rpx; */
+  margin-bottom: 20rpx;
+  background: #fff;
+  padding: 10rpx 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.red_fifter_fixed {
+  position: fixed;
+  width: 100%;
+  top: 0rpx;
+  z-index: 50;
+  padding: 0;
+  /* padding-top: 20rpx; */
+}
+
+.red_fifter .fifter_sort {
+  /* padding: 0 40rpx; */
+  width: 25%;
+  border-right: 2rpx solid #e4e4e4;
+  line-height: 63rpx;
+}
+
+.red_fifter_fixed view {
+  border-bottom: 2rpx solid #e4e4e4;
+  border-top: 2rpx solid transparent;
+}
+
+.red_fifter .fifter_brand {
+  border-top: 2rpx solid #e4e4e4;
+  border-bottom: 2rpx solid #fff;
+}
+
+.red_fifter .fifter_brand_active {
+  color: #eb3d6e;
+}
+
+.red_fifter view:last-child {
+  border-right: none;
+}
+
+.red_fifter view text {
+  font-size: 26rpx;
+  color: #323232;
+}
+
+.fifter_sort {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 68rpx;
+}
+
+.fifter_sort .iconfont {
+  font-size: 32rpx;
+}
+
+.fifter_sort .fifter_icon {
+  position: relative;
+  width: 40rpx;
+  border: none;
+  height: 60rpx;
+}
+
+.fifter_icon .iconfont {
+  position: absolute;
+  font-size: 40rpx;
+  left: 16rpx;
+}
+
+.fifter_sort .sort_asc {
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.fifter_sort .icon_active {
+  color: #eb3d6e;
+}
+
+.fifter_sort .sort_desc {
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.fifter_sort text {
+  /* margin-left: 16rpx; */
+}
+
+.vip_body  .fifter_brand_more_bg {
+  margin-top: -20rpx;
+  position: fixed;
+  top: 108rpx;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+}
+
+.fifter_brand_more {
+  background: #fff;
+  z-index: 60;
+  position: fixed;
+  top: 73rpx;
+}
+
+.fifter_brand_more checkbox-group {
+  padding-left: 20px;
+}
+
+.fifter_brand_more label {
+  width: 340rpx;
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding: 22rpx 0;
+  position: relative;
+}
+
+.fifter_brand_more text {
+  color: #323232;
+  font-size: 28rpx;
+}
+
+.fifter_brand_more .chose_text {
+  border-bottom: 2rpx solid #ff8d97;
+}
+
+.fifter_brand_more  .chose_default {
+  border-bottom: 2rpx solid #fff;
+}
+
+.fifter_brand_more .fifter_brand_btn {
+  box-shadow: 0rpx -4rpx 20rpx -6rpx #a2a2a2;
+  height: 75rpx;
+  display: flex;
+}
+
+.fifter_brand_btn button {
+  width: 50%;
+  height: 75rpx;
+  color: #2b2b2b;
+  background: #fff;
+  font-size: 30rpx;
+  font-weight: bold;
+  line-height: 75rpx;
+  border-radius: 0;
+  margin: 0;
+}
+
+.fifter_brand_btn .btn_red {
+  background: #ff8d97;
+  color: #fff;
+}
+
+.fifter_brand_btn button::after {
+  border: none;
+}
+
+/* 筛选 */
+
+.vip_body .fifter_more_bg {
+  position: fixed;
+  top: 0rpx;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+}
+
+.vip_body .fifter_more {
+  position: fixed;
+  width: 640rpx;
+  height: 100%;
+  background: #f2f2f2;
+  top: 0;
+  right: -640rpx;
+  z-index: 52;
+}
+
+.fifter_more .fifter_price {
+  padding-top: 36rpx;
+  height: 155rpx;
+  background: #fff;
+  padding-right: 26rpx;
+  margin-bottom: 20rpx;
+}
+
+.fifter_price view {
+  margin-left: 30rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  display: flex;
+  align-items: center;
+  margin-top: 30rpx;
+}
+
+.fifter_price input {
+  width: 270rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 50rpx;
+  background: #f1f2f6;
+  display: inline-block;
+  text-align: center;
+  font-size: 26rpx;
+}
+
+.fifter_price .input-placeholder {
+  color: #c3c3c3;
+  font-size: 26rpx;
+  text-align: center;
+}
+
+.fifter_price view icon {
+  line-height: 50rpx;
+  color: #000;
+  margin: 0 10rpx;
+}
+
+.fifter_price text {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-left: 30rpx;
+  display: block;
+}
+
+.fifter_more .fifter_other {
+  background: #fff;
+  padding-bottom: 20rpx;
+}
+
+.fifter_other .fifter_info {
+  padding-top: 30rpx;
+}
+
+.fifter_info .fifter_head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 26rpx;
+}
+
+.fifter_head text {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.fifter_head view {
+  display: inline-flex;
+  align-items: center;
+}
+
+.fifter_head view text {
+  color: #939393;
+  margin-right: 10rpx;
+}
+
+.fifter_head view icon {
+  display: inline-flex;
+  align-items: center;
+  font-size: 26rpx;
+  color: #939393;
+}
+
+.fifter_head view .icon_open {
+  transform: rotate(180deg);
+}
+
+.fifter_options {
+  margin-top: 20rpx;
+  padding-left: 26rpx;
+}
+
+.fifter_options_hidden {
+  height: 80rpx;
+  overflow: hidden;
+}
+
+.fifter_options text {
+  width: 126rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  padding: 0 16rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #6c6c6c;
+  background: #f1f2f5;
+  border-radius: 50rpx;
+  display: inline-block;
+  margin: 10rpx 0;
+  margin-right: 45rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fifter_options .chose_text {
+  background: #ff8d97;
+  color: #fff;
+}
+
+.fifter_more .fifter_more_btn {
+  box-shadow: 0rpx -4rpx 20rpx -6rpx #a2a2a2;
+  height: 75rpx;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.fifter_more_btn button {
+  width: 50%;
+  height: 75rpx;
+  color: #2b2b2b;
+  background: #fff;
+  font-size: 30rpx;
+  font-weight: bold;
+  line-height: 75rpx;
+  border-radius: 0;
+  margin: 0;
+}
+
+.fifter_more_btn .btn_red {
+  background: #ff8d97;
+  color: #fff;
+}
+
+.fifter_more_btn button::after {
+  border: none;
+}
+
+/* 促销列表 */
+
+.vip_body_list .vip_list {
+  padding: 0 26rpx;
+  background: #fff;
+}
+
+.vip_list .vip_pro {
+  /* height: 310rpx; */
+  background: #fff;
+  border-bottom: 1px solid #ebebeb;
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+}
+
+.vip_pro .pro_img {
+  float: left;
+  /* margin-top: 40rpx; *//* margin-left: 18rpx; */
+  margin-right: 36rpx;
+  position: relative;
+}
+
+.pro_img image {
+  width: 190rpx;
+  height: 190rpx;
+}
+
+.vip_pro .pro_info {
+  width: 100%;
+}
+
+.pro_info .pro_title {
+  font-size: 24rpx;
+  color: #444;
+  /* margin-top: 50rpx; */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.pro_title  .pro_level {
+  width: 80rpx;
+  border: 2rpx solid #ff8d97;
+  border-radius: 16rpx;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 6rpx;
+  padding: 0 4rpx;
+  justify-content: center;
+}
+
+.pro_level .iconfont {
+  color: #ff8d97;
+  display: inline-flex;
+}
+
+.pro_level text {
+  color: #ff8d97;
+}
+
+.pro_info .pro_spec {
+  overflow: hidden;
+  margin-top: 30rpx;
+  height: 82rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pro_spec .pro_price {
+  font-family: 'DIN';
+  width: 226rpx;
+}
+
+.pro_price .pro_nowprice {
+  color: #ff8d97;
+  font-size: 30rpx;
+  /* margin-bottom: -10rpx; */
+  font-weight: bold;
+}
+
+.pro_price .pro_integral {
+  font-size: 30rpx;
+  color: #ff8d97;
+  font-weight: bold;
+  margin-left: 8rpx;
+}
+
+.pro_price .pro_inter_img {
+  display: inline-flex;
+  /* margin-left: 9rpx; */
+}
+
+.pro_price .pro_inter_img .iconfont {
+  font-size: 30rpx;
+  color: #ff8d97;
+  display: inline-flex;
+  font-weight: bold;
+}
+
+/* .pro_price .pro_inter_img image {
+  width: 24rpx;
+  height: 20rpx;
+} */
+
+.pro_price .pro_orig {
+  margin-top: -20rpx;
+  /* height: 30rpx;
+  line-height: 30rpx; */
+  position: relative;
+}
+
+.pro_price .pro_orig .nowprice {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #b8b8b8;
+  text-decoration: line-through;
+  /* margin-left: 58rpx; */
+  margin-left: 4rpx;
+}
+
+.pro_spec .pro_btn {
+  margin-right: 4rpx;
+  display: flex;
+  border-radius: 6rpx;
+}
+
+.pro_btn button {
+  width: 150rpx;
+  height: 52rpx;
+  background: #ff8d97;
+  color: #fff;
+  font-size: 26rpx;
+  padding: 0rpx 20rpx;
+  line-height: 52rpx;
+  border-radius: 18rpx;
+}
+
+.pro_btn button::after {
+  border: none;
+}
+
+.pro_icon {
+  margin-right: 26rpx;
+}
+
+.pro_icon .iconfont {
+  color: #ff8d97;
+  font-size: 40rpx;
+}
+
+.order-foot {
+  height: 84rpx;
+  line-height: 84rpx;
+  /* background: #fff; */
+  text-align: center;
+}
+
+.order-foot text {
+  font-size: 23.97rpx;
+  color: #bebebe;
+}
+
+checkbox .wx-checkbox-input {
+  border-radius: 50%;
+  width: 34rpx;
+  height: 34rpx;
+  border: none;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  border: 1px solid transparent;
+  background: #fff;
+  color: #ff8d97;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  border-radius: 50%;
+  width: 34rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #ff8d97;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+
+.car_edit_more {
+  height: 100rpx;
+  display: flex;
+  justify-content: flex-end;
+  /* align-items: center; */
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  z-index: 50;
+  box-shadow: 0 8rpx 20rpx 10rpx #dadada;
+}
+.car_edit_more_height{
+  height: 168rpx;
+}
+.car_edit_more .allCheck {
+  margin-right: 26rpx;
+  font-size: 26rpx;
+  color: #555;
+  text-align: right;
+}
+
+.allCheck .car_pro_total {
+  font-family: 'DIN';
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #484848;
+  font-weight: bold;
+}
+
+.car_pro_total text {
+  font-size: 42rpx;
+  color: #ff8d97;
+  font-family: 'DIN';
+  align-items: flex-end;
+}
+
+.allCheck .car_tips {
+  font-size: 24rpx;
+  color: #808080;
+}
+
+.car_edit_more button {
+  float: right;
+  min-width: 230rpx;
+  height: 100rpx;
+  background: #ff8d97;
+  color: #fff;
+  font-size: 34rpx;
+  line-height: 100rpx;
+  border-radius: 0;
+  margin: 0;
+}

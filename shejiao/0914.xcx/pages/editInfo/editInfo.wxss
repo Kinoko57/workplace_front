@@ -1,0 +1,75 @@
+/* pages/editInfo/editInfo.wxss */
+/* pages/editInfo/editInfo.wxss */
+
+page {
+  background: #ffffff;
+}
+
+.e_body {
+  padding: 0 26rpx;
+  background: #fff;
+}
+
+.e_body .section {
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.e_body .info_tips {
+  font-size: 24rpx;
+  margin-top: 10rpx;
+  margin-bottom: -24rpx;
+}
+
+.e_body .hide {
+  display: none;
+}
+
+.e_body .section input {
+  padding: 40rpx 20rpx;
+}
+
+.input-placeholder {
+  font-size: 28rpx;
+  color: #bbb;
+}
+
+.saveInfo {
+  border: none !important;
+  margin-top: 126rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.saveInfo view {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #e34c26, #e13816);
+  width: 460rpx;
+  height: 86rpx;
+  border: none;
+  color: #fff;
+  outline: none;
+  font-size: 40rpx;
+  border-radius:20rpx;
+  margin: 0 auto;
+}
+.section_flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80rpx;
+  padding-top: 40rpx;
+}
+.section_area{
+  display: inline-flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: #333;
+  height: 80rpx;
+}
+.con-right{
+  color: #999;
+  display: inline-flex;
+  align-items: center;
+}

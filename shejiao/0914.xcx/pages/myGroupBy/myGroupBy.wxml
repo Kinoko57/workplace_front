@@ -1,0 +1,54 @@
+<!--pages/mytryOut/mytryOut.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<view class='mytryOut' wx:if='{{isShow}}'>
+  <view class='tryOut_body'>
+	  <navbar page-name="我的拼团" bg-color="#fff" icon-color="#666666" text-color="#e13b18" show-title='true' show-nav='true' show-index='false'></navbar>
+    <view class='try_nav' style="top:{{navHeight}}px">
+      <text bindtap='viewtryType' class="{{tryType=='1'?'text_active':''}}" id='1'>全部</text>
+      <text bindtap='viewtryType' class="{{tryType=='2'?'text_active':''}}" id='2'>进行中</text>
+      <text bindtap='viewtryType' class="{{tryType=='3'?'text_active':''}}" id='3'>已结束</text>
+    </view>
+    <view style="height:90rpx"></view>
+    <view class='order_list'>
+      <view wx:for='{{orderList}}' wx:key='index' class='sale_pro'>
+        <view class='proInfo'>
+          <view class='order_status'>
+            <icon class='iconfont icon-pintuanchenggong iconred' wx:if="{{item.status=='2'||item.status=='3'}}"></icon>
+            <icon class='iconfont icon-pintuanshibai' wx:if="{{item.status=='4'}}"></icon>
+            <icon class='iconfont icon-jinhangzhong icongreen' wx:if="{{item.status=='1'}}"></icon>
+          </view>
+          <view class='pro_img' bindtap='goPro' bindtap='goOrderDetail' data-gid='{{item.team_id}}'>
+            <image src='{{item.image}}'></image>
+          </view>
+          <view class='pro_info'>
+            <view class='pro_title' bindtap='goOrderDetail' data-gid='{{item.team_id}}'>{{item.activity_name}}</view>
+            <view class='pro_spec'>
+              <view class='pro_price'>
+                <!-- <icon class='iconfont icon-tuangou3'></icon> -->
+                <text class='pro_integral'>{{item.group_num}}人拼</text>
+                <!-- <text class='pro_integral'>{{item.discount_people}}人起拼</text> -->
+                <text class='peo_nowprice'>¥{{filters.formatMoney(item.buy_price)}}</text>
+              </view>
+            </view>
+            <!-- <view class='pro_orig'>
+              原价
+              <text>¥{{filters.formatMoney(item.price_sell)}}</text>
+            </view> -->
+          </view>
+        </view>
+        <view class='pro_btn'>
+          <button size='mini' class='btn_red' bindtap='goOrderDetail' data-gid='{{item.team_id}}' data-oid='{{item.order_id}}'>订单详情</button>
+          <button size='mini' class='btn_red' id='{{item.id}}' bindtap='goPro' data-link='../groupResult/groupResult?type=view&group_id={{item.group_id}}&team_id={{item.team_id}}'>拼购详情</button>
+        </view>
+      </view>
+      <null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false&&hasData}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无数据" dataShow="{{!hasData}}"></null-data>
+    </view>
+    <!-- <view class='cou_tips' wx:if='{{orderList.length<=0}}'>
+      <text>{{tips}}</text>
+      <button class='btn_red' bindtap='goLink'>去优惠拼团看看</button>
+    </view> -->
+  </view>
+</view>
+<!-- <view class='goIndex' bindtap='goIndex' data-link='../index/index'>
+  <icon class='iconfont icon-home'></icon>
+</view> -->

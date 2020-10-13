@@ -1,0 +1,81 @@
+/* pages/paySuccess/paySuccess.wxss */
+.pay_top{
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.pay_bg_image{
+  position: absolute;
+  top: 0;
+  width: 750rpx;
+  overflow: hidden;
+}
+.pay_top_cont{
+  position: relative;
+  padding-top: 20rpx;
+  z-index: 1;
+  color: #fff;
+  text-align: center;
+}
+.pay_success_text{
+  font-size: 36rpx;
+}
+.pay_success_text icon{
+  margin-right: 10rpx;
+  font-size:36rpx;
+}
+.pay_success_money{
+  padding-top: 50rpx;
+  font-size: 48rpx;
+}
+.pay_success_money text{
+  font-size: 30rpx;
+}
+.pay_success_type{
+  font-size: 28rpx;
+  padding-top: 15rpx;
+}
+.pay_btn{
+  display: inline-flex;
+  align-items: center;
+  margin-top: 20rpx;
+  color: #fff;
+}
+.pay_btn text{
+  width: 184rpx;
+  height: 60rpx;
+  display: inline-block;
+  line-height: 60rpx;
+  text-align: center;
+  border-radius: 30rpx;
+  margin: 0 20rpx;
+  font-size: 26rpx;
+}
+.pay_btn text:nth-child(1){
+  border:1px solid #fff;
+}
+ .pay_btn text:nth-child(2){
+  color: #f20;
+  background: #fff;
+}
+.pay_pro_titi{
+  height: 112rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pay_pro_titi .text_titi{
+  font-size: 28rpx;
+  color: #f20;
+  padding: 0 28rpx;
+}
+.pay_pro_titi .xian{
+  width: 139rpx;
+  display: inline-flex;
+  height: 2rpx;
+  background: #FF0000;
+}
+.pay_pro .activity_list_two_columns .pro_block_style:nth-child(even){
+  float: right;
+  margin-right: 0;
+}

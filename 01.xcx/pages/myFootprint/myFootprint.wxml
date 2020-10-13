@@ -1,0 +1,71 @@
+<!--pages/myFootprint/myFootprint.wxml-->
+<import src="../../template/calendar/index.wxml" />
+<!-- <reload bind:relaod="_relaod" id='reload'></reload> -->
+<view class='my_footprint' wx:if='{{isShow}}'>
+  <view class='foot_header' hidden='{{footList.length==0}}'>
+    <text>共浏览<text class='foot_num'>{{total}}</text>件商品</text>
+    <text class='foot_edit' bindtap='edit' hidden='{{isEdit}}'>编辑</text>
+    <text class='foot_edit' bindtap='edit' hidden='{{!isEdit}}'>完成</text>
+  </view>
+  <view class="foot_body {{footList.length>0?'':'top'}}">
+    <!-- <view class="{{date_show==false?'foot_date_hidden':'foot_date'}}"> -->
+    <view class="foot_date">
+      <template is="calendar" data="{{...calendar}}" />
+    </view>
+    <!-- <view class="{{date_show==false?'down_more':'down_more_down'}}" bindtap='dataShow'>
+      <icon class='iconfont icon-xiajiantou'></icon>
+    </view> -->
+    <view class="foot_list" wx:if='{{footList.length>0}}'>
+      <text class='chose_date'>{{mon}}月{{day}}日</text>
+      <checkbox-group bindchange="chosefoot">
+        <view class='foot_pro' wx:for="{{footList}}" wx:key="index">
+          <view class='pro_chose' wx:if='{{isEdit}}'>
+            <checkbox value="{{item.id}}" checked="{{item.checked}}" />
+          </view>
+          <view class='pro_img' bindtap='goPro' data-type="{{item.belong}}" data-link='../proDetail/proDetail?type=normal&id={{item.goods_id}}' id='{{item.goods_id}}'>
+            <image src='{{item.img}}'></image>
+          </view>
+          <view class='pro_info' bindtap='goPro' data-type="{{item.belong}}" data-link='../proDetail/proDetail?type=normal&id={{item.goods_id}}' id='{{item.goods_id}}'>
+            <view class='pro_title'>
+              <view class='pro_level' wx:if='{{item.promotion==1}}'>
+                <image src='../../static/img/member/cu.png' mode='aspectFit'></image>
+                <text>限时购</text>
+              </view>
+              {{item.name}}</view>
+            <view class='pro_spec'>
+              <view class='pro_price'>
+                <text class='peo_nowprice' wx:if='{{item.deal_type==1||item.deal_type==3}}'>￥{{item.price_sell}} </text>
+                <text class='peo_nowprice' wx:if='{{item.deal_type>=4}}'>￥{{item.price_sell}} </text>
+                <text class='pro_integral' wx:if='{{item.deal_type!=1&&item.deal_type!=2&&item.deal_type!=3}}'>+</text>
+                <view class='pro_inter_img' wx:if='{{item.deal_type!=1&&item.deal_type!=3}}'>
+                  <icon class='iconfont icon-jifen1'></icon>
+                </view>
+                <text class='pro_integral' wx:if='{{item.deal_type==2}}'>{{item.point}}</text>
+                <text class='pro_integral' wx:if='{{item.deal_type!=1&&item.deal_type!=2&&item.deal_type!=3}}'>{{item.point}}</text>
+
+              </view>
+              <view class='pro_icon' wx:if='{{!isEdit}}'>
+                <image src='../../static/img/member/red_car.png' mode='aspectFit'></image>
+              </view>
+            </view>
+          </view>
+        </view>
+      </checkbox-group>
+    </view>
+
+    <view class='order-foot' wx:if='{{footList.length>0}}'>
+      <text>—————— 我是有底线的 ——————</text>
+    </view>
+    <view class='foot_list_null' wx:if='{{footList.length==0}}'>暂无数据</view>
+  </view>
+  <view class='foot_edit_more' wx:if='{{isEdit&&footList.length>0}}'>
+    <view class='allCheck'>
+      <checkbox bindtap='checkAll' checked='{{allchose==1}}' />
+      <text>全选</text>
+    </view>
+    <button size='mini' bindtap='delFoot'>删除</button>
+  </view>
+</view>
+<view class='goIndex' bindtap='goIndex' data-link='../index/index'>
+  <icon class='iconfont icon-home'></icon>
+</view>

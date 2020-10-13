@@ -1,0 +1,45 @@
+<!--pages/useCoupon/useCoupon.wxml-->
+<view class='use_coupon'>
+  <view class='coupon_body'>
+    <view class='coupon_nav'>
+      <text class="{{choseType==0?'text_active':''}}" bindtap='choseType' id='0'>可用优惠券({{couUseList.length}})</text>
+      <text class="{{choseType==1?'text_active':''}}" bindtap='choseType' id='1'>不可使用优惠券({{couNoList.length}})</text>
+    </view>
+    <view class='cou_tip' wx:if='{{isChecked}}'>
+      使用优惠券1张，共抵用
+      <text>￥{{couValue}}</text>
+    </view>
+    <view class='cou_list'>
+      <checkbox-group bindchange="choseCou">
+        <view class='cou_info' wx:for="{{couList}}" wx:key="index">
+          <image src='../../static/img/order/cop_bg.png' wx:if='{{choseType==0}}'></image>
+          <image src='../../static/img/order/cop_bg_01.png' wx:if='{{choseType==1}}'></image>
+          <view class='cou_more'>
+            <view class='cou_value'>￥
+              <text>{{item.cashworth}}</text>
+            </view>
+            <view class='cou_more_tips'>
+              <text wx:if='{{item.order_price>0}}'>满{{item.order_price}}可用</text>
+              <text wx:else>零门槛使用</text>
+              <!-- <icon class='iconfont icon-right'></icon> -->
+            </view>
+          </view>
+          <view class='cou_tips'>
+            <text class='cou_title'>{{item.title}}</text>
+            <view class='cou_time'><text>有效期至{{item.totime}}</text></view>
+            <view class='cou_type' wx:if='{{item.name!=null}}'>适用于{{item.name}}{{item.content}}</view>
+            <view class='cou_type' wx:if='{{item.name==null}}'>全类目通用{{item.content}}</view>
+          </view>
+          <view class='cou_radio' hidden='{{choseType==1}}'>
+            <checkbox value="{{item.id}}" checked="{{item.ischose}}" />
+          </view>
+        </view>
+      </checkbox-group>
+    </view>
+
+  </view>
+  <view class='null_view'></view>
+  <view class="cou_btn {{is_iphonex?'cou_btn_height':''}}" bindtap='useCou' wx:if='{{choseType==0}}'>
+    <button>确定</button>
+  </view>
+</view>

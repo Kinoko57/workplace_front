@@ -1,0 +1,260 @@
+/* pages/news/news.wxss */
+
+.news {
+  /* padding: 0 26rpx; */
+  font-family: SimHei;
+  background: #f2f2f2;
+  overflow-x: hidden;
+}
+
+.news_header {
+  text-align: center;
+  background: #ebebeb;
+  width: 100%;
+  height: 86rpx;
+  line-height: 86rpx;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
+
+.news_header text {
+  padding-left: 26rpx;
+  color: #515151;
+  font-size: 24rpx;
+}
+
+.news_header .news_num {
+  color: #ff8d97;
+  font-size: 26rpx;
+  padding-left: 0;
+}
+
+.news_header .news_edit {
+  float: right;
+  padding-right: 26rpx;
+  color: #ff8d97;
+  font-size: 24rpx;
+}
+
+.news_body {
+  height: 100%;
+}
+
+.news_nav {
+  height: 90rpx;
+  background: #fff;
+  position: fixed;
+  top: 86rpx;
+  width: 100%;
+  z-index: 50;
+  border-bottom: 4rpx solid #f6f6f6;
+}
+
+.top {
+  top: 0;
+}
+
+.news_nav text {
+  width: 375rpx;
+  display: inline-block;
+  color: #999;
+  font-size: 32rpx;
+  text-align: center;
+  border-bottom: 4rpx solid transparent;
+  border-top: 4rpx solid transparent;
+  height: 82rpx;
+  line-height: 82rpx;
+}
+
+.news_nav .text_active {
+  border-bottom: 4rpx solid #e21f11;
+  color: #333;
+}
+
+.news_list {
+  background: #fff;
+  padding: 0 24rpx;
+  padding-top: 170rpx;
+  /* padding-top: 84rpx; */
+}
+
+.padd_top {
+  padding-top: 84rpx;
+}
+
+.news_list_null {
+  padding: 0 24rpx;
+  padding-top: 170rpx;
+  margin: 20rpx auto;
+  text-align: center;
+}
+
+.news_list_null text {
+  font-size: 30rpx;
+  /* font-weight: bold; */
+  color: #999;
+}
+
+.news_list .new_info {
+  padding-top: 20rpx; 
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.news_list .new_info:last-child {
+  border-bottom: none;
+}
+
+.info_hidden {
+  height: 100rpx;
+  overflow: hidden;
+}
+
+.news_list .info_title {
+  display: flex;
+  align-items: center;
+}
+
+.news_list .info_chose {
+  float: left;
+  display: flex;
+  align-items: center;
+}
+
+.info_title .info_img {
+  width: 96rpx;
+  height: 96rpx;
+  text-align: center;
+  line-height: 96rpx;
+}
+
+.info_title .info_img .iconfont {
+  display: inline-flex;
+  font-size: 64rpx;
+  color: #ff8d97;
+}
+
+.info_title .info_img image {
+  width: 90%;
+  height: 90%;
+}
+
+.info_title .news_more {
+  width: 580rpx;
+  margin-left: 10rpx;
+}
+
+.info_title  .news_more_edit {
+  width: 530rpx;
+  margin-left: 26rpx;
+}
+
+.info_title .news_tips {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.news_tips .iconfont {
+  display: inline-flex;
+  color: #999;
+  font-size: 30rpx;font-weight: bold;
+}
+
+.news_tips .iconopen {
+  transform: rotate(180deg);
+}
+
+.info_title text {
+  font-size: 24rpx;
+  color: #999;
+  display: inline-block;
+}
+
+.info_title .news_title {
+  font-size: 30rpx;
+  /* font-weight: bold; */
+  color: #4d4d4d;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 220rpx;
+}
+
+.info_detail {
+  margin: 12rpx 0;
+  font-size: 28rpx;
+  color: #4d4d4d;
+  text-indent: 2em;
+  padding: 0 26rpx;
+  padding-bottom: 20rpx;
+  /* overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%; */
+}
+
+.null_height {
+  height: 100rpx;
+}
+
+.foot_edit_more {
+  box-shadow: 0 8rpx 20rpx 10rpx #dadada;
+  height: 100rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+}
+
+.foot_edit_more .allCheck {
+  margin-left: 26rpx;
+  font-size: 26rpx;
+  color: #555;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.foot_edit_more button {
+  float: right;
+  width: 210rpx;
+  height: 100rpx;
+  background: #ff8d97;
+  color: #fff;
+  font-size: 34rpx;
+  line-height: 100rpx;
+  border-radius: 0;
+  margin: 0;
+}
+
+checkbox .wx-checkbox-input {
+  border-radius: 50%;
+  width: 34rpx;
+  height: 34rpx;
+  /* border: 1px solid #d8d8d8;
+  background: #484848; */
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  border: 1px solid transparent;
+  background: #ff8d97;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  border-radius: 50%;
+  width: 34rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}

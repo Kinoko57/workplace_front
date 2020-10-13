@@ -1,0 +1,40 @@
+/* pages/guidePage/guidePage.wxss */
+.guid{
+  height: 100vh;
+  width:100%;
+  background: #fff;
+  text-align: center;
+}
+/* swiper{
+  width: 100%;
+  height:100%;
+}
+swiper-item{
+  width: 100%;
+  height:100%;
+} */
+.guid swiper{
+  width: 750rpx;
+  height:100%;
+}
+.guid swiper swiper-item{
+  width:750rpx;
+  height:100%;
+  overflow: hidden;
+}
+.guid swiper swiper-item image{
+  height:100%;
+  width:750rpx;
+}
+.right_fell{
+  position: absolute;
+  bottom: 270rpx;
+  width: 60%;
+  height: 70rpx;
+  color: #fff;
+  line-height: 70rpx;
+  /* background: -webkit-linear-gradient(left,#eeddbc,#dbb679); */
+  left: 50%;
+  border-radius: 35rpx;
+  transform: translateX(-50%)
+}

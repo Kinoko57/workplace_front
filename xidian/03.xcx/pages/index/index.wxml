@@ -1,0 +1,228 @@
+<!--pages/index/index.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="index skeleton">
+  <view class="i_search">
+	  <view class="i_search_top" bindtap='searchpage'>
+	    <icon class='iconfont iconsousuo color_theme_blue'></icon>
+      <text>请输入课程名称</text>
+		</view>
+		<scroll-view scroll-x scroll-with-animation="true" class="search_scroll color_theme_blue" wx:if="{{hotSearch.length>0}}">
+			<view wx:for="{{hotSearch}}" class="scroll_search_word" wx:key="index" bindtap="toSearch" data-name="{{item.name}}" class="">{{item.name}}</view>
+		</scroll-view>
+	</view>
+	<view style="height:{{search_height}}px;width:100%"></view>
+	<view class="i_banner">
+		<!-- 轮播图宽750，高度自适应 -->
+		<swiper indicator-dots="true" autoplay='true' indicator-color='rgba(255, 255, 255, .3)' indicator-active-color='#0d8d37' interval='5000' class="skeleton-rect" circular='true' wx:if="{{imgUrls.length>0}}" style="height:{{imgHeight}}px">
+			<block wx:for="{{imgUrls}}" wx:key="index" wx:if="{{imgUrls.length>0}}">
+				<swiper-item>
+					<image lazy-load="true" src="{{item.image}}" id="{{index}}" class="skeleton-rect" bindtap="visitLink" data-type="{{item.skip_type}}" data-activityid="{{item.skip_id}}" style="height:{{imgHeight}}px"></image>
+				</swiper-item>
+			</block>
+		</swiper>
+	</view>
+		<view class="i_group_scroll" animation="{{animationData}}">
+			<swiper circular='true'  autoplay='true' interval='3000' class="skeleton-rect"  wx:if="{{group_scroll.length>0}}" vertical="true">
+				<block wx:for="{{group_scroll}}" wx:key="index">
+					<swiper-item>
+						<view class="i_group_scroll_text">
+						  <text class="color_theme_blue clolor_num">{{item.time}}</text>
+							<text>{{item.time_interval}}</text>
+							<image src="{{item.image}}"></image>
+							<text>{{item.message}}</text>
+							<text wx:if="{{item.discount_money!=0}}" class="color_theme_blue clolor_num">{{filters.formatMoney(item.discount_money)}}</text>
+							<text wx:if="{{item.discount_money!=0}}">元</text>
+						</view>
+					</swiper-item>
+				</block>
+			</swiper>
+		</view>
+	<!-- <view class="i_group_scroll">
+	  <view class="i_group_scroll_top">
+				<view class="i_top_title skeleton-rect">
+					<icon class="iconfont icontongzhi"></icon>拼团信息
+				</view>
+		</view>
+		<swiper circular='true'  autoplay='true' interval='3000' class="skeleton-rect"  wx:if="{{groupInfo.length>0}}" vertical="true">
+			<block wx:for="{{groupInfo}}" wx:key="index">
+				<swiper-item>
+				  <text class="i_group_scroll_text">{{item.content}}</text>
+				</swiper-item>
+			</block>
+		</swiper>
+	</view> -->
+	<view class="index_body">
+		<!-- 2020-06-08增加社圈 -->
+		<view class="i_plant_grass index_block skeleton-rect">
+			<view class="i_block_top">
+				<view class="i_top_title skeleton-rect">
+					<image src="../../image/icon/index_grass.png" class="i_top_title_img"></image>社圈
+				</view>
+				<view class="i_top_more" bindtap="goLink" data-link="../dynamic/dynamic?id={{dynamicList[0].id}}" >
+					<text class="more_link">发现更多频道</text>
+					<icon class="iconfont iconright more_link"></icon>
+				</view>
+			</view>
+			<view class="i_plant_grass_bottom">
+				<scroll-view class="i_plant_grass_typelist" scroll-x="true" style="width: 100%">
+					<view class="grass_type" wx:for="{{dynamicList}}" wx:key="index" bindtap="goLink" data-link="../dynamic/dynamic?id={{item.id}}">
+						<view class="type_img">
+							<image src="{{item.icon}}" class="skeleton-radius"></image>
+						</view>
+						<view class="type_other">
+							<view class="type_name skeleton-rect">
+								<text>{{item.name}}</text>
+							</view>
+						</view>
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+		<!-- 西点课程 -->
+		<view class="i_hot_block" wx:if="{{col1.length>0}}">
+			<view class="i_block_top skeleton-rect">
+				<view class="i_top_title">
+					<image src="../../image/icon/index_hot.png" class="i_top_title_img"></image>西点课程
+				</view>
+				<view class="i_top_more" bindtap="goTabBar" data-link="../course/course">
+					<text class="more_link">更多</text>
+					<icon class="iconfont iconright more_link"></icon>
+				</view>
+			</view>
+			<view class="i_hot_bottom">
+				<scroll-view class="i_hot_scrolllist" scroll-y scroll-y lower-threshold='120' bindscrolltolower="loadMore" bindscroll="scroll" scroll-top='{{topNum}}' scroll-with-animation>
+					<view class="hot_lists">
+						<view class="hot_block_left">
+							<view class="hot_block" wx:for="{{col1}}" wx:key="index" bindtap="goLink" data-link="../proDetail/proDetail?id={{item.id}}">
+								<view class="hot_img">
+									<image src="{{item.image}}" style="width:100%;height:{{item.height}}rpx" class="skeleton-rect"></image>
+								</view>
+								<view class="hot_title skeleton-rect">
+									{{item.name}}
+								</view>
+								<view class="hot_year">
+									<text wx:for="{{item.tag}}" wx:for-item="tagItem" wx:key="tagIndex" class="skeleton-rect">{{tagItem.tag_name}}</text>
+								</view>
+								<view class="hot_pri skeleton-rect">
+									<text>￥{{filters.formatMoney(item.price_sell)}}</text>
+									<text>{{filters.formatCount(item.people_num)}}人已报名</text>
+								</view>
+							</view>
+						</view>
+						<view class="hot_block_right">
+							<view class="hot_block" wx:for="{{col2}}" wx:key="index" bindtap="goLink" data-link="../proDetail/proDetail?id={{item.id}}">
+								<view class="hot_img">
+									<image src="{{item.image}}" style="width:100%;height:{{item.height}}rpx" class="skeleton-rect"></image>
+								</view>
+								<view class="hot_title skeleton-rect">
+									{{item.name}}
+								</view>
+								<view class="hot_year">
+									<text wx:for="{{item.tag}}" wx:for-item="tagItem" class="skeleton-rect" wx:key="tagIndex">{{tagItem.tag_name}}</text>
+								</view>
+								<view class="hot_pri skeleton-rect">
+									<text>￥{{filters.formatMoney(item.price_sell)}}</text>
+									<text>{{filters.formatCount(item.people_num)}}人已报名</text>
+								</view>
+							</view>
+						</view>
+					</view>
+				</scroll-view>
+			</view>
+			<!-- <null-data id="null-data" loadingText="加载中..." loadingShow="{{col1.length>0&&!is_end}}" bottomText="已经到底啦~" bottomShow="{{is_end&&col1.length>0}}" dataText="暂无课程" dataShow="{{col1.length==0}}"></null-data> -->
+		</view>
+		<!-- 优惠拼团 -->
+		<view class="i_group index_block" wx:if="{{groupList.length>0}}">
+			<view class="i_block_top skeleton-rect">
+				<view class="i_top_title">
+					<image src="../../image/icon/index_group.png" class="i_top_title_img"></image>优惠拼团
+				</view>
+				<view class="i_top_more" bindtap="goLink" data-link="../spellGroup/spellGroup">
+					<text class="more_link">更多</text>
+					<icon class="iconfont iconright more_link"></icon>
+				</view>
+			</view>
+			<view class="i_group_bottom">
+				<view class="group_prolist">
+					<view class="group_block_wrap">
+						<view class="group_block" wx:for="{{groupList}}" wx:key="index">
+							<view class="group_banner">
+								<image src="{{item.image}}" bindtap="goLink" data-link='../groupDetail/groupDetail?id={{item.id}}' ></image>
+								<view class="group_banner_fixed" wx:if="{{item.status==2}}">截止报名时间：{{filters.formatDate(item.end_time)}}</view>
+								<view class="group_banner_fixed" wx:if="{{item.status==1}}">报名开始时间：{{filters.formatDate(item.start_time)}}</view>
+							</view>
+							<view class="group_name skeleton-rect">
+								<text class="bg_theme_blue group_name_text">{{item.discount_people}}人起拼</text><text>{{item.name}}</text>
+							</view>
+							<view class="group_year">
+								<view class="group_year_l">
+									<text wx:for="{{item.tag}}" wx:for-item="tagItem" wx:key="tagIndex" class="skeleton-rect">{{tagItem.tag_name}}</text>
+								</view>
+								<text class="group_year_r" style="margin-left:6rpx">{{filters.formatCount(item.people_num)}}人已报名</text>
+							</view>
+							<view class="group_pri">
+								<view class="other_left skeleton-rect">
+									<text class="pri_num"><text class="mode_style">￥</text>{{filters.formatMoney(item.group_money)}}</text>
+									<view class="pro_dis_num">
+										优惠可达￥{{filters.formatMoney(item.free_price)}}
+									</view>
+								</view>
+								<view class="pro_btn">
+									<view class="btn_clear bg_theme_blue skeleton-rect" bindtap="goLink" data-link='../groupDetail/groupDetail?id={{item.id}}' wx:if="{{item.status==2}}">参团</view>
+									<view class="btn_clear bg_theme_gray skeleton-rect" bindtap="goLink" data-link='../groupDetail/groupDetail?id={{item.id}}' wx:if="{{item.status==1}}">未开始</view>
+								</view>
+							</view>
+						</view>
+					</view>
+					<view class="color_theme_blue i_group_find" bindtap="goLink" data-link="../spellGroup/spellGroup">前往查看更多拼团课程>></view>
+				</view>
+			</view>
+		</view>
+		<!-- 宣传视频 -->
+		<view class="i_hot_block" wx:if="{{videoUrl!=''&&videoUrl!=null}}">
+			<view class="i_block_top">
+				<view class="i_top_title skeleton-rect">
+					<image src="../../image/icon/index_grass.png" class="i_top_title_img"></image>宣传视频
+				</view>
+				<!-- <view class="i_top_more" bindtap="goNavBar" data-link="../social/social" id="{{grassList[0].id}}">
+					<text class="more_link">更多</text>
+					<icon class="iconfont iconright more_link"></icon>
+				</view> -->
+			</view>
+			<view class="i_plant_grass_bottom">
+				<video src="{{videoUrl}}" autoplay="{{isPlay}}" objectFit="cover" controls="{{true}}" show-mute-btn="{{true}}" loop="{{true}}" style="width: 100%;"></video>
+			</view>
+		</view>
+		<!-- 关于西点 -->
+		<view class="i_plant_grass index_block skeleton-rect">
+			<view class="i_block_top">
+				<view class="i_top_title skeleton-rect">
+					<image src="../../image/icon/index_grass.png" class="i_top_title_img"></image>关于西点
+				</view>
+				<view class="i_top_more" bindtap="goNavBar" data-link="../social/social" id="{{grassList[0].id}}">
+					<text class="more_link">更多</text>
+					<icon class="iconfont iconright more_link"></icon>
+				</view>
+			</view>
+			<view class="i_plant_grass_bottom">
+				<scroll-view class="i_plant_grass_typelist" scroll-x="true" style="width: 100%">
+					<view class="grass_type" wx:for="{{grassList}}" wx:key="index" bindtap="goNavBar" data-link="../social/social" id="{{item.id}}">
+						<view class="type_img">
+							<image src="{{item.icon}}" class="skeleton-radius"></image>
+						</view>
+						<view class="type_other">
+							<view class="type_name skeleton-rect">
+								<text>{{item.name}}</text>
+							</view>
+						</view>
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+		<view style="height:40rpx"></view>
+	</view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+	<icon class="iconfont iconhuidaodingbuxianxing"></icon>
+</view>

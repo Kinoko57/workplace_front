@@ -1,0 +1,8 @@
+<!--pages/guidePage/guidePage.wxml-->
+<view class="guide_bg" hidden='{{isShow==false}}'>
+  <view class="countdown">
+    <canvas canvas-id="firstCanvas" class="prograss_bg"></canvas>
+    <canvas canvas-id="secondCanvas" class="prograss_cansvas"></canvas>
+  </view>
+  <image src="{{showImg}}" class="guide_img" width="750" mode='aspectFill' bindtap='goIndex'></image>
+</view>

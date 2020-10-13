@@ -1,0 +1,49 @@
+/* pages/paymentGuide/paymentGuide.wxss */
+page{
+  background-color: rgb(184,184,184);
+}
+/* 支付宝弹框 */
+.alipay_dia{
+  position: fixed;
+  overflow: hidden;
+  overflow-y: scroll;
+  width:100%;
+  z-index: 1001;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+}
+.pay_one{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.pay_one image{
+  width: 750rpx;
+  height: 100%;
+}
+.pay_one .view_btn{
+  position: absolute;
+  z-index: 1003;
+  /* background: #f20; */
+  width: 300rpx;
+  height: 130rpx;
+}
+.copy_link{
+  top: 110rpx;
+  left: 90rpx;
+}
+.dianji{
+  top: 496rpx;
+  left: 236rpx;
+}
+.step_2{
+  top:826rpx;
+  left:230rpx;
+}
+.step_3{
+  top:1152rpx;
+  left:222rpx;
+}

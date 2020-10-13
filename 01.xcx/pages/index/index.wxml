@@ -1,0 +1,390 @@
+<!--pages/index/index.wxml-->
+<view class='index'>
+ <!-- hidden='{{!isShow}}' -->
+  <view class="i_header {{top?'i_header_bg':''}}">
+    <view class='icon_bg'>
+      <icon class='iconfont icon-kuaijiecaidan' bindtap='goProtype'></icon>
+    </view>
+    <view class="search {{top>0?'search_bg':''}}">
+      <icon class='iconfont icon-search'></icon>
+      <text bindtap='searchHis'>搜索喜欢的商品</text>
+      <icon class='iconfont icon-saoma' bindtap='scan' style='float:right'></icon>
+    </view>
+    <view class='icon_bg'>
+      <view class='icon_radio' wx:if='{{newNews}}'>
+        <text>{{news_num}}</text>
+      </view>
+      <icon class='iconfont icon-xiaoxioff' data-link='../news/news' bindtap='goLink' data-type='readNew'></icon>
+    </view>
+  </view>
+   <!-- hidden='{{!isShow}}' -->
+  <view class='i_recom'>
+    <!-- 首页轮播图 -->
+    <view class='i_swiper'>
+      <swiper indicator-dots="true" autoplay='true' indicator-color='rgba(255, 255, 255, .3)' indicator-active-color='#fff' interval='3000' circular='true'>
+        <block wx:for="{{imgUrls}}" wx:key='index'>
+          <swiper-item bindtap='imgLink' data-type='{{item.type}}' id='{{item.relevance_id}}' data-activityid='{{item.activity_id}}' data-imgid='{{item.id}}' data-href="{{item.href}}">
+            <image lazy-load="true" src="{{item.image_pc}}" class="slide_image" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <!-- 首页菜单 -->
+    <!-- <scroll-view class='i_scroll_nav' scroll-x bindscrolltolower='choseNavRight' bindscrolltoupper='choseNavLeft'> -->
+    <view class='i_scroll_nav'>
+      <form class='i_com_nav' bindsubmit="goNav" report-submit="true" wx:for='{{comNav}}' wx:key='index' data-href='{{item.href}}'>
+        <button formType="submit" hover-class='none'>
+        </button>
+        <image lazy-load="true" src='{{item.img}}'></image>
+        <text>{{item.title}}</text>
+      </form>
+    </view>
+    <!-- </scroll-view> -->
+    <!-- 水果专区banner -->
+    <view class='i_banner_bg' wx:if="{{showFruit=='true'}}">
+      <image lazy-load="true" src='{{fruitImg}}' mode='aspectFit' bindtap='goLink' data-link='../fruitArea/fruitArea'></image>
+    </view>
+    <!-- 中奖列表轮播 -->
+    <view class='i_winlist' wx:if="{{haswinList&&showWin=='true'}}">
+      <view class='i_win' data-link='../lottery/lottery' bindtap='goLottery'>
+        <image lazy-load="true" src='../../static/img/pro/i_w_left.png' class='i_win_left' mode='aspectFit'></image>
+        <view style='height:120rpx;width:486rpx;padding:16rpx 22rpx;position:absolute;left:184rpx;z-index:20'></view>
+        <swiper class='i_win_right' vertical="true" autoplay="true" circular="true" interval="3000" duration='1000'>
+          <block wx:for='{{winList}}' wx:key='index'>
+            <swiper-item catchtouchmove='catchTouchMove'>
+              <view class='i_w_r_info' wx:for='{{item.list}}' wx:key='index'>
+                <text class='i_win_name'>{{item.mobile}}</text>
+                <text class='i_win_proname'>{{item.name}}</text>
+                <text class='i_win_time'>{{item.lottery_time}}</text>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+    </view>
+    <!-- 限时促销倒计时 -->
+    <view class='i_flash_sale' hidden='{{!isSale}}'>
+      <view class='i_sale_head'>
+        <view class='i_sale_head_left'>
+          <!-- <image lazy-load="true" src='../../static/img/pro/i_s_left.png' class='f_sale_bg' mode='aspectFit'></image> -->
+          <image lazy-load="true" src='{{sale_img}}' class='f_sale_bg' mode='aspectFit'></image>
+          <view>
+            <text class='sale_time_style'>{{saleTimes[0]}}</text>
+            <text class='sale_icon_style'>：</text>
+            <text class='sale_time_style'>{{saleTimes[1]}}</text>
+            <text class='sale_icon_style'>：</text>
+            <text class='sale_time_style'>{{saleTimes[2]}}</text>
+          </view>
+        </view>
+        <view class='i_more_right' data-link='../flashSale/flashSale?type=1' bindtap='goLink'>
+          <text>查看更多</text>
+          <icon class='iconfont icon-iconfontjiantou5'></icon>
+        </view>
+      </view>
+      <view class='i_sale_body'>
+        <scroll-view class='i_sale_info' scroll-x>
+          <view class='i_sale_info_pro' wx:for='{{saleList}}' wx:key="index" bindtap='goPro' data-link='../proDetail/proDetail?type=normal&id={{item.goods_id}}' id='{{item.goods_id}}'>
+            <view class='i_sale_info_pro_top'>
+              <image lazy-load="true" src='{{item.img}}' mode='aspectFit'></image>
+            </view>
+            <view class='i_sale_info_pro_bottom'>
+              <view class='pro_price'>
+                <view style='display:flex;align-items:center;line-height:48rpx;'>
+                  <view class='pro_flex'>
+                    <text class='peo_nowprice' wx:if='{{item.deal_type==1||item.deal_type==3}}'>￥{{item.price_sell}} </text>
+                    <text class='peo_nowprice' wx:if='{{item.deal_type>=4}}'>￥{{item.price_combine}}</text>
+                    <text class='peo_nowprice' wx:if='{{item.deal_type>=4}}'>+</text>
+                  </view>
+                  <view class='pro_flex'>
+                    <view class='pro_inter_img' wx:if='{{item.deal_type!=1&&item.deal_type!=3}}'>
+                      <icon class='iconfont icon-jifen1'></icon>
+                    </view>
+                    <text class='pro_integral' wx:if='{{item.deal_type==2}}'>{{item.point}}</text>
+                    <text class='pro_integral' wx:if='{{item.deal_type!=1&&item.deal_type!=2&&item.deal_type!=3}}'>{{item.point_combine}}</text>
+                  </view>
+                </view>
+              </view>
+              <view class='pro_title'>{{item.name}}</view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+    <!-- 本周上新 view_type 0-全部显示,1-标题加列表,2-banner,3-全部隐藏,-->
+    <view class='i_new' wx:if='{{loadingNew==1}}'>
+      <view class='i_new_head' wx:if="{{newList.module.view_type!=2&&newList.module.view_type!=3}}">
+        <view class='i_redeem_head_left'>
+          <text wx:if="{{newList.module.title_img==''}}">{{newList.module.title}}</text>
+          <image lazy-load="true" src='{{newList.module.title_img}}' mode='aspectFit' wx:else></image>
+        </view>
+        <view class='i_more_right' id='{{newList.module.id}}' bindtap='goActivityList'>
+          <text>查看更多</text>
+          <icon class='iconfont icon-iconfontjiantou5'></icon>
+        </view>
+      </view>
+      <view class='i_new_body'>
+        <view class='i_adv' wx:if="{{newList.module.view_type!=1&&newList.module.view_type!=3}}" id='{{newList.module.id}}' bindtap='goActivityList'>
+          <image lazy-load="true" src='{{newList.module.banner_img}}' mode='widthFix'></image>
+        </view>
+        <view class='i_prolist' wx:if="{{newList.module.view_type!=2&&newList.module.view_type!=3}}">
+          <view class='i_pro' wx:for="{{newList.list}}" wx:key="index" bindtap='goPro' data-link='../proDetail/proDetail?type=normal&id={{item.goods_id}}' id='{{item.goods_id}}'>
+            <view class='pro_img'>
+              <image lazy-load="true" src='{{item.gimg}}'></image>
+            </view>
+            <view class='pro_title pro_line_two'>
+              <view class='pro_level' wx:if='{{item.promotion==1}}'>
+                <image lazy-load="true" src='../../static/img/member/cu.png' mode='aspectFit'></image>
+                <text>限时购</text>
+              </view>
+              {{item.name}}</view>
+            <view class='pro_price'>
+              <!-- 积分+现金 -->
+              <view style='display:flex;align-items:center;line-height:48rpx;'>
+                <view class='pro_flex'>
+                  <text class='peo_nowprice' wx:if='{{item.deal_type==1||item.deal_type==3}}'>￥{{item.price_sell}} </text>
+                  <text class='peo_nowprice' wx:if='{{item.deal_type>=4}}'>￥{{item.price_combine}}</text>
+                  <text class='peo_nowprice' wx:if='{{item.deal_type>=4}}'>+</text>
+                </view>
+                <view class='pro_flex'>
+                  <view class='pro_inter_img' wx:if='{{item.deal_type>=4}}'>
+                    <icon class='iconfont icon-jifen1'></icon>
+                  </view>
+                  <text class='pro_integral' wx:if='{{item.deal_type!=1&&item.deal_type!=2&&item.deal_type!=3}}'>{{item.point_combine}}</text>
+                </view>
+              </view>
+              <view style='display:flex;align-items:center;justify-content:space-between;'>
+                <view style='display:inline-flex;align-items:center;'>
+                  <text class='pro_orig pro_bg'>{{item.price_market_from}}</text>
+                  <text class='pro_orig line'>￥{{item.price_market}}</text>
+                </view>
+                <view class='pro_count'>销量:{{item.buy_count}}</view>
+              </view>
+              <!-- 纯积分 -->
+              <!-- <view style='display:flex;align-items:center;' wx:if='{{item.deal_type!=1&&item.point>0}}'>
+                <text class='pro_orig pro_bg'>积分兑换</text>
+                <text class='pro_orig'>{{item.point}}</text>
+              </view> -->
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 积分专区-->
+    <view class='i_redeem' wx:if='{{loadingPoint==1}}'>
+      <view class='i_redeem_head' wx:if="{{redeemList.module.view_type!=2&&redeemList.module.view_type!=3}}">
+        <view class='i_redeem_head_left'>
+          <text wx:if="{{redeemList.module.title_img==''}}">{{redeemList.module.title}}</text>
+          <image lazy-load="true" src='{{redeemList.module.title_img}}' mode='aspectFit' wx:else></image>
+        </view>
+        <view class='i_more_right' id='{{redeemList.module.id}}' bindtap='goActivityList'>
+          <text>查看更多</text>
+          <icon class='iconfont icon-iconfontjiantou5'></icon>
+        </view>
+      </view>
+      <view class='i_redeem_body'>
+        <view class='i_adv' wx:if="{{redeemList.module.view_type!=1&&redeemList.module.view_type!=3}}" id='{{redeemList.module.id}}' bindtap='goActivityList'>
+          <image lazy-load="true" src='{{redeemList.module.banner_img}}' mode="widthFix"></image>
+        </view>
+        <view class='i_prolist' wx:if="{{redeemList.module.view_type!=2&&redeemList.module.view_type!=3}}">
+          <view class='i_pro' wx:for="{{redeemList.list}}" wx:key="index" bindtap='goPro' data-link='../proDetail/proDetail?type=normal&id={{item.goods_id}}' id='{{item.goods_id}}'>
+            <view class='pro_img'>
+              <image lazy-load="true" src='{{item.gimg}}'></image>
+            </view>
+            <view class='pro_tag'>
+              <text>积分兑换</text>
+            </view>
+            <view class='pro_title pro_line_two'>
+              <view class='pro_level' wx:if='{{item.promotion==1}}'>
+                <image lazy-load="true" src='../../static/img/member/cu.png' mode='aspectFit'></image>
+                <text>限时购</text>
+              </view>
+              {{item.name}}</view>
+            <view class='pro_price'>
+              <view style='display:flex;align-items:center;line-height:48rpx;'>
+                <view class='pro_flex'>
+                  <view class='pro_inter_img'>
+                    <icon class='iconfont icon-jifen1'></icon>
+                  </view>
+                  <text class='pro_integral'>{{item.point}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 活动专区 -->
+    <view wx:for="{{activityShowList}}" wx:key="listindex" wx:for-item="listblock" class="i_activity" hidden="{{loadingActivity==0}}">
+      <view class='i_shop' wx:for="{{listblock}}" wx:for-item="block" wx:key="blockindex" hidden="{{block.module.view_type==3}}">
+        <view class='i_shop_head' wx:if="{{block.module.view_type!=2&&block.module.view_type!=3}}">
+          <view class='i_shop_head_left'>
+            <text wx:if="{{block.module.title_img==''}}">{{block.module.title}}</text>
+            <image lazy-load="true" src='{{block.module.title_img}}' mode='aspectFit' wx:else></image>
+          </view>
+          <view class='i_more_right' id='{{block.module.id}}' bindtap='goActivityList'>
+            <text>查看更多</text>
+            <icon class='iconfont icon-iconfontjiantou5'></icon>
+          </view>
+        </view>
+        <view class='i_shop_body'>
+          <view class='i_adv' wx:if="{{block.module.view_type!=1&&block.module.view_type!=3}}" id='{{block.module.id}}' bindtap='goActivityList'>
+            <image lazy-load="true" src='{{block.module.banner_img}}' mode="widthFix"></image>
+          </view>
+          <view class='i_prolist' wx:if="{{block.module.view_type!=2&&block.module.view_type!=3}}">
+            <view class='i_pro' wx:for="{{block.list}}" wx:key="index" bindtap='goPro' data-link='../proDetail/proDetail?type=normal&id={{item.goods_id}}' id='{{item.goods_id}}'>
+              <view class='pro_img'>
+                <image lazy-load="true" src='{{item.gimg}}'></image>
+              </view>
+              <view class='pro_title pro_line_two'>
+                <view class='pro_level' wx:if='{{item.promotion==1}}'>
+                  <image lazy-load="true" src='../../static/img/member/cu.png' mode='aspectFit'></image>
+                  <text>限时购</text>
+                </view>
+                {{item.name}}</view>
+              <view class='pro_price'>
+                <view style='display:flex;align-items:center;line-height:48rpx;'>
+                  <view class='pro_flex'>
+                    <view class='pro_flex'>
+                      <text class='peo_nowprice' wx:if='{{item.deal_type==1||item.deal_type==3}}'>￥{{item.price_sell}} </text>
+                      <text class='peo_nowprice' wx:if='{{item.deal_type>=4}}'>￥{{item.price_sell}}</text>
+                      <text class='peo_nowprice' wx:if='{{item.deal_type>=4}}'>+</text>
+                    </view>
+                    <view class='pro_inter_img' wx:if='{{item.deal_type!=1&&item.deal_type!=3}}'>
+                      <icon class='iconfont icon-jifen1'></icon>
+                    </view>
+                    <text class='pro_integral' wx:if='{{item.deal_type==2}}'>{{item.point}}</text>
+                    <text class='pro_integral' wx:if='{{item.deal_type!=1&&item.deal_type!=2&&item.deal_type!=3}}'>{{item.point}}</text>
+                  </view>
+                </view>
+                <view style='display:flex;align-items:center;justify-content:space-between;'>
+                  <view style='display:inline-flex;align-items:center;'>
+                    <text class='pro_orig pro_bg'>{{item.price_market_from}}</text>
+                    <text class='pro_orig line'>￥{{item.price_market}}</text>
+                  </view>
+                  <view class='pro_count'>销量:{{item.buy_count}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 精品分类 -->
+    <!-- <view class='i_type' wx:if='{{downList.length>0}}'>
+      <view class='i_type_head'>
+        <view class='i_type_head_left'>
+          <image lazy-load="true" src='../../static/img/pro/i_t_left.png' mode='aspectFit'></image>
+        </view>
+        <view class='i_more_right' bindtap='goProtype'>
+          <text>查看更多</text>
+          <icon class='iconfont icon-iconfontjiantou5'></icon>
+        </view>
+      </view>
+      <view class='i_type_body'>
+        <view class='i_type_block' wx:for='{{downList}}' wx:key='index' id='{{item.id}}' bindtap='goTypeList'>
+          <image lazy-load="true" src='{{item.icon}}' mode='aspectFit'></image>
+        </view>
+      </view>
+    </view> -->
+    <!-- 热门推荐 -->
+    <view class='i_recom' wx:if='{{recomShowList.length>0}}'>
+      <view class='i_recom_head'>
+        <view class='i_recom_head_left'>
+          <!-- <image lazy-load="true" src='../../static/img/pro/i_recom_left.png' mode='aspectFit'></image> -->
+          <image lazy-load="true" src='{{recom_img}}' mode='aspectFit'></image>
+        </view>
+      </view>
+      <view class='i_recom_body'>
+        <view class='i_prolist'>
+          <view class="i_pro_block" wx:for="{{recomShowList}}" wx:key="blockindex" wx:for-item="listblock">
+            <view class='i_pro' wx:for="{{listblock}}" wx:key="index" bindtap='goPro' data-link='../proDetail/proDetail?type=normal&id={{item.goods_id}}' id='{{item.goods_id}}'>
+              <view class='pro_img'>
+                <image lazy-load="true" src='{{item.gimg}}'></image>
+              </view>
+              <view class='pro_title pro_line_two'>
+                <view class='pro_level' wx:if='{{item.promotion==1}}'>
+                  <image lazy-load="true" src='../../static/img/member/cu.png' mode='aspectFit'></image>
+                  <text>限时购</text>
+                </view>
+                {{item.gname}}</view>
+              <view class='pro_price'>
+                <view style='display:flex;align-items:center;line-height:48rpx;'>
+                  <view class='pro_flex'>
+                    <text class='peo_nowprice' wx:if='{{item.deal_type==1||item.deal_type==3}}'>￥{{item.price_sell}} </text>
+                    <text class='peo_nowprice' wx:if='{{item.deal_type>=4}}'>￥{{item.price_sell}}</text>
+                    <text class='peo_nowprice' wx:if='{{item.deal_type>=4}}'>+</text>
+                  </view>
+                  <view class='pro_flex'>
+                    <view class='pro_inter_img' wx:if='{{item.deal_type!=1&&item.deal_type!=3}}'>
+                      <icon class='iconfont icon-jifen1'></icon>
+                    </view>
+                    <text class='pro_integral' wx:if='{{item.deal_type==2}}'>{{item.point}}</text>
+                    <text class='pro_integral' wx:if='{{item.deal_type!=1&&item.deal_type!=2&&item.deal_type!=3}}'>{{item.point}}</text>
+                  </view>
+                </view>
+                <view style='display:flex;align-items:center;justify-content:space-between;'>
+                  <view style='display:inline-flex;align-items:center;'>
+                    <text class='pro_orig pro_bg'>{{item.price_market_from}}</text>
+                    <text class='pro_orig line'>￥{{item.price_market}}</text>
+                  </view>
+                  <view class='pro_count'>销量:{{item.buy_count}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <button type="default" size="default" loading plain hidden='{{isloading==false}}' class="loading_style" style="background:#f2f2f2">正在加载中，请稍后...</button>
+    <view class='order-red' wx:if="{{isloading==false}}">
+      <text>—————— 我是有底线的 ——————</text>
+    </view>
+  </view>
+</view>
+<!-- 首页优惠券列表弹框 -->
+<view class='open_model_bg' hidden="{{red_show||boxType=='lottery'}}" catchtouchmove="ture" wx:if='{{isShow}}'></view>
+<view class='open_model' hidden="{{red_show||boxType=='lottery'}}" catchtouchmove="ture" wx:if='{{isShow}}'>
+  <view class='cou_list'>
+    <view class='cou_info' wx:for="{{redInfo}}">
+      <view class='line_radio left'>
+        <text wx:for="{{10}}"></text>
+      </view>
+      <view class="cou_left {{item.isget?'cou_left_get':''}}">
+        <view class='cou_amount'>
+          ¥
+          <text class='price'>{{item.cashworth}}</text>
+          <text class='type'>{{item.type_name}}</text> 购物券
+        </view>
+        <view class='cou_max'>
+          满{{item.order_price}}元可用{{item.content}}
+        </view>
+        <view class='cou_time'>
+          有效期：{{item.fromtime}}-{{item.totime}} 可用
+        </view>
+      </view>
+      <view class="cou_line {{item.isget?'cou_line_get':''}}"></view>
+      <view class="cou_right {{item.isget?'cou_right_get':''}}" id='{{item.id}}' data-isget='{{item.isget}}' bindtap='getCou'>
+        <text wx:if='{{!item.isget}}'>立即领取</text>
+        <icon class='iconfont icon-get isget' wx:else></icon>
+      </view>
+      <view class='line_radio right'>
+        <text wx:for="{{10}}"></text>
+      </view>
+    </view>
+  </view>
+  <view class='cou_close'>
+    <icon class='iconfont icon-close' bindtap='close_model'></icon>
+  </view>
+</view>
+<!-- 首页引导大转盘弹框 -->
+<view class='open_model_bg' hidden="{{red_show||boxType=='cou'}}" catchtouchmove="ture" wx:if='{{isShow}}'></view>
+<view class='open_model' hidden="{{red_show||boxType=='cou'}}" catchtouchmove="ture" wx:if='{{isShow}}'>
+  <image lazy-load="true" src='{{lotteryImg}}' class='lottery_img' data-link='../lottery/lottery' bindtap='goLottery'></image>
+  <icon class='iconfont icon-guanbi2' bindtap='close_model'></icon>
+</view>
+<view class='sign' data-link='../mySignIn/mySignIn' bindtap='goSign' hidden='{{isSign}}'>
+  <image lazy-load="true" src='../../static/img/pro/signIn.png'></image>
+</view>
+<view class='goTop' hidden='{{isTop}}' bindtap='returnTop'>
+  <icon class='iconfont icon-huidaodingbu'></icon>
+</view>

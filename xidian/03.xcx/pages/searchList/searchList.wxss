@@ -1,0 +1,101 @@
+/* pages/spellGroup/spellGroup.wxss */
+page{
+  /* background: #fff */
+  background: #f6f6f6;
+}
+image{
+  /* display: block; */
+  font-size: 0;
+}
+/* 搜索样式 */
+.group_srarch{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 24rpx;
+  border-bottom: 1px solid #ededed;
+  background: #fff;
+}
+.i_search_top{
+  width: 630rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  background: #f6f6f6;
+  border-radius: 35rpx;
+  display: flex;
+  align-items: center;
+}
+.i_search_top icon{
+  padding:0 10rpx 0 20rpx;
+  display: inline-flex;
+  align-items: center;
+}
+.i_search_top input{
+  font-size: 24rpx;
+  height: 70rpx;
+  width: 76%;
+  color: #999999;
+}
+.cancel_search{
+  color: #999;
+
+}
+
+
+.group_body{
+  /* padding: 20rpx 0rpx 0; */
+}
+.group_block_wraper{
+  padding: 0 20rpx;
+}
+.group_name_text{
+  padding: 2rpx 10rpx;
+  border-radius: 10rpx;
+  color: #fff;
+  font-size: 20rpx;
+  margin-right: 6rpx;
+}
+.hot_lists{
+  overflow: hidden;
+  padding-top: 20rpx;
+  /* display: flex;
+  justify-content: space-between; */
+}
+.hot_block_left{
+  float: left;
+}
+.hot_block_right{
+  float: right;
+}
+ .hot_lists .hot_block{
+  background: #fff;
+  width: 350rpx;
+  padding-bottom: 20rpx;
+  margin-bottom: 20rpx;
+}
+ .hot_lists .hot_block .hot_img{
+  margin-bottom: 10rpx;
+  position: relative;
+}
+ .hot_lists .hot_block .hot_img image{
+  width: 350rpx;
+  /* height: 340rpx; */
+  position: relative;
+}
+ .hot_lists .hot_block .hot_title{
+  color: #333333;
+  /* display: flex; */
+  font-size: 24rpx;
+  /* padding: 0 20rpx; */
+  margin-bottom: 10rpx;
+  padding: 0 10rpx;
+  word-break: break-all;
+}
+.hot_lists .hot_block .search_titi{
+  /* width:260rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
+  display: inline-block; */
+}

@@ -1,0 +1,154 @@
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="flash_bg skeleton">
+  <view class="flash_inner">
+    <!-- <view class="countdown_bg" wx:if="{{orderInfo.curriculum.status==0&&endtime>0}}">
+      <view class="countdown_block">
+      订单将在后
+      <text class="time">{{saleTime.hou}}</text>
+      <text>:</text>
+      <text class="time">{{saleTime.min}}</text>
+      <text>:</text>
+      <text class="time">{{saleTime.sec}}</text>
+      自动取消，请尽快提交
+      </view>
+    </view> -->
+    <view class='flash_chose_info'>
+      <view class='flash_sure_addr'>
+      <view class="flash_title">选择学员</view>
+        <view class='flash_sure_addr_info'>
+          <view wx:for="{{studentList}}" wx:key="index" class="student_list" bindtap='choseAdd' data-link="../myChildList/myChildList?type=replace&id={{item.id}}&&num={{orderInfo.num}}" wx:if="{{studentList.length>0}}">
+            <view class="student_list_l">
+              <icon class="iconfont iconnan add_info_l_ku add_info_l_ku_man" wx:if="{{item.gender==1&&item.image==''}}"></icon>
+              <icon class="iconfont icongirl add_info_l_ku add_info_l_ku_sex" wx:if="{{item.gender==0&&item.image==''}}"></icon>
+              <image wx:if="{{item.image!=''}}" class="{{item.gender==0?'add_info_l_ku_sex':'add_info_l_ku_man'}}" src="{{item.image}}"></image>
+              <view class="people_name">{{item.name}}</view>
+            </view>
+            <!-- <icon class="iconfont iconright"></icon> -->
+          </view>
+          <view class="add_student"  bindtap='choseAdd' data-link="../myChildList/myChildList?type=change&num={{orderInfo.num}}" wx:if="{{studentList.length<orderInfo.num}}">
+          <!-- 添加学员 -->
+          <view class="add_style">+</view>
+        </view>
+        </view>
+      </view>
+    </view>
+    <view class="flash_info">
+      <view class="info_title bg_theme_blue_line" wx:if="{{!showIndex}}">
+        下单信息  
+      </view>
+      <view class="flash_goods">
+        <view class="pic_l">
+          <image src="{{orderInfo.curriculum.image}}"></image>
+        </view>
+        <view class="pic_r">
+          <view class='pic_r_t_wraper'>
+            <text class="pic_r_t"><text wx:if="{{type=='group'}}" class="activity_tag color_theme_blue">团购</text> {{orderInfo.curriculum.name}}</text>
+          </view>
+          <text class="pic_r_b">金额：￥{{filters.formatMoney(orderInfo.curriculum.price_sell)}}</text>
+          <text class="pic_r_b">营期：{{filters.formatDate(orderInfo.curriculum.camp_time)}}【{{orderInfo.curriculum.camp_day}}天】</text>
+        </view>
+      </view>
+      <view class="info_from">
+        <view class="info_item">
+          <text class="item_title">数量:</text>
+          <text class="item_information"><text class='fuhao'>X</text>{{orderInfo.num}}</text> 
+        </view>
+        <view class="info_item" wx:if="{{!show_inviter}}" >
+          <text class="item_title">教官码:</text>
+           <input placeholder="请输入教官码" name='invite_code' bindblur="getCode"  type="text" confirm-type="next" value="{{invite_code}}"></input>
+        </view>
+        <view class="info_item">
+          <text class="item_title">分班要求:</text>
+          <view class="item_bind_block">
+            <view class="item_bind_list" wx:if="{{showChildList.length>0}}">
+              <view class="item_information_l" wx:for="{{showChildList}}" wx:key="index" bindtap="deletChild" data-id="{{item.id}}">
+                <text class="item_information_l_text">{{item.name}}</text>
+                <icon class='iconfont iconguanbicopy icon_style'></icon>
+              </view> 
+            </view>
+            <icon class='iconfont iconright' bindtap="showView"></icon>
+          </view>
+        </view>
+        <view class="info_item" wx:if="{{type=='normal'}}">
+          <text class="item_title">付款方式：</text>
+          <picker bindchange="bindPickerChange" class="item_information" value="{{payIndex}}" range="{{payList}}" range-key="name">
+              <view class="picker_text">
+                {{payList[payIndex].name}}
+                <icon class='iconfont iconright'></icon>
+              </view>
+          </picker>
+        </view>
+        <view class="info_item" wx:if="{{type=='group'}}">
+          <text class="item_title">付款方式：</text>
+          <picker bindchange="bindPickerChange" class="item_information" value="{{payIndex}}" range="{{payList}}" range-key="name" disabled>
+              <view class="picker_text">
+                {{payList[payIndex].name}}
+                <!-- <icon class='iconfont iconright'></icon> -->
+              </view>
+          </picker>
+        </view>
+        <view class="info_item">
+          <text class="item_title">付款金额:</text>
+          <text class="item_information red" wx:if="{{payType==0}}">￥{{filters.formatMoney(orderInfo.total_amount)}}</text>
+          <text class="item_information red" wx:if="{{payType==1}}">￥{{filters.formatMoney(orderInfo.front_total_amount)}}</text> 
+        </view>
+      </view>
+      <view style="height:120px"></view>
+      <view wx:if="{{is_iphonex}}" style="height:34px"></view>
+    </view>
+  </view>
+  <view class="confirm_modify {{is_iphonex?'iphone_x':''}}">
+     <button bindtap="goOrder" disabled='{{!showSubmit}}' class='bg_theme_blue'>提交订单</button>
+  </view>
+</view>
+<view class="goIndex {{is_iphonex?'goIndex_bottom':''}}" bindtap='goIndex' wx:if="{{showIndex}}">
+  <icon class='iconfont iconhome'></icon>
+</view>
+<!-- /*同班学员展示弹框 */ -->
+<view class="model_bg" wx:if="{{showDia}}" bindtap="closeDia"></view>
+<view class="model_style label_style" wx:if="{{showDia}}">
+  <view class="label_titi">同班学员姓名</view>
+   <view class="ipt_label" bindtap="addInfo">
+     +新增同班学员
+   </view>
+   <scroll-view scroll-y scroll-with-animation style="height:500rpx;margin-top:30rpx">
+      <view class="my_child_block">
+         <view wx:for="{{childList}}" class="my_child_list" wx:key="index">
+           <view>
+              <text class="my_child_list_name">{{item.name}}</text>
+              <text class="my_child_list_num" wx:if="{{item.id_card!=''}}">学员身份证 {{item.id_card}}</text>
+              <text class="my_child_list_num" wx:if="{{item.phone!=''}}">家长手机号 {{item.phone}}</text>
+           </view>
+           <view class="color_theme_blue" bindtap="clearChild" data-id="{{item.id}}">删除</view>
+         </view>
+      </view>
+   </scroll-view>
+   <view class="bg_theme_blue_line sureSave" bindtap="closeModel" >完成</view>
+   <view wx:if="{{is_iphonex}}" style="height:34px"></view>
+</view>
+
+<!-- /* 输入信息签弹框 */ -->
+<view class="addInfo_style" wx:if="{{showAddInfo}}">
+  <view class="addInfo_top">
+    <text class="addInfo_top_oper color_theme_blue" bindtap="cancelChild">取消</text>
+    <text class="addInfo_top_titi">新增学员</text>
+    <text class="addInfo_top_oper color_theme_blue" bindtap="addChild">完成</text>
+  </view>
+  <!-- <view class="addInfo_tips color_theme_blue">温馨提示：手机号和身份证号必须填写一个</view> -->
+  <view class="addInfo_ipt">
+      <view class='section'>
+        <text class='form_title text_left'>姓名</text>
+        <input placeholder="请输入姓名" data-name='name' bindinput="burlInput" type="text" value="{{child_name}}"></input>
+      </view>
+      <view class='section'>
+        <text class='form_title text_left'>家长手机号</text>
+        <input placeholder="请输入家长手机号" data-name='phone' bindinput="burlInput" type='number' value="{{child_phone}}"></input>
+      </view>
+      <view class='section'>
+        <text class='form_title text_left'>学员身份证号</text>
+        <input placeholder="请输入学员身份证号" data-name='id_card' bindinput="burlInput" type="idcard" value="{{child_card}}"></input>
+      </view>
+  </view>
+</view>
+

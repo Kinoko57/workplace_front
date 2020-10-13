@@ -1,0 +1,68 @@
+<!--pages/course/course.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="course_bg skeleton">
+   <view class="course_body">
+      <scroll-view class="block_nav" scroll-x scroll-with-animation="true" wx:if="{{navList.length>=2}}">
+        <view wx:for="{{navList}}" wx:key="index" bindtap="choseNavId" id="{{item.id}}" class="{{choseId==item.id?'nav_active color_theme_blue':''}} nav_text">
+        <text class="nav_name">{{item.name}}</text>
+        <text wx:if="{{choseId==item.id}}" class="line bg_theme_blue"></text>
+        </view>
+      </scroll-view>
+      <view class="course_block_wraper">
+          <view class="course_select">
+             <view class="camp_seed" wx:if="{{selectType.length>=2}}">
+               <picker bindchange="bindPickerChange" value="{{index}}" id="{{selectType[index].id}}" range="{{selectType}}" range-key="name">
+                  <view class="picker_text">
+                     <text >营种：{{selectType[index].name}}</text>
+                     <icon class="iconfont iconxiajiantou"></icon>
+                  </view>
+               </picker>
+             </view>
+             <view class="camp_seed camp_stage" wx:if="{{selectType.length>=2}}">
+               <picker value="{{courserDate}}" start="2015-09-01" mode="date" fields="month" bindchange="bindDateChange">
+                  <view class="picker_text" wx:if="{{courserDate!=''}}">
+                     <text >营期：{{courserDate}}</text>
+                  </view>
+                  <view class="picker_text" wx:if="{{courserDate==''}}">
+                  <text >营期：全部</text>
+               </view>
+               </picker>
+               <icon class="iconfont iconguanbicopy" bindtap="clearDate" style="font-size: 24rpx;margin-left: 10rpx;" wx:if="{{courserDate!=''}}"></icon>
+               <icon class="iconfont iconxiajiantou" wx:if="{{courserDate==''}}"></icon>
+             </view>
+          </view>
+        <scroll-view class="course_bottom" style="height:{{scrollHeight}}px;position: relative;" scroll-y scroll-y lower-threshold='120' bindscrolltolower="loadMore" bindscroll="scroll" scroll-top='{{topNum}}' scroll-with-animation refresher-enabled="{{true}}" refresher-threshold="{{100}}" refresher-default-style="black" refresher-background="#f6f6f6" refresher-triggered="{{triggered}}" bindrefresherpulling="onPulling" bindrefresherrefresh="onRefresh" bindrefresherrestore="onRestore" bindrefresherabort="onAbort">
+           <view class="course_block" >
+             <view wx:for="{{courseList}}" wx:for-item="blockitem" wx:for-index="blockIndex" wx:key="blockIndex">
+               <view class="course_list" wx:for="{{blockitem}}" wx:key="index" bindtap="goLink" data-link="../proDetail/proDetail?id={{item.id}}">
+                  <image src="{{item.image[0]}}" class="course_list_img"></image>
+                  <view class="course_list_r">
+                     <view class="course_list_r_titi">{{item.name}}</view>
+                     <view class="course_list_r_text">{{item.title}}</view>
+                     <view class="course_list_r_progress">
+                        <view class='course_list_r_bar_line'>
+                           <view style='width:{{item.people_num/item.num*100}}%' class="bg_theme_blue" wx:if='{{item.people_num/item.num*100<100}}'></view>
+                           <view style='width:100%' wx:if='{{item.people_num/item.num*100>=100}}' class="bg_theme_blue"></view>
+                        </view>
+                        <view class="color_theme_blue">报名：{{item.people_num}}/{{item.num}}</view>
+                     </view>
+                     <view class="course_list_r_year" wx:if="{{item.tag.length>0}}">
+                           <text wx:for="{{item.tag}}"  wx:for-item="tagitem" wx:for-index="tagindex" wx:key="tagindex">{{tagitem.tag_name}}</text>
+                     </view>
+                     <view class="course_list_r_pri">
+                        <text class="pri_mode">￥</text>{{filters.formatMoney(item.price_sell)}}
+                     </view>
+                  </view>
+               </view>
+             </view>
+           </view>
+            <null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false&&hasData}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无课程" dataShow="{{!hasData}}"></null-data>
+			<view style="width:2rpx;height:2rpx;bottom:-2rpx;position:absolute;" />
+        </scroll-view>
+      </view>
+   </view>
+</view>
+<view class="goTop {{is_iphonex?'goTop_bottom':''}}" hidden="{{isTop}}" bindtap="returnTop">
+  <icon class='iconfont iconhuidaodingbu'></icon>
+</view>

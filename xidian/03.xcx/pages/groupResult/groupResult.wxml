@@ -1,0 +1,328 @@
+<!--pages/groupResult/groupResult.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<view class='result_group' wx:if="{{isShow}}">
+	<!-- <view class="result_title" wx:if='{{GroupOrder.isleader==1&&GroupOrder.status==1}}'>
+    <icon class='iconfont iconduihaocheckmark17'></icon>
+    <view>
+      <text class='title_top'>恭喜你，开团成功!</text>
+      <text>快去邀请小伙伴参团吧~</text>
+    </view>
+  </view>
+  <view class="result_title" wx:if='{{GroupOrder.isleader==0&&GroupOrder.status==1}}'>
+    <icon class='iconfont iconduihaocheckmark17'></icon>
+    <view>
+      <text class='title_top'>团长邀请你加入该团~</text>
+    </view>
+  </view>
+  <view class="result_title" wx:if='{{GroupOrder.status==2}}'>
+    <icon class='iconfont iconduihaocheckmark17'></icon>
+    <view>
+      <text class='title_top' wx:if="{{last_status==0}}">恭喜，拼购成功，邀请更多好友更优惠哦!</text>
+      <text class='title_top' wx:if="{{last_status==1}}">恭喜，拼购成功!</text>
+    </view>
+  </view>
+  <view class="result_title" wx:if='{{GroupOrder.status==3}}'>
+    <icon class='iconfont iconduihaocheckmark17'></icon>
+    <view>
+      <text class='title_top'>恭喜，拼购成功已满员，已享受最大优惠哦!</text>
+    </view>
+  </view>
+  <view class='result_title fail' wx:if='{{GroupOrder.status==4}}'>
+    <icon class='iconfont iconguanbi2'></icon>
+    <view>
+      <text class='title_top'>该团未能按时凑齐人数，拼购失败!</text>
+    </view>
+  </view> -->
+	<view class="group_bg_style">
+		<view class="group_level_01"></view>
+		<view class="group_level_02"></view>
+		<view class="group_level_03">
+			<image src="../../image/member/group_bg.png" mode="widthFix"></image>
+		</view>
+	</view>
+	<view style="height:1050rpx"></view>
+	<view class='group_order'>
+		<view class='sale_pro'>
+			<view class='pro_img' bindtap='goProDetail' data-link='../groupDetail/groupDetail'>
+				<image src='{{GroupOrder.image}}'></image>
+			</view>
+			<view class='pro_info'>
+				<view class='pro_title' bindtap='goProDetail' data-link='../groupDetail/groupDetail'>{{GroupOrder.currName}}</view>
+				<view class='pro_spec'>
+					<view class='pro_price'>
+					 <text class='pro_integral'> 参营时长：{{camp_day}}天</text>
+						<!-- <icon class='iconfont icontuangou3'></icon>
+						<text class='pro_integral'>{{ruleInfo[0].p_number_start}}人起拼</text> -->
+					</view>
+					<!-- <view class='pro_icon'>
+            <button size='mini' bindtap='goPro' data-link='../proDetail/proDetail?type=group&id={{item.id}}' id='{{item.id}}'>去开团</button>
+          </view> -->
+				</view>
+				<view class='pro_orig'>
+					<view class="price_01">
+						¥<text class='peo_nowprice'>{{filters.formatMoney(GroupOrder.group_money)}}</text>
+					</view>
+					<view class="price_02">
+						原价
+						<text>¥{{filters.formatMoney(GroupOrder.price_sell)}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="sale_time_bg">
+			<image src="../../image/member/group_time_bg.png" mode="widthFix"></image>
+			<view class="sale_time_text">
+				<view wx:if='{{GroupOrder.status!=1}}'>
+					<text>当前阶梯每邀请</text>
+					<text class="red_color">{{GroupOrder.increasing_number}}</text>
+					<text>人减免</text>
+					<text class="red_color">{{filters.formatMoney(GroupOrder.now_discount)}}</text>
+				</view>
+        <!-- <view>
+					<text>课程原价</text>
+					<text class="red_color">{{filters.formatMoney(GroupOrder.curriculum_cost_price)}}</text>
+				</view> -->
+				<view>
+					<text>已有</text>
+					<text class="red_color">{{GroupOrder.num}}</text>
+					<text>人参团，减免后金额</text>
+					<text class="red_color">{{filters.formatMoney(GroupOrder.curriculum_discount)}}</text>
+				</view>
+				<view wx:if="{{GroupOrder.invite_people_num>0}}">
+					<text>再邀请</text>
+					<text class="red_color">{{GroupOrder.invite_people_num}}</text>
+					<text>人进入下一阶梯</text>
+				</view>
+        <view wx:if="{{GroupOrder.invite_people_num>0}}">
+					<text>下一阶梯每邀请</text>
+					<text class="red_color">{{GroupOrder.increasing_number}}</text>
+					<text>人减免</text>
+					<text class="red_color">{{filters.formatMoney(GroupOrder.next_discount)}}</text>
+				</view>
+				<!-- <view wx:if="{{GroupOrder.invite_people_num>0}}">
+					<text>减免后金额</text>
+					<text class="red_color">{{filters.formatMoney(GroupOrder.curriculum_max_discount)}}</text>
+				</view> -->
+				<view wx:if="{{GroupOrder.invite_people_num==0&&((GroupOrder.num<=GroupOrder.max_people)||GroupOrder.max_people==0)}}">
+					<text>当前已到达最大减免阶梯</text>
+				</view>
+				<view wx:if="{{GroupOrder.invite_people_num==0&&GroupOrder.num<GroupOrder.max_people&&GroupOrder.max_people!=0&&GroupOrder.status!=3}}">
+					<text>再邀请</text>
+					<text class="red_color">{{next_people}}</text>
+					<text>人满员</text>
+				</view>
+				<view wx:if="{{GroupOrder.status==3}}">
+					<text>该团已满员</text>
+				</view>
+			</view>
+		</view>
+		<!-- <view style="height:320rpx"></view> -->
+		<view class='sale_time'>
+			<!-- <view class='group_spec' hidden='{{GroupOrder.status==4||GroupOrder.status==3||last_status==1||activityStatus==1}}'>
+        <text class='spec_text' wx:if='{{GroupOrder.status==1}}'>课程原价</text>
+        <text class='spec_text spec_red' wx:if='{{GroupOrder.status==1}}'>{{filters.formatMoney(GroupOrder.default_camp.price_sell)}}元</text>
+         <text class='spec_text' wx:if='{{GroupOrder.status==1}}'>再邀请</text>
+        <text class='spec_text spec_red' wx:if='{{GroupOrder.status==1}}'>{{next_people}}人</text>
+        <text class='spec_text' wx:if='{{GroupOrder.status==1}}'>可减免</text>
+        <text class='spec_text spec_red' wx:if='{{GroupOrder.status==1}}'>{{filters.formatMoney(now_discount)}}元</text>
+
+        <text class='spec_text' wx:if='{{GroupOrder.status==2}}'>课程原价</text>
+        <text class='spec_text spec_red' wx:if='{{GroupOrder.status==2}}'>{{filters.formatMoney(GroupOrder.default_camp.price_sell)}}元</text>
+        <text class='spec_text' wx:if='{{GroupOrder.status==2}}'>当前已减免</text>
+        <text class='spec_text spec_red' wx:if='{{GroupOrder.status==2}}'>{{filters.formatMoney(now_discount)}}元</text>
+        <text class='spec_text' wx:if='{{GroupOrder.status==2}}'>再邀请</text>
+        <text class='spec_text spec_red' wx:if='{{GroupOrder.status==2}}'>{{next_people}}人</text>
+        <text class='spec_text' wx:if='{{GroupOrder.status==2}}'>可减免</text>
+        <text class='spec_text spec_red' wx:if='{{GroupOrder.status==2}}'>{{filters.formatMoney(next_discount)}}元</text>
+      </view> -->
+			<!-- -->
+			<view class='group_spec' hidden='{{GroupOrder.status==4||GroupOrder.status==3||last_status==1||activityStatus==1}}'>
+				<text class='spec_text' wx:if='{{GroupOrder.status==1}}'>剩余时间</text>
+				<text class='spec_text' wx:if='{{GroupOrder.status==2}}'>剩余时间</text>
+				<text class='sepc_block'>{{saleTime.day}}</text>
+				<text class='spec_text'>天</text>
+				<text class='sepc_block'>{{saleTime.hou}}</text>
+				<text class='spec_text'>:</text>
+				<text class='sepc_block'>{{saleTime.min}}</text>
+				<text class='spec_text'>:</text>
+				<text class='sepc_block'>{{saleTime.sec}}</text>
+			</view>
+			<scroll-view class='group_person' scroll-x>
+				<view class='group_img' wx:for='{{groupPeople}}' wx:key='index'>
+					<text class='leader' wx:if='{{item.is_team==1}}'>团长</text>
+					<text style="height:30rpx;display:block"></text>
+					<image src='{{item.image}}' wx:if="{{item.image!=null&&item.image!=''}}"></image>
+					<image src='../../image/icon/pc_avatar.png' wx:if="{{item.image==null||item.image==''}}"></image>
+					<text class="student_info">学员+{{item.kids_num}}</text>
+					<text style="height:40rpx;display:block"></text>
+				</view>
+				<view class='group_img' wx:for='{{next_people}}' wx:key='index' wx:if="{{last_status==0}}">
+					<!-- <view class='img_bg'></view> -->
+					<image src="../../image/member/null_person.png" mode="widthFix"></image>
+					<!-- <image src='{{imgPath}}member/avatar.png' hidden='true'></image> -->
+				</view>
+				<!-- <view class='group_img' wx:if='{{groupPeople.length>4}}'>
+          <text>...</text>
+        </view> -->
+			</scroll-view>
+		</view>
+		<view class='sale_btn' wx:if='{{GroupOrder.status==1&&activityStatus==1}}'>
+			<button class='width' style="width: 100%;">
+				<image src="../../image/member/group_btn_bg.png" mode="widthFix"></image>
+				<text>正在合团中……</text>
+			</button>
+		 <view class="sale_index">
+			  <text bindtap='goindex' data-link='../index/index' id='{{GroupOrder.id}}'>返回首页</text>
+			  <text bindtap='goProDetail' data-link='../groupDetail/groupDetail' id='{{GroupOrder.id}}' wx:if="{{GroupOrder.is_groupGet!=0}}">查看其他团</text>
+			</view>
+		</view>
+		<view class='sale_btn' wx:if='{{GroupOrder.status==1&&activityStatus!=1}}'>
+			<button bindtap='golink' data-link='../proDetail/proDetail?type=group&id={{GroupOrder.group_id}}&gid={{GroupOrder.id}}' id='{{GroupOrder.id}}' class='width' bindtap="closeModel">
+				<image src="../../image/member/group_btn_bg.png" mode="widthFix"></image>
+				<text>我要参团</text>
+			</button>
+			<button open-type="share" class='width'>
+				<image src="../../image/member/group_btn_bg.png" mode="widthFix"></image>
+				<text>邀请好友参团</text>
+			</button>
+		  <view class="sale_index">
+			  <text bindtap='goindex' data-link='../index/index' id='{{GroupOrder.id}}'>返回首页</text>
+			  <text bindtap='goProDetail' data-link='../groupDetail/groupDetail' id='{{GroupOrder.id}}' wx:if="{{GroupOrder.is_groupGet!=0}}">查看其他团</text>
+			</view>
+		</view>
+		<view class='sale_btn' wx:if='{{GroupOrder.status==4}}'>
+			<button class='fail'>拼购失败</button>
+    	<view class="sale_index">
+			  <text bindtap='goindex' data-link='../index/index' id='{{GroupOrder.id}}'>返回首页</text>
+			  <text bindtap='goProDetail' data-link='../groupDetail/groupDetail' id='{{GroupOrder.id}}' wx:if="{{GroupOrder.is_groupGet!=0}}">查看其他团</text>
+			</view>
+		</view>
+		<view class='sale_btn' wx:if='{{GroupOrder.status==2}}'>
+			<button class='width' bindtap='golink' data-link='../proDetail/proDetail?type=group&id={{GroupOrder.group_id}}&gid={{GroupOrder.id}}' id='{{GroupOrder.id}}' class='width' bindtap="closeModel">
+				<image src="../../image/member/group_btn_bg.png" mode="widthFix"></image>
+				<text>我要参团</text>
+			</button>
+			<button open-type="share" class='width'>
+				<image src="../../image/member/group_btn_bg.png" mode="widthFix"></image>
+				<text>邀请好友参团</text>
+			</button>
+		  <view class="sale_index">
+			  <text bindtap='goindex' data-link='../index/index' id='{{GroupOrder.id}}'>返回首页</text>
+			  <text bindtap='goProDetail' data-link='../groupDetail/groupDetail' id='{{GroupOrder.id}}' wx:if="{{GroupOrder.is_groupGet!=0}}">查看其他团</text>
+			</view>
+		</view>
+		<view class='sale_btn' wx:if='{{GroupOrder.status==3}}'>
+			<button class='width'>
+				<image src="../../image/member/group_btn_bg.png" mode="widthFix"></image>
+				<text>拼购成功</text>
+			</button>
+		  <view class="sale_index">
+			  <text bindtap='goindex' data-link='../index/index' id='{{GroupOrder.id}}'>返回首页</text>
+			  <text bindtap='goProDetail' data-link='../groupDetail/groupDetail' id='{{GroupOrder.id}}' wx:if="{{GroupOrder.is_groupGet!=0}}">查看其他团</text>
+			</view>
+		</view>
+	</view>
+
+	<view class='group_help'>
+		<view class='help_title'>拼购规则</view>
+		<view class='help_detail'>
+			<view class="tips">1、好友参团，满员成团，人多更优惠</view>
+			<view class="tips">2、每多邀请一人可减免优惠金额</view>
+			<view class="tips" style="font-size: 22rpx;color: #999;">例：第一梯度：1-3人，优惠10元；第二梯度4-6人，优惠5元；当参团人数为1满足第一梯度时，减免10元（1*10），达到2时，减免20元（2*10），在第一梯度范围内依次递增;当参团人数达到第二梯度为4人时，减免35元（3*10+1*5），依次类推……</view>
+			<view class="tips">3、团购优惠梯度：</view>
+			<view class="help_block help_block_first">
+				<text>阶段</text>
+				<text>拼团人数</text>
+				<text>优惠</text>
+				<!-- <text>尾款</text> -->
+			</view>
+			<view wx:for="{{ruleInfo}}" wx:key="index" class="help_block">
+				<text>第{{index+1}}梯度</text>
+				<text wx:if="{{item.p_number_start!=item.p_number_end}}">{{item.p_number_start}}至{{item.p_number_end}}人</text>
+				<text wx:if="{{item.p_number_start==item.p_number_end}}">{{item.p_number_end}}人</text>
+				<text>每邀请{{GroupOrder.increasing_number}}人，减免{{filters.formatMoney(item.discount)}}元</text>
+				<!-- <text>{{filters.formatMoney(GroupOrder.residue_money-item.discount)}}元</text> -->
+			</view>
+		</view>
+	</view>
+	<view style="height:40rpx"></view>
+</view>
+<!-- 立即抢购弹框 -->
+<view class='pro_spec_model' hidden='{{modelShow}}' bindtap='closeGui' catchtouchmove="ture"></view>
+<view class="pro_spec_detail" hidden='{{modelShow}}' catchtouchmove="ture">
+	<view class='spec_head'>
+		<view class='spec_pro_img' bindtap='viewImg' data-url='{{GroupOrder.image}}'>
+			<image src='{{GroupOrder.image}}' lazy-load='true'></image>
+		</view>
+		<view class='spec_close' bindtap='closeGui'>
+			<icon class='iconfont iconguanbi'></icon>
+		</view>
+		<view class='spec_pro_price'>
+			<text class='spec_pro_integral'>￥{{filters.formatMoney(GroupOrder.group_money)}}</text>
+		</view>
+		<view class='spec_pro_code'>
+			<view>
+				<text>原价：</text>
+				<text class='spec_pro_orig'>￥{{filters.formatMoney(GroupOrder.price_sell)}}</text>
+			</view>
+		</view>
+		<view class='spec_pro_code'>
+			<view>
+				<text>剩余人数：</text>
+				<text wx:if="{{GroupOrder.max_num-GroupOrder.people_num>0}}">{{GroupOrder.max_num-GroupOrder.people_num}}</text>
+				<text wx:else>0</text>
+			</view>
+		</view>
+	</view>
+	<scroll-view class='spec_body' scroll-y scroll-with-animation='true'>
+		<view wx:if="{{specList.length>0}}">
+			<view class='spec_title' bindtap="choseCamp">
+				<text>营期</text>
+				<view><text class="color_theme_blue" style="font-weight:600">{{filters.formatDate(staticInfo.camp_time)}}【{{staticInfo.camp_day}}天】</text>
+					<icon class="iconfont iconright"></icon>
+				</view>
+			</view>
+			<view class='spec_type'>
+				<!-- <button size='mini' bindtap="choseType" wx:for="{{specList}}" wx:key='index' id='{{item.id}}' data-pid='{{item.id}}' class="{{item.ischose? 'button_click': ''}}">{{filters.formatDate(item.camp_time)}}【{{item.camp_day}}天】</button> -->
+			</view>
+		</view>
+		<view class='spec_num'>
+			<text>数量</text>
+			<view class='pro_icon'>
+				<button size='mini' class='pro_spec_btn' id='0' bindtap='lessNum' data-value='less' disabled='{{specNum==0||specNum==1}}'>-</button>
+				<input value='{{specNum}}' type='number' bindblur='changeValue' />
+				<button size='mini' class='pro_spec_btn' id='1' bindtap='addNum' data-value='add'>+</button>
+			</view>
+		</view>
+		<view style="height:120rpx;"></view>
+		<view style="height:68rpx;" wx:if="{{is_iphonex}}"></view>
+	</scroll-view>
+	<view class="spec_btn_bg {{is_iphonex?'spec_btn_height':''}}">
+		<view class="spec_btn">
+			<button class='surebtn' bindtap='rightBuy' wx:if="{{GroupOrder.is_up==1&&activityStatus==2&&staticInfo.num>staticInfo.people_num}}">确认</button>
+			<button class='surebtn surebtn_disable' wx:if="{{GroupOrder.is_up==1&&activityStatus==2&&staticInfo.num<=staticInfo.people_num}}">已售完</button>
+			<button class='surebtn surebtn_disable' wx:if="{{GroupOrder.is_up==1&&activityStatus==0}}">未开始</button>
+			<button class='surebtn surebtn_disable' wx:if="{{GroupOrder.is_up==1&&activityStatus==1}}">已结束</button>
+			<button class='surebtn surebtn_disable' wx:if="{{GroupOrder.is_up==0||allDayList.length==0}}">已下架</button>
+		</view>
+	</view>
+</view>
+<!-- 营期弹框 -->
+<view class="camp_bg" hidden="{{showCamp}}" bindtap='closeCamp' catchtouchmove="ture" bindtap="closeCamp"></view>
+<view class="camp_body" hidden="{{showCamp}}" catchtouchmove="ture">
+   <view class="camp_titi">选择营期</view>
+    <view class="camp_block">
+       <scroll-view scroll-y class="camp_block_left" scroll-into-view="type_{{campId}}" >
+         <view wx:for="{{allDayList}}" wx:key="index" bindtap="choseType" id='type_{{item.camp_day}}' data-pid="{{item.camp_day}}" class="camp_block_left_list camp_block_list {{campId==item.camp_day?'camp_block_left_list_active':''}}">{{item.camp_day}}天</view>
+       </scroll-view>
+       <scroll-view scroll-y class="camp_block_right" scroll-into-view="type_{{dayId}}">
+           <view wx:for="{{dayList}}" wx:key="index" class="camp_block_right_list camp_block_list" bindtap="choseDay" id="type_{{item.id}}"  data-pid="{{item.id}}">
+               <text class="{{dayId==item.id?'color_theme_blue':''}}">{{filters.formatDate(item.day)}}</text>
+               <icon class="iconfont icondui color_theme_blue" wx:if="{{dayId==item.id}}"></icon>
+           </view>
+       </scroll-view>
+    </view>
+    <view class="camp_fixed {{is_iphonex?'iphone_x_padding':''}}">
+       <view class="camp_btn bg_theme_blue_line" bindtap="sureCamp">确定</view>
+     </view>
+</view>

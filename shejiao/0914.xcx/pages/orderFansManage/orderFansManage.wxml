@@ -1,0 +1,70 @@
+<!--pages/orderManage/orderManage.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="order skeleton">
+    <view class="order_body">
+      <navbar page-name="粉丝订单"  bg-color="#ffffff" icon-color="#000000" show-title='true' show-nav='true' show-index='false'></navbar>
+      <view class="order_nav">
+        <scroll-view scroll-x scroll-with-animation="true" class="nav_scroll" scroll-into-view="{{choseId}}">
+            <view wx:for="{{navList}}" wx:key="index" bindtap="choseNavId" id="{{item.id}}" class="{{choseId==item.id?'nav_active':''}} nav_text">
+              <text>{{item.name}}</text>
+              <text wx:if="{{item.id==choseId}}"></text>
+            </view>
+        </scroll-view>
+      </view>
+      <view class="order_list" >
+        <scroll-view class="order_scroll" style="height:{{scrollHeight}}px" scroll-y lower-threshold='120' bindscrolltolower="loadMore" bindscroll="scroll" scroll-top='{{topNum}}' scroll-with-animation>
+          <view wx:for='{{orderList}}' wx:for-item="blockitem" wx:for-index="blockindex" wx:key="blockindex" class="order_block">
+            <!-- 非 待支付状态 -->
+            <view wx:for='{{blockitem}}' wx:key="index" class="block_cont">
+              <view class="order_list_t skeleton-rect"  bindtap="goDetail" data-status="{{item.status}}" data-oid="{{item.oid}}" data-suppid="{{item.supplier_id}}">
+                <text class="order_id">订单号：{{item.oid}}</text>
+                <view class="order_time">
+                  <text wx:if="{{item.status==5}}" class="cancel_color">已取消</text>
+                  <text wx:if="{{item.status==0}}" class="text_color">待支付</text>
+                  <text wx:if="{{item.status==1}}" class="text_color">待发货</text>
+                  <text wx:if="{{item.status==2}}" class="text_color">待收货</text>
+                  <text wx:if="{{item.status==3}}" class="text_color">待评价</text>
+                  <text wx:if="{{item.status==4}}" class="text_color">售后订单</text>
+                  <text wx:if="{{item.status==6}}" class="text_color">已完成</text>
+                </view>
+              </view>
+              <view class="order_list_c" wx:if="{{item.detail.length==1}}" bindtap="goDetail"  data-status="{{item.status}}" data-oid="{{item.oid}}" data-suppid="{{item.supplier_id}}">
+                  <image src="{{item.detail[0].goods_image[0]}}" class="skeleton-rect"></image>
+                  <view class="titi skeleton-rect">
+                    <view class="goods_name">{{item.detail[0].goods_name}}</view>
+                    <view wx:if="{{item.detail[0].spec!=''}}">规格：{{item.detail[0].spec}}</view>
+                    <view wx:if="{{item.detail[0].spec==''}}">规格：默认规格</view>
+                  </view>
+                  <view class="order_pri skeleton-rect">
+                    <text class="pri">￥<text class="pri_count">{{filters.formatMoney(item.price)}}</text></text>
+                    <text class="num">共{{item.goods_num}}件</text>
+                  </view>
+              </view>
+              <view class="order_list_c order_list_cimg" wx:if="{{item.detail.length>1}}" bindtap="goDetail"  data-status="{{item.status}}"  data-oid="{{item.oid}}" data-suppid="{{item.supplier_id}}">
+                <scroll-view class="order_list_img order_list_img_no" scroll-x scroll-with-animation="true">
+                    <image src="{{item.goods_image[0]}}" class="skeleton-rect" wx:for="{{item.detail}}" wx:key="index"></image>
+                </scroll-view>
+                <view class="order_pri skeleton-rect">
+                  <text class="pri">￥<text class="pri_count">{{filters.formatMoney(item.price)}}</text></text>
+                  <text class="num">共{{item.goods_num}}件</text>
+                </view>
+              </view>
+              <view class="order_list_b skeleton-rect">
+                  <!-- <text class="cancel" wx:if="{{item.status==0}}" bindtap="cancelBtn" data-id="{{item.order_pay_id}}">取消订单</text> -->
+                  <text class="cancel" wx:if="{{item.status==1}}" bindtap="goDetail" data-status="{{item.status}}" data-oid="{{item.oid}}" data-suppid="{{item.supplier_id}}">前去发货</text>
+                  <text class="cancel" wx:if="{{item.view_track==1}}" bindtap="goFind" data-oid="{{item.oid}}" data-supplier_id="{{item.supplier_id}}">查看物流</text>
+                  <!-- <text class="text_active" style="background:{{line_bg_color}}" wx:if="{{item.status==3}}" bindtap="goLink" data-link='../evaluateOrder/evaluateOrder' data-supplier_id="{{item.supplier_id}}" data-oid="{{item.oid}}">评价晒单</text> -->
+                  <!-- <text class="text_active"  style="background:{{line_bg_color}}" wx:if="{{item.status==2}}"  data-supid="{{item.supplier_id}}" data-id="{{item.oid}}" bindtap="sureBtn">确认收货</text> -->
+                  <!-- <text class="text_active" style="background:{{line_bg_color}}" wx:if="{{item.status==0}}" data-time="{{item.cancel_second}}" data-price="{{item.price}}" data-id="{{item.order_pay_id}}" bindtap="buyBtn">立即支付</text> -->
+              </view>
+            </view>
+          </view>
+          <null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false&&hasData}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无数据" dataShow="{{!hasData}}"></null-data>
+        </scroll-view>
+      </view>
+    </view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+  <icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

@@ -1,0 +1,42 @@
+<!--pages/improveInfo/improveInfo.wxml-->
+<view class='improveInfo'>
+  <!-- <view class='jump'>
+    <text bindtap='goNext' hidden="{{visited=='1'}}">跳过</text>
+  </view> -->
+  <view class='improve_title'>
+    <text>完善个人信息</text>
+  </view>
+  <view class='improve_tips'>
+    <text>生日，性别保存后不可修改</text>
+  </view>
+  <view class='improve_body'>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+      <view class='section'>
+        <text class='info_title'>选择您的生日</text>
+        <picker mode="date" value="{{birthday}}" start="1900-01-01" bindchange="bindDateChange" end='{{endDate}}'>
+          <text wx:if='{{birthday!=null}}'>{{birthday}}</text>
+          <text wx:if='{{birthday==null}}'>仅自己可见</text>
+          <icon class='iconfont icon-youjiantou1'></icon>
+        </picker>
+      </view>
+      <view class='section'>
+        <text class='info_title'>选择您的性别</text>
+        <radio-group class="radio-group" bindchange="radioChange">
+          <label for='m'>
+            <radio id='m' value="male" checked color='#ff8d97' />
+            <text>男</text>
+          </label>
+          <label for='w'>
+            <radio id='w' value="female" color='#ff8d97' />
+            <text>女</text>
+          </label>
+        </radio-group>
+      </view>
+      <view class="next">
+        <button form-type='submit' size='default' wx:if="{{visited=='0'}}">完成</button>
+        <button form-type='submit' size='default' wx:else>完成</button>
+      </view>
+    </form>
+  </view>
+
+</view>

@@ -1,0 +1,252 @@
+/* pages/editClientInfo/editClientInfo.wxss */
+/* pages/editAddr/editAddr.wxss */
+page{
+  background: #ffffff
+}
+.edit_info_t {
+  padding: 0 0rpx 20rpx;
+  height: 100%;
+}
+
+.edit_info_t form {
+  overflow: hidden;
+}
+.edit_info_t form .placeholder-class{
+  color: #e13816;
+  font-size: 24rpx;
+}
+.edit_info_t form .placeholder-class-default{
+  color: #999;
+  font-size: 24rpx;
+}
+.edit_info_t .section {
+  border-bottom:1px solid #e4e4e4;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  min-height: 120rpx;
+  padding:0 20rpx;
+  background:#fff;
+}
+.edit_top{
+  /* padding-top: 10rpx; */
+}
+.edit_c{
+  /* margin-top: 20rpx; */
+  background: #fff;
+  padding: 10rpx 20rpx 30rpx;
+}
+.edit_b{
+  /* padding-top: 20rpx */
+}
+.edit_top .section:last-child{
+   border-bottom:0
+}
+.edit_bott .section:last-child{
+   border-bottom:0
+}
+.section .form_title {
+  font-size: 28rpx;
+  display: inline-flex;
+  color: #999;
+  justify-content: flex-start;
+}
+.edit_bott .section .form_title {
+  font-size: 28rpx;
+  color: #333;
+}
+.section .text_left {
+  width: 140rpx;
+}
+.section icon {
+  color: #b6b6b6;
+}
+.section  input {
+  width:500rpx;
+}
+.section input.addr_input{
+  width: 700rpx;
+}
+.text_right{
+  width:80rpx; 
+  color: #333;
+  text-align: right
+}
+.section .input-placeholder {
+  font-size: 24rpx;
+  color: #bbb;
+}
+
+.section .picker{
+  width: 500rpx;
+}
+.section .picker .picker_placeholder{
+  font-size:24rpx;
+  color: #999;
+}
+.section image{
+ width: 36rpx;
+ height: 38rpx;
+}
+.concat{
+  display: inline-flex;
+  font-size: 28rpx;
+  align-items: center;
+  justify-content: flex-end;
+}
+.concat icon{
+  display: inline-flex;
+  align-items: center
+}
+.edit_lable{
+  padding: 30rpx 0 20rpx;
+}
+.edit_lable_block{
+  width: 500rpx;
+}
+.edit_lable text{
+  display: inline-flex;
+  padding: 0rpx 22rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  border-radius: 28rpx;
+  border: 1px solid #ececec;
+  color: #999;
+  font-size: 24rpx;
+  margin: 0 10rpx;
+}
+.edit_lable .active_text{
+  border: 1px solid #e13816;
+  color: #e13816;
+}
+/* 多行文本框样式 */
+.edit_c_text{
+  /* border:1px solid #ececec; */
+  border-radius: 12rpx;
+  padding: 15rpx;
+  background: #f9f9f9;
+}
+.edit_c_text textarea{
+  color: #333;
+  height: 140rpx;
+  font-size: 26rpx;
+  width: 100%;
+}
+.text_class{
+  color: #999;
+}
+.edit_c_btn{
+  text-align: right;
+}
+.edit_c_btn .text_active{
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 30rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: 100rpx;
+  font-size: 26rpx;
+  }
+  .label{
+    min-width:60rpx;
+    height: 100%;
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .label icon{
+    display:flex;
+    align-items: center;
+   }
+.clear_null{
+  height: 40rpx;
+  width: 90rpx;
+  margin-right: 20rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 26rpx;
+   border-radius: 15rpx;
+}
+.saveInfo{
+  /* display: flex;
+  justify-content: center; */
+  text-align: center;
+  border: none !important;
+  margin-top: 70rpx;
+}
+.saveInfo button {
+   display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 644rpx !important;
+  font-size: 30rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+}
+.saveInfo .cancel_button{
+  width: 644rpx !important;
+  font-size: 30rpx;
+  height: 80rpx;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40rpx;
+  margin-top: 20rpx;
+  color: #666;
+  border: 1px solid #ededed;
+}
+button[disabled]:not([type]) {
+  color:#fff !important;
+  background:#e13816 !important;
+}
+  
+.invalid {
+  width: 100%;
+  color: #fff;
+  padding: 10rpx 0;
+  z-index: 2;
+  background:#e13816;
+  text-align: center;
+  /* position: fixed;
+  top: 0; */
+  width: 100%;
+}
+/* 二次修改样式 */
+.label_input{
+   margin: 25rpx 0;
+   width: 478rpx;
+   padding:4rpx 0 4rpx 15rpx;
+   height: 56rpx;
+   display: flex;
+   align-items: center;
+   background:#f9f9f9 ;
+   border-radius: 28rpx;
+   overflow: hidden;
+}
+.label_input_text{
+  width: 300rpx;
+}
+.label_input input{
+  width: 360rpx;
+}
+.label_input_text input{
+  width:152rpx;
+}
+.label_input .sure_text{
+  width: 100rpx;
+  display: inline-block;
+  background: #E4E4E4;
+  height: 64rpx;
+  line-height: 64rpx;
+  border-radius: 32rpx;
+  text-align: center;
+  margin: 0;
+}
+.label_input .sure_text_color{
+  color:#fff;
+  background: linear-gradient(-90deg,rgba(221,44,47,1) 0%,rgba(255,80,83,1) 100%);
+}

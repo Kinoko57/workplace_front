@@ -1,0 +1,52 @@
+<!--pages/spellGroup/spellGroup.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="group_bg skeleton">
+	<view class="group_body">
+		<view class="block_nav">
+			<view wx:for="{{navList}}" wx:key="index" bindtap="choseNavId" id="{{item.id}}" class="{{choseId==item.id?'nav_active color_theme_blue':''}} nav_text">
+				<text class="nav_name">{{item.name}}</text>
+				<text wx:if="{{choseId==item.id}}" class="line bg_theme_blue"></text>
+			</view>
+		</view>
+		<view class="group_block_wraper">
+			<scroll-view class="group_prolist" style="height:{{scrollHeight}}px" scroll-y bindscroll="scroll" bindscrolltolower="{{is_load?'loadMore':''}}" scroll-top='{{topNum}}' scroll-with-animation='true'>
+				<view class="group_block" wx:for="{{groupList}}" wx:key="index" wx:if="{{groupList.length>0}}">
+					<view class="group_banner">
+						<image src="{{item.image}}" bindtap="goLink" data-link='../groupDetail/groupDetail?id={{item.id}}'></image>
+						<view class="group_banner_fixed" wx:if="{{choseId==3}}">活动已结束</view>
+						<view class="group_banner_fixed" wx:if="{{choseId==2}}">截止报名时间：{{filters.formatDate(item.end_time)}}</view>
+						<view class="group_banner_fixed" wx:if="{{choseId==1}}">报名开始时间：{{filters.formatDate(item.start_time)}}</view>
+					</view>
+					<view class="group_name">
+						<text class="bg_theme_blue group_name_text">{{item.discount_people}}人起拼</text><text>{{item.name}}</text>
+					</view>
+					<view class="group_year">
+						<view class="group_year_l">
+							<text wx:for="{{item.tag}}" wx:for-item="tagItem" wx:key="tagIndex" class="skeleton-rect">{{tagItem.tag_name}}</text>
+						</view>
+						<text class="group_year_r" style="margin-left:6rpx" wx:if="{{choseId==2}}">{{filters.formatCount(item.people_num)}}人已报名</text>
+					</view>
+					<view class="group_pri">
+						<view class="other_left">
+							<text class="pri_num"><text class="mode_style">￥</text>{{filters.formatMoney(item.group_money)}}</text>
+							<view class="pro_dis_num">
+								优惠可达￥{{filters.formatMoney(item.free_price)}}
+							</view>
+						</view>
+						<view class="pro_btn">
+							<view class="btn_clear bg_theme_gray" wx:if="{{choseId==3}}" bindtap="goLink" data-link='../groupDetail/groupDetail?id={{item.id}}'>已结束</view>
+							<view class="btn_clear bg_theme_blue" wx:if="{{choseId==2}}" bindtap="goLink" data-link='../groupDetail/groupDetail?id={{item.id}}'>参团</view>
+							<view class="btn_clear bg_theme_gray" wx:if="{{choseId==1}}" bindtap="goLink" data-link='../groupDetail/groupDetail?id={{item.id}}'>未开始</view>
+						</view>
+					</view>
+				</view>
+				<null-data id="null-data" loadingText="加载中..." loadingShow="{{hasData&&is_load}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无拼团" dataShow="{{!hasData}}"></null-data>
+			</scroll-view>
+		</view>
+	</view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+  <icon class="iconfont iconhuidaodingbuxianxing"></icon>
+</view>

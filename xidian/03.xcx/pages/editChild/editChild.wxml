@@ -1,0 +1,133 @@
+<!--pages/editClientInfo/editClientInfo.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class='edit_student_bg skeleton'>
+    <view class="student_titi">
+       填写学员资料
+    </view>
+    <view class='edit_info_t'>
+      <view class='section' bindtap="changeImage" data-type="student">
+        <text class='form_title text_left'>头像</text>
+        <view class="section_r">
+          <image wx:if="{{image!=''&&image!=null}}" src="{{host+image}}" class='pc_avatar' mode="scaleToFill"></image>
+          <image wx:if="{{image==''||image==null}}" src="../../image/icon/pc_avatar.png" class='pc_avatar' mode="scaleToFill"></image>
+          <icon class="iconfont iconright"/>
+        </view>
+      </view>
+      <view class='section'>
+        <text class='form_title text_left'>姓名</text>
+        <view class="section_r">
+          <input placeholder="请输入姓名" bindinput="inputCheck"  bindblur="validate" type="text" data-name="name"  confirm-type="next" value="{{name}}"></input>
+        </view>
+      </view>
+      <view class='section'>
+        <text class='form_title text_left'>性别</text>
+        <view class="section_r">
+         <picker bindchange="bindPickerChangeType" value="{{index}}" id="{{modeList[index].id}}" class="pick_gebder" range="{{modeList}}" name='gender' data-name="gender" range-key="name">
+              <text wx:if='{{gender!==""}}'>{{modeList[index].name}}</text>
+              <icon class="iconfont iconright"/>
+          </picker>
+        </view>
+      </view>
+      <view class='section'>
+        <text class='form_title text_left'>生日</text>
+        <view class="section_r">
+          <picker mode="date" value="{{birthday}}" start="1900-01-01" bindchange="bindDateChange" end='{{endDate}}' name='birthday' type="text" data-name="birthday" data-validator="required">
+            <text wx:if='{{birthday!=""}}'>{{birthday}}</text>
+            <icon class="iconfont iconright"/>
+          </picker>
+        </view>
+      </view>
+       <view class='section'>
+        <text class='form_title text_left'>联系方式</text>
+        <view class="section_r">
+          <input placeholder="请输入联系方式（选填）"   bindblur="validate" type="text" data-name="contact_way" confirm-type="next" value="{{contact_way}}"></input>
+        </view>
+       </view>
+       <view class='section'>
+        <text class='form_title text_left'>身份证号</text>
+        <view class="section_r">
+          <input placeholder="请输入身份证号（选填）"   bindblur="validate" type="idcard" data-name="number" confirm-type="next" value="{{number}}"></input>
+        </view>
+       </view>
+       <view class='section'>
+        <text class='form_title text_left'>身高(cm)</text>
+        <view class="section_r">
+          <input placeholder="请输入身高（选填）"  bindblur="validate" data-name="height"  type="digit" confirm-type="next" value="{{height}}"></input>
+        </view>
+      </view>
+      <view class='section'>
+       <text class='form_title text_left'>体重(kg)</text>
+        <view class="section_r">
+          <input placeholder="请输入体重（选填）" bindblur="validate" type="digit" data-name="weight" confirm-type="next" value="{{weight}}"></input>
+        </view>
+      </view>
+    </view>
+    <view class="student_titi">
+       选择监护人
+    </view>
+    <view class="super_block">
+      <view class="super_block_list" wx:for="{{superList}}" wx:key="index" bindtap="editSuper" data-index="{{index}}">
+        <view class="super_block_t">
+          <view class="super_img">
+            <image wx:if="{{item.image!=''&&item.image!=null}}" src="{{host+item.image}}"></image>
+            <image wx:else src="../../image/icon/pc_avatar.png"></image>
+             <!-- <icon class="icon-box-img iconfont icondui1-copy-copy color_theme_blue"></icon> -->
+          </view>
+           <text>{{item.name}}</text>
+           <!-- <text>设置监护人</text> -->
+        </view>
+      </view>
+      <view class="super_block_add">
+        <view class="super_add" bindtap="addSuper">
+          <icon class="iconfont iconadd"></icon>
+        </view>
+          <text> </text>
+          <!-- <text> </text> -->
+      </view>
+    </view>
+    <view style="height:34px;width:100%" wx:if="{{is_iphonex}}"></view>
+    <view style="height:43px;width:100%"></view>
+</view>
+  <view class='saveInfo'>
+    <view bindtap="submit" disabled="{{!showSubmit}}" class="oBtn bg_theme_blue {{is_iphonex?'iphone_x':''}}">保存</view>
+  </view>
+
+<!-- /* 监护人弹框 */ -->
+<view class="model_bg" wx:if="{{showAddInfo}}" bindtap="goBack"></view>
+<view class="addInfo_style" wx:if="{{showAddInfo}}">
+  <view class="super_dia_titi">
+      添加监护人
+  </view>
+  <view class="dia_upload">
+      <view class="super_add" bindtap="addSuper" bindtap="changeImage" data-type="super">
+          <icon class="iconfont iconadd" wx:if="{{super_image==''}}"></icon>
+          <image src="{{host+super_image}}" wx:if="{{super_image!=''}}"></image>
+      </view>
+      <view class="avater_text">点击上传头像</view>
+  </view>
+  <view class="super_info">
+     <view class='super_section'>
+        <input placeholder="请输入姓名" bindblur="validate" type="text" data-name="super_name"  confirm-type="next" value="{{super_name}}"></input>
+      </view>
+     <view class='super_section'>
+        <input placeholder="请输入电话" bindblur="validate" type="text" data-name="super_phone"  confirm-type="next" value="{{super_phone}}"></input>
+      </view>
+      <view class='super_section'>
+        <picker bindchange="bindPickerSuper" value="{{superindex}}" id="{{superModeList[superindex].id}}" class="pick_gebder" range="{{superModeList}}" name='gender' bindblur="validate" type="text" data-name="gender" range-key="name">
+            <text wx:if='{{super_gender!=""}}'>{{superModeList[superindex].name}}</text>
+            <text wx:if='{{super_gender==""}}' class="section_color">请选择性别（选填）</text>
+        </picker>
+      </view>
+       <view class='super_section super_section_bot'>
+        <picker bindchange="bindPickerConcat" value="{{consctindex}}" id="{{concatModeList[consctindex].id}}" class="pick_gebder" range="{{concatModeList}}" data-name="gender" range-key="name">
+            <text wx:if='{{super_concat!=""}}'>{{concatModeList[consctindex].name}}</text>
+            <text wx:if='{{super_concat==""}}' class="section_color">请选择与学员关系（选填）</text>
+        </picker>
+      </view>
+      <view class="super_btn">
+         <text class="back" bindtap="goBack">返回</text>
+         <text class="save bg_theme_blue" bindtap="saveSuper">保存</text>
+      </view>
+  </view>
+</view>
+<simple-crop wx:if="{{visible}}" size="{{size}}" src="{{src}}" cropSizePercent="{{cropSizePercent}}" borderColor="{{borderColor}}" bindcropUpload="uploadCallback" bindcropClose="closeCallback" bindcropCrop="cropCallback"></simple-crop>

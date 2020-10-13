@@ -1,0 +1,327 @@
+/* pages/vipCenter/vipCenter.wxss */
+page{
+  background: #f6f6f6;
+}
+.vip_body{
+  position: relative;
+  top: 0;
+  z-index: 1;
+}
+.vip_head{
+  width: 100%;
+  position: absolute;
+  top: 0; 
+  overflow: hidden;
+}
+
+.vip_head_bg{
+  width: 200%;
+  position: absolute;
+  top: 0;
+  left: -50%;
+  z-index: 2;
+  border-radius: 0 0 50% 50%;
+  overflow: hidden;
+  height: 100%;
+}
+.vip_head_bg::after {
+  content: '';
+  width: 200%;
+  height: 100%;
+  position: absolute;
+  left: -50%;
+  top: 0;
+  z-index: -1;
+  overflow: hidden;
+  border-radius: 0 0 50% 50%;
+  background:linear-gradient(to right,rgba(238,221,188,1) 0%,rgba(219,182,121,1) 100%)
+}
+.vip_head_t{
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ position: absolute;
+ z-index: 3;
+ padding: 24rpx;
+}
+.vip_head_t_l{
+  display: flex;
+  align-items: center;
+}
+.vip_head_t .avater{
+  width: 116rpx;
+  height: 116rpx;
+  border-radius: 50%;
+  margin-top: 15rpx;
+}
+.vip_head_info{
+  padding-left: 22rpx;
+  width: 474rpx;
+}
+.vip_head_info .vip_head_info_t{
+  display: flex;
+  align-items: center;
+}
+.vip_head_info .vip_head_info_t .vip_name {
+  color: #333;
+  font-size: 30rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width:300rpx;
+}
+.vip_head_info .vip_head_info_t image{
+  width: 43rpx;
+  height: 46rpx;
+  margin-top: 8rpx;
+  margin: 12rpx 6rpx 0 10rpx;
+}
+.vip_head_info .vip_head_info_t .lever_equity{
+  height: 28rpx;
+  line-height: 28rpx;
+  padding: 0 8rpx;
+  font-size: 20rpx;
+  display: inline-flex;
+  border-radius: 4rpx;
+  color: #E2C693;
+}
+.vip_head_info .vip_pro{
+ position: relative;
+ width: 224rpx;
+ background: #fff;
+ height: 12rpx;
+ border-radius: 6rpx;
+ overflow: hidden;
+}
+.vip_head_info .pro_color{
+  height: 12rpx;
+  border-radius: 6rpx;
+}
+.vip_head_info .vip_mark{
+  font-size: 20rpx;
+  color: #333;
+  padding-top: 10rpx;
+}
+.vip_head_t .wallet{
+  width:48rpx;
+  height: 38rpx;
+  margin-right: 30rpx;
+}
+.vip_head_b{
+  width: 710rpx;
+  left: 50%;
+  border-radius: 15rpx;
+  transform: translateX(-50%);
+  position: relative;
+  top:302rpx;
+  background:linear-gradient(90deg,rgba(70,70,70,1) 0%,rgba(47,47,47,1) 100%)
+}
+.vip_head_cont_iphonex{
+  top: 340rpx;
+}
+.vip_head_cont{
+  display: flex;
+  align-items: center;
+  height: 140rpx;
+  padding-bottom: 20rpx;
+}
+.vip_head_b .vip_head_b_xian{
+  height: 82rpx;
+  border-left: 2rpx dotted #888;
+}
+.vip_head_b_l{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 350rpx;
+  text-align: center;
+}
+.vip_head_b_l_block{
+  font-size: 40rpx;
+  font-weight: 500;
+}
+.vip_head_b_l_block text:nth-child(2){
+  display: block;
+  font-size: 22rpx;
+  padding-top: 6rpx;
+}
+.vip_head_b_l .vip_head_b_l_block_add{
+  font-size: 18rpx;
+  padding:15rpx 0 0 10rpx;
+}
+.vip_sign{
+   position: relative;
+   width: 100%;
+   height: 208rpx;
+}
+.vip_sign .vip_sign_image{
+  position: absolute;
+  top:0 ;
+  left: 0;
+  width: 750rpx;
+  height: 208rpx;
+}
+.vip_tit{
+  font-size: 26rpx;
+  color: #333;
+}
+.vip_sign_date{
+  display: flex;
+  position: relative;
+  z-index: 3;
+  height: 208rpx;
+  align-items: center;
+  justify-content: center;
+}
+.vip_sign_date_wraper{
+  display: flex;
+  margin-top: 56rpx;
+}
+.vip_sign_block image{
+  width: 57rpx;
+  height: 57rpx;
+}
+.vip_sign_block .vip_sign_t{
+   display: flex;
+   align-items: center;
+   height: 57rpx;
+}
+.vip_sign_block .vip_sign_t .vip_sign_t_text{
+   width: 26rpx;
+   height: 26rpx;
+   border-radius: 50%;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   background: #FF9C41;
+}
+.vip_sign_block .vip_sign_t .vip_sign_t_text icon{
+  display: inline-flex;
+  color: #fff;
+  font-size: 24rpx;
+}
+.vip_sign_block .vip_sign_t  .sign_active{
+  background:linear-gradient(86deg,rgba(70,70,70,1) 0%,rgba(47,47,47,1) 100%)
+}
+.vip_sign_block .vip_sign_t .vip_sign_t_xian{
+   width: 38rpx;
+   height: 2rpx;
+   background: #FF9C41;
+}
+.vip_sign_block .vip_sign_t .vip_sign_t_xian_active{
+  background:linear-gradient(86deg,rgba(70,70,70,1) 0%,rgba(47,47,47,1) 100%)
+}
+.vip_sign_block .vip_sign_b{
+   font-size: 18rpx;
+   color: #fff;
+   width: 102rpx;
+   text-align: center;
+   padding-top: 10rpx;
+}
+.vip_sign_block .vip_sign_b_active{
+  color: #333;
+}
+.vip_sign_block:first-child,.vip_sign_block:last-child .vip_sign_b{
+  width:64rpx
+}
+.vip_sign_block:first-child .vip_sign_b{
+  text-align: left;
+}
+.vip_sign_block:last-child .vip_sign_b{
+  text-align: right;
+}
+.vip_team{
+  padding: 24rpx;
+}
+.vip_titi{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 26rpx;
+  font-weight: 600;
+  padding-bottom: 20rpx;
+  color: #333;
+  padding-top: 35rpx;
+}
+.vip_titi .tit_text_r{
+  display: inline-flex;
+  align-items: center;
+  font-size: 24rpx;
+  font-weight: normal;
+  color: #999;
+}
+.vip_titi .tit_text_r icon{
+ display: inline-flex;
+ color: #B9B9B9;
+ font-size: 24rpx;
+}
+.vip_date{
+  width: 702rpx;
+  height:160rpx ;
+  border-radius: 12rpx;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.vip_date .vip_date_l{
+  width: 151rpx;
+  height: 160rpx;
+  color:#B9985B ;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:3px 4px 5px 0px rgba(0, 0, 0, 0.18);
+}
+.vip_date text.text{
+  font-size: 22rpx;
+  padding-top: 6rpx;
+}
+.vip_date text.num{
+  font-size: 44rpx;
+  font-weight: 500;
+}
+.vip_date text{
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.vip_date_r{
+  width: 551rpx;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+}
+.vip_date_r_every{
+  width: 25%;
+}
+.vip_things{
+  padding: 0 24rpx;
+}
+.vip_things_list{
+  display: flex;
+  align-items: center;
+  background: #fff;
+  width: 100%;
+  height: 148rpx;
+  padding: 24rpx;
+  box-sizing: border-box;
+  margin-bottom: 24rpx;
+  border-radius: 12rpx;
+}
+.vip_things_list .vip_things_list_r{
+  font-size: 28rpx;
+  color: #333;
+  padding-left: 15rpx;
+}
+.vip_things_list .vip_things_list_r text:nth-child(2){
+   display: block;
+   font-size: 24rpx;
+   padding-top: 10rpx;
+   color: #999;
+}
+.vip_things_list image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 12rpx;
+}
+

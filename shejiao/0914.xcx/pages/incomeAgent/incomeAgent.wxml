@@ -1,0 +1,63 @@
+<!--pages/incomeAgent/incomeAgent.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="income_bg skeleton">
+   <navbar page-name="收益管理" bg-color="transparent" icon-color="#fff" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+    <view class="income_top" style="height:499rpx">
+      <view style="height:{{navHeight}}px"></view>
+      <view class="income_info">
+        <view class="income_info_allCount"><text class="symob">￥</text>{{filters.formatMoney(total_money)}}</view>
+        <view class="income_info_allText">总收益</view>
+        <view class="income_info_type">
+           <view class="income_info_type_list">
+              <text>￥{{filters.formatMoney(disable_balance)}}</text>
+              <text>未结算</text>
+           </view>
+           <image src="{{staticUrl}}my/xian.png"></image>
+           <view class="income_info_type_list">
+              <text>￥{{filters.formatMoney(enable_balance)}}</text>
+              <text>已结算</text>
+           </view>
+        </view>
+      </view>
+      <image src="{{staticUrl}}vip/income_bg.png" class="income_bg_image" style="height:499rpx"></image>
+    </view>
+    <view class="income_detail">
+       <view style="height:{{zan_height}}px" wx:if="{{!isiPhoneX}}"></view>
+       <view style="height:{{zan_height_iphonex}}px" wx:if="{{isiPhoneX}}"></view>
+       <view class="income_detail_titi">收益明细</view>
+       <view class="income_detail_type">
+         <view class="block_wraper" wx:for="{{incomeList}}" wx:key="blockindex" wx:for-item="blockitem" wx:for-index="blockindex">
+            <view class="income_detail_type_block" wx:for="{{blockitem}}" wx:key="index">
+               <view class="income_detail_type_list" bindtap="viewFind" data-oid="{{item.oid}}" data-blockIndex="{{blockindex}}" data-index="{{index}}">
+                  <view class="income_detail_type_list_l">
+                    <text>来源订单：{{item.oid}}</text>
+                     <text>{{filters.formatDateTime(item.time)}}</text>
+                  </view>
+                  <view class="income_detail_type_list_r">
+                  <view class="income_detail_type_list_r_l">
+                     <text class="{{item.after_status==2?'disable_income':''}}">+{{filters.formatMoney(item.income)}}</text>
+                     <!-- <text>数量：{{item.goods_num}}</text> -->
+                     <text>{{item.income_type}}</text>
+                  </view>
+                  <icon class="iconfont {{item.isUp?'icon-xiajiantou':'icon-right'}}"></icon>
+                  </view>
+               </view>
+               <view class="income_detail_type_list_find" wx:if="{{item.isUp}}">
+                  <view class="find_income_info_titi">本次收益来源直播间：{{item.scene_name}}</view>
+                  <view class="find_income_info_titi">商品名称：{{item.goods_name}}</view>
+                  <view class="find_income_info_block">
+                     订单号：{{item.oid}}
+                  </view>
+                  <view  class="find_income_info_block">
+                     <view>数量：{{item.goods_num}}</view>
+                     <view>收益：<text style="color:#f20">￥{{filters.formatMoney(item.income)}}</text></view>
+                  </view>
+               </view>
+            </view>
+         </view>
+       </view>
+        <null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false&&hasData}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无数据" dataShow="{{!hasData}}"></null-data>
+        <view wx:if="{{isiPhoneX}}" style="height:34px;width:100%"></view>
+    </view>
+</view>

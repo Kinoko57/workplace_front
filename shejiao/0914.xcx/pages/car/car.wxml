@@ -1,0 +1,268 @@
+<!--pages/car/car.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="car_bg skeleton">
+	<navbar page-name="购物车" bg-color="{{headBg}}" icon-color="{{headColor}}" show-title='true' show-nav='false'></navbar>
+	<view class="car_top_bg" wx:if="{{proList.length>0}}">
+		<image src="{{carBg}}"></image>
+	</view>
+	<view class="car_top_head {{headBg=='#fff'?'car_top_head_scroll':''}}" style="top:{{navHeight}}px;background:{{headBg}};color:{{headColor}}">
+		<!-- <view class="car_chose">
+			<checkbox-group bindchange="choseAll">
+				<label style="display: inline-flex;align-items: center;">
+					<checkbox value='{{allchose}}' checked='{{allchose==1}}' />
+					<text>全选</text>
+				</label>
+			</checkbox-group>
+		</view> -->
+		<view class="car_nav_top" wx:if="{{proList.length>0}}">
+			<text wx:if="{{editCar==false}}" bindtap="edit">管理</text>
+			<text wx:else bindtap="edit">完成</text>
+		</view>
+	</view>
+	<view class="car_body" style="margin-bottom:{{tabbarHeight*2}}px;">
+		<checkbox-group bindchange="chosePro" wx:if="{{proList.length>0}}">
+			<view class="car_list">
+				<view class="car_block" wx:for="{{proList}}" wx:key="index" wx:for-item="shop" wx:if="{{shop.pros.length>0}}">
+					<view class="car_block_top">
+						<checkbox-group bindchange="choseShop" id="{{shop.id}}">
+							<label>
+								<checkbox value="{{shop.id}}" checked="{{shop.shopCheck}}" id='{{shop.id}}' />
+								<text class="shop_tag" wx:if="{{shop.shopinfo.is_self==1}}">自营</text> {{shop.shopinfo.name}}({{shop.pros.length}})</label>
+						</checkbox-group>
+						<view class="car_red_color" bindtap="showDiscount">
+							<text>优惠</text>
+						</view>
+					</view>
+					<view class="car_block_middle">
+						<view class="car_block_pro" wx:for="{{shop.pros}}" wx:key="index">
+							<movable-area>
+								<movable-view damping="100" out-of-bounds="true" direction="horizontal" x="{{item.x}}" animation="false" bindchange="handleMovableChange" touchend="handleTouchend({{index}})" touchstart="handleTouchestart">
+									<view class="main_item_content">
+										<label for='{{item.product_id}}' class="pro_check">
+											<view class='pro_chose'>
+												<checkbox value="{{item.product_id}}" checked="{{item.checked}}" id='{{item.product_id}}' />
+											</view>
+										</label>
+										<view class="pro_info">
+											<view class="pro_img" bindtap="goLink" data-link="../proDetail/proDetail?id={{item.goods_id}}">
+												<image src="{{item.img}}"></image>
+											</view>
+											<view class="pro_right">
+												<view class="pro_name" bindtap="goLink" data-link="../proDetail/proDetail?id={{item.goods_id}}">{{item.goods_name}}</view>
+												<view class="pro_spec_name" bindtap="goLink" data-link="../proDetail/proDetail?id={{item.goods_id}}">规格：{{item.spec}}</view>
+												<view class="pro_activity car_red_color">
+													<view wx:if="{{item.sales_type==1}}">库存紧张</view>
+													<view wx:if="{{item.sales_type==2}}">限购5件</view>
+													<view wx:if="{{item.sales_type==3}}">比加入时便宜￥25.00</view>
+												</view>
+												<view class="pro_price car_red_color">
+													<text>￥{{filters.formatMoney(item.buy_price)}}</text>
+													<view class="pro_num">
+														<icon class="iconfont icon-less" id='0' bindtap='lessNum' data-value='less' data-proid="{{item.product_id}}" data-shopid="{{shop.id}}"></icon>
+														<input type="number" value="{{item.shops_num}}" bindblur='changeValue' data-proid="{{item.product_id}}" data-shopid="{{shop.id}}"></input>
+														<icon class="iconfont icon-add" id='1' bindtap='addNum' data-value='add' data-proid="{{item.product_id}}" data-shopid="{{shop.id}}"></icon>
+													</view>
+												</view>
+											</view>
+										</view>
+									</view>
+								</movable-view>
+							</movable-area>
+							<view class="delete_btn" data-carid="{{item.id}}" data-shopid="{{shop.id}}" data-index="{{index}}" bindtap="handleDelete">删除</view>
+						</view>
+					</view>
+					<view class="car_block_bottom">
+						<view></view>
+						<view></view>
+					</view>
+				</view>
+			</view>
+		</checkbox-group>
+		<null-data id="null-data" dataText="购物车空空如也，去逛逛吧" dataShow="{{proList.length==0}}" wx:if="{{proList.length==0}}"></null-data>
+		<view class="car_fail_list_bg" wx:if="{{failureList.length>0}}">
+			<view class="car_fail_list">
+				<view class="car_fail_top">
+					<text>失效宝贝 2 件</text>
+					<text>清除失效宝贝</text>
+				</view>
+				<view class="car_fail_body">
+					<view class="car_fail_pro" wx:for="{{failureList}}" wx:key="index">
+						<view class="pro_tag">失效</view>
+						<view class="pro_right">
+							<view class="pro_img">
+								<image src="{{item.img}}"></image>
+							</view>
+							<view class="pro_info">
+								<view class="pro_title">{{item.goods_name}}</view>
+								<view class="pro_tips">商品已下架不能购买，请选择别的商品</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="car_recommend_list">
+			<view class="car_recommend_title">
+				<text>猜你喜欢</text>
+				<view class="more car_red_color">
+					<text>更多</text>
+					<icon class="iconfont icon-right more_link"></icon>
+				</view>
+			</view>
+			<view class="car_pro_list" wx:if="{{recommendList.length>0}}">
+				<view class="pro_list_block pro_block_style" wx:for="{{recommendList}}" wx:key="index" bindtap="goProDetail" data-type="{{item.activity_type}}" id="{{item.activity_type==0?item.goods_id:item.activity_id}}">
+					<view class="pro_top">
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==1}}" class="pro_icon"
+							style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==2}}" class="pro_icon"
+							style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==3}}" class="pro_icon"
+							style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==4}}" class="pro_icon"
+							style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image class="pro_img" src="{{item.image}}"></image>
+						<image src="{{item.tag.min_img}}" wx:if="{{item.tag.min_img!=undefined&&item.tag.min_img!=''}}"
+							class="pro_min_frame"></image>
+					</view>
+					<view class="pro_middle">
+						<view class="title">
+							<text wx:if="{{item.activity_type==1}}" class="pro_tag_list_style red_gradient">限时促销</text>
+							<text wx:if="{{item.activity_type==2}}" class="pro_tag_list_style blue_gradient">体验专区</text>
+							<text wx:if="{{item.activity_type==3}}" class="pro_tag_list_style red_gradient">礼盒商品</text>
+							<text wx:if="{{item.activity_type==4}}" class="pro_tag_list_style blue_gradient">每日秒杀</text>
+							<text wx:if="{{item.activity_type==5}}" class="pro_tag_list_style blue_gradient">拼团</text>
+							{{item.goods_name}}
+						</view>
+						<view class="pro_tags" wx:if="{{item.tag.button_tag!=undefined&&item.tag.button_tag.length>0}}">
+							<view class="pro_tab_block" wx:for="{{item.tag.button_tag}}" wx:key="index" wx:if="{{index<4}}">{{item.text}}</view>
+						</view>
+						<view class="pro_tags" wx:else>
+							<view class="pro_tab_block_null">默认</view>
+						</view>
+					</view>
+					<!-- 普通普通商品 -->
+					<view class="pro_bottom" wx:if="{{item.activity_type==0}}">
+						<view class="pro_bottom_left">
+							<text class="price_icon color_theme_red">￥</text>
+							<text class="price color_theme_red">{{filters.formatMoney(item.original_price)}}</text>
+						</view>
+						<view class="pro_bottom_right">
+							<text>{{item.sales_volume}}人已付款</text>
+						</view>
+					</view>
+					<!-- <view class="pro_bottom_margin" wx:if="{{item.activity_type==0}}">
+						<view class="pro_bottom_right color_theme_gray line_through">
+							<text>市场价：￥{{filters.formatMoney(item.market_price)}}</text>
+							<view class="vip_style">
+								<text class="red_gradient_font">VIP</text>
+							</view>
+						</view>
+					</view> -->
+					<!-- 活动活动商品 -->
+					<view class="pro_bottom" wx:if="{{item.activity_type!=0}}">
+						<view class="pro_bottom_left">
+							<text class="price_icon color_theme_red">￥</text>
+							<text class="price color_theme_red">{{filters.formatMoney(item.original_price)}}</text>
+						</view>
+						<view class="pro_bottom_right">
+							<text>{{item.sales_volume}}人已付款</text>
+						</view>
+					</view>
+					<!-- <view class="pro_bottom_margin" wx:if="{{item.activity_type!=0}}">
+						<view class="pro_bottom_right color_theme_gray line_through">
+							<text>市场价：￥{{filters.formatMoney(item.market_price)}}</text>
+							<view class="vip_style">
+									<text class="red_gradient_font">VIP</text>
+								</view>
+						</view>
+					</view> -->
+				</view>
+			</view>
+		</view>
+		<null-data id="null-data" bottomText="没有更多了~" bottomShow="true" wx:if="{{recommendList.length>0}}"></null-data>
+		<view class="car_fixed_btn" style="bottom:{{tabbarHeight}}px" wx:if="{{hasData}}">
+			<view class="car_chose">
+				<checkbox-group bindchange="choseAll">
+					<label style="display: inline-flex;align-items: center;">
+						<checkbox value='{{allchose}}' checked='{{allchose==1}}' />
+						<text>全选</text>
+					</label>
+				</checkbox-group>
+			</view>
+			<view class="car_right">
+				<view class="car_total_info" wx:if="{{editCar==false}}">
+					<view class="car_total_price">
+						合计：<text class="color_theme_red">￥{{filters.formatMoney(carAmount)}}</text>
+					</view>
+					<view style="font-size:22rpx;" class="color_theme_red">
+						<!-- 减免￥100.00 -->
+					</view>
+				</view>
+				<view class="car_btn">
+					<button class="{{check_ids.length==0?'disbale_btn':''}}" disabled="{{check_ids.length==0}}" wx:if="{{editCar==false}}" bindtap="goBuy">去结算({{check_ids.length}}件)</button>
+					<button class="del_btn {{check_ids.length==0?'disbale_btn':''}}" disabled="{{check_ids.length==0}}" wx:else bindtap="removeCars">删除</button>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="model_bg" wx:if="{{showModel}}" bindtap="hidenModel" catchtouchmove="ture"></view>
+	<!-- 商品优惠弹框 -->
+	<view class="discount_model model_style" hidden="{{!discountShow||!showModel}}" catchtouchmove="ture">
+		<view class="model_title">优惠</view>
+		<view class="model_body">
+			<scroll-view style="height:46vh;" scroll-y>
+				<view class="model_body_title">领券</view>
+				<view class="coupon_block" wx:for="{{couList}}" wx:key="index">
+					<view class="coupon_body">
+						<view class="coupon_body_left">
+							<view class="coupon_title">{{item.name}}</view>
+							<view class="coupon_price color_theme_red">
+								￥
+								<text class="price">{{filters.formatMoney(item.discount_price)}}</text>
+								<text class="amount">满{{filters.formatMoney(item.price)}}可用</text>
+							</view>
+						</view>
+						<view class="coupon_body_middle" wx:if="{{item.is_get==0}}"></view>
+						<view class="coupon_body_right {{item.is_get==1?'bg_theme_red':''}}" bindtap="getCou" id="{{item.id}}" data-get="{{item.is_get}}" data-index="{{index}}">
+							<view class="coupon_btn coupon_get" wx:if="{{item.is_get==0}}">立即领取</view>
+							<view class="coupon_btn coupon_use" wx:if="{{item.is_get==1}}">去使用</view>
+							<icon class="iconfont icon-yilingqu" wx:if="{{item.is_get==1}}"></icon>
+							<!-- <icon class="iconfont icon-yilingqu" wx:if="{{item.is_get==1&&item.is_snatch==1}}"></icon> -->
+						</view>
+						<view class="coupon_circle circle_top"></view>
+						<view class="coupon_circle circle_bottom"></view>
+					</view>
+				</view>
+				<view class="model_body_title">优惠</view>
+				 <!-- wx:for="{{discountList}}" wx:key="index" -->
+				<view class="discount_block">
+					<view class="discount_block_tips">
+						<text class="free_tag">包邮</text>
+						<text>满{{filters.formatMoney(sendByPost.price)}}包邮</text>
+					</view>
+					<view class="discount_btn" bindtap="goLink" data-link="../couProList/couProList?type=-1">
+						<text>去凑单</text>
+						<icon class="iconfont icon-right"></icon>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+		<view class="model_footer">
+			<view class="btn_tips">以上价格计算仅为初步预估，不代表最终购买价格</view>
+			<view class="sure_btn bg_theme_linear_red" bindtap="hidenModel">关闭</view>
+		</view>
+	</view>
+</view>
+
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}" style="bottom: 20%;">
+	<icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

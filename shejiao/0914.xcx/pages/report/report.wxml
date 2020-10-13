@@ -1,0 +1,29 @@
+<!--pages/report/report.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="report_bg skeleton">
+   <navbar page-name="举报" bg-color="#333333" icon-color="#ffffff" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class="report_body">
+     <view class="report_block">
+        <view class="report_cause">举报理由:<text>{{cause}}</text></view>
+        <view class="report_titi">
+            <text>举报描述</text>
+            <text>{{content.length}}/200</text>
+        </view>
+        <view class="add_detail">
+          <textarea bindblur="bindTextAreaBlur" bindinput="bindTextAreaBlur" placeholder-class="input_placeholder" auto-height placeholder="详细描述举报理由..." maxlength="200" />
+        </view>
+        <view class="add_upload_img">
+          <view class="upload_block" wx:for="{{imgs}}" wx:key="index">
+              <image class="upload_block_img" src="{{item.image}}" catchtap="findImg" data-index="{{index}}"></image>
+              <icon class="iconfont icon-cha" catchtap="clearImg" data-index="{{index}}"></icon>
+          </view>
+        </view>
+        <view class="report_upload" bindtap="addImg">
+          <image src="{{staticUrl}}anchor/report.png"></image>
+          <view>{{imgs.length}}/4</view>
+        </view>
+     </view>
+     <view class="report_tips">您的举报将在12小时内受理，若举报成功会第一时间告知处 理结果。请尽量提交完整的举报描述及材料，无需重复举报， 感谢您的配合。</view>
+     <view style="background:{{line_bg_color}}" class="report_btn" bindtap="submit">提交</view>
+  </view>
+</view>

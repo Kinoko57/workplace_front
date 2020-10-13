@@ -1,0 +1,12 @@
+<!--pages/editImg/editImg.wxml-->
+
+<view class='editInfo'>
+  <view class="e_body" style="height:{{height}}px">
+    <view class="e_bg" style="height:{{height}}px"></view>
+    <view class="e_cont">
+      <image src="{{image}}" class='pc_avatar' mode="scaleToFill"></image>
+    </view>
+     <button bindtap="chooseCropImage">修改</button>
+     <simple-crop wx:if="{{visible}}" size="{{size}}" src="{{src}}" cropSizePercent="{{cropSizePercent}}" borderColor="{{borderColor}}" bindcropUpload="uploadCallback" bindcropClose="closeCallback" bindcropCrop="cropCallback"></simple-crop>
+  </view>
+</view>

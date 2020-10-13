@@ -1,0 +1,104 @@
+<!--pages/myComment/myComment.wxml-->
+<!-- <reload bind:relaod="_relaod" id='reload'></reload> -->
+
+<view class='my_comment'>
+  <view class='com_body'>
+    <view class='com_user'>
+      <view class='user_info'>
+        <image src='{{userInfo.avatar}}' style='width:64rpx;height:61rpx;border-radius:50%;'></image>
+        <text>{{userInfo.nickname}}</text>
+        <icon class='iconfont icon-{{userInfo.level}}'></icon>
+        <!-- <image src='../../static/img/member/level.png' style='width:160rpx;height:52rpx;' mode='aspectFit'></image> -->
+      </view>
+      <view class='con_btn' bindtap='goLink' data-link='../myOrder/myOrder?tid=6&id=type6'>写评论</view>
+    </view>
+    <view class='com_write' wx:if='{{commOrder!=null}}'>
+      <view class='write_title'>
+        没有来得及评价的宝贝，还有机会去评论！
+      </view>
+      <view class='write_imglist'>
+        <image src='{{item.first_img}}' wx:for='{{commOrder}}' wx:key='index' id='{{item.order_id}}' bindtap='goComm' data-num='{{item.order_items.length}}' data-url='../addComment/addComment'></image>
+        <!-- <image src='../../static/img/pro/c_03.jpg'></image>
+        <image src='../../static/img/pro/c_05.jpg'></image>
+        <image src='../../static/img/pro/p_c__09.jpg'></image> -->
+        <view class='null_img' bindtap='goLink' data-link='../myOrder/myOrder?tid=6&id=type6' wx:if='{{order_total>4}}'>
+          <text>查看更多</text>
+        </view>
+      </view>
+    </view>
+    <view class='com_list' wx:if='{{comList.length>0}}'>
+      <view class='com_head'>全部评论</view>
+      <view class='com_info' wx:for='{{comList}}' wx:key='index'>
+        <view class='com_info_head'>
+          <view class='com_users'>
+            <image src='{{userInfo.avatar}}' style='width:64rpx;height:61rpx;border-radius:50%;'></image>
+            <text>{{userInfo.nickname}}</text>
+          </view>
+          <view class='star_level'>
+            <icon class='iconfont icon-star' wx-if="{{item.score<1}}"></icon>
+            <icon class='iconfont icon-xingping light' wx-if="{{item.score>=1}}"></icon>
+            <icon class='iconfont icon-star' wx-if="{{item.score<2}}"></icon>
+            <icon class='iconfont icon-xingping light' wx-if="{{item.score>=2}}"></icon>
+            <icon class='iconfont icon-star' wx-if="{{item.score<3}}"></icon>
+            <icon class='iconfont icon-xingping light' wx-if="{{item.score>=3}}"></icon>
+            <icon class='iconfont icon-star' wx-if="{{item.score<4}}"></icon>
+            <icon class='iconfont icon-xingping light' wx-if="{{item.score>=4}}"></icon>
+            <icon class='iconfont icon-star' wx-if="{{item.score<5}}"></icon>
+            <icon class='iconfont icon-xingping light' wx-if="{{item.score>=5}}"></icon>
+          </view>
+        </view>
+        <view class='com_pro_info'>
+          <text>{{item.createtime}}</text>规格:
+          <!-- 数量:<text>{{item.proNum}}</text> -->
+          <text>{{item.title}}</text>
+        </view>
+        <view class='com_text'>
+          {{item.comment}}
+        </view>
+        <view class='com_img'>
+          <image src='{{com}}' wx:for='{{item.pic}}' wx:key='index' data-index="{{index}}" wx:for-item="com" bindtap='previewImg' data-comid='{{item.id}}'></image>
+        </view>
+        <view class='com_pro_more' bindtap='goLink' data-link='../proDetail/proDetail?type=normal&id={{item.goods_id}}'>
+          <view class='pro_img'>
+            <image src='{{item.goods_image}}'></image>
+          </view>
+          <view class='pro_more_info'>
+            <view class='pro_name'>{{item.name}}</view>
+            <view class='pro_spec'>
+              <!-- 数量:<text>{{item.proNum}}</text> -->
+              规格:
+              <text>{{item.title}}</text>
+            </view>
+            <view class='pro_price'>
+              <text class='price'>{{item.proPrice_n}}</text>
+              <icon class='iconfont icon-jifen1' wx:if='{{item.proScore>0}}'></icon>
+              <!-- <image src='../../static/img/pro/score.png' wx:if='{{item.proScore>0}}'></image> -->
+              <text class='score' wx:if='{{item.proScore>0}}'>{{item.proScore}}</text>
+            </view>
+            <view class='pro_oldprice'>{{item.proPrice_o}}</view>
+          </view>
+        </view>
+        <!-- <view class='com_oper'>
+          <view class='com_oper_info'>
+            浏览
+            <text>{{item.readNum}}</text>次 点赞
+            <text>{{item.zanNum}}</text>次 评论
+            <text>{{item.comNum}}</text>次
+          </view>
+          <view class='com_oper_btn'>
+            <icon class='iconfont icon-bianji'></icon>
+            <text>写评论</text>
+          </view>
+        </view> -->
+      </view>
+      <button type="default" size="default" loading plain hidden='{{comList.length==total}}' class="loading_style">正在加载中，请稍后...</button>
+    </view>
+    <view class='order-foot' wx:if='{{comList.length==total&&total>0}}'>
+      <text>—————— 我是有底线的 ——————</text>
+    </view>
+    <view class='com_list_null' wx:if='{{comList.length<=0}}'>暂无数据</view>
+  </view>
+</view>
+<view class='goIndex' bindtap='goIndex' data-link='../index/index'>
+  <icon class='iconfont icon-home'></icon>
+</view>

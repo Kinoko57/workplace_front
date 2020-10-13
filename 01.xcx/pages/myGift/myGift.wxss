@@ -1,0 +1,111 @@
+/* pages/myGift/myGift.wxss */
+
+.my_gift {
+  background: #f2f2f2;
+  overflow-x: hidden;
+}
+
+.gift_nav {
+  background: #f6f6f6;
+  height: 90rpx;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 50;
+}
+
+.gift_nav text {
+  width: 50%;
+  display: inline-block;
+  color: #999;
+  font-size: 32rpx;
+  text-align: center;
+  border-bottom: 4rpx solid transparent;
+  border-top: 4rpx solid transparent;
+  height: 82rpx;
+  line-height: 82rpx;
+}
+
+.gift_nav .text_active {
+  border-bottom: 4rpx solid #e21f11;
+  color: #333;
+}
+
+.center {
+  text-align: center;
+}
+
+.gift_list {
+  padding: 30rpx 14rpx;
+  margin-top: 90rpx;
+}
+
+.gift_tips {
+  margin-top: 90rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.gift_list .gift_info {
+  /* background: #fff;
+  padding: 26rpx;
+  border-radius: 20rpx; */
+}
+
+.gift_info .info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 26rpx;
+  border-radius: 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.info .iconfont {
+  font-size: 60rpx;
+  color: #999;
+}
+
+.info text {
+  font-size: 30rpx;
+  /* font-weight: bold; */
+  margin-left: 10rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  width: 400rpx;
+}
+
+.info button {
+  border: 1px solid #808080;
+  border-color: #f06b90;
+  color: #f06b90;
+  background: transparent;
+  border-radius: 20rpx;
+  font-size: 26rpx;
+  width: 160rpx;
+  padding: 4rpx 16rpx;
+  line-height: 1.6;
+}
+
+.info .btn_red {
+  border-color: #f06b90;
+  color: #f06b90;
+  font-size: 24rpx;
+  margin-right: 0;
+}
+
+.order-foot {
+  height: 84rpx;
+  line-height: 84rpx;
+  /* background: #fff; */
+  text-align: center;
+  margin-top: -50rpx;
+}
+
+.order-foot text {
+  font-size: 23.97rpx;
+  color: #bebebe;
+}

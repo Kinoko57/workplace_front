@@ -1,0 +1,32 @@
+<!--pages/myGift/myGift.wxml-->
+<view class='my_gift'>
+  <view class='gift_nav'>
+    <text bindtap='viewGift' class="{{giftType=='2'?'text_active':''}}" id='2'>待领取</text>
+    <text bindtap='viewGift' class="{{giftType=='1'?'text_active':''}}" id='1'>已领取</text>
+  </view>
+  <view class='gift_list' wx:if='{{giftList!=null}}'>
+    <view class='gift_info'>
+      <view class='info' wx:for='{{giftList}}' wx:key='index'>
+        <icon class='iconfont icon-jifen' wx:if='{{item.lottery_type==2}}'></icon>
+        <icon class='iconfont icon-youhuiquan' wx:if='{{item.lottery_type==3}}'></icon>
+        <icon class='iconfont icon-shangpin' wx:if='{{item.lottery_type==1}}'></icon>
+        <text>{{item.name}}</text>
+        <button size='mini' class='btn_red' wx:if='{{item.status==0}}' bindtap='usegift' id='{{item.id}}' data-pid='{{item.lottery_id}}' data-type='{{item.lottery_type}}'>立即领取</button>
+        <button size='mini' class='btn_red' wx:if='{{item.status==1}}'>已领取</button>
+        <button size='mini' class='btn_red' wx:if='{{item.status==2}}'>已下单</button>
+        <button size='mini' class='btn_red' wx:if='{{item.status==3}}'>已取消</button>
+        <button size='mini' class='btn_red' wx:if='{{item.status==4}}'>已过期</button>
+      </view>
+      <button type="default" size="default" loading plain hidden='{{giftList.length==total}}' class="loading_style">正在加载中，请稍后...</button>
+    </view>
+  </view>
+  <view class='order-foot' hidden='{{giftList.length<total}}'>
+    <text>—————— 我是有底线的 ——————</text>
+  </view>
+  <view class='gift_list center' wx:if='{{giftList==null}}'>
+    <text class='gift_tips'>当前分类暂无数据</text>
+  </view>
+</view>
+<view class='goIndex' bindtap='goIndex' data-link='../index/index'>
+  <icon class='iconfont icon-home'></icon>
+</view>

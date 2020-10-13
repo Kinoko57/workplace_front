@@ -1,0 +1,168 @@
+<!--pages/flashSale/flashSale.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="flash_bg skeleton">
+  <navbar page-name="限时促销" bg-color="{{topBg}}" icon-color="#ffffff" show-search='false' show-title='true'
+    show-nav='true' show-index='false'></navbar>
+  <image src="{{staticUrl}}flash/flash_bg.jpg" class="flash_bg_img" style="height:{{navHeight}}px"></image>
+  <view class="flash_body">
+    <view style="height:36rpx;width:100%"></view>
+    <view class="flash_body_time">
+      <scroll-view class="flash_timelist" scroll-x="true" style="width: 100%">
+        <view class="flash_time_block {{item.id==choseId?'time_block_active':''}}" wx:for="{{timeList}}" wx:key="index"
+          bindtap="choseActivity" data-id="{{item.id}}" data-status="{{item.status}}">
+          <image src="{{staticUrl}}flash/flash_l.png" wx:if="{{item.id==choseId&&choseId==1}}" class="new_l"></image>
+          <view class="time">{{item.text}}</view>
+          <image src="{{staticUrl}}flash/flash_r.png" class="new_r" wx:if="{{item.id==choseId&&choseId==1}}"></image>
+          <image src="{{staticUrl}}flash/flash_l.png" wx:if="{{item.id==choseId&&choseId==3}}" class="history"></image>
+          <image src="{{staticUrl}}flash/flash_r.png" class="future" wx:if="{{item.id==choseId&&choseId==2}}"></image>
+        </view>
+      </scroll-view>
+      <view>
+      </view>
+    </view>
+    <view class="flash_scroll">
+      <swiper circular='true' autoplay='true' interval='3000' class="skeleton-rect" wx:if="{{group_scroll.length>0}}"
+        vertical="true">
+        <block wx:for="{{group_scroll}}" wx:key="index">
+          <swiper-item>
+            <view class="flash_scroll_text">
+              <image src="{{item.image}}"></image>
+              <text>{{item.username}}抢到了{{item.goods_name}}</text>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class="flash_pro_body">
+      <scroll-view class="flash_prolist" style="height:{{scrollHeight}}px" scroll-y bindscroll="scroll"
+        bindscrolltolower="{{is_load?'loadMore':''}}" scroll-top='{{topNum}}' scroll-with-animation='true'>
+        <view class="flash_01">
+          <view class="activity_block" wx:for="{{activityList}}" wx:key="index">
+            <view class="act_pro" bindtap="goLink" data-link='../flashDetail/flashDetail?id={{item.id}}'>
+              <view class="act_pro_left">
+                <image src="{{item.tag.ico_img}}"
+                  wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==1}}" class="pro_icon"
+                  style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+                </image>
+                <image src="{{item.tag.ico_img}}"
+                  wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==2}}" class="pro_icon"
+                  style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+                </image>
+                <image src="{{item.tag.ico_img}}"
+                  wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==3}}" class="pro_icon"
+                  style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+                </image>
+                <image src="{{item.tag.ico_img}}"
+                  wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==4}}" class="pro_icon"
+                  style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+                </image>
+                <image src="{{item.image}}" class="pro_main_image"></image>
+                <image src="{{item.tag.min_img}}" wx:if="{{item.tag.min_img!=undefined&&item.tag.min_img!=''}}"
+                  class="pro_min_frame"></image>
+              </view>
+              <view class="act_pro_right">
+                <view class="act_pro_name">
+                  <text>{{item.goods_name}}</text>
+                </view>
+                <view class="act_pro_tips" wx:if="{{item.tag.button_tag!=undefined&&item.tag.button_tag.length>0}}">
+                  <text class="act_pro_dis" style="border:1px solid {{bg_color}};color:{{bg_color}}" wx:for="{{item.tag.button_tag}}" wx:key="index" wx:if="{{index<3}}">{{item.text}}</text>
+                </view>
+                <view class="act_pro_progress">
+                  <!-- 进度条小于100 -->
+                  <view class="sale_progress" wx:if="{{((item.total_stock-item.count)/item.total_stock)*100<100}}"
+                    style='width:{{((item.total_stock-item.count)/item.total_stock)*100}}%;background:{{line_bg_color}}'>
+                    <text class="sale_num">已抢{{item.total_stock-item.count}}件</text>
+                  </view>
+                  <text class="whole_num"
+                    wx:if="{{((item.total_stock-item.count)/item.total_stock)*100<100}}">{{item.percentage*100}}%</text>
+                  <!-- 进度条大于100 -->
+                  <view class="sale_progress" wx:if="{{((item.total_stock-item.count)/item.total_stock)*100>=100}}"
+                    style='width:100%;background:{{line_bg_color}}'>
+                    <text class="sale_num">已抢{{item.total_stock-item.count}}件</text>
+                  </view>
+                  <text class="whole_num"
+                    wx:if="{{((item.total_stock-item.count)/item.total_stock)*100>=100}}">100%</text>
+                </view>
+                <view class="act_time">
+                  <view class="act_time_left" wx:if="{{choseId==2}}">活动已结束</view>
+                  <view class="act_time_right" wx:if="{{choseId!=2}}">
+                    <text class="time_bg">{{saleTimeList[index].day}}</text>
+                    <text>天</text>
+                    <text class="time_bg">{{saleTimeList[index].hou}}</text>
+                    <text>:</text>
+                    <text class="time_bg">{{saleTimeList[index].min}}</text>
+                    <text>:</text>
+                    <text class="time_bg">{{saleTimeList[index].sec}}</text>
+                  </view>
+                  <view class="act_time_left" wx:if="{{choseId==1}}">后结束</view>
+                  <view class="act_time_left" wx:if="{{choseId==3}}">后开始</view>
+                </view>
+                <view class="act_pro_price">
+                  <view class="pro_price">
+                    <view class="sale_price">￥<text class="sale">{{filters.formatMoney(item.buy_price)}}</text></view>
+                    <view class="market_price">￥{{filters.formatMoney(item.market_price)}}</view>
+                  </view>
+                  <view class="pro_btn {{choseId==2?'disable_btn bg_theme_gray':''}}" wx:if="{{choseId==2}}">已结束</view>
+                  <view class="pro_btn" wx:if="{{choseId==1}}" style="background:{{line_bg_color}}">去抢购</view>
+                  <view class="pro_btn {{choseId==3?'wait_btn':''}}" style="background:{{line_bg_color}}"
+                    wx:if="{{choseId==3}}">未开始</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- <view class="i_recomend_list activity_list_line">
+          <view class="activity_block" wx:for="{{activityList}}" wx:key="index"  bindtap="goLink" data-link='../flashDetail/flashDetail?id={{item.id}}'>
+            <view class="pro_image">
+              <view class="pro_image_fixed">
+                <text wx:if="{{choseId==3}}">距开始</text>
+                <text wx:if="{{choseId==1}}">距结束</text>
+                <text wx:if="{{choseId==2}}">活动已结束</text>
+                <view  wx:if="{{choseId!=2}}">
+                  <text class="time_bg">12</text>
+                  <text>天</text>
+                  <text class="time_bg">1</text>
+                  <text>时</text>
+                  <text class="time_bg">2</text>
+                  <text>分</text>
+                  <text class="time_bg">30</text>
+                  <text>秒</text>
+                </view>
+              </view>
+              <view class="pro_image_left">
+                <text class="pro_fixed_left_top">限购{{item.purchase_limits}}份</text>
+              </view>
+              <image src="{{item.image}}"></image>
+            </view>
+            <view class="pro_bottom">
+              <view class="pro_title">
+                <text>{{item.goods_name}}</text>
+              </view>
+              <view class="pro_discount">
+                <text>前100名五折</text>
+              </view>
+              <view class="pro_price_btn">
+                <view class="pro_price_left">
+                  <text class="price_icon">￥</text>
+                  <text class="price">{{filters.formatMoney(item.buy_price)}}</text>
+                  <text>剩余{{item.count}}/{{item.total_stock}}</text>
+                </view>
+                <view class="pro_btn">
+                  <button class="btn_clear " wx:if="{{choseId==2}}" hover-class="none" style="background:#C1C1C1;box-shadow:0rpx 0rpx 27rpx 0rpx #ccc">已结束</button>
+                  <button class="btn_clear " wx:if="{{choseId==1}}" hover-class="none" style="background:#cd2f54;box-shadow:0rpx 0rpx 27rpx 0rpx #cd2f5449">去抢购</button>
+                  <button class="btn_clear " wx:if="{{choseId==3}}" hover-class="none" style="background:#cd2f54;box-shadow:0rpx 0rpx 27rpx 0rpx #cd2f5449">未开始</button>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view> -->
+        <null-data id="null-data" loadingText="加载中..." loadingShow="{{hasData&&is_load}}" bottomText="已经到底啦~"
+          bottomShow="{{is_end&&hasData}}" dataText="暂无活动" dataShow="{{!hasData}}"></null-data>
+      </scroll-view>
+    </view>
+  </view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+  <icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

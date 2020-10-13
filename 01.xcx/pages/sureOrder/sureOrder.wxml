@@ -1,0 +1,181 @@
+<!--pages/sureOrder/sureOrder.wxml-->
+<!-- <reload bind:relaod="_relaod" id='reload'></reload> -->
+<view class='sure_order'>
+  <view class='sure_body'>
+    <view class='sure_head'>
+      <view class='sure_addr' bindtap='choseAdd' wx:for='{{staticAdd}}' wx:key='index' wx:if='{{chooseAdd==0}}'>
+        <view class='sure_addr_info'>
+          <icon class='iconfont icon-address'></icon>
+          <view style='margin-left:20rpx;'>
+            <text class='add_more'>{{item.ship_name}}</text>
+            <text style='margin-left:30rpx;'>{{item.ship_mobile}}</text>
+            <text class='static' wx:if="{{item.is_default=='1'}}">默认</text>
+            <view>
+              <text style='margin-right:10rpx'>{{item.ship_area}}</text>{{item.ship_addr}}</view>
+          </view>
+        </view>
+        <icon class='iconfont icon-youjiantou1'></icon>
+      </view>
+      <view class='sure_addr' bindtap='choseAdd' wx:if='{{chooseAdd==-1}}'>
+        <icon class='iconfont icon-address' hidden='{{chooseAdd==-1}}'></icon>
+        <!-- <view class='sure_addr_info'>
+          <view class='sure_addr_info'> -->
+        <text class='add_tips'>选择收货地址</text>
+        <!-- </view>
+        </view> -->
+        <icon class='iconfont icon-youjiantou1'></icon>
+      </view>
+      <image src='../../static/img/sale/s_bg.jpg'></image>
+    </view>
+    <view class='sure_pro' wx:for='{{proDetail}}' wx:key='index' wx:for-item="order">
+      <view class="sure_pro_title">
+        <text wx:if="{{order.third_id!=0}}" class="third_title">{{order.third_name}}</text>
+        <text wx:if="{{order.third_id==0}}" class="third_title">平台自营</text>
+        <text wx:if="{{order.third_id!=0}}" class="order_tag">包邮</text>
+        <text wx:if="{{order.third_id==0&&static_freight<=0}}" class="order_tag">包邮</text>
+      </view>
+      <view class="order_pro" wx:for="{{order.rows_product}}" wx:key='index'>
+        <view class='car_pro'>
+          <view class='pro_img'>
+            <image src='{{item.goods.img}}'></image>
+          </view>
+          <view class='pro_info'>
+            <view class='pro_title'>{{item.name}}</view>
+            <view class='pro_spec'>
+              <view class='pro_weight' wx:if="{{item.title!=''}}">
+                <text>规格:{{item.title}}</text>
+              </view>
+              <view class='pro_price'>
+                <view style='display:inline-flex;align-items:center;'>
+                  <view class='pro_inter_img' wx:if='{{item.deal_type!=1}}'>
+                    <icon class='iconfont icon-jifen1'></icon>
+                  </view>
+                  <text class='pro_integral' wx:if='{{item.deal_type==2||item.deal_type==3}}'>{{item.point}}</text>
+                  <text class='pro_integral' wx:if='{{item.deal_type>=4}}'>{{item.point}}</text>
+                  <text class='pro_integral_add' wx:if='{{item.deal_type>=4}}'>+</text>
+                  <text class='peo_nowprice' wx:if='{{item.deal_type>=4}}'>￥{{item.price_sell}}</text>
+                  <text class='peo_nowprice' wx:if='{{item.deal_type==1}}'>￥{{item.price_sell}}</text>
+                </view>
+                <view class='pro_icon' style='display:inline-flex;align-items:center;'>
+                  <text>x{{item.quantity}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- <view class='pro_num'>
+          <text>购买数量</text>
+          <view class='pro_icon'>
+            <text>{{item.quantity}}</text>
+          </view>
+        </view> -->
+      </view>
+      <view class="pro_block">
+        <text>商品总额</text>
+        <view class='pro_tips'>
+          <text>￥{{order.total_amount}}</text>
+        </view>
+      </view>
+      <view class="pro_block" wx:if="{{order.third_id==0}}">
+        <text>积分总额</text>
+        <view class='pro_tips'>
+          <text>{{order.total_point}}</text>
+        </view>
+      </view>
+      <view class="pro_block">
+        <text>商品运费</text>
+        <view class='pro_tips'>
+          <text wx:if="{{order.third_id!=0}}">￥{{order.cost_freight}}</text>
+          <text wx:if="{{order.third_id==0&&static_freight>0}}">￥{{static_freight}}</text>
+          <text wx:if="{{order.third_id==0&&static_freight<=0}}">￥0.00</text>
+        </view>
+      </view>
+    </view>
+    <view class='sure_other'>
+      <view class='other_blcok' wx:if="{{orderType=='normal'&&hiddenCou==false}}">
+        <view class='type'>
+          <text>优惠券</text>
+        </view>
+        <view bindtap='golink' data-url='../useCoupon/useCoupon'>
+          <text>{{couInfo}}</text>
+          <icon class='iconfont icon-youjiantou1'></icon>
+        </view>
+      </view>
+      <!-- <view class='other_blcok' wx:if='{{!isFree}}'>
+        <view class='type'>
+          <text>配送物流</text>
+        </view>
+        <view style='display:inline-flex;'>
+          <picker bindchange="bindPickerChange" value="{{index}}" range="{{viewTrack}}" style="font-size:24rpx;color:#555;font-family:'DIN';" name="picker">
+            <view class="picker">
+              {{trackName}}
+            </view>
+          </picker>
+          <icon class='iconfont icon-youjiantou1'></icon>
+        </view>
+      </view> -->
+      <!-- <view class='other_blcok' wx:if="{{orderType=='flash'||orderType=='group'}}">
+        <view class='type'>
+          <text>限时优惠（或团购等）</text>
+        </view>
+        <view>
+          <text>已减500积分，已减29元</text>
+          <icon class='iconfont icon-youjiantou1'></icon>
+        </view>
+      </view> -->
+      <view class='other_blcok'>
+        <view class='type'>
+          <text>运费</text>
+        </view>
+        <view>
+          <text wx:if='{{static_freight>0}}'>￥{{static_freight}}</text>
+          <text wx:if='{{static_freight==0}}'>免运费</text>
+          <!-- <icon class='iconfont icon-youjiantou1'></icon> -->
+        </view>
+      </view>
+      <view class='other_blcok'>
+        <view class='type'>
+          <text>支付方式</text>
+        </view>
+        <view>
+          <image src='../../static/img/sale/s_pay.jpg' style='width:155rpx;height:48rpx;vertical-align:middle;'></image>
+          <!-- <icon class='iconfont icon-youjiantou1'></icon> -->
+        </view>
+      </view>
+      <view class='other_blcok' wx:if="{{orderDetail.total_score!=null&&orderDetail.total_score>0||orderType=='birthday'}}">
+        <view class='type'>
+          <text>应付积分</text>
+        </view>
+        <view>
+          <text class='sure_score'>{{orderDetail.total_score}}积分</text>
+        </view>
+      </view>
+      <view class='other_blcok'>
+        <view class='type'>
+          <text>应付总额</text>
+        </view>
+        <view>
+          <text class='sure_price'>￥{{orderDetail.total_price}}</text>
+        </view>
+      </view>
+      <!-- <view class='other_blcok'>
+        <view class='type'>
+          <text>买家留言：</text>
+        </view>
+        <view style='width:500rpx;'>
+          <input value='{{order_memo}}' placeholder="选填：填写内容已与卖家确认" bindinput='addInfo'></input>
+        </view>
+      </view> -->
+    </view>
+  </view>
+  <view class="null_height  {{is_iphonex?'null_height_iphonex':''}}"></view>
+  <form bindsubmit="payOver" report-submit="true">
+    <view class="sure_btn {{is_iphonex?'sure_btn_height':''}}">
+      <button formType="submit">确认支付</button>
+      <!-- <view class='surecountdown'>
+      <icon class='iconfont icon-jinriqianggou'></icon>
+      <text>59:59</text>
+    </view> -->
+    </view>
+  </form>
+</view>

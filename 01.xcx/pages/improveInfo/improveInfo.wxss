@@ -1,0 +1,124 @@
+/* pages/improveInfo/improveInfo.wxss */
+
+page {
+  background: #fff;
+}
+
+.improveInfo {
+  text-align: center;
+}
+
+.jump {
+  text-align: right;
+  font-size: 30rpx;font-weight: bold;
+  color: #666;
+  margin-top: 58rpx;
+  margin-right: 58rpx;
+}
+
+.improve_title {
+  margin-top: 60rpx;
+}
+
+.improve_title text {
+  color: #343434;
+  font-size: 44rpx;
+  display: inline;
+  /* font-family: Arial, Helvetica, sans-serif, SimHei; */
+}
+
+.improve_tips {
+  margin-top: 28rpx;
+}
+
+.improve_tips text {
+  color: #8f8f8f;
+  font-size: 26rpx;
+  display: inline;
+  line-height: 10rpx;
+  /* font-family: Arial, Helvetica, sans-serif, SimHei; */
+}
+
+.improve_body {
+  padding: 0 78rpx;
+  margin-top: 60rpx;
+}
+
+.section {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 12rpx 0;
+}
+
+.section:first-child {
+  border-bottom: 1px solid #e4e4e4;
+  margin-bottom: 64rpx;
+}
+
+.section .info_title {
+  font-size: 30rpx;
+  color: #808080;
+}
+
+.section picker text {
+  font-size: 24rpx;
+  color: #b3b3b3;
+  margin-right: 70rpx;
+}
+
+.section icon {
+  color: #bebebe;
+  display: inline-flex;
+  font-size: 26rpx;
+}
+
+.radio-group text {
+  color: #808080;
+  font-size: 30rpx;
+  margin-left: 12rpx;
+  margin-right: 16rpx;
+}
+
+.next {
+  margin-top: 110rpx;
+}
+
+.next  button {
+  width: 460rpx;
+  height: 86rpx;
+  line-height: 86rpx;
+  border: none;
+  background: #ff8d97;
+  color: #fff;
+  outline: none;
+  font-size: 40rpx;
+  border-radius: 20rpx;
+}
+
+/* radio的默认样式 */
+
+radio .wx-radio-input {
+  border-radius: 50%;
+  width: 34rpx;
+  height: 34rpx;
+  border: 1px solid #a1a1a1;
+}
+
+radio .wx-radio-input.wx-radio-input-checked {
+  border: 1px solid transparent;
+  background: #ff8d97;
+}
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+  border-radius: 50;
+  width: 34rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  text-align: center;
+  font-size: 30rpx;font-weight: bold;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}

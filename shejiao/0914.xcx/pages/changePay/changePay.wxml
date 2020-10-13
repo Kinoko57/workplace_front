@@ -1,0 +1,31 @@
+<!--pages/changePay/changePay.wxml-->
+<view class="pass_bg">
+    <navbar page-name="{{page_name}}" bg-color="#fff" icon-color="#333333" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+   <view class="pass_body">
+        <view class="pass_body_titi" wx:if="{{pay_password==0&&default_once=='one'}}">输入支付密码</view>
+        <view class="pass_body_titi" wx:if="{{pay_password==1&&next_check=='first'}}">输入当前支付密码，以身份验证</view>
+        <view class="pass_body_titi" wx:if="{{next_check=='two'}}">输入新的支付密码</view>
+        <view class="pass_body_titi" wx:if="{{next_check=='end'||default_once=='two'}}">再次确认支付密码</view>
+        <view class='content'>
+        <!-- 公共第一步 -->
+          <block wx:for="{{length}}" wx:key="item" wx:if="{{(pay_password==0&&default_once=='one')||(pay_password!=0&&next_check=='first')}}" >
+            <input class='iptbox {{index==value.length?"iptbox_border":""}}' type='number' value="{{value.length>=index+1?value[index]:''}}" disabled password='{{ispassword}}' catchtap='tap'></input>
+          </block>
+          <!-- 初始设置密码 -->
+          <block wx:for="{{length}}" wx:key="item" wx:if="{{pay_password==0&&default_once!='one'}}" >
+            <input class='iptbox {{index==default_once_value.length?"iptbox_border":""}}' type='number' value="{{default_once_value.length>=index+1?default_once_value[index]:''}}" disabled password='{{ispassword}}' catchtap='tap'></input>
+          </block>
+          <!-- 修改密码 -->
+          <block wx:for="{{length}}" wx:key="item"  wx:if="{{pay_password!=0&&next_check=='two'}}">
+            <input class='iptbox {{index==new_value.length?"iptbox_border":""}}' wx:if="{{next_check=='two'}}" type='number' value="{{new_value.length>=index+1?new_value[index]:''}}" disabled password='{{ispassword}}' catchtap='tap'></input>
+          </block>
+          <block wx:for="{{length}}" wx:key="item"  wx:if="{{pay_password!=0&&next_check=='end'}}" >
+            <input class='iptbox {{index==next_value.length?"iptbox_border":""}}' type='number' value="{{next_value.length>=index+1?next_value[index]:''}}" disabled password='{{ispassword}}' catchtap='tap'></input>
+          </block>
+        </view>
+        <input name="password" type='number' password="{{ispassword}}" class='ipt' maxlength="{{length}}" focus="{{isFocus}}" value="{{hide_value}}" bindinput="focus"></input>  
+        <view class="save_btn" style="background:{{line_bg_color}}" wx:if="{{(pay_password!=0&&next_check!='end')||(pay_password==0&&default_once=='one')}}" bindtap="goNext">下一步</view>
+        <view class="save_btn" style="background:{{line_bg_color}}" wx:if="{{pay_password!=0&&next_check=='end'}}" bindtap="goNext">保存</view>
+        <view class="save_btn" style="background:{{line_bg_color}}" bindtap="savePass" wx:if="{{pay_password==0&&default_once=='two'}}">保存</view>
+   </view>
+</view>

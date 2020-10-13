@@ -1,0 +1,64 @@
+/* pages/manager/manager.wxss */
+page{
+  background: #f9f9f9;
+}
+
+.ma_cont{
+  padding: 40rpx;
+  background: #fff;
+  width:550rpx;
+  height:760rpx;
+  margin: 100rpx auto 0;
+  border-radius: 20rpx;
+}
+.ma_avatar{
+  display: flex;
+  align-items: center;
+}
+.ma_avatar image{
+ width: 124rpx;
+ height: 124rpx;
+ border-radius: 8rpx;
+ margin-right: 30rpx;
+}
+.ma_avatar .ma_avatat_info text:nth-child(1){
+  display: block;
+  color: #333;
+  font-size: 42rpx;
+  padding-bottom: 15rpx;
+
+}
+.ma_avatar .ma_avatat_info text:nth-child(2){
+  display: block;
+  color: #999;
+  font-size: 26rpx;
+}
+.ma_wx{
+  text-align: center;
+  padding-top: 46rpx;
+}
+.ma_wx image{
+  width: 540rpx;
+  height: 540rpx;
+}
+.ma_wx view{
+ font-size: 26rpx;
+ color: #999;
+padding-top: 20rpx;
+ text-align: center;
+}
+.ma_opera{
+ display: flex;
+ justify-content: center;
+ padding-top: 36rpx;
+}
+.ma_opera .btn{
+  width: 304rpx;
+  height:80rpx;
+  color: #fff;
+  font-size:28rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  text-align: center;
+  margin: 0 10rpx;
+}

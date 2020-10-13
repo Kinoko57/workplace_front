@@ -1,0 +1,279 @@
+/* pages/findList/findList.wxss */
+page{
+  background: #f9f9f9;
+}
+.find_body{
+
+}
+.find_body_nav{
+  padding: 24rpx 24rpx 0;
+  background: #ffffff;
+}
+.find_body_top{
+  display: flex;
+  align-items: center;
+  padding-top: 15rpx;
+}
+.find_body_top .find_nav{
+  font-size: 28rpx;
+  color: #BCBCBC;
+}
+.find_body_top .find_nav .find_nav_text{
+  display: inline-block;
+  width: 25%;
+  height: 68rpx;
+  text-align: center;
+}
+.find_body_top .find_nav .find_nav_text .text{
+  padding-bottom: 22rpx;
+  display: block;
+}
+.find_body_top .find_nav .find_nav_text .active{
+  width: 90rpx;
+  height: 4rpx;
+  background:#FF0000 ;
+  display: block;
+  margin: 0 auto;
+}
+.find_body_top .find_nav .find_nav_active{
+  color: #FF0000;
+  font-size: 34rpx;
+  font-weight: 600;
+}
+.list_search {
+  padding: 10rpx 26rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  width: 93%;
+  z-index: 50;
+}
+.list_search .search {
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 50rpx;
+  background: #f5f5f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 26rpx;
+}
+.list_search .search icon {
+  color: #333;
+  font-size: 34rpx;
+  float: left;
+  display: flex;
+}
+.list_search .search .close {
+  color: #7c7c7c;
+  font-size: 30rpx;
+  font-weight: bold;
+  float: right;
+}
+
+.list_search .search input {
+  font-size: 24rpx;
+  /* width: 500rpx; */
+  width: 90%;
+  height: 60rpx;
+  display: inline-flex;
+  padding-left: 16rpx;
+}
+
+.find_body_bottom{
+  padding: 30rpx 24rpx 0;
+}
+/* 重置样式 */
+.weui-tabs-bar__wrp{
+  height: 0 !important;
+}
+/* 重用样式 */
+.anchorPer_block{
+  -moz-column-count:2;
+  -webkit-column-count:2;
+  column-count:2;
+	-moz-column-gap:20rpx;
+	-webkit-column-gap:20rpx;
+	column-gap:20rpx;
+}
+.anchorPer_block_list{
+  width: 340rpx;
+  -moz-page-break-inside:avoid;
+	-webkit-column-break-inside:avoid;
+	break-inside:avoid;
+  background: #fff;
+  margin-bottom: 25rpx;
+  border-radius:12rpx;
+  overflow: hidden;
+  padding-bottom: 20rpx;
+}
+.anchorPer_block_list_img{
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  width: 340rpx;
+}
+.anchorPer_block_list_img image{
+  width: 340rpx;
+  border-radius: 12rpx 12rpx 0 0;
+}
+.anchorPer_block_list_img video{
+  width: 340rpx;
+  position: relative;
+  border-radius: 12rpx 12rpx 0 0;
+  display: block;
+}
+.anchorPer_block_list_img .video_mask{
+  position: absolute;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.video_mask image{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 50%;
+}
+.anchor_remind{
+  position: absolute;
+  top: 29rpx;
+  right: 26rpx;
+  height: 38rpx;
+  line-height: 38rpx;
+  padding: 0 15rpx;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 18rpx;
+  border-radius: 19rpx;
+  background: rgba(0,0,0,.5);
+}
+.anchor_remind icon{
+  display: inline-flex;
+  font-size: 24rpx;
+  margin-right: 6rpx;
+}
+.anchorPer_block_list_titi{
+  font-size: 24rpx;
+  padding: 18rpx 6rpx 0;
+  color: #333;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.anchorPer_block_list_info{
+  display: flex;
+  align-items: center;
+  padding: 15rpx 6rpx 0;
+  color: #999;
+  justify-content: space-between;
+}
+.anchorPer_block_list_info .anchorPer_block_list_info_l{
+   font-size: 18rpx;
+   display: inline-flex;
+   align-items: center;
+}
+.anchorPer_block_list_info .anchorPer_block_list_info_l image{
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+.anchorPer_block_list_info_r{
+  font-size: 24rpx;
+}
+.anchorPer_block_list_info_r icon{
+  display: inline-flex;
+  font-size: 26rpx;
+  color: #FF0000;
+  margin-right: 15rpx;
+}
+/* 未登录信息 */
+.no_login_block{
+  color: #333;
+  text-align: center;
+  padding-top: 160rpx;
+}
+.no_login{
+  font-size: 40rpx;
+}
+.no_login_little{
+  font-size: 26rpx;
+  padding: 20rpx 0 40rpx;
+}
+.login{
+  width: 500rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  margin: 0 auto;
+  color: #fff;
+  font-size: 28rpx;
+  text-align: center;
+}
+
+/* 主播 */
+.fans_block .fans_block_list{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 140rpx;
+  border-bottom: 1px solid #EAEAEA;
+}
+.fans_block .fans_block_list:last-child{
+  border-bottom:0
+}
+.fans_block .fans_block_list .fans_block_list_l{
+  display: inline-flex;
+  align-items: center;
+}
+.fans_block .fans_block_list .fans_block_list_l image{
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  margin-right: 10rpx;
+}
+.fans_block_list .fans_block_list_l .fans_info{
+  font-size: 18rpx;
+  color: #999;
+}
+.fans_block_list .fans_block_list_l .fans_info text:nth-child(1){
+  display: block;
+  width: 420rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+  font-size: 24rpx;
+}
+.fans_block_list .fans_block_list_l .fans_info text:nth-child(2){
+  padding-top: 10rpx;
+  display: block;
+}
+.fans_block_list_r text{
+  font-size: 24rpx;
+  width: 132rpx;
+  height: 48rpx;
+  color: #999;
+  border-radius: 24rpx;
+  display: block;
+  text-align: center;
+  line-height: 48rpx;
+}
+.fans_block_list_r .follow{
+  border: 1px solid #E5E5E5;
+}
+.fans_block_list_r .each_follow{
+  background: #EAEAEA;
+}
+.fans_block_list_r .come_follow{
+  color: #FF0000;
+  border:1px solid #FF0000
+}

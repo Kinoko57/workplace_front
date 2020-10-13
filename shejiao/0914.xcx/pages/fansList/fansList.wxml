@@ -1,0 +1,43 @@
+<!--pages/fansList/fansList.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="fans_bg skeleton">
+  <navbar page-name="{{fansName}}" bg-color="#ffffff" icon-color="#000000" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class="fans_body">
+    <view class="fans_top">
+      <view class="fans_nav">
+          <text bindtap="choseNav" data-index="0" class="{{activeTab==0?'nav_active':''}}">关注 {{follow_num}}</text>
+          <text  bindtap="choseNav" data-index="1" class="{{activeTab==1?'nav_active':''}}">粉丝 {{fans_num}}</text>
+      </view>
+      <view class="fans_search"  wx:if="{{activeTab==0}}">
+        <view class='search_input'>
+          <icon class='iconfont icon-sousuo'></icon>
+          <input value='{{searchkey}}' bindinput='searchInput' confirm-type="search" bindconfirm='searchList' placeholder="搜索关注人名称"></input>
+        </view>
+      </view>
+    </view>
+      <scroll-view class="anchorPer_scroll" style="height:{{scrollHeight}}px" scroll-y scroll-x lower-threshold='120' bindscrolltolower="loadMore" bindscroll="scroll" scroll-top='{{topNum}}' scroll-with-animation>
+        <view class="fans_block" wx:for="{{list}}" wx:key="index" wx:for-item="blockitem">
+          <view class="fans_block_list" wx:for="{{blockitem}}" wx:key="index">
+            <view class="fans_block_list_l">
+              <image src="{{item.image}}"></image>
+              <view class="fans_info">
+                <text>{{item.nickname}}</text>
+                <text wx:if="{{tabBlock.id==1}}">笔记 · 586 | 推荐自 美甲</text>
+              </view>
+            </view>
+            <view class="fans_block_list_r">
+              <text class="come_follow" wx:if="{{item.is_follow==0&&activeTab==1}}" data-anchor_id='{{item.member_id}}' data-index="{{index}}" bindtap="followView" data-type="follow" data-type='follow'>回关</text>
+              <text class="come_follow" wx:if="{{item.is_follow==2&&activeTab==1}}" data-anchor_id='{{item.member_id}}' data-index="{{index}}" bindtap="followView" data-type="follow" data-type='cancelfollow'>已回关</text>
+              <text wx:if="{{item.is_follow==0&&activeTab==0}}" class="follow" data-anchor_id='{{item.member_id}}' bindtap="followView" data-type='follow' data-type="fans">未关注</text>
+              <text wx:if="{{item.is_follow==1&&activeTab==0}}" class="follow" data-anchor_id='{{item.member_id}}' bindtap="followView" data-type='cancelfollow' data-type="fans">已关注</text>
+              <text class="each_follow" wx:if="{{item.is_follow==2&&activeTab==0}}" data-anchor_id='{{item.member_id}}' bindtap="followView" data-type='cancelfollow' data-type="fans">互相关注</text>
+            </view>
+          </view>
+        </view>
+        <null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false&&hasData}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无数据" dataShow="{{!hasData}}"></null-data>
+      </scroll-view>
+  </view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+  <icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

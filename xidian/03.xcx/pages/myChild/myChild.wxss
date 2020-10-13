@@ -1,0 +1,212 @@
+/* pages/clientList/clientList.wxss */
+page{
+  background: #f2f2f2;
+}
+.null_data{
+  color: #999;
+  padding-top: 100rpx;
+  width: 100%;
+  text-align: center;
+
+}
+.i_header{
+  /* padding: 20rpx; */
+  /* padding-bottom: 10rpx; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: #f2f2f2;
+  /* border-bottom: 1px solid #ececec; */
+}
+
+.i_header .search{
+  width: 100%;
+  height: 65rpx;
+  display: flex;
+  line-height: 65rpx;
+  border-radius: 50rpx;
+}
+
+.i_header .search .search_left{
+  width: 85%;
+  background: #f6f6f6;
+  border-radius: 46rpx;
+  display: flex;
+  padding-left: 16rpx;
+  position: relative;
+}
+.search_left icon{
+  position: absolute;
+  left:20rpx;
+  color: #333;
+  font-size: 30rpx;
+}
+.search_left input{
+  width: 100%;
+  height: 65rpx;
+  line-height: 65rpx;
+  padding-left: 49rpx;
+  font-size: 24rpx;
+}
+.i_header .search .cancel{
+  width: 15%;
+  text-align: center;
+  font-size: 24rpx;
+}
+.client_Info{
+  background: #f2f2f2;
+  overflow-x: hidden;
+}
+.e_add_body {
+  background: #f2f2f2;
+  margin-top: 10rpx;
+}
+.add_section {
+  /* height: 302rpx; */
+  background: #fff;
+  position: relative;
+  z-index: 1;
+}
+.add_status{
+  position: absolute;
+  z-index: 2;
+  top: 8rpx;
+  right: 26rpx;
+  font-size: 26rpx;
+  width: 200rpx;
+  text-align: right;
+}
+
+.add_section .add_info {
+  padding: 0 26rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 156rpx;
+  position: relative;
+  z-index: 1;
+}
+.add_info_l{
+  display: flex;
+  align-items: center;
+}
+.add_info_l .add_info_l_ku{
+  width: 75rpx;
+  height: 75rpx;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border:1px solid #f56c6c;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  overflow:hidden;
+  margin-right: 24rpx;
+}
+.add_info_l .add_info_l_ku image{
+  width: 75rpx;
+  height: 75rpx;
+  border-radius: 50%;
+}
+.add_info_l .add_info_l_ku_man{
+  border:1px solid #409eff;
+}
+.add_info_l .add_info_l_ku_man icon{
+  font-size: 40rpx;
+  align-items: center;
+  color: #409eff;
+}
+.add_info_l .add_info_l_ku_sex icon{
+  color: #f56c6c;
+  font-size: 40rpx;
+  display: inline-flex;
+  align-items: center;
+}
+.add_info_l .add_info_l_ku_zhong{
+  border:1px solid #999;
+}
+
+
+.add_info .people_name {
+  color:#333;
+  font-size:30rpx;
+  display: inline-block;
+  width:360rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+
+}
+.info_people .peop_tel {
+  color: #352228;
+  font-size: 26rpx;
+}
+.add_info .info_addr {
+  color: #999;
+  font-size: 27rpx;
+}
+.add_edit text {
+  font-size: 27rpx;
+  color: #2d2e30;
+}
+.add_section{
+  margin-bottom: 22rpx;
+  /* padding: 30rpx 0 30rpx; */
+  border-bottom: 1px solid #e4e4e4;
+}
+/* .add_section:first-child{
+  margin-top: 0;
+} */
+.operating {
+  display: flex;
+}
+.operating view{
+  display: flex;
+  align-items: center;
+}
+.operating .oper_icon {
+  width: 35rpx;
+  height: 40rpx;
+  float: left;
+  margin-left: 22rpx;
+}
+.operating text {
+  font-size: 27rpx;
+  color: #2d2e30;
+  float: left;
+  margin-top: 4rpx;
+  margin-left:6rpx;
+}
+.null_section {
+  height: 138rpx;
+}
+.null_section_height {
+  height: 206rpx;
+}
+.add_saveInfo {
+  position: fixed;
+  bottom: 0;
+  height: 164rpx;
+  z-index: 99;
+  width: 100%;
+  background: #f2f2f2;
+}
+.add_saveInfo_height{
+ height: 206rpx;
+}
+ .null {
+  bottom: 80%;
+}
+.add_saveInfo view {
+  width: 460rpx;
+  height: 78rpx;
+  line-height: 78rpx;
+  border: none;
+  color: #fff;
+  outline: none;
+  font-size: 40rpx;
+  border-radius: 20rpx;
+  margin: 20rpx auto 0;
+  text-align: center;
+}

@@ -1,0 +1,86 @@
+<!--pages/lotteryDraw/lotteryDraw.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="lotter_bg skeleton">
+  <navbar page-name="幸运抽奖" bg-color="#5F239B" icon-color="#ffffff" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class="lotter_wraper">
+    <view class="lotter_body">
+      <image  src="{{staticUrl}}lottery/lotter_t.png" class="lotter_body_timg" mode="widthFix"></image>
+      <view class="lotter_num">今天还剩<text class="color_num">5</text>次机会</view>
+      <view class="lotter_block">
+          <!--九宫格大转盘-->
+        <view class="lottery">
+          <view class="lottery-unit lottery-unit-0 {{Jack_pots_select[0]?'select':''}}">
+              <image mode="scaleToFill" src="{{staticUrl}}flash/flash_02.jpg"></image>
+          </view>
+          <view class="lottery-unit lottery-unit-1 {{Jack_pots_select[1]?'select':''}}">
+              <image mode="scaleToFill" src="{{staticUrl}}flash/flash_02.jpg"></image>
+          </view>
+          <view class="lottery-unit lottery-unit-2 {{Jack_pots_select[2]?'select':''}}">
+            <image mode="scaleToFill" src="{{staticUrl}}flash/flash_02.jpg"></image>
+          </view>
+          <view class="lottery-unit lottery-unit-3 {{Jack_pots_select[3]?'select':''}}">
+            <image mode="scaleToFill" src="{{staticUrl}}flash/flash_02.jpg"></image>
+          </view>  
+          <view class="lottery-unit lottery-unit-4 {{Jack_pots_select[4]?'select':''}}">
+            <image mode="scaleToFill" src="{{staticUrl}}flash/flash_02.jpg"></image>
+          </view>    
+          <view class="lottery-unit lottery-unit-5 {{Jack_pots_select[5]?'select':''}}">
+            <image mode="scaleToFill" src="{{staticUrl}}flash/flash_02.jpg"></image>
+          </view>
+          <view class="lottery-unit lottery-unit-6 {{Jack_pots_select[6]?'select':''}}">
+            <image mode="scaleToFill" src="{{staticUrl}}flash/flash_02.jpg"></image>
+          </view>
+          <view class="lottery-unit lottery-unit-7 {{Jack_pots_select[7]?'select':''}}">
+            <image mode="scaleToFill" src="{{staticUrl}}flash/flash_02.jpg"></image>
+          </view>
+          <view class="start" id="start" bindtap='start'>
+            <view>
+              <view>开始</view>
+              <view>抽奖</view>
+            </view>
+            <!-- <image mode="scaleToFill" src="{{staticUrl}}flash/flash_01.png"></image> -->
+          </view>
+        </view>
+        <view class="lotter_block_bg">
+          <image  src="{{staticUrl}}lottery/lotter_c.png" mode="widthFix"></image>
+          <view class="lotter_block_bg_inte color_theme_red">我的积分：2355</view>
+        </view>
+        <!--九宫格大转盘-->
+        <!-- <view>
+        获奖结果：{{result_val}}
+        </view>
+        <view>
+        剩余抽奖次数：{{available_num}}
+        </view> -->
+
+      </view>
+    </view>
+    <view wx:if="{is_iphonex}}" style="height:340rpx;position:relative"></view>
+    <view class="lotter_rules" bindtap="goView">
+      <text>活动规则</text>
+      <image src="{{staticUrl}}lottery/lotter_b.png"></image>
+    </view>
+  </view>
+  <!-- <image src="{{staticUrl}}lottery/lotter_bg.jpg" class="lotter_bg_img"></image> -->
+</view>
+	<!-- 规格弹框 -->
+  <view class="model_bg" wx:if="{{rulesShow}}" bindtap="sureModel" catchtouchmove="ture"></view>
+	<view class="lotter_dia_model model_style" hidden="{{!rulesShow}}" catchtouchmove="ture">
+		<view class="model_title">规则说明</view>
+		<view class="model_body">
+			<scroll-view style="height:40vh;" scroll-y>
+				<view class="lotter_dia_block" wx:for="{{rulesList}}" wx:key="index">
+					<view class="lotter_dia_block_title">
+						<icon class="iconfont icon-dui1-copy-copy color_theme_red"></icon>
+						<text>{{item.name}}</text>
+					</view>
+					<view class="lotter_dia_block_tips">
+						<text>{{item.desc}}</text>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+		<view class="model_footer">
+			<view class="sure_btn" style="background:{{line_bg_color}}" bindtap="sureModel">确认</view>
+		</view>
+	</view>

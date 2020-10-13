@@ -1,0 +1,26 @@
+<!--pages/copyright/copyright.wxml-->
+<view class="copy_right">
+   <view class="copy_cont">
+    <view class="copy_info">
+      <!-- <view class="copy_msg">版本信息</view> -->
+      <image src="../../image/icon/article_img.png"></image>
+      <view class="copy_titi">西点军校</view>
+      <view class="copy_logo">
+        <text class="text">领先</text>
+        <text class="xian"></text>
+        <text class="text">深入</text>
+        <text class="xian"></text>
+        <text class="text">专业</text>
+        <text class="xian"></text>
+        <text class="text">挑战</text>
+        <text class="xian"></text>
+        <text class="text">贴心</text>
+        <text class="xian"></text>
+        <text class="text">安全</text>
+         <text class="xian"></text>
+        <text class="text">温暖</text>
+      </view>
+    </view>
+   </view>
+   <image src="../../image/my/copyright.jpg" class="img_bg"></image>
+</view>

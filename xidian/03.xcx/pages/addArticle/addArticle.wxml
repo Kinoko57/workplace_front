@@ -1,0 +1,42 @@
+<!--pages/addArticle/addArticle.wxml-->
+<view class="add_bg">
+	<view class="add_body">
+		<view class="add_title">
+			<input bindinput="bindValue" id="title" value="{{title}}" placeholder-class="input_placeholder" placeholder="请输入标题" />
+		</view>
+		<view class="add_detail">
+			<textarea bindblur="bindTextAreaBlur" placeholder-class="input_placeholder" auto-height placeholder="温馨提示：正文至少10个字才能发布哦~" maxlength="1000" />
+		</view>
+    <view class="add_type">
+      <view>
+        <icon class="iconfont iconyouhui"></icon>
+        <text>分类</text>
+      </view>
+      <picker bindchange="bindPickerChange" value="{{index}}" range-key="name" range="{{typeList}}">
+        <view class="picker" wx:if="{{index==''}}">
+          <text>点击选择</text>
+          <icon class="iconfont iconright"></icon>
+        </view>
+        <view class="picker" wx:if="{{index!=''}}" style="color: #666;">
+          <text>{{typeList[index].name}}</text>
+          <icon class="iconfont iconright"></icon>
+        </view>
+      </picker>
+    </view>
+    <view class="add_imgs">
+      <view class='img_block' wx:for="{{imgs}}" wx:for-item="item" wx:key="*this">
+        <icon class='iconfont iconguanbi2' data-index="{{index}}" catchtap='delImg'></icon>
+        <text></text>
+        <image src='{{item}}' data-index="{{index}}" bindtap="previewImg"></image>
+      </view>
+      <view class="add_img_stytle" bindtap='addImg' hidden='{{imgs.length==9}}'>
+        <icon class="iconfont iconadd"></icon>
+      </view>
+    </view>
+  </view>
+  <view class="add_btn">
+    <button class="cancel" bindtap="returnBack">取消</button>
+    <button class="sure" bindtap="saveArticle">发布</button>
+  </view>
+
+</view>

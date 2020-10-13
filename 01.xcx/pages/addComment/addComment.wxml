@@ -1,0 +1,99 @@
+<!--pages/addComment/addComment.wxml-->
+<view class='add_com' wx:if='{{!morePro}}'>
+  <view class='addComlist'>
+    <view class='comInfo'>
+      <view class='comPro'>
+        <view class='pro_img'>
+          <image src='{{proInfo.product_img_src}}'></image>
+        </view>
+        <view class='pro_info'>
+          <view class='pro_title'>{{proInfo.name}}</view>
+          <view class='pro_spec'>
+            <view class='pro_price'>
+              <view style='display:flex;align-items:center;'>
+                <view class='pro_inter_img' wx:if='{{proInfo.point>0}}'>
+                  <!-- <image src='../../static/img/pro/score.png'></image> -->
+                  <icon class='iconfont icon-jifen1'></icon>
+                </view>
+                <text class='pro_integral' wx:if='{{proInfo.point>0}}'>{{proInfo.point}}</text>
+                <text class='pro_integral' wx:if='{{proInfo.point>0&&proInfo.price>0}}'>+</text>
+                <text class='peo_nowprice' wx:if='{{proInfo.price>0}}'>¥{{proInfo.price}}</text>
+              </view>
+            </view>
+            <view class='pro_weight'>
+              <text>{{proInfo.title}}*{{proInfo.nums}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='comText'>
+        <textarea bindinput="bindTextAreaBlur" auto-height placeholder="商品是否满足您的期待？说说它的优点或美中不足吧" maxlength='-1' placeholder-class="phcolor" />
+        <view class='com_imgList'>
+          <view class='imgBlock' wx:for="{{imgs}}" wx:for-item="item" wx:key="*this">
+            <icon class='iconfont icon-to-remove' data-index="{{index}}" catchtap='delImg'></icon>
+            <text></text>
+            <image src='{{item}}' data-index="{{index}}" bindtap="previewImg"></image>
+          </view>
+          <icon class='iconfont icon-addpictures addicon' bindtap='addImg' hidden='{{imgs.length==9}}'></icon>
+        </view>
+      </view>
+      <view class='comStar'>
+        <view class='title'>
+          <icon class='iconfont icon-shop'></icon>
+          <text>商品评分：</text>
+        </view>
+        <view class='starInfo'>
+          <view class='starTitle'>
+            <text>商品描述：</text>
+          </view>
+          <view class='star'>
+            <icon class="iconfont {{index<pNum?'icon-xingping light':'icon-star'}}" wx:for='{{5}}' wx:key='index' id='{{index}}' data-type='p' bindtap='choseStar'></icon>
+          </view>
+        </view>
+        <view class='starInfo'>
+          <view class='starTitle'>
+            <text>物流服务：</text>
+          </view>
+          <view class='star'>
+            <icon class="iconfont {{index<wNum?'icon-xingping light':'icon-star'}}" wx:for='{{5}}' wx:key='index' id='{{index}}' data-type='w' bindtap='choseStar'></icon>
+          </view>
+        </view>
+        <view class='starInfo'>
+          <view class='starTitle'>
+            <text>服务评价：</text>
+          </view>
+          <view class='star'>
+            <icon class="iconfont {{index<fNum?'icon-xingping light':'icon-star'}}" wx:for='{{5}}' wx:key='index' id='{{index}}' data-type='f' bindtap='choseStar'></icon>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='comBtn'>
+    <button size='default' bindtap='saveCom' id='{{proInfo.goods_id}}' data-pid='{{proInfo.product_id}}'>完成</button>
+  </view>
+</view>
+<view class='comlist' wx:if='{{morePro}}'>
+  <view class='addComlist'>
+    <view class='comInfo'>
+      <view class='comPro' wx:for='{{orderInfo}}' wx:key='index'>
+        <view class='pro_img'>
+          <image src='{{item.product_img_src}}'></image>
+        </view>
+        <view class='pro_info'>
+          <view class='pro_title'>{{item.name}}</view>
+          <view class='pro_spec'>
+            <view class='pro_weight'>
+              <text>规格：{{item.title}}</text>
+              <text>数量：{{item.nums}}</text>
+            </view>
+            <view class='pro_btn'>
+              <button size='mini' class='btn_red' id='{{item.product_id}}' bindtap='addComm' wx:if='{{item.iscomment==0&&item.is_up!=null}}'>评价晒单</button>
+              <button size='mini' class='btn_default' wx:if='{{item.iscomment==1&&item.is_up!=null}}'>已评价</button>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

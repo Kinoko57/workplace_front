@@ -1,0 +1,62 @@
+<!--pages/spellGroup/spellGroup.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="group_bg skeleton">
+	<view class="group_body">
+		<view class="group_srarch">
+			<view class="i_search_top" bindtap='searchHis'>
+				<icon class='iconfont iconsousuo color_theme_blue'></icon>
+				<input placeholder="请输入课程名称" bindconfirm="searchConfirm" bindinput="searchInput" type="text" data-validator="number" confirm-type="next" value="{{inputSearch}}"></input>
+			</view>
+			<view class="cancel_search" bindtap="cancelSearch">取消</view>
+		</view>
+		<view class="group_block_wraper">
+			<scroll-view class="group_prolist" style="height:{{scrollHeight}}px" scroll-y bindscroll="scroll" bindscrolltolower="{{is_load?'loadMore':''}}" scroll-top='{{topNum}}' scroll-with-animation='true' lower-threshold='120'>
+				<view class="hot_lists" wx:if="{{col1.length>0}}">
+						<view class="hot_block_left">
+							<view class="hot_block" wx:for="{{col1}}" wx:key="index" bindtap="goLink" data-type="{{item.search_type}}" data-id="{{item.id}}">
+								<view class="hot_img">
+									<image src="{{item.image[0]}}" class="skeleton-rect" mode="widthFix"></image>
+								</view>
+								<view class="hot_title skeleton-rect">
+									<text class="bg_theme_blue group_name_text" wx:if="{{item.search_type==2}}">拼团</text>
+						      <text class="bg_theme_blue group_name_text" wx:if="{{item.search_type==1}}">课程</text>
+						      <text class="bg_theme_blue group_name_text" wx:if="{{item.search_type==3}}">动态</text>
+						      <text class="search_titi">{{item.name}}</text>
+								</view>
+							</view>
+						</view>
+						<view class="hot_block_right">
+							<view class="hot_block" wx:for="{{col2}}" wx:key="index" bindtap="goLink" data-type="{{item.search_type}}" data-id="{{item.id}}">
+								<view class="hot_img">
+									<image src="{{item.image[0]}}" class="skeleton-rect" mode="widthFix"></image>
+								</view>
+								<view class="hot_title skeleton-rect">
+									<text class="bg_theme_blue group_name_text" wx:if="{{item.search_type==2}}">拼团</text>
+						      <text class="bg_theme_blue group_name_text" wx:if="{{item.search_type==1}}">课程</text>
+						      <text class="bg_theme_blue group_name_text" wx:if="{{item.search_type==3}}">动态</text>
+						      <text class="search_titi">{{item.name}}</text>
+								</view>
+							</view>
+						</view>
+					</view>
+				<!-- <view class="group_block" wx:for="{{groupList}}" wx:key="index" wx:if="{{groupList.length>0}}" bindtap="goLink" data-link='../groupDetail/groupDetail?id={{item.id}}'>
+					<view class="group_banner">
+						<image src="{{item.image[0]}}"></image>
+					</view>
+					<view class="group_name">
+						<text class="bg_theme_blue group_name_text" wx:if="{{item.search_type==1}}">拼团</text>
+						<text class="bg_theme_blue group_name_text" wx:if="{{item.search_type==2}}">课程</text>
+						<text class="bg_theme_blue group_name_text" wx:if="{{item.search_type==3}}">动态</text>
+						<text>{{item.title}}</text>
+					</view>
+				</view> -->
+				<null-data id="null-data" loadingText="加载中..." loadingShow="{{hasData&&is_load}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无数据" dataShow="{{!hasData}}"></null-data>
+			</scroll-view>
+		</view>
+	</view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+  <icon class="iconfont iconhuidaodingbuxianxing"></icon>
+</view>

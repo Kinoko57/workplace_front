@@ -1,0 +1,356 @@
+/* pages/myOrder/myOrder.wxss */
+@import '../footer/footer.wxss';
+
+.myOrder {
+  /* padding: 0 26rpx; *//* font-family: SimHei; *//* background: #ededed; */
+  overflow-x: hidden;
+}
+
+.order_header {
+  text-align: center;
+  /* padding-top: 40rpx; */
+  background: #ff8d97;
+  height: 94rpx;
+  line-height: 94rpx;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+}
+
+.order_header  icon {
+  float: left;
+  padding-left: 13px;
+  color: #fff;
+}
+
+.order_header text {
+  color: #fff;
+  font-size: 38rpx;
+  margin-left: -26rpx;
+}
+
+.order_body {
+  height: 100%;
+  margin-bottom: 98rpx;
+}
+
+.order_type {
+  height: 88rpx;
+  background: #fff;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid #dadada;
+  width: 100%;
+  white-space: nowrap;
+  position: fixed;
+  /* top: 94rpx; */
+  z-index: 50;
+}
+
+.order_type text {
+  font-size: 30rpx;
+  /* font-weight: bold; */
+  color: #444;
+  padding: 0 21rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  /* width: 104rpx; */
+  display: inline-block;
+  text-align: center;
+  border-bottom: 5rpx solid transparent;
+  border-top: 5rpx solid transparent;
+}
+
+.order_type .text_active {
+  border-bottom: 5rpx solid #ff8d97;
+}
+
+.order_list {
+  height: 100%;
+  padding-top: 94rpx;
+}
+
+.order_list_null {
+  height: 100%;
+  padding-top: 130rpx;
+  text-align: center;
+}
+
+.order_list_null text {
+  font-size: 28rpx;
+  color: #555;
+  display: block;
+}
+
+.order_list_null .btn_red {
+  margin-top: 20rpx;
+  display: inline-flex;
+  height: 66rpx;
+  line-height: 66rpx;
+  border: none;
+  background: #ff8d97;
+  color: #fff;
+  outline: none;
+  font-size: 32rpx;
+  border-radius: 20rpx;
+}
+
+.order_list .order_single {
+  /* height: 520rpx; */
+  background: #fff;
+  margin-bottom: 22rpx;
+}
+
+/* 单个订单的订单号和订单状态 */
+
+.order_single .order_head {
+  height: 27rpx;
+  margin: 0 24rpx;
+  padding-top: 35rpx;
+  padding-bottom: 18rpx;
+}
+
+.order_head .order_code {
+  color: #515151;
+  font-size: 24rpx;
+  float: left;
+}
+.order_head .order_code .order_tag{
+  height: 24rpx;
+  line-height: 24rpx;
+  border: 2rpx solid #ff8d97;
+  font-size: 20rpx;
+  color: #ff8d97;
+  border-radius: 5rpx;
+  display: inline-block;
+  text-align: center;
+  padding:  2rpx 6rpx;
+  margin-right: 8rpx;
+}
+.order_head .order_code text {
+  font-family: 'DIN';
+}
+
+.order_head .order_states {
+  color: #ff8d97;
+  font-size: 30rpx;
+  /* font-weight: bold; */
+  float: right;
+}
+
+.order_states text {
+  color: #dfdfdf;
+}
+
+.order_states view {
+  float: left;
+  padding: 0 20rpx;
+}
+
+.order_states .delOrder {
+  float: left;
+}
+
+.order_states .delOrder image {
+  width: 34rpx;
+  height: 30rpx;
+}
+
+/* 订单商品信息 */
+
+.order_single .order_pro_info {
+  /* height: 252rpx;
+  background: #f8f8f8; */
+  background: #f8f8f8;
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+}
+
+.order_pro_info .pro_img {
+  float: left;
+  /* margin-top: 40rpx; */
+  margin-left: 18rpx;
+  margin-right: 30rpx;
+}
+
+.order_pro_info .pro_img image {
+  width: 190rpx;
+  height: 190rpx;
+}
+
+.order_pro_info .pro_info {
+  float: left;
+  width: 440rpx;
+}
+
+.pro_info .pro_title {
+  /* width: 400rpx; */
+  font-size: 24rpx;
+  color: #444;
+  /* margin-top: 50rpx; */
+  border-radius: 10rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.pro_info .title_icon {
+  background: #ff8d97;
+  height: 26rpx;
+  padding: 0 6rpx;
+  font-size: 20rpx;
+  color: #fff;
+  border-radius: 8rpx;
+  line-height: 26rpx;
+  text-align: center;
+  display: inline-block;
+  margin-right: 10rpx;
+}
+
+.pro_info .pro_color {
+  /* width: 400rpx; */
+  font-size: 20rpx;
+  color: #999;
+  margin: 10rpx 0;
+}
+
+.pro_info .pro_spec {
+  /* width: 490rpx; */
+  overflow: hidden;
+  /* margin-top: 30rpx; */
+  height: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pro_spec .pro_price {
+  font-family: 'DIN';
+  width: 280rpx;
+  display: flex;
+  align-items: center;
+}
+
+.pro_price .peo_nowprice {
+  color: #ff8d97;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.pro_price .pro_integral {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #ff8d97;
+  /* font-weight: bold; *//* margin-left: 8rpx; */
+}
+
+.pro_price .pro_inter_img {
+  display: flex;
+  align-items: flex-end;
+  /* margin-left: 10rpx; */
+}
+
+.pro_price .pro_inter_img .iconfont {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #ff8d97;
+  display: inline-flex;
+}
+
+/* .pro_price .pro_inter_img image {
+  width: 24rpx;
+  height: 20rpx;
+} */
+
+.pro_price .pro_orig {
+  font-size: 22rpx;
+  color: #7c7c7c;
+  text-decoration: line-through;
+}
+
+.pro_spec .pro_num {
+  font-size: 20rpx;
+  color: #999;
+  margin-right: 8rpx;
+}
+
+.order_single .order_info {
+  color: #555;
+  font-size: 24rpx;
+  text-align: right;
+  margin-top: 34rpx;
+  padding-bottom: 24rpx;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.order_info text {
+  color: #ff8d97;
+  font-weight: bold;
+  font-size: 30rpx;
+  font-family: 'DIN';
+}
+.order_info .iconfont{
+  color: #ff8d97;
+}
+.order_single  .order_child{
+  background:#f8f8f8;
+  font-size:22rpx;
+  padding: 10rpx 24rpx;
+}
+
+.order_single .order_oper {
+  /* margin-top: 25rpx; */
+  text-align: right;
+  padding: 24rpx 0;
+}
+
+.order_single .order_oper .countdown {
+  font-size: 26rpx;
+  float: left;
+  margin-left: 16rpx;
+  color: #f06b90;
+}
+
+.order_single .order_oper .countdown .iconfont {
+  margin-right: 4rpx;
+}
+
+.order_single .order_oper .countdown text {
+  margin-right: 4rpx;
+}
+
+.order_oper button {
+  margin-right: 16rpx;
+  border: 1px solid #808080;
+  color: #808080;
+  background: transparent;
+  border-radius: 50rpx;
+  font-size: 26rpx;
+  width: 160rpx;
+  padding: 4rpx 26rpx;
+}
+
+.order_oper .btn_red {
+  border-color: #f06b90;
+  color: #f06b90;
+}
+
+.order-foot {
+  height: 84rpx;
+  line-height: 84rpx;
+  /* background: #fff; */
+  text-align: center;
+  margin-top: -22rpx;
+}
+
+.view_hidden {
+  display: none;
+}
+
+.order-foot text {
+  font-size: 23.97rpx;
+  color: #bebebe;
+}
+

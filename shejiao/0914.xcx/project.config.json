@@ -1,0 +1,248 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"enhance": true,
+		"postcss": true,
+		"preloadBackgroundData": false,
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"nodeModules": true,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"uglifyFileName": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"compileHotReLoad": false,
+		"useMultiFrameRuntime": false,
+		"useApiHook": false,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		},
+		"useIsolateContext": true,
+		"useCompilerModule": true,
+		"userConfirmedUseCompilerModuleSwitch": false,
+		"packNpmManually": false,
+		"packNpmRelationList": []
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.10.3",
+	"appid": "wx3ebf235cc7295cf6",
+	"projectname": "0915%E7%89%88%E6%BA%AA%E7%A7%80%E7%9B%B4%E6%92%AD",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": 0,
+					"name": "pages/changePay/changePay",
+					"pathName": "pages/changePay/changePay",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "pages/integralArea/integralArea",
+					"pathName": "pages/integralArea/integralArea",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "pages/newShow/newShow",
+					"pathName": "pages/newShow/newShow",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "每日秒杀",
+					"pathName": "pages/spikeArea/spikeArea",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "添加动态",
+					"pathName": "pages/addSocia/addSocia",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "pages/specialActivity/specialActivity",
+					"pathName": "pages/specialActivity/specialActivity",
+					"query": "id=1",
+					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "pages/anchorSearchResult/anchorSearchResult",
+					"pathName": "pages/anchorSearchResult/anchorSearchResult",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 7,
+					"name": "pages/incomeAgent/incomeAgent",
+					"pathName": "pages/incomeAgent/incomeAgent",
+					"query": "id=92",
+					"scene": null
+				},
+				{
+					"id": 8,
+					"name": "pages/groupActivities/groupActivities",
+					"pathName": "pages/groupActivities/groupActivities",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/proSale/proSale",
+					"pathName": "pages/proSale/proSale",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/proSale/proSale",
+					"pathName": "pages/proSale/proSale",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/saleList/saleList",
+					"pathName": "pages/saleList/saleList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 20,
+					"name": "观看视频",
+					"pathName": "pages/viewLive/viewLive",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "个人中心",
+					"pathName": "pages/myCenter/myCenter",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 14,
+					"name": "商品详情",
+					"pathName": "pages/proDetail/proDetail",
+					"query": "id=95",
+					"scene": null
+				},
+				{
+					"id": 15,
+					"name": "评价列表",
+					"pathName": "pages/commentList/commentList",
+					"query": "id=95",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "促销详情",
+					"pathName": "pages/flashDetail/flashDetail",
+					"query": "id=57&type=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "消息列表",
+					"pathName": "pages/messageList/messageList",
+					"query": "type=1",
+					"scene": null
+				},
+				{
+					"id": 18,
+					"name": "pages/balanceDetails/balanceDetails",
+					"pathName": "pages/balanceDetails/balanceDetails",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "商品列表",
+					"pathName": "pages/proList/proList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "优惠券列表",
+					"pathName": "pages/couponArea/couponArea",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的优惠券列表",
+					"pathName": "pages/myCoupon/myCoupon",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "支付成功推荐页",
+					"pathName": "pages/paySuccess/paySuccess",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "凑单列表",
+					"pathName": "pages/couProList/couProList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/paySuccess/paySuccess",
+					"pathName": "pages/paySuccess/paySuccess",
+					"scene": null
+				}
+			]
+		}
+	}
+}

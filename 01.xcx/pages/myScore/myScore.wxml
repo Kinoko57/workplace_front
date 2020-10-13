@@ -1,0 +1,44 @@
+<!--pages/myScore/myScore.wxml-->
+<view class='my_score'>
+  <view class='m_header'>
+    <view class="m_info_login">
+      <image src='{{userInfo.avatar}}' class='m_avatar' mode='scaleToFill'></image>
+      <view class='m_info_title'>
+        <view class='m_info_name'>
+          <text>{{userInfo.nickname}}</text>
+        </view>
+        <view class='m_info_level'>
+          <icon class='iconfont icon-L{{userInfo.level}}' bindtap='showLevel'></icon>
+          <view style='display:inline-flex;align-items:center;margin-left:16rpx;'>
+            <icon class='iconfont icon-jifen1'></icon>
+            <text>{{score}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='m_score'>
+        <icon class='iconfont icon-iconqiandaowenzi' data-url='../mySignIn/mySignIn' bindtap='goSign'></icon>
+        <!-- <text>{{score}}</text> -->
+        <!-- <image src='../../static/img/member/signIn.png' style='width:214rpx;height:56rpx;' mode='aspectFit' bindtap='goSign'></image> -->
+      </view>
+    </view>
+  </view>
+  <view class='score_body'>
+    <view class='score_title'>积分收支明细</view>
+    <view class='score_list'>
+      <view class='score_info' wx:for='{{scoreList}}' wx:key='index'>
+        <view class='score_info_more'>
+          <text>{{item.desc}}</text>
+          <text class='score_time'>{{item.createtime}}</text>
+        </view>
+        <view class='score_num'>
+          <!-- <text wx:if='{{item.type==1||item.type==4||item.type==5}}'>+</text>
+          <text wx:else>-</text> -->{{item.price}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view style='height:68rpx'></view>
+</view>
+<view class='goIndex' bindtap='goIndex' data-link='../index/index'>
+  <icon class='iconfont icon-home'></icon>
+</view>

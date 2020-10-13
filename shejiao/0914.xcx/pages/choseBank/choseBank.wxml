@@ -1,0 +1,21 @@
+<!--pages/choseBank/choseBank.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="bank_bg skeleton">
+   <navbar page-name="选择银行卡" bg-color="#ffffff" icon-color="#000000" show-title='true' show-nav='false'></navbar>
+   <scroll-view scroll-y class="bank_bg_body" style="height:{{scrollHeight}}px" scroll-with-animation>
+      <view class="bank_info" wx:for="{{bankList}}" wx:key="index" bindtap="sureBank" data-bank_Card="{{item.long_bankCard}}">
+          <view class="bank_more skeleton-rect" id='{{item.bank_id}}'>
+              <image src="{{item.icon}}"></image>
+              <view class="bank_name">
+                <view>{{item.bankName}}</view>
+                <view>{{item.bankCard}}</view>
+              </view>
+          </view>
+      </view>
+      <null-data id="null-data" loadingShow="{{false}}" bottomShow="{{false}}" dataText="暂无银行卡" dataShow="{{bankList.length==0}}"></null-data>
+      <view wx:if="{{is_iphonex}}" style="height:34px"></view>
+  </scroll-view>
+   <view class="bank_btn {{is_iphonex?'iphone_x_margin':''}}">
+     <text style="background:{{line_bg_color}}" bindtap="addBank" data-link="../addBank/addBank">添加银行卡</text>
+   </view>
+</view>

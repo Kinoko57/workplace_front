@@ -1,0 +1,54 @@
+<!--pages/editInfo/editInfo.wxml-->
+<!-- <reload bind:relaod="_relaod" id='reload'></reload> -->
+<view class='editInfo'>
+  <view class="{{editInput==0?'e_body':'body_hide'}}">
+    <view class="{{editcode=='nickname'?'section':'hide'}}">
+      <input placeholder="请输入昵称" type='text' value='{{value}}' bindinput='editInfo' />
+    </view>
+    <view wx:if="{{editcode=='nickname'}}" class='info_tips'>
+      <text>提示：昵称由2-8位中文，英文字母和数字及下划线组成</text>
+    </view>
+    <view class="{{editcode=='email'?'section':'hide'}}">
+      <input placeholder="请输入电子邮箱" type='text' bindinput='editInfo' value='{{value}}' />
+    </view>
+    <view class="section saveInfo">
+      <button size='default' bindtap='saveInfo'>保存</button>
+    </view>
+  </view>
+  <view class="{{editInput==1?'e_add_body':'body_hide'}}">
+    <radio-group bindchange="checkAddr">
+      <view class="add_section" wx:for='{{addrList}}' wx:key='index'>
+        <view class='add_info' bindtap='choseAdd' id='{{item.id}}'>
+          <view class='info_people'>
+            <text class='peop_name'>{{item.ship_name}}</text>
+            <text class='peop_tel'>{{item.ship_mobile}}</text>
+          </view>
+          <view class='info_addr'>
+            <text style='margin-right:10rpx;'>{{item.ship_area}}</text> {{item.ship_addr}}
+          </view>
+        </view>
+        <view class='add_edit'>
+          <label for='add1'>
+            <radio id='add1' checked="{{item.is_default=='1'}}" value="{{item.id}}" color='#ff8d97'></radio>
+            <text class="{{item.is_default=='1'?'isChecked':''}}">默认地址</text>
+          </label>
+          <view class='operating'>
+            <view bindtap='editAdd' data-info='{{item}}'>
+              <image src='../../static/img/com/edit.png' class='oper_icon'></image>
+              <text>编辑</text>
+            </view>
+
+            <view bindtap='delAdd' id='{{item.id}}'>
+              <image src='../../static/img/com/del.png' class='oper_icon'></image>
+              <text>删除</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </radio-group>
+    <view class="null_section {{is_iphonex?'null_section_height':''}}"></view>
+    <view class="add_saveInfo {{is_iphonex?'add_saveInfo_height':''}}">
+      <button form-type='submit' size='default' bindtap='newAdd'>+添加新地址</button>
+    </view>
+  </view>
+</view>

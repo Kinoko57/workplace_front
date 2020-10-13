@@ -1,0 +1,150 @@
+<!--pages/proList/proList.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="list_bg skeleton">
+	<navbar page-name="商品列表" bg-color="#fff" icon-color="#333333" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+	<view class="list_body">
+		<view class="list_body_head">
+			<view class="list_search">
+				<view class='search'>
+					<icon class='iconfont icon-sousuo'></icon>
+					<input value='{{search_condition.name}}' confirm-type="search" bindinput='searchInput' bindconfirm='searchList' placeholder='搜索喜欢的商品'></input>
+					<icon class='iconfont icon-guanbi close' wx:if="{{search_condition.name==''}}" style="color:#f5f5f5"></icon>
+					<icon class='iconfont icon-guanbi close' bindtap='clearSearch' wx:if="{{search_condition.name!=''}}"></icon>
+				</view>
+			</view>
+			<view class="list_fifter">
+				<view class="fifter_complex {{activity_type=='all'?'color_theme_red':''}}" bindtap="fifterSearch" id="all">
+					<text>综合</text>
+				</view>
+				<view class="fifter_complex" bindtap="fifterSearch" id="num">
+					<text class="{{activity_type=='num'?'color_theme_red':''}}">销量</text>
+					<!-- <view class="fifter_icon">
+						<icon class="iconfont icon-asc asc_icon {{search_condition.fifter.sales_volume=='asc'?'color_theme_red':''}}"></icon>
+						<icon class="iconfont icon-desc desc_icon {{search_condition.fifter.sales_volume=='desc'?'color_theme_red':''}}"></icon>
+					</view> -->
+				</view>
+				<view class="fifter_complex" bindtap="fifterSearch" id="good">
+					<text class="{{activity_type=='good'?'color_theme_red':''}}">好评</text>
+				</view>
+				<view class="fifter_complex" bindtap="fifterSearch" id="price">
+					<text class="{{activity_type=='price'?'color_theme_red':''}}">价格</text>
+					<view class="fifter_icon">
+						<icon class="iconfont icon-asc asc_icon {{search_condition.fifter.retail_price=='asc'?'color_theme_red':''}}"></icon>
+						<icon class="iconfont icon-desc desc_icon {{search_condition.fifter.retail_price=='desc'?'color_theme_red':''}}"></icon>
+					</view>
+				</view>
+
+				<view class="fifter_complex {{fifter_type?'color_theme_red':''}}" bindtap='fifterAll'>
+					<text>筛选</text>
+					<view class="fifter_icon" style="line-height: 84rpx;">
+						<icon class="iconfont icon-shaixuanguolv" style="font-size:30rpx"></icon>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="list_pro_body" wx:if="{{hasData}}">
+			<scroll-view class="list_prolist" style="height:{{scrollHeight}}px" scroll-y lower-threshold='120' bindscrolltolower="loadMore" bindscroll="scroll" scroll-top='{{topNum}}' scroll-with-animation>
+				<view class="list_prolist_blocks" wx:for="{{proList}}" wx:key="index" wx:for-item="listblock">
+					<view class="list_pro" wx:for="{{listblock}}" wx:key="index" bindtap="goProDetail" data-type="{{item.activity_type}}" id="{{item.activity_type==0?item.goods_id:item.activity_id}}">
+						<view class="pro_img skeleton-rect">
+							<image src="{{item.tag.ico_img}}" wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==1}}" class="pro_icon" style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx"></image>
+							<image src="{{item.tag.ico_img}}" wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==2}}" class="pro_icon" style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx"></image>
+							<image src="{{item.tag.ico_img}}" wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==3}}" class="pro_icon" style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx"></image>
+							<image src="{{item.tag.ico_img}}" wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==4}}" class="pro_icon" style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx"></image>
+							<image src="{{item.image}}" class="pro_main_image"></image>
+							<image src="{{item.tag.min_img}}" wx:if="{{item.tag.min_img!=undefined&&item.tag.min_img!=''}}" class="pro_min_frame" ></image>
+						</view>
+						<view class="pro_middle">
+							<view class="pro_title">
+								<text wx:if="{{item.activity_type==1}}" class="pro_tag_list_style red_gradient">限时促销</text>
+								<text wx:if="{{item.activity_type==2}}" class="pro_tag_list_style blue_gradient">体验专区</text>
+								<text wx:if="{{item.activity_type==3}}" class="pro_tag_list_style red_gradient">礼盒商品</text>
+								<text wx:if="{{item.activity_type==4}}" class="pro_tag_list_style blue_gradient">每日秒杀</text>
+								<text wx:if="{{item.activity_type==5}}" class="pro_tag_list_style blue_gradient">拼团</text>
+								{{item.goods_name}}
+							</view>
+							<!-- <view class="pro_desc">{{item.intro}}</view> -->
+							<view class="pro_tags" wx:if="{{item.tag.button_tag!=undefined&&item.tag.button_tag.length>0}}">
+								<view class="pro_tab_block" wx:for="{{item.tag.button_tag}}" wx:key="index" wx:if="{{index<4}}">{{item.text}}</view>
+							</view>
+							<view class="pro_tags" wx:else>
+								<view class="pro_tab_block_null">默认</view>
+							</view>
+						</view>
+						<!-- 普通普通商品 -->
+						<view class="pro_bottom" wx:if="{{item.activity_type==0}}">
+							<view class="pro_price color_theme_red">
+								<text>￥</text>{{filters.formatMoney(item.original_price)}}</view>
+							<view class="pro_bottom_right color_theme_gray">
+								<!-- <text class="line_through price_market">￥{{filters.formatMoney(item.market_price)}}</text> -->
+								<text>{{filters.formatCount(item.sales_volume)}}人已付款</text>
+							</view>
+						</view>
+						<!-- <view class="pro_bottom_margin" wx:if="{{item.activity_type==0}}">
+							<view class="pro_bottom_right color_theme_gray line_through">
+								<text>市场价：￥{{filters.formatMoney(item.market_price)}}</text> 
+								<view class="vip_style">
+									<text class="red_gradient_font">VIP</text>
+								</view>
+							</view>
+						</view> -->
+						<!-- 活动活动商品 -->
+						<view class="pro_bottom" wx:if="{{item.activity_type!=0}}">
+							<view class="pro_price color_theme_red">
+								<text>￥</text>{{filters.formatMoney(item.original_price)}}</view>
+							<view class="pro_bottom_right color_theme_gray">
+								<!-- <text class="line_through price_market">￥{{filters.formatMoney(item.market_price)}}</text> -->
+								<text>{{filters.formatCount(item.sales_volume)}}人已付款</text>
+							</view>
+						</view>
+						<!-- <view class="pro_bottom_margin" wx:if="{{item.activity_type!=0}}">
+							<view class="pro_bottom_right color_theme_gray line_through">
+								<text>市场价：￥{{filters.formatMoney(item.market_price)}}</text> 
+								<view class="vip_style">
+									<text class="red_gradient_font">VIP</text>
+								</view>
+							</view>
+						</view> -->
+					</view>
+				</view>
+				<null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无数据" dataShow="{{!hasData}}"></null-data>
+			</scroll-view>
+
+		</view>
+		<view class="list_pro_body" wx:else>
+			<null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无结果" dataShow="{{!hasData}}"></null-data>
+		</view>
+
+	</view>
+	<view class='fifter_more_bg' bindtap='hiddenFifterBg' hidden='{{!fifter}}'>
+	</view>
+	<scroll-view class='fifter_more' scroll-y="{{allowScorll}}" style="height: {{fifterHeight}}px;top:{{navHeight}}px" animation="{{animation}}">
+		<view class='fifter_price'>
+			<text>价格区间</text>
+			<view>
+				<input placeholder='最低价' type='number' value='{{lowPrice}}' bindinput='low' bindblur="lowBlur" bindfocus="lowFocus" class="{{lowFocus?'activity_input':''}}"></input>
+				<icon class='iconfont icon-less'></icon>
+				<input placeholder='最高价' type='number' value='{{highPrice}}' bindinput='high' bindblur="highBlur" bindfocus="highFocus" class="{{highFocus?'activity_input':''}}"></input>
+			</view>
+		</view>
+		<view class="fifter_body">
+			<view class="fifter_brand">
+				<text>品牌</text>
+				<view class="brand_list">
+					<view class="brand_block {{item.ischose?'brand_block_active':''}}" wx:for="{{brandList}}" wx:key="index" bindtap="choseBrand" id="{{item.id}}">
+						{{item.name}}
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="fifter_more_btn {{is_iphonex?'fifter_more_btn_height':''}}">
+			<button bindtap='resetFifter' hover-class="none">重置</button>
+			<button class='btn_red' bindtap='hiddenFifter' hover-class="none">确定</button>
+		</view>
+	</scroll-view>
+</view>
+
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+	<icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

@@ -1,0 +1,41 @@
+<!--components/navbar/index.wxml-->
+<view class="navbar custom-class" style='height:{{navHeight}}px;background:{{bgColor}};'>
+  <view wx:if="{{showNav=='true'}}" class="navbar-action-wrap navbar-action-group row item-center" style='top:{{navTop}}px;'>
+    <ss-icon name="icon-left" color="{{iconColor}}" size="20px" block="{{true}}" class="navbar-action_item" bindtap="_navBack"></ss-icon>
+  </view>
+  <view wx:if="{{showSearch=='true'&&showNav=='false'}}" class="navbar-action-wrap navbar-action-group row item-center" style='top:{{navTop}}px;'>
+    <text style="height: 60rpx;line-height: 50rpx;font-size: 28rpx;padding: 0;">夷购</text>
+  </view>
+  <view wx:if="{{showSearch=='true'}}" class="navbar-action-wrap navbar-action-group row item-center" style='top:{{navTop}}px;left:40px' >
+    <ss-icon name="icon-sousuo" color="{{iconColor}}" size="16px" block="{{true}}" class="navbar-action_item" style="padding-top: 10rpx;" bindtap="_goLink" data-link="{{pageUrl}}"></ss-icon>
+  </view>
+  <view class='navbar-title' style='top:{{navTop}}px;color:{{iconColor}}' wx:if="{{showTitle=='true'}}">
+    {{pageName}}
+  </view>
+  <view class='navbar-title navbar-custom' style='top:{{navTop}}px;color:{{iconColor}}' wx:if="{{showCustom=='true'}}" bindtap="_goView">
+    <picker value="{{choseDate}}" start="1999-01-01" mode="date" fields="month" bindchange="_bindDateChange">
+      {{customName}}
+      <ss-icon wx:if="{{showIcon=='true'}}" name="icon-desc" color="{{iconColor}}" size="16px" block="{{true}}" class="navbar-custom_item"></ss-icon>
+      <ss-icon wx:if="{{showIcon=='false'}}" name="icon-asc" color="{{iconColor}}" size="16px" block="{{true}}" class="navbar-custom_item"></ss-icon>
+    </picker>
+  </view>
+  <view class="status-header" wx:if="{{showIndex=='true'}}" style='top:{{navTop}}px;height:{{menuHeight}}px'>
+    <view class="nav_warp_l">
+      <text style="color:{{iconColor}}">夷购</text>
+    </view>
+    <view class="nav_warp_c" style='width:{{inputWidth}}px'>
+      <icon class='iconfont icon-sousuo'></icon>
+      <text bindtap='_searchHis'>搜索喜欢的商品</text>
+      <!-- <icon class='iconfont icon-saoma'></icon> -->
+    </view>
+    <view class="nav_warp_r" bindtap="_goMessage">
+      <view class="log_news">
+        <icon class="iconfont icon-xiaoxi" style="color:{{iconColor}}"></icon>
+      </view>
+      <view class="news_num" style="background-color:{{textColor}}" wx:if="{{unread>0}}">
+        <text class="num" style="color:{{bgColor}}">{{unread}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view style='height:{{navHeight}}px;'></view>

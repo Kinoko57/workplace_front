@@ -1,0 +1,161 @@
+/* pages/myScore/myScore.wxss */
+
+.my_score {
+  /* font-family: SimHei; */
+  position: relative;
+  background: #f2f2f2;
+  overflow-x: hidden;
+}
+
+.my_score .m_header_bg {
+  height: 332rpx;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+}
+
+.m_header {
+  height: 200rpx;
+  width: 702rpx;
+  position: relative;
+  z-index: 20;
+  /* top: 28rpx; */
+  padding: 0 26rpx;
+  background: #ff8d97;
+}
+
+/* 头部导航icon */
+
+/* .m_top_nav {
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+}
+
+.m_return {
+  float: left;
+}
+
+.m_return icon {
+  color: #fff;
+}
+
+.m_top_nav text {
+  color: #fff;
+  font-size: 38rpx;
+  margin-left: -26rpx;
+} */
+
+/* 会员信息 */
+
+.m_info_login {
+  /* padding-top: 20rpx;  */
+  margin-left: 20rpx;
+  display: flex;
+  align-items: center;
+  height: 200rpx;
+  justify-content: space-between;
+  padding-right: 24rpx;
+}
+
+.m_info_login .m_avatar {
+  width: 122rpx;
+  height: 122rpx;
+  margin-right: 30rpx;
+  margin-bottom: 12rpx;
+  border-radius: 50%;
+}
+
+.m_info_login .m_info_title {
+  /* width: 260rpx;
+  margin-right: 62rpx; *//* margin-right: 140rpx; */
+  width: 400rpx;
+}
+
+.m_info_login .m_info_title .m_info_name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #fff;
+  /* display: block; */
+  margin-left: 14rpx;
+}
+
+.m_info_login .m_info_title .m_info_level {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.m_info_login .m_info_title .m_info_level text {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #fff;
+}
+
+.m_info_login .m_info_title .m_info_level .iconfont {
+  font-size: 40rpx;
+  /* color: #f5cd19; */
+  color: #ffe790;
+  display: inline-flex;
+}
+
+.m_score {
+  text-align: center;
+}
+
+.m_score .iconfont {
+  font-size: 84rpx;
+  color: #fff;
+}
+
+.score_body {
+}
+
+.score_title {
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  background: #f1f1f1;
+  font-size: 34rpx;
+  color: #444;
+}
+
+.score_list {
+  background: #fff;
+  padding: 0 24rpx;
+}
+
+.score_list :last-child {
+  border-bottom: 0;
+}
+
+.score_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+  border-bottom: 1px solid #e4e4e4;
+  font-family: 'DIN';
+}
+
+.score_info .score_info_more {
+  float: left;
+}
+
+.score_info_more text {
+  display: block;
+  font-size: 25rpx;
+  color: #555;
+}
+
+.score_info_more .score_time {
+  font-size: 18rpx !important;
+  color: #999 !important;
+  font-family: 'DIN';
+}
+
+.score_info .score_num {
+  font-size: 32rpx;
+  color: #ff8d97;
+  font-family: 'DIN';
+}

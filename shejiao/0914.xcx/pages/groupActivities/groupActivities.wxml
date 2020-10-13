@@ -1,0 +1,78 @@
+<!--pages/groupActivities/groupActivities.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="group_bg skeleton">
+   <navbar page-name="超值拼团" bg-color="#fff" icon-color="#333333" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class="group_body">
+    <view class="gropu_top" wx:if="{{recommend.length>0}}">
+        <image src="{{staticUrl}}flash/group_1.png" class="gropu_top_img skeleton-rect"></image>
+        <view class="group_top_block">
+          <view class="group_titi">
+            <view class="group_titi_l">
+              <text>今日必拼</text>
+              <text>好货天天有</text>
+            </view>
+          </view>
+          <scroll-view class="group_list_block" scroll-x scroll-with-animation="true">
+              <view class="gropu_list_pro" wx:for="{{recommend}}" wx:if="index" bindtap="goLink" data-link='../flashDetail/flashDetail?id={{item.id}}'>
+                <image src="{{item.image}}" class="group_pro_img"></image>
+                <view class="grop_list_num">
+                  <text class="bg_theme_red">{{item.group_num}}人拼</text>
+                  <text>￥{{filters.formatMoney(item.buy_price)}}</text>
+                </view>
+                <view class="group_al_num">已拼{{item.total_count-item.count}}</view>
+              </view>
+          </scroll-view>
+        </view>
+    </view>
+    <view class="group_bot">
+     <scroll-view class="order_scroll" style="height:{{scrollHeight}}px" scroll-y lower-threshold='120' bindscrolltolower="loadMore" bindscroll="scroll" scroll-top='{{topNum}}' scroll-with-animation>
+        <view class="group_bot_block" wx:for="{{groupList}}" wx:key="blockindex" wx:for-item="blockitem" wx:for-index="blockindex">
+            <view class="group_bot_block_list" wx:for="{{blockitem}}" wx:key="index" bindtap="goLink" data-link='../flashDetail/flashDetail?id={{item.id}}'>
+              <!-- <image class="group_bot_img" src="{{item.image}}"></image> -->
+              <view class="group_bot_l">
+                <image src="{{item.tag.ico_img}}"
+                  wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==1}}" class="pro_icon"
+                  style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+                </image>
+                <image src="{{item.tag.ico_img}}"
+                  wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==2}}" class="pro_icon"
+                  style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+                </image>
+                <image src="{{item.tag.ico_img}}"
+                  wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==3}}" class="pro_icon"
+                  style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+                </image>
+                <image src="{{item.tag.ico_img}}"
+                  wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==4}}" class="pro_icon"
+                  style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+                </image>
+                <image src="{{item.image}}" class="pro_main_image"></image>
+                <image src="{{item.tag.min_img}}" wx:if="{{item.tag.min_img!=undefined&&item.tag.min_img!=''}}"
+                  class="pro_min_frame"></image>
+              </view>
+              <view class="group_bot_r">
+                <view class="group_bot_r_titi">
+                  <text class="label" style="background:{{bg_color}}">{{item.group_num}}人团</text>{{item.goods_name}}
+                </view>
+                <view class="group_lable" wx:if="{{item.tag.button_tag!=undefined&&item.tag.button_tag.length>0}}">
+                  <text class="group_bot_r_dis" style="border:1px solid {{bg_color}};color:{{bg_color}}" wx:for="{{item.tag.button_tag}}" wx:key="index" wx:if="{{index<3}}">{{item.text}}</text>
+                </view>
+                  <view class="grop_bot_r_team">
+                  <view class="grop_bot_r_team_l">
+                    <text class="color_theme_red">￥{{filters.formatMoney(item.buy_price)}}</text>
+                    <text>￥{{filters.formatMoney(item.market_price)}}</text>
+                  </view>
+                    <text class="grop_bot_r_team_r" style="background:{{line_bg_color}}">去开团</text>
+                  </view>
+              </view>
+            </view>
+        </view>
+        <null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false&&hasData}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无数据" dataShow="{{!hasData}}"></null-data>
+     </scroll-view>
+    </view>
+  </view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+  <icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

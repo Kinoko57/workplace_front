@@ -1,0 +1,501 @@
+<!--pages/flashSalesDetail/flashSalesDetail.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<import src="/wxParse/wxParse.wxml" />
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class='courseDetail skeleton'>
+	<scroll-view scroll-y scroll-with-animation='true' style='height:{{height}}px' bindscroll="scroll" scroll-top='{{topNum}}' class="scroll">
+		<view class='i_wraper'>
+			<swiper indicator-color='#efeff0' indicator-active-color="#0d8d37" indicator-dots="{{indicatorDots}}" circular autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+				<block wx:for="{{imgUrls}}" wx:key="index">
+					<swiper-item>
+						<image src="{{item}}" class="slide-image" lazy-load='true' />
+					</swiper-item>
+				</block>
+			</swiper>
+		</view>
+		<view class='f_content'>
+			<view class='pro_down_sale'>
+				<view class='pro_price'>
+					<!-- <view style='display:flex;align-items:center;'>
+						<text class='pro_integral'>￥{{filters.formatMoney(courseDetail.group_money)}}</text>
+					</view>
+					<view>
+						<text>市场价</text>
+						<text class='pro_orig'>￥{{filters.formatMoney(courseDetail.price_market)}}</text>
+						<text class='pro_num'>已抢{{decNum}}件</text>
+					</view> -->
+					<view class="pro_activity_price">
+						定金:
+						<text>￥{{filters.formatMoney(courseDetail.group_money)}}</text>
+					</view>
+					<view class="pro_other">
+						<text>原价：￥{{filters.formatMoney(courseDetail.price_sell)}}</text>
+						<text class="activity_tag">{{courseDetail.discount_people}}人起拼</text>
+					</view>
+				</view>
+				<view class='pro_right' wx:if="{{activityStatus==0}}">
+					<view class='pro_time'>
+						<text class='title'>距开抢还剩:</text>
+						<text class='time'>{{saleTime.day}}</text>
+						<text class='text'>天</text>
+						<text class='time'>{{saleTime.hou}}</text>
+						<text class='text'>:</text>
+						<text class='time'>{{saleTime.min}}</text>
+						<text class='text'>:</text>
+						<text class='time'>{{saleTime.sec}}</text>
+					</view>
+				</view>
+				<view class='pro_right' wx:if="{{activityStatus==2}}">
+					<view class='pro_time'>
+						<text class='title'>距结束还剩:</text>
+						<text class='time'>{{saleTime.day}}</text>
+						<text class='text'>天</text>
+						<text class='time'>{{saleTime.hou}}</text>
+						<text class='text'>:</text>
+						<text class='time'>{{saleTime.min}}</text>
+						<text class='text'>:</text>
+						<text class='time'>{{saleTime.sec}}</text>
+					</view>
+					<view class='pro_prop'>
+						<view class='prop_bg'>
+							<text style='width:{{decNum/allNum*100}}%' wx:if='{{decNum/allNum*100<100}}'></text>
+							<text style='width:100%' wx:if='{{decNum/allNum*100>=100}}'></text>
+						</view>
+					</view>
+				</view>
+				<view class='pro_right' wx:if="{{activityStatus==1}}">
+					<view class='pro_time'>
+						<text class='title'>团购已结束</text>
+					</view>
+				</view>
+			</view>
+			<view class='f_con_tit'>
+				<view class="f_con_tit_text">
+					{{courseDetail.name}}
+				</view>
+				<view class="f_con_tit_collect">
+					<view class="coll_bg" bindtap="collPro">
+						<icon class="iconfont {{courseDetail.isCollect==0?'iconcoll':'iconcoll1'}}"></icon>
+						<view>{{like_num}}</view>
+					</view>
+				</view>
+			</view>
+			<view class='f_con_remark'>
+				<view class="f_con_tit_remark">
+					{{courseDetail.introduce}}
+				</view>
+			</view>
+			<view class="pro_tag" wx:if="{{courseDetail.tag.length>0}}">
+				<text wx:for="{{courseDetail.tag}}" wx:key="index" class="skeleton-rect">{{item.tag_name}}</text>
+			</view>
+		</view>
+		<!-- 拼团相关 -->
+		<view class='pro_group_title' wx:if="{{groupTotal>0&&specList.length>0&&activityStatus==2}}">
+			<text>{{groupTotal}}人在拼团</text>
+			<view bindtap='moreGroup'>
+				<text>查看更多</text>
+				<icon class="iconfont iconright" style="color:#777"></icon>
+			</view>
+			<!-- <view class="title">他们正在拼购，可直接参与</view>
+			<view class="line"></view> -->
+		</view>
+		<view class="pro_group pro_bottom_group" wx:if="{{groupTotal>0&&specList.length>0&&activityStatus==2}}">
+			<view wx:for='{{groupList}}' wx:key='index' class="pro_group_block" wx:if='{{index<2&&endTimeList[index]!=0}}'>
+				<view class='group' style='padding:20rpx 0;'>
+					<view class='group_user'>
+						<image src='{{item.image}}' class='group_img'></image>
+						<text class="name">{{item.nickname}}</text>
+						<text>的团</text>
+					</view>
+					<view>
+						<view>
+							<text>已有</text>
+							<text class='group_num'>{{filters.formatCount(item.num)}}</text>
+							<text>人拼团【{{item.camp_day}}天】</text>
+						</view>
+						<!-- <view class="group_activity_tag"> -->
+						<!-- <text class='title'>剩余</text> -->
+						<!-- <text class='time'>{{saleTimeList[index].day}}</text>
+              <text class='text'>天</text> -->
+						<!-- <text class='time'>{{saleTimeList[index].hou}}</text>
+							<text class='text'>:</text>
+							<text class='time'>{{saleTimeList[index].min}}</text>
+							<text class='text'>:</text>
+							<text class='time'>{{saleTimeList[index].sec}}</text> -->
+						<!-- {{item.discount_people}}人起拼
+						</view> -->
+					</view>
+					<!-- bindtap="addGroup" id='{{item.id}}' -->
+					<button data-link='../groupResult/groupResult?type=view' data-tid="{{item.id}}" data-gid="{{item.group_id}}" bindtap='goGroupResult'>去拼团</button>
+				</view>
+			</view>
+		</view>
+		<!-- <view class='pro_group_bottom pro_bottom_group' wx:if="{{groupTotal>2&&specList.length>0&&activityStatus==2}}" bindtap='moreGroup'>
+				<text>查看更多</text>
+				<icon class="iconfont iconright"></icon>
+			</view> -->
+		<!-- <view class='pro_group_tips'>
+      <view class='group_head'>
+        <text>团购规则</text>
+      </view>
+      <view class='group_text'>
+        <text>{{activity.rule}}</text>
+      </view>
+    </view> -->
+		<!-- <view class='f_con_pri'>
+      <text class='f_con_pri_l'>￥<text class='price_num'>{{filters.formatMoney(courseDetail.price_sell)}}</text></text>
+      <text class='f_con_pri_c'>￥{{filters.formatMoney(courseDetail.price_market)}}</text>
+      <text class='f_con_pri_r'>报名人数：{{courseDetail.people_num}}</text>
+    </view> -->
+		<view class="pro_spec" style='color:#444' wx:if="{{specList.length>0}}">
+			<view style='display:inline-flex;color:#444'>
+				已选
+				<view style='display:inline-block;'>
+					<text>营期：{{filters.formatDate(showSpec.camp_time)}}【{{showSpec.camp_day}}天】</text>
+				</view>
+			</view>
+			<view style='display:inline-flex;'>
+				<view style='display:inline-flex;margin-right:20rpx;justify-content:flex-end;'>
+					<text>{{specNum}}个</text>
+				</view>
+				<view class='spec_icon' bindtap='showguiModel'>
+					<icon class='iconfont iconyuandianzhong'></icon>
+					<icon class='iconfont iconyuandianzhong'></icon>
+					<icon class='iconfont iconyuandianzhong'></icon>
+				</view>
+			</view>
+		</view>
+		<view class="pro_recommend" wx:if="{{recommPros.length>0}}">
+			<view class="pro_recommend_title">
+				<text>热门推荐</text>
+				<!-- <view class="recommend_right color_theme_red">
+					<text>查看全部</text>
+					<icon class="iconfont icon-right"></icon>
+				</view> -->
+			</view>
+			<view class="pro_recommend_list">
+				<view class="recommend_pro" wx:for="{{recommPros}}" bindtap="goLink" data-link="../groupDetail/groupDetail?id={{item.id}}" wx:key="index">
+					<image src="{{item.image}}"></image>
+					<view class="title">{{item.name}}</view>
+					<view class="price color_theme_red">￥{{filters.formatMoney(item.group_money)}}</view>
+					<view class="count color_theme_gray">{{item.people_num}}人已买</view>
+				</view>
+			</view>
+
+		</view>
+		<view class='f_proDetail'>
+			<view class='f_proDetail_title'>
+				<text>课程介绍</text>
+			</view>
+			<view class='f_proDetail_img' style='min-height:800rpx'>
+				<template is="wxParse" data="{{wxParseData:proDetail.nodes}}" />
+			</view>
+
+			<!-- <view class='bott_footer'>
+      <text class='lxian xian'></text>
+    	<view class="page_footer">已经到底啦~</view>
+      <text class='rxian xian'></text>
+    </view> -->
+		</view>
+		<view class="page_footer">已经到底啦~</view>
+		<view class="{{is_iphonex?'bottom_height_iphone':'bottom_height'}}"></view>
+	</scroll-view>
+	<!-- 商品底部fiexed按钮 -->
+	<view class="pro_btn {{is_iphonex?'iphone_x':''}}">
+		<view class="link_icon">
+			<button class="link_icon_block btn_clear" open-type="contact">
+				<icon class="iconfont iconxiaoxi3"></icon>
+				<text>客服</text>
+			</button>
+			<button class="link_icon_block btn_clear" wx:if="{{!isLogin&&courseDetail.num>courseDetail.people_num}}" bindtap="toshare">
+				<icon class="iconfont iconzhuanfa1"></icon>
+				<text>分享</text>
+			</button>
+			<button class="link_icon_block btn_clear" open-type="share" wx:if="{{isLogin&&courseDetail.num>courseDetail.people_num}}">
+				<icon class="iconfont iconzhuanfa1"></icon>
+				<text>分享</text>
+			</button>
+		</view>
+		<view class="buy_btn" wx:if="{{courseDetail.is_up==1&&activityStatus==2&&specList.length>0}}">
+			<button class="btn_clear buy_disable_btn" bindtap="closeModel" wx:if="{{courseDetail.num<=courseDetail.people_num}}">
+				<view>
+					<text class="btn_text">已售完</text>
+				</view>
+			</button>
+			<button class="btn_clear buy" bindtap="closeModel" wx:if="{{courseDetail.num>courseDetail.people_num}}">
+				<view>
+					<text class="btn_text">我要开团</text>
+				</view>
+			</button>
+			<!-- <button class="btn_clear share" wx:if="{{isLogin}}" open-type="share">
+				<view>
+					<text class="btn_text">立即分享</text>
+				</view>
+			</button> -->
+			<!-- <button class="btn_clear share" wx:if="{{!isLogin}}" bindtap="toshare">
+				<view>
+					<text class="btn_text">立即分享</text>
+				</view>
+			</button> -->
+		</view>
+		<view class="buy_btn" wx:if="{{courseDetail.is_up==1&&activityStatus==1&&specList.length>0}}">
+			<button class="btn_clear buy_disable_btn" bindtap="closeModel">
+				<view>
+					<text class="btn_text">团购已结束</text>
+				</view>
+			</button>
+			<!-- <button class="btn_clear share" open-type="share">
+				<view>
+					<text class="btn_text">立即分享</text>
+				</view>
+			</button> -->
+		</view>
+		<view class="buy_btn" wx:if="{{courseDetail.is_up==1&&activityStatus==0&&specList.length>0}}">
+			<button class="btn_clear buy_disable_btn" bindtap="closeModel">
+				<view>
+					<text class="btn_text">团购未开始</text>
+					<!-- <text wx:if="{{proInfo.save_price>0}}">（省¥{{filters.formatMoney(proInfo.save_price)}}）</text> -->
+				</view>
+			</button>
+			<!-- <button class="btn_clear share" open-type="share">
+				<view>
+					<text class="btn_text">立即分享</text>
+				</view>
+			</button> -->
+		</view>
+		<view class="buy_btn" wx:if="{{courseDetail.is_up==0&&specList.length>0}}">
+			<button class="btn_clear buy_disable_btn" bindtap="closeModel">
+				<view>
+					<text class="btn_text">已下架</text>
+				</view>
+			</button>
+			<!-- <button class="btn_clear share" open-type="share">
+				<view>
+					<text class="btn_text">立即分享</text>
+				</view>
+			</button> -->
+		</view>
+		<view class="buy_btn" wx:if="{{specList.length<=0}}">
+			<button class="btn_clear buy_disable_btn">
+				<view>
+					<text class="btn_text">我要开团</text>
+				</view>
+			</button>
+			<!-- <button class="btn_clear share" open-type="share">
+				<view>
+					<text class="btn_text">立即分享</text>
+				</view>
+			</button> -->
+		</view>
+	</view>
+</view>
+<view class="goTop {{is_iphonex?'goTop_bottom':''}}" hidden="{{isTop}}" bindtap="returnTop">
+	<icon class='iconfont iconhuidaodingbu'></icon>
+</view>
+<!-- 立即抢购弹框 -->
+<view class='pro_spec_model' hidden='{{modelShow}}' bindtap='closeGui' catchtouchmove="ture"></view>
+<view class="pro_spec_detail" hidden='{{modelShow}}' catchtouchmove="ture">
+	<view class='spec_head'>
+		<view class='spec_pro_img' bindtap='viewImg' data-url='{{courseDetail.image[0]}}'>
+			<image src='{{courseDetail.image[0]}}' lazy-load='true'></image>
+		</view>
+		<view class='spec_close' bindtap='closeGui'>
+			<icon class='iconfont iconguanbi'></icon>
+		</view>
+		<view class='spec_pro_price'>
+			<text class='spec_pro_integral'>定金：￥{{filters.formatMoney(courseDetail.group_money)}}</text>
+		</view>
+		<view class='spec_pro_code'>
+			<view>
+				<text>原价：</text>
+				<text class='spec_pro_orig'>￥{{filters.formatMoney(courseDetail.price_sell)}}</text>
+			</view>
+		</view>
+		<view class='spec_pro_code'>
+			<view>
+				<text>剩余人数：</text>
+				<text wx:if="{{courseDetail.num_static-courseDetail.people_num_static>0}}">{{courseDetail.num_static-courseDetail.people_num_static}}</text>
+				<text wx:else>0</text>
+			</view>
+		</view>
+	</view>
+	<view class='spec_body'>
+		<!-- <view wx:if="{{specList.length>0}}">
+		 <view class='spec_title' bindtap="choseCamp">
+          <text>营期</text>
+          <view><text class="color_theme_blue" style="font-weight:600">{{filters.formatDate(showSpec.camp_time)}}【{{showSpec.camp_day}}天】</text><icon class="iconfont iconright"></icon></view>
+      </view>
+			<view class='spec_type'>
+				<button size='mini' bindtap="choseType" wx:for="{{specList}}" wx:key='index' id='{{item.id}}' data-pid='{{item.id}}' class="{{item.ischose? 'button_click': ''}}">{{filters.formatDate(item.camp_time)}}【{{item.camp_day}}天】</button>
+			</view>
+		</view> -->
+		<view class="spec_list">
+			<view class='spec_title'>
+				<text>营期</text>
+			</view>
+			<view class="camp_block">
+				<scroll-view scroll-y class="camp_block_left" scroll-into-view="type_{{campId}}">
+					<view wx:for="{{allDayList}}" wx:key="index" bindtap="choseType" id='type_{{item.camp_day}}' data-pid="{{item.camp_day}}" class="camp_block_left_list camp_block_list {{campId==item.camp_day?'camp_block_left_list_active':''}}">{{item.camp_day}}天</view>
+				</scroll-view>
+				<scroll-view scroll-y class="camp_block_right" scroll-into-view="type_{{dayId}}">
+					<view wx:for="{{dayList}}" wx:key="index" class="camp_block_right_list camp_block_list" bindtap="choseDay" id="type_{{item.id}}" data-pid="{{item.id}}">
+						<text class="{{dayId==item.id?'color_theme_blue':''}}">{{filters.formatDate(item.day)}}</text>
+						<icon class="iconfont icondui color_theme_blue" wx:if="{{dayId==item.id}}"></icon>
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+		<view class='spec_num'>
+			<text>数量</text>
+			<view class='pro_icon'>
+				<button size='mini' class='pro_spec_btn' id='0' bindtap='lessNum' data-value='less' disabled='{{specNum==0||specNum==1}}'>-</button>
+				<input value='{{specNum}}' type='number' bindblur='changeValue' />
+				<button size='mini' class='pro_spec_btn' id='1' bindtap='addNum' data-value='add'>+</button>
+			</view>
+		</view>
+		<view style="height:120rpx;"></view>
+		<view style="height:68rpx;" wx:if="{{is_iphonex}}"></view>
+	</view>
+	<view class="spec_btn_bg {{is_iphonex?'spec_btn_height':''}}">
+		<view class="spec_btn">
+
+			<button class='surebtn' bindtap='rightBuy' wx:if="{{courseDetail.is_up==1&&activityStatus==2&&courseDetail.num_static>courseDetail.people_num_static}}">确认</button>
+			<button class='surebtn surebtn_disable' wx:if="{{courseDetail.is_up==1&&activityStatus==2&&courseDetail.num_static<=courseDetail.people_num_static}}">已售完</button>
+
+			<button class='surebtn surebtn_disable' wx:if="{{courseDetail.is_up==1&&activityStatus==0}}">未开始</button>
+			<button class='surebtn surebtn_disable' wx:if="{{courseDetail.is_up==1&&activityStatus==1}}">已结束</button>
+
+			<button class='surebtn surebtn_disable' wx:if="{{courseDetail.is_up==0}}">已下架</button>
+			<!-- <button class='surebtn_null' wx:if="{{courseDetail.status==0}}">已下架</button>
+        <button wx:if="{{showColor&&isUp==0&&!timer}}" class='surebtn_null'>已下架</button>
+        <button class='surebtn_null' wx:if="{{!showColor&&isUp!=0&&!timer}}">已售完</button>
+        <button class='surebtn_null' wx:if="{{showColor&&isUp!=0&&timer}}">活动已结束</button> -->
+		</view>
+	</view>
+</view>
+<!-- <view class="goIndex {{is_iphonex?'goIndex_bottom':''}}" bindtap='goIndex'>
+	<icon class='iconfont iconhome'></icon>
+</view> -->
+<!-- 立即抢购弹框 -->
+<!-- <view class='pro_spec_model' hidden='{{modelShow}}' bindtap='closeGui' catchtouchmove="ture">
+</view> -->
+<!-- <view class="pro_spec_detail" hidden='{{modelShow}}' catchtouchmove="ture">
+	<view class='spec_head'>
+		<view class='spec_pro_img' bindtap='viewImg' data-url='{{flashDetail.img}}'>
+			<image src='{{flashDetail.img}}' mode='widthFix' lazy-load='true'></image>
+		</view>
+		<view class='spec_close' bindtap='closeGui'>
+			<icon class='iconfont iconguanbi'></icon>
+		</view>
+		<view class='spec_pro_price'>
+			<text class='spec_pro_integral'>￥{{flashDetail.price_sell}}</text>
+		</view>
+		<view class='spec_pro_code'>
+			<view>
+				<text>市场价：</text>
+				<text class='spec_pro_orig'>￥{{flashDetail.price_market}}</text>
+			</view>
+		</view>
+	</view>
+	<scroll-view class='spec_body' scroll-y scroll-with-animation='true'>
+		<view>
+			<view class='spec_type'>
+				<button size='mini' id='1' class="button_click" bindtap='chosePriceType' data-type='0'>￥{{flashDetail.price_sell}}</button>
+			</view>
+		</view>
+		<view wx:for='{{specList}}' wx:key='index' wx:for-item="blockitem" wx:if="{{showGui}}">
+			<view class='spec_title'>
+				{{blockitem.name}}
+			</view>
+			<view class='spec_type'>
+				<button size='mini' bindtap="choseType" wx:for="{{blockitem.list}}" wx:key='index' id='{{item.name}}' data-pid='{{blockitem.id}}' class="{{item.ischose? 'button_click': ''}}">{{item.name}}</button>
+			</view>
+		</view>
+		<view class='spec_num'>
+			<text>数量</text>
+			<view class='pro_icon'>
+				<button size='mini' class='pro_spec_btn' id='0' bindtap='lessNum' data-value='less' disabled='{{specNum==0||specNum==1}}'>-</button>
+				<input value='{{specNum}}' type='number' bindblur='changeValue' />
+				<button size='mini' class='pro_spec_btn' id='1' bindtap='addNum' data-value='add'>+</button>
+			</view>
+		</view>
+		<view style="height:120rpx;"></view>
+		<view style="height:68rpx;" wx:if="{{is_iphonex}}"></view>
+	</scroll-view>
+	<view class="spec_btn_bg {{is_iphonex?'spec_btn_height':''}}">
+		<view class="spec_btn">
+			<form report-submit="true" bindsubmit='rightBuy' data-link="../flashDetail/flashDetail" wx:if="{{showColor&&isUp!=0&&!timer&&flashDetail.status!=0}}" class='surebtn'><button formType="submit">确认</button></form>
+			<button class='surebtn_null' wx:if="{{flashDetail.status==0}}">已下架</button>
+			<button wx:if="{{showColor&&isUp==0&&!timer}}" class='surebtn_null'>已下架</button>
+			<button class='surebtn_null' wx:if="{{!showColor&&isUp!=0&&!timer}}">已售完</button>
+			<button class='surebtn_null' wx:if="{{showColor&&isUp!=0&&timer}}">活动已结束</button>
+		</view>
+	</view>
+</view> -->
+<!-- <view class="goIndex {{is_iphonex?'goIndex_bottom':''}}" bindtap='goIndex'>
+	<icon class='iconfont iconhome'></icon>
+</view> -->
+<!-- 拼团列表弹框 -->
+<view class='group_model_bg' hidden='{{groupShow}}' bindtap='closeGroup'></view>
+<view class='group_model' hidden='{{groupShow}}'>
+	<view class='group_model_icon' bindtap='closeGroup'>
+		<!-- <image src='{{imgPath}}pro/close.png' style='width:62rpx;height:62rpx;'></image> -->
+	</view>
+	<view class='group_model_body'>
+		<view class='group_model_title'>正在拼团</view>
+		<scroll-view class='group_model_list' scroll-y style="height:{{g_list_height}}rpx">
+			<view wx:for='{{groupList}}' wx:key='index'>
+				<view class='group_block' wx:if='{{endTimeList[index]!=0}}'>
+					<view class='group_block_left'>
+						<image src='{{item.image}}' class='group_img'></image>
+						<view class='group_right'>
+							<view style='display:flex;align-items:center;'>
+								<text class='group_name'>{{item.nickname}}</text>
+								<text class='group_num'>已有<text style="color:#0d8d37">{{filters.formatCount(item.num)}}</text>人参团</text>
+							</view>
+							<!-- <view class='group_right_time group_activity_tag'>
+								{{item.discount_people}}人起拼 -->
+							<!-- <text class='title'>剩余</text>
+								<text class='time'>{{saleTimeList[index].hou}}</text>
+								<text class='text'>:</text>
+								<text class='time'>{{saleTimeList[index].hou}}</text>
+								<text class='text'>:</text>
+								<text class='time'>{{saleTimeList[index].min}}</text>
+								<text class='text'>:</text>
+								<text class='time'>{{saleTimeList[index].sec}}</text> -->
+							<!-- </view> -->
+						</view>
+					</view>
+					<view class='group_block_right'>
+						<!--  id='{{item.id}}' bindtap="closeModel" -->
+						<button data-link='../groupResult/groupResult?type=view' data-tid="{{item.id}}" data-gid="{{item.group_id}}" bindtap='goGroupResult'>去拼团</button>
+					</view>
+				</view>
+
+			</view>
+		</scroll-view>
+	</view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+	<icon class="iconfont iconhuidaodingbuxianxing"></icon>
+</view>
+
+<!-- 营期弹框 -->
+<view class="camp_bg" hidden="{{showCamp}}" bindtap='closeCamp' catchtouchmove="ture" bindtap="closeCamp"></view>
+<view class="camp_body" hidden="{{showCamp}}" catchtouchmove="ture">
+	<view class="camp_titi">选择营期</view>
+	<view class="camp_block">
+		<scroll-view scroll-y class="camp_block_left" scroll-into-view="type_{{campId}}">
+			<view wx:for="{{allDayList}}" wx:key="index" bindtap="choseType" id='type_{{item.camp_day}}' data-pid="{{item.camp_day}}" class="camp_block_left_list camp_block_list {{campId==item.camp_day?'camp_block_left_list_active':''}}">{{item.camp_day}}天</view>
+		</scroll-view>
+		<scroll-view scroll-y class="camp_block_right" scroll-into-view="type_{{dayId}}">
+			<view wx:for="{{dayList}}" wx:key="index" class="camp_block_right_list camp_block_list" bindtap="choseDay" id="type_{{item.id}}" data-pid="{{item.id}}">
+				<text class="{{dayId==item.id?'color_theme_blue':''}}">{{filters.formatDate(item.day)}}</text>
+				<icon class="iconfont icondui color_theme_blue" wx:if="{{dayId==item.id}}"></icon>
+			</view>
+		</scroll-view>
+	</view>
+	<view class="camp_fixed {{is_iphonex?'iphone_x_padding':''}}">
+		<view class="camp_btn bg_theme_blue_line" bindtap="sureCamp">确定</view>
+	</view>
+</view>

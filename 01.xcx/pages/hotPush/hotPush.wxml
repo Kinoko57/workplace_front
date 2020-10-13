@@ -1,0 +1,26 @@
+<!--pages/hotPush/hotPush.wxml-->
+<!-- <reload bind:relaod="_relaod" id='reload'></reload> -->
+<view class='hot_push' wx:if='{{isShow}}'>
+  <view class='hot_block' wx:for="{{hotList}}" wx:key='index' bindtap='viewDetail' id='{{item.id}}' data-link="../hotArticle/hotArticle?id={{item.id}}&name={{item.title}}">
+    <view class='hot_time'>
+    <text style='font-size:36rpx'>{{item.time[0]}}/</text>
+    <text style='font-size:42rpx'>{{item.time[1]}}.{{item.time[2]}}</text>
+    </view>
+    <view class='hot_head'>
+      <image src="{{item.img}}"></image>
+    </view>
+    <view class='hot_title'>
+      <view class='title_name'>{{item.title}}</view>
+      <text>{{item.summary}}</text>
+    </view>
+    <view class='hot_operating'>
+      <!-- <view class='oper_read'> -->
+        <icon class="iconfont icon-16pxyuedu"></icon>
+        <text>{{item.click_nums}}人已阅读</text>
+      <!-- </view> -->
+    </view>
+  </view>
+</view>
+<view class='goTop' hidden='{{isSign}}' bindtap='returnTop'>
+  <icon class='iconfont icon-huidaodingbu'></icon>
+</view>

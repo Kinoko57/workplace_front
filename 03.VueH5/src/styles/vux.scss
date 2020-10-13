@@ -1,0 +1,26 @@
+.vux-popup-header-right {
+  color: #5977fe !important;
+}
+
+.vux-popup-picker-select-box {
+  color: #717171;
+}
+
+.weui-cell_access .weui-cell__ft:after {
+  width: 0.2rem !important;
+  height: 0.2rem !important;
+}
+
+.weui-cells_radio {
+  .vux-radio-label {
+    font-weight: normal;
+  }
+}
+// a链接点击阴影去掉
+a{
+  outline: none;
+  appearance:none;
+ -webkit-tap-highlight-color: transparent; 
+ -webkit-touch-callout: none;
+ -webkit-user-select: none;
+}

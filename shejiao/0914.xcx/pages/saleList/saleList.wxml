@@ -1,0 +1,37 @@
+<!--pages/proSale/proSale.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<view class="Sale_bg skeleton">
+   <navbar page-name="售后订单"  bg-color="#fff" icon-color="#333" show-title='true' show-nav='true' show-index='false'></navbar>
+   <view class="Sale_body">
+      <view class="sale_nav">
+        <view wx:for="{{navList}}" wx:key="index" bindtap="choseNavId" id="{{item.id}}" class="{{choseId==item.id?'nav_active color_theme_red':''}} nav_text">{{item.name}}</view>
+      </view>
+      <view class="sale_list">
+          <scroll-view class="sale_list_scroll" style="height:{{scrollHeight}}px" scroll-y lower-threshold='120' bindscrolltolower="loadMore" bindscroll="scroll" scroll-top='{{topNum}}' scroll-with-animation>
+            <view wx:for="{{saleList}}" wx:for-index="blockindex" wx:for-item="blockitem" wx:key="blockindex">
+               <view class="sale_list_block" wx:for="{{blockitem}}"  wx:for-item="lableitem" wx:key="lableindex">
+                  <view class="sale_list_supName">
+                     <view>{{filters.formatDateTime(lableitem.create_time)}}</view>
+                     <view wx:if="{{lableitem.type==1}}"><icon class="iconfont icon-tuikuanshouhou"></icon>退款</view>
+                     <view wx:if="{{lableitem.type==2}}"><icon class="iconfont icon--tuihuo"></icon>退货</view>
+                     <view wx:if="{{lableitem.type==3}}"><icon class="iconfont icon-xiaoxi4"></icon>换货</view>
+                  </view>
+                  <view class="sale_list_block_list" wx:for="{{lableitem.detail}}" wx:key="index" bindtap="goDetail" data-id="{{lableitem.id}}">
+                     <view class="sale_list_block_list_top">
+                        <image class="sale_list_img" src="{{item.goods_image}}"></image>
+                        <view class="sale_list_block_list_top_r">
+                           <view class="sale_list_pro_titi">{{item.goods_name}}</view>
+                           <view class="sale_list_pro_num">
+                              规格：{{item.spec}}
+                           </view>
+                        </view>
+                     </view>
+                  </view>
+               </view>
+            </view>
+             <null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false&&hasData}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无数据" dataShow="{{!hasData}}"></null-data>
+          </scroll-view>
+      </view>
+   </view>
+</view>

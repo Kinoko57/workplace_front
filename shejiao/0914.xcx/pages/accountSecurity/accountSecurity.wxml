@@ -1,0 +1,71 @@
+<!--pages/accountSecurity/accountSecurity.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="account skeleton">
+    <navbar page-name="账户安全"  bg-color="#ffffff" icon-color="#000000" show-title='true' show-nav='true' show-index='false'></navbar>
+    <view class="account_body">
+      <image src="{{staticUrl}}my/account.png" class="account_image" mode="widthFix"></image>
+      <view class="account_block">
+         <view class="account_lever">当前安全级别： <text wx:if="{{accountSecurity.security_level<3}}">低</text><text wx:if="{{accountSecurity.security_level==3||accountSecurity.security_level==4}}">中</text><text wx:if="{{accountSecurity.security_level==5}}">高</text></view>
+         <view class="account_start">
+            <icon class="iconfont icon-gray-star" wx:for="{{accountSecurity.security_level}}" wx:key="index"></icon>
+            <!-- <icon class="iconfont icon-banxing" wx:if="{{}}"></icon> -->
+         </view>
+         <view class="account_block_cont">
+           <view class="account_block_sections">
+              <view class="wa_section" bindtap="goLink" data-url="../bindPhone/bindPhone?type=bind&phone={{accountSecurity.bind_phone}}">
+                <view class="wa_sec_l">
+                  <view style="width:48rpx" class="wa_sec_l_img">
+                    <image src="{{staticUrl}}vip/phone.png" style="width:32rpx;height:48rpx"></image>
+                  </view>
+                  <text>手机绑定</text>
+                </view>
+                <view class="wa_sec_r">
+                  <text wx:if="{{accountSecurity.bind_phone==''}}">未绑定</text>
+                   <text wx:if="{{accountSecurity.bind_phone!=''}}">{{accountSecurity.bind_phone}}</text>
+                  <icon class="iconfont icon-right"></icon>
+                </view>
+              </view>
+              <view class="wa_section" bindtap="goRealName" data-url="../realInfo/realInfo">
+                <view class="wa_sec_l">
+                  <view style="width:48rpx" class="wa_sec_l_img">
+                    <image src="{{staticUrl}}vip/wa_2.png" style="width:48rpx;height:42rpx"></image>
+                  </view>
+                  <text>身份认证</text>
+                </view>
+                <view class="wa_sec_r">
+                  <text class="bind" wx:if="{{accountSecurity.auth==1}}">{{accountSecurity.auth_name}}<text class="auth">已认证</text></text>
+                  <text class="none" wx:if="{{accountSecurity.auth==0}}"><text class="yuan bg_theme_red"></text>未实名</text>
+                  <icon class="iconfont icon-right"></icon>
+                </view>
+              </view>
+              <view class="wa_section" bindtap="goRealName" data-url="../myBank/myBank">
+                <view class="wa_sec_l">
+                <view style="width:48rpx" class="wa_sec_l_img">
+                  <image src="{{staticUrl}}vip/wa_3.png" style="width:48rpx;height:31rpx"></image>
+                </view>
+                  <text>银行卡</text>
+                </view>
+                <view class="wa_sec_r">
+                  <text class="bind" wx:if="{{accountSecurity.bind_bank_card==1}}">已绑定银行卡</text>
+                  <text class="none" wx:if="{{accountSecurity.bind_bank_card==0}}"><text class="yuan bg_theme_red"></text>还未绑定银行卡</text>
+                  <icon class="iconfont icon-right"></icon>
+                </view>
+              </view>
+              <view class="wa_section" bindtap="goRealName" data-url="../changePay/changePay?pay_password={{accountSecurity.pay_password}}">
+                <view class="wa_sec_l">
+                  <view style="width:48rpx;" class="wa_sec_l_img">
+                    <image src="{{staticUrl}}vip/pass.png" style="width:32rpx;height:39rpx"></image>
+                  </view>
+                  <text>支付密码</text>
+                </view>
+                <view class="wa_sec_r">
+                  <text class="bind" wx:if="{{accountSecurity.pay_password==1}}">已设置</text>
+                  <text class="none" wx:if="{{accountSecurity.pay_password==0}}"><text class="yuan bg_theme_red"></text>未设置</text>
+                  <icon class="iconfont icon-right"></icon>
+                </view>
+              </view>
+           </view>
+         </view>
+      </view>
+    </view>
+</view>

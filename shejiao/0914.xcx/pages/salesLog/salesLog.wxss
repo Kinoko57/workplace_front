@@ -1,0 +1,95 @@
+/* pages/findLog/findLog.wxss */
+page{
+  background: #ffffff;
+}
+.log_body{
+  /* border-top: 1px solid #ccc; */
+}
+/* 物流进度 */
+.log_body_progress{
+  background: #fff;
+  padding: 30rpx 24rpx 60rpx;
+}
+.log_body_progress_titi{
+  border-bottom: 1px solid #EDEDED;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  margin-bottom: 40rpx;
+  color: #666;
+}
+.log_body_block{
+  display: flex;
+}
+.log_body_block_l{
+   width: 50rpx;
+   text-align: center;
+}
+.log_body_block_l text:nth-child(1){
+   display: block;
+   width: 16rpx;
+   height: 16rpx;
+   background: #c6c6c6;
+   margin: 0 auto;
+   border-radius: 50%;
+}
+.log_body_block_l text.text_active{
+  background: #f20;
+  border:5rpx solid #FEA4A4
+}
+.log_body_block_l text:nth-child(2){
+   display:block;
+   width:4rpx;
+   margin: 0 auto;
+   height: 100%;
+   background: #F8F8F8;
+}
+.log_body_block_r{
+  margin-left: 30rpx;
+  padding-bottom: 30rpx;
+  margin-bottom: 25rpx;
+  width: 600rpx;
+  display: block;
+  border-bottom: 1px solid #f6f6f6;
+}
+.log_body_block_r text.log_titi{
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 600;
+}
+.log_body_block_r text.log_text{
+  font-size: 22rpx;
+  color: #999;
+  display: block;
+  padding-top: 10rpx;
+  word-break: break-all;
+}
+/* .log_body_block_r_active text:nth-child(1){
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 600;
+}
+.log_body_block_r_active text:nth-child(2){
+  font-size: 24rpx;
+  color: #333;
+} */
+.log_body_block:last-child .log_body_block_l text:nth-child(2){
+   display: none;
+}
+.log_btn{
+  padding: 0 24rpx;
+  margin-top: 30rpx;
+  text-align: right;
+}
+.log_btn text{
+  display: inline-block;
+  height: 56rpx;
+  line-height: 56rpx;
+  padding: 0 25rpx;
+  border-radius: 28rpx;
+  font-size: 26rpx;
+  color: #666;
+  border:1px solid #999;
+}

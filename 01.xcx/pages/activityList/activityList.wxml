@@ -1,0 +1,73 @@
+<!--pages/activityList/activityList.wxml-->
+<view class='activity' style="height:{{height}}px" hidden="{{!isShow}}">
+  <scroll-view class='red_body' style='height:{{height}}px' scroll-y='{{allowScorll}}' bindscroll="scroll" bindscrolltolower="{{is_load?'loadMore':''}}" scroll-top='{{topNum}}' scroll-with-animation='true'>
+    <view class='activity_banner'>
+      <image src='{{headbg}}' mode="widthFix"></image>
+      <view class="activity_content {{show_icon?'overflow_text':''}}" wx:if="{{content!=''}}">
+      <!--animation="{{animation}}" -->
+        <view class="content_info {{isopen?'show_content':'hidden_content'}}" >{{content}}</view>
+        <view class="open_icon" bindtap='openText' wx:if="{{show_icon}}">
+          <text wx:if="{{isopen}}">收起</text>
+          <text wx:else>展开</text>
+          <icon class="iconfont {{isopen==false?'icon-jiantou-copy-copy':'icon-jiantou-copy-copy-copy'}}"></icon>
+        </view>
+      </view>
+    </view>
+    <view class='red_list' wx:if='{{hasData}}' id='top' style="background:{{bgColor}}">
+      <view class="res_list_block" wx:for="{{redShowList}}" wx:key="blockindex" wx:for-item="listblock">
+        <view class='red_pro' wx:for="{{listblock}}" wx:key="index">
+          <view class='pro_img' bindtap='goPro' data-link='../proDetail/proDetail?type=normal&id={{item.goods_id}}' id='{{item.goods_id}}'>
+            <image src='{{item.gimg}}'></image>
+          </view>
+          <view class='pro_info'>
+            <view class='pro_title' bindtap='goPro' data-link='../proDetail/proDetail?type=normal&id={{item.goods_id}}' id='{{item.goods_id}}'>
+              <view class='pro_level' wx:if='{{item.promotion==1}}'>
+                <image src='../../static/img/member/cu.png' mode='aspectFit'></image>
+                <text>限时购</text>
+              </view>
+              {{item.name}}</view>
+            <view class='pro_spec'>
+              <view class='pro_price'>
+                <view style='display:flex;align-items:center;line-height:48rpx;' wx:if="{{activity_id!=2}}">
+                  <text class='peo_nowprice' wx:if='{{item.deal_type==1||item.deal_type==3}}'>￥{{item.price_sell}} </text>
+                  <text class='peo_nowprice' wx:if='{{item.deal_type>=4}}'>￥{{item.price_sell}} </text>
+                  <text class='pro_integral' wx:if='{{item.deal_type!=1&&item.deal_type!=2&&item.deal_type!=3}}'>+</text>
+                  <view class='pro_inter_img' wx:if='{{item.deal_type!=1&&item.deal_type!=3}}'>
+                    <icon class='iconfont icon-jifen1'></icon>
+                  </view>
+                  <text class='pro_integral' wx:if='{{item.deal_type==2}}'>{{item.point}}</text>
+                  <text class='pro_integral' wx:if='{{item.deal_type!=1&&item.deal_type!=2&&item.deal_type!=3}}'>{{item.point}}</text>
+                </view>
+                <view style='display:flex;align-items:center;line-height:48rpx;' wx:if="{{activity_id==2}}">
+                  <view class='pro_inter_img'>
+                    <icon class='iconfont icon-jifen1'></icon>
+                  </view>
+                  <text class='pro_integral'>{{item.point}}</text>
+                </view>
+                <view style='display:flex;align-items:center;justify-content:space-between;'>
+                  <view style='display:inline-flex;align-items:center;'>
+                    <text class='pro_orig pro_bg'>{{item.price_market_from}}</text>
+                    <text class='pro_orig line'>￥{{item.price_market}}</text>
+                  </view>
+                  <view class='pro_count'>销量:{{item.buy_count}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <button type="default" size="default" loading plain class="loading_style" hidden='{{(is_end&&is_load==false)||hasData==false}}'>正在加载中，请稍后...</button>
+    <view class='red_list_null' wx:if='{{!hasData}}'>
+      <text>暂无数据</text>
+    </view>
+    <view class='order-red' wx:if="{{hasData&&is_end}}">
+      <text>—————— 我是有底线的 ——————</text>
+    </view>
+    <view class='null_height'></view>
+  </scroll-view>
+  <include src="../footer/footer.wxml" />
+  <view class='goTop' hidden='{{isSign}}' bindtap='returnTop'>
+    <icon class='iconfont icon-huidaodingbu'></icon>
+  </view>
+</view>

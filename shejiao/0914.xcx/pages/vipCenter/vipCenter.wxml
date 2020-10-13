@@ -1,0 +1,31 @@
+<!--pages/vipCenter/vipCenter.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="vip skeleton">
+    <navbar page-name="会员中心"  bg-color="linear-gradient(to right, #e34c26, #e13816)" icon-color="#fff" show-title='true' show-nav='true' show-index='false'></navbar>
+    <view class="vip_body">
+      <view class="vip_head">
+        <view class="vip_head_t">
+          <image src="{{staticUrl}}vip/bank.png" class="avater"></image>
+          <view class="vip_head_info">
+            <view class="vip_name">猫怕抓老鼠</view>
+            <view class="vip_lever">
+              <text>钻石用户</text>
+              <text>权限等级</text>
+            </view>
+            <view class="vip_pro">
+              <view style='width:60%' class="pro_color"></view>
+              <!-- <view style='width:100%' wx:if='{{item.sale_num/item.all_quantity*100>=100}}'></view> -->
+            </view>
+            <view class="vip_mark">
+              距离下级等级差200积分
+            </view>
+          </view>
+          <view class="vip_head_wallet">
+            <image src="{{staticUrl}}vip/wallet.png" mode="widthFix"></image>
+            <view class="vip_money">钱包</view>
+          </view>
+        </view>
+      </view>
+    </view>
+</view>

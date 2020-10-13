@@ -1,0 +1,82 @@
+<!--pages/myWallet/myWallet.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="wallet skeleton">
+  <navbar page-name="钱包"  bg-color="#ffffff" icon-color="#000000" show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class="wa_body">
+    <view class="wa_head">
+     <view class="wa_head_block">
+        <view class="wa_head_l">
+          <view>账户余额</view>
+          <view>{{filters.formatMoney(walletObj.balance)}}</view>
+        </view>
+        <view class="wa_head_r" bindtap="goLink" data-url="../balanceDetails/balanceDetails">
+          余额明细
+        </view>
+     </view>
+      <image src="{{staticUrl}}vip/wallet_bg.jpg" class="weallet_bg_img"></image>
+    </view>
+    <view class="wa_cont">
+      <view class="wa_section" bindtap="goLink" data-url="../cash/cash">
+        <view class="wa_sec_l">
+          <view style="width:48rpx" class="wa_sec_l_img">
+             <image src="{{staticUrl}}vip/wa_1.png" style="width:40rpx;height:38rpx"></image>
+          </view>
+          <text>提现</text>
+        </view>
+        <view class="wa_sec_r">
+          <text></text>
+          <icon class="iconfont icon-right"></icon>
+        </view>
+      </view>
+      <view class="wa_section" bindtap="goLink" data-url="../realInfo/realInfo">
+        <view class="wa_sec_l">
+          <view style="width:48rpx" class="wa_sec_l_img">
+            <image src="{{staticUrl}}vip/wa_2.png" style="width:48rpx;height:42rpx"></image>
+          </view>
+          <text>身份认证</text>
+        </view>
+        <view class="wa_sec_r">
+          <text class="bind" wx:if="{{walletObj.card_type==1}}">{{walletObj.name}}<text class="auth">已认证</text></text>
+          <text class="none" wx:if="{{walletObj.card_type==0}}"><text class="yuan bg_theme_red"></text>未认证</text>
+          <icon class="iconfont icon-right"></icon>
+        </view>
+      </view>
+      <view class="wa_section" bindtap="goLink" data-url="../myBank/myBank">
+        <view class="wa_sec_l">
+         <view style="width:48rpx" class="wa_sec_l_img">
+          <image src="{{staticUrl}}vip/wa_3.png" style="width:48rpx;height:31rpx"></image>
+         </view>
+          <text>银行卡</text>
+        </view>
+        <view class="wa_sec_r">
+          <text class="bind" wx:if="{{walletObj.bank_type==1}}">已绑定银行卡</text>
+          <text class="bind" wx:if="{{walletObj.bank_type==2}}">审核中</text>
+          <text class="none" wx:if="{{walletObj.bank_type==0}}"><text class="yuan bg_theme_red"></text>还未绑定银行卡</text>
+          <icon class="iconfont icon-right"></icon>
+        </view>
+      </view>
+      <view class="wa_section" bindtap="goLink" data-url="../myBill/myBill">
+        <view class="wa_sec_l">
+          <view style="width:48rpx;" class="wa_sec_l_img">
+            <image src="{{staticUrl}}vip/wa_4.png" style="width:34rpx;height:41rpx"></image>
+          </view>
+          <text>账单</text>
+        </view>
+        <view class="wa_sec_r">
+          <text class="bind">{{walletObj.bill}}</text>
+          <icon class="iconfont icon-right"></icon>
+        </view>
+      </view>
+      <!-- <view class="wa_section" bindtap="goLink" data-url="../balanceDetails/balanceDetails">
+        <view class="wa_sec_l">
+          <image src="{{staticUrl}}vip/wallet_5.png"></image>
+          <text>余额明细</text>
+        </view>
+        <view class="wa_sec_r">
+          <icon class="iconfont icon-right"></icon>
+        </view>
+      </view> -->
+    </view>
+  </view>
+</view>

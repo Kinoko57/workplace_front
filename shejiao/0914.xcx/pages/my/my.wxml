@@ -1,0 +1,115 @@
+<!--pages/my/my.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="my_bg skeleton">
+  <navbar page-name="我的" bg-color="{{toBg}}" icon-color="#fff" show-title='true' show-nav='false'></navbar>
+  <view class="my_top" style="height:515rpx">
+    <view style="height:{{navHeight}}px"></view>
+    <view class="my_info">
+      <view class="my_info_top">
+        <view class="info_left">
+          <image class="info_user skeleton-radius" wx:if="{{!isLogin}}" src="{{staticUrl}}common/avatar.png" ></image>
+          <image class="info_user skeleton-radius" wx:if="{{isLogin}}" src="{{userInfo.image}}" bindtap="goLink" data-url="../myCenter/myCenter"></image>
+          <view class="info_name" wx:if="{{isLogin}}">
+             <view class="info_name_info">
+               <text>{{userInfo.nickname}}</text>
+               <image class="info_name_lever" src="{{staticUrl}}vip/lever_1.png"></image>
+             </view>
+            <!-- <view class="info_name_name">用户名称</view>  -->
+          </view>
+          <text class="info_name_logon" wx:if="{{!isLogin}}" bindtap="goLogin">请登录</text>
+        </view>
+        <view class="info_right" bindtap="goLink" data-url='../setUp/setUp'>
+          <icon class="iconfont icon-shezhi"></icon>设置
+        </view>
+      </view>
+      <view class="my_about skeleton-rect">
+        <view class="about_pro" bindtap="goLink" data-url="../myCollection/myCollection">
+          <text class="num">{{userInfo.collect_num}}</text>
+          <text class="title">商品收藏</text>
+        </view>
+        <view class="about_pro" bindtap="goLink" data-url="../myFootprint/myFootprint">
+          <text class="num">{{userInfo.track_num}}</text>
+          <text class="title">足迹</text>
+        </view>
+        <view class="about_pro" bindtap="goLink" data-url="../myCoupon/myCoupon">
+          <text class="num">{{userInfo.discount_num}}</text>
+          <text class="title">优惠券</text>
+        </view>
+      </view>
+    </view>
+    <view class="my_discount" bindtap="goLink" data-url="../couponArea/couponArea">
+      <view class="my_discount_block">
+        <view class="my_discount_l">
+          <image src="{{staticUrl}}my/vip.png"></image>
+          <text>溪秀会员</text>
+          <text></text>
+          <text>有新的优惠券待领取</text>
+        </view>
+        <view class="my_discount_r">
+          立即查看
+        </view>
+      </view>
+    </view>
+    <image src="{{staticUrl}}my/my_bg.png" class="my_bg_image" style="height:515rpx"></image>
+  </view>
+  <view class="my_block">
+   <view style="height:{{zan_height}}px"></view>
+    <view class="my_income">
+      <view class="my_income_l" bindtap="goLink" data-url="../incomeAgent/incomeAgent">
+        <view class="my_income_l_info">
+          <text>{{userInfo.live}}</text>
+          <text>直播场数</text>
+        </view>
+        <view class="my_income_l_info">
+          <text>{{userInfo.live_goods_num}}</text>
+          <text>带货数</text>
+        </view>
+        <view class="my_income_l_info">
+          <text>{{filters.formatMoney(userInfo.live_use_money)}}</text>
+          <text>带货收益</text>
+        </view>
+        <!-- <view class="my_income_l_info">
+          <text>0</text>
+          <text>可提现</text>
+        </view> -->
+      </view>
+      <image class="my_income_shadow" src="{{staticUrl}}my/my_shoadow.png"></image>
+      <view class="my_income_r" bindtap="goLink" data-url="../myWallet/myWallet">
+         <image src="{{staticUrl}}my/wallet.png"></image>
+         <view>我的钱包</view>
+      </view>
+    </view>
+    <view class="my_order skeleton-rect">
+      <view class="my_order_title" bindtap="goLink" data-url="../orderManage/orderManage?status=type_-1">
+        <view class="order_title">我的订单</view>
+        <view class="order_more">
+          <text>全部订单</text>
+          <icon class="iconfont icon-right"></icon>
+        </view>
+      </view>
+      <view class="my_order_block">
+        <view wx:for="{{orderType}}" bindtap="goOrder" data-type="{{item.type}}" data-link="{{item.link}}" wx:key="index" class="skeleton-radius">
+          <view class="order_num" wx:if="{{item.num!=undefined&&item.num>0}}">
+            {{item.num}}
+          </view>
+          <image src="{{item.icon}}" class="order_img" style="width:{{item.width}}"></image>
+          <text class="order_text">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+    <!-- <image src="{{staticUrl}}my/banner.png" class="my_banner"></image> -->
+    <view class="my_use skeleton-rect">
+      <view class="my_use_title">
+        <view class="title">常用功能</view>
+      </view>
+      <view class="my_use_block">
+        <view wx:for="{{useList}}" wx:key="index" class="my_use_block_list skeleton-radius" data-url='{{item.link}}' bindtap="goLink">
+          <image src="{{item.img}}" class="use_img" style="height:{{item.height}};"></image>
+          <text class="use_name" style="padding-top:{{item.padding_top}}">{{item.name}}</text>
+          <text class="new_unread" wx:if="{{item.status==1&&userInfo.unread_num!=0}}">{{userInfo.unread_num}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view style="height:140rpx;width:100%"></view>
+</view>

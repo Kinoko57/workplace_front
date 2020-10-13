@@ -1,0 +1,290 @@
+/* pages/myComment/myComment.wxss */
+
+.my_comment {
+  background: #f2f2f2;
+  overflow-x: hidden;
+}
+
+.com_body {
+  height: 100%;
+}
+
+.com_user {
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #fff;
+  margin-bottom: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 26rpx;
+}
+
+.com_user .user_info {
+  height: 88rpx;
+  line-height: 88rpx;
+  display: inline-flex;
+  align-items: center;
+}
+
+.com_user .user_info image {
+  vertical-align: middle;
+}
+
+.user_info text {
+  font-size: 24rpx;
+  color: #686868;
+  margin: 0 16rpx;
+}
+
+.user_info .iconfont {
+  font-size: 40rpx;
+  color: #ff8d97;
+}
+
+.com_user .con_btn {
+  width: 160rpx;
+  height: 50rpx;
+  font-size: 28rpx;
+  color: #ff8d97;
+  border: 2rpx solid #ff8d97;
+  text-align: center;
+  line-height: 50rpx;
+  border-radius: 20rpx;
+}
+
+.com_body .com_write {
+  height: 252rpx;
+  background: #fff;
+  margin-bottom: 20rpx;
+  padding: 0 26rpx;
+}
+
+.com_write .write_title {
+  font-size: 24rpx;
+  color: #909090;
+  padding-top: 38rpx;
+}
+
+.com_write .write_imglist {
+  margin-top: 25rpx;
+  overflow: hidden;
+}
+
+.write_imglist image {
+  width: 130rpx;
+  height: 130rpx;
+  margin-right: 12rpx;
+}
+
+.write_imglist .null_img {
+  width: 130rpx;
+  height: 130rpx;
+  background: #8f8f8f;
+  text-align: center;
+  line-height: 130rpx;
+  float: right;
+}
+
+.null_img text {
+  color: #fff;
+  font-size: 22rpx;
+}
+
+.com_body .com_list {
+}
+
+.com_list .com_head {
+  height: 84rpx;
+  line-height: 84rpx;
+  font-size: 32rpx;
+  color: #ff8d97;
+  background: #fff;
+  padding: 0 26rpx;
+  border-bottom: 2rpx solid #e0e0e0;
+}
+
+.com_list .com_info {
+  margin-bottom: 20rpx;
+  background: #fff;
+  padding: 0 26rpx;
+  padding-bottom: 20rpx;
+}
+
+.com_info .com_info_head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 36rpx;
+}
+
+.com_info_head .com_users {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.com_users text {
+  font-size: 24rpx;
+  color: #686868;
+  margin-left: 16rpx;
+}
+
+.com_info .com_pro_info {
+  padding-top: 22rpx;
+  font-size: 24rpx;
+  color: #a4a4a4;
+  font-family: 'DIN';
+  background: #fff;
+}
+
+.com_info_head .star_level .light {
+  color: #ff8d97;
+}
+
+.com_info_head .star_level icon {
+  color: #ff8d97;
+}
+
+.com_pro_info text {
+  margin-right: 8rpx;
+}
+
+.com_info .com_text {
+  padding: 36rpx 0;
+  font-size: 30rpx;
+  /* font-weight: bold; */
+  color: #333;
+  word-wrap: break-word;
+}
+
+.com_img  image {
+  width: 176rpx;
+  height: 176rpx;
+  margin-right: 12rpx;
+}
+
+.com_info .com_pro_more {
+  height: 220rpx;
+  display: flex;
+  align-items: center;
+  background: #f8f8f8;
+}
+
+.com_pro_more .pro_img {
+  width: 220rpx;
+  height: 220rpx;
+}
+
+.com_pro_more .pro_img image {
+  width: 220rpx;
+  height: 220rpx;
+}
+
+.com_pro_more .pro_more_info {
+  padding: 0 24rpx;
+  background: #f8f8f8;
+}
+
+.pro_more_info .pro_name {
+  width: 437rpx;
+  font-size: 30rpx;
+  /* font-weight: bold; */
+  color: #313131;
+  /* margin-top: 30rpx; */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.pro_more_info .pro_spec {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #7e7e7e;
+}
+
+.pro_spec text {
+  font-family: 'DIN';
+}
+
+.com_pro_more .pro_price {
+  margin-top: 10rpx;
+  font-family: 'DIN';
+}
+
+.pro_price .price {
+  font-size: 38rpx;
+  color: #ff8d97;
+}
+
+.pro_price .score {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.pro_price image {
+  width: 24rpx;
+  height: 20rpx;
+}
+
+.com_pro_more .pro_oldprice {
+  font-family: 'DIN';
+  color: #7c7c7c;
+  font-size: 22rpx;
+  text-decoration: line-through;
+  margin-top: -8rpx;
+}
+
+.com_oper {
+  display: flex;
+  height: 72rpx;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 42rpx;
+}
+
+.com_oper .com_oper_info {
+  font-size: 24rpx;
+  color: #8b8b8b;
+}
+
+.com_oper .com_oper_btn {
+  width: 144rpx;
+  height: 46rpx;
+  font-size: 28rpx;
+  color: #ff8d97;
+  border: 2rpx solid #ff8d97;
+  text-align: center;
+  line-height: 46rpx;
+  border-radius: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.com_oper_btn icon {
+  font-size: 28rpx;
+  line-height: 88rpx;
+}
+
+.order-foot {
+  height: 84rpx;
+  line-height: 84rpx;
+  /* background: #fff; */
+  text-align: center;
+  margin-top: -20rpx;
+}
+
+.order-foot text {
+  font-size: 23.97rpx;
+  color: #bebebe;
+}
+
+.com_list_null {
+  text-align: center;
+  font-size: 30rpx;
+  /* font-weight: bold; */
+  padding: 20rpx 0;
+  color: #999;
+}

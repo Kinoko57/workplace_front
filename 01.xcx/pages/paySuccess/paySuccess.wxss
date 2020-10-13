@@ -1,0 +1,94 @@
+/* pages/paySuccess/paySuccess.wxss */
+@import '../footer/footer.wxss';
+
+.pay_success {
+  font-family: SimHei;
+  background: #f2f2f2;
+  overflow-x: hidden;
+}
+
+.pay_header {
+  text-align: center;
+  background: #f7f7f7;
+  height: 94rpx;
+  line-height: 94rpx;
+}
+
+.pay_header  icon {
+  float: left;
+  color: #5d5d5d;
+  padding-left: 26rpx;
+}
+
+.pay_header text {
+  color: #393939;
+  font-size: 38rpx;
+  margin-left: -26rpx;
+}
+
+.pay_body {
+  background: #fff;
+}
+
+.pay_body .pay_title {
+  height: 180rpx;
+  /* line-height: 180rpx; */
+  background: #ff8d97;
+  display: flex;
+  padding: 0 26rpx;
+  align-items: center;
+}
+
+.pay_title icon {
+  font-size: 70rpx;
+  color: #fff;
+}
+
+.pay_title view {
+  color: #fff;
+  margin-left: 40rpx;
+}
+
+.pay_title  view .pay_states {
+  font-size: 34rpx;
+  display: block;
+}
+
+.pay_title  view .pay_info {
+  font-size: 24rpx;
+}
+
+.pay_addr {
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid #e0e0e0;
+  margin: 0 26rpx;
+}
+
+.pay_addr view {
+  font-size: 24rpx;
+  color: #444;
+  padding: 5rpx 0;
+}
+
+.pay_addr view text {
+  color: #999;
+  width: 100rpx;
+  display: inline-block;
+}
+
+.pay_btn {
+  height: 256rpx;
+  line-height: 256rpx;
+  text-align: center;
+}
+
+.pay_btn button {
+  color: #ff8d97;
+  border: 2rpx solid #ff8d97;
+  background: #fff;
+  margin: 0 30rpx;
+}
+
+.pay_btn button::after {
+  border: none;
+}

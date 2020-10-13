@@ -1,0 +1,122 @@
+/* pages/login/login.wxss */
+page{
+  background-color: #fff;
+}
+
+.login_bg{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.logo_body{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+}
+.bg_video{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+.video_bg{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 101;
+  /* background: rgba(0,0,0,.1); */
+}
+.login_text{
+  color: #333;
+  /* color: #fff; */
+  font-size: 44rpx;
+  text-align: center;
+  /* padding-top: 50rpx; */
+  padding-top: 460rpx;
+}
+.login_samll{
+  display: block;
+  padding-top: 44rpx;
+  font-size:30rpx;
+  color: #fbedeb;
+}
+.login_auth{
+  position: fixed;
+  top: 66%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600rpx;
+  height: 86rpx;
+  line-height: 86rpx;
+  border-radius: 41rpx;
+  overflow: hidden;
+  /* box-shadow: 0 0 10rpx #cd4a30 */
+}
+.login_auth .login_btn{
+  width: 600rpx;
+  color: #fff;
+  height: 86rpx;
+  display: inline-flex;
+  font-weight: normal;
+  align-items: center;
+  justify-content: center;
+}
+/* .login_auth{
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200rpx;
+  overflow: hidden;
+}
+.login_auth .login_btn{
+  width: 200rpx;
+  font-weight: normal;
+  padding: 0;
+}
+.login_auth .login_btn image{
+  width: 108rpx;
+  height: 108rpx;
+}
+.login_auth .login_btn text{
+  display: block;
+  color: #666;
+  font-size: 24rpx;
+  padding-top: 10rpx;
+} */
+.agreement{
+   position: fixed;
+   left: 0;
+   width: 100%;
+   bottom: 120rpx;
+   color: #333;
+   /* color: #fff; */
+   font-size: 24rpx;
+}
+.agreement view{
+  text-align: center;
+}
+.agreement view text{
+  color: #666;
+  /* color: #fff; */
+  text-decoration: underline;
+  /* text-decoration-color: #f2f2f2; */
+  text-decoration-color: #999;
+}

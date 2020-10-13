@@ -1,0 +1,100 @@
+/* pages/accountSecurity/accountSecurity.wxss */
+page{
+  background: #2C7DF9;
+}
+.account_body{
+  position: relative;
+  top: 0;
+  height: 100%;
+  overflow: hidden;
+}
+.account_image{
+  position: absolute;
+  width: 750rpx;
+  top: 0;
+  left: 0;
+}
+.account_block{
+  position: relative;
+  padding: 0 24rpx;
+  z-index: 2;
+}
+.account_lever{
+  text-align: center;
+  color: #fff;
+  font-size: 30rpx;
+  padding-top: 50rpx;
+}
+.account_start{
+  text-align: center;
+  margin:10rpx 0 25rpx;
+}
+.account_start icon{
+  color:#FFED72;
+  font-size: 70rpx;
+  margin: 0 10rpx;
+}
+.account_block_cont{
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 0 22rpx;
+}
+
+.wa_section{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 136rpx;
+  border-bottom: 1px solid #ECECEC;
+}
+.wa_section:last-child{
+  border-bottom: 0;
+}
+.wa_sec_l{
+  display: inline-flex;
+  align-items: center;
+}
+.wa_section .wa_sec_l .wa_sec_l_img{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+}
+.wa_section .wa_sec_l text{
+  font-size: 30rpx;
+  color: #333;
+}
+.wa_section .wa_sec_r text.none{
+  color: #999;
+  font-size: 24rpx;
+  display: inline-flex;
+  align-items: center;
+}
+.wa_section .wa_sec_r text.none .yuan{
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6rpx;
+  vertical-align: middle;
+}
+.wa_section .wa_sec_r text.bind{
+   color: #333;
+  font-size: 24rpx;
+}
+.wa_section .wa_sec_r text.bind .auth{
+  display: inline-flex;
+  width:80rpx;
+  height:32rpx;
+  border-radius: 4rpx;
+  align-items: center;
+  justify-content: center;
+  color: #0091FE;
+  font-size: 22rpx;
+  margin-left: 10rpx;
+  background:rgba(0,138,255,0.06);
+}
+.wa_section .wa_sec_r icon{
+   color: #999;
+   font-size: 30rpx;
+}

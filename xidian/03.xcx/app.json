@@ -1,0 +1,97 @@
+{
+  "pages": [
+    "pages/guidePage/guidePage",
+    "pages/index/index",
+    "pages/social/social",
+    "pages/my/my",
+    "pages/dynamic/dynamic",
+    "pages/userAuz/userAuz",
+    "pages/bindPhone/bindPhone",
+    "pages/spellGroup/spellGroup",
+    "pages/articleDetail/articleDetail",
+    "pages/myCollection/myCollection",
+    "pages/myFootprint/myFootprint",
+    "pages/myShare/myShare",
+    "pages/copyright/copyright",
+    "pages/proDetail/proDetail",
+    "pages/editChild/editChild",
+    "pages/myCenter/myCenter",
+    "pages/messageCenter/messageCenter",
+    "pages/messageList/messageList",
+    "pages/myChild/myChild",
+    "pages/groupResult/groupResult",
+    "pages/saleAfter/saleAfter",
+    "pages/groupDetail/groupDetail",
+    "pages/saleList/saleList",
+    "pages/afterDetail/afterDetail",
+    "pages/dynamicDetail/dynamicDetail",
+    "pages/sureOrder/sureOrder",
+    "pages/course/course",
+    "pages/orderManage/orderManage",
+    "pages/myGroupBy/myGroupBy",
+    "pages/orderDetail/orderDetail",
+    "pages/protocol/protocol",
+    "pages/about/about",
+    "pages/viewImage/viewImage",
+    "pages/viewArticle/viewArticle",
+    "pages/viewDynamic/viewDynamic",
+    "pages/search/search",
+    "pages/searchList/searchList",
+    "pages/editChildOrder/editChildOrder",
+    "pages/payOrder/payOrder",
+    "pages/myChildList/myChildList",
+    "pages/paymentGuide/paymentGuide"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#0d8d37",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#000000",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/image/member/index.png",
+        "selectedIconPath": "/image/member/index_c.png"
+      },
+      {
+        "pagePath": "pages/course/course",
+        "text": "课程",
+        "iconPath": "/image/member/course.png",
+        "selectedIconPath": "/image/member/course_c.png"
+      },
+      {
+        "pagePath": "pages/social/social",
+        "text": "关于西点",
+        "iconPath": "/image/member/socia.png",
+        "selectedIconPath": "/image/member/socia_c.png"
+      },
+      {
+        "pagePath": "pages/messageCenter/messageCenter",
+        "text": "消息",
+        "iconPath": "/image/member/customer.png",
+        "selectedIconPath": "/image/member/customer_c.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "个人",
+        "iconPath": "/image/member/member.png",
+        "selectedIconPath": "/image/member/member_c.png"
+      }
+    ]
+  },
+  "usingComponents": {
+    "skeleton": "./components/skeleton/skeleton",
+    "simple-crop": "./components/simple-crop/index",
+    "null-data": "./components/null-data/null-data",
+    "action-sheet": "./components/action-sheet/action-sheet"
+  },
+  "networkTimeout": {
+    "request": 5000
+  },
+  "sitemapLocation": "sitemap.json"
+}

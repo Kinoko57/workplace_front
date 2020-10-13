@@ -1,0 +1,32 @@
+<!--pages/balanceDetails/balanceDetails.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="balance_bg skeleton">
+    <navbar page-name="余额明细" bg-color="#fff" icon-color="#333333" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+    <view class="balance_body" >
+      <scroll-view style="height:{{scrollHeight}}px" scroll-y lower-threshold='120' bindscrolltolower="loadMore" bindscroll="scroll" scroll-top='{{topNum}}' scroll-with-animation>
+          <view class="balance_block" wx:for="{{cashList}}" wx:key="indedx" wx:for-item="blockItem">
+              <view class="balance_list" wx:for="{{blockItem}}" wx:key="index">
+                <view class="balance_list_t">
+                  <!-- <text wx:if="{{item.profit_type==1}}">自购省</text>
+                  <text wx:if="{{item.profit_type==2}}">零售收益</text>
+                  <text wx:if="{{item.profit_type==3}}">推广收益</text>
+                  <text wx:if="{{item.profit_type==4}}">平台奖励</text> -->
+                  <text>{{item.profit_type_name}}</text>
+                  <text wx:if="{{item.type==1}}">+{{filters.formatMoney(item.profit_price)}}</text>
+                  <text wx:if="{{item.type==2}}">-{{filters.formatMoney(item.profit_price)}}</text>
+                </view>
+                <view class="balance_list_b">
+                  <text>{{filters.formatDateTime(item.update_time)}}</text>
+                  <text>余额：￥{{filters.formatMoney(item.new_total)}}</text>
+                </view>
+              </view>
+          </view>
+          <null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false&&hasData}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无数据" dataShow="{{!hasData}}"></null-data>
+          <view wx:if="{{isiPhoneX}}" style="height:34px;width:100%"></view>
+      </scroll-view>
+    </view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+  <icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

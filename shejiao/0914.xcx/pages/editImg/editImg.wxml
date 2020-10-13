@@ -1,0 +1,13 @@
+<!--pages/editImg/editImg.wxml-->
+
+<view class='editInfo'>
+  <navbar page-name="修改{{codeName}}"  bg-color="linear-gradient(to right, #e34c26, #e13816)" icon-color="#fff" show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class="e_body" style="height:{{height}}px">
+    <view class="e_bg" style="height:{{height}}px"></view>
+    <view class="e_cont">
+      <image src="{{image}}" class='pc_avatar' mode="scaleToFill"></image>
+    </view>
+     <view class="btn" bindtap="chooseCropImage">修改</view>
+     <simple-crop wx:if="{{visible}}" size="{{size}}" src="{{src}}" cropSizePercent="{{cropSizePercent}}" borderColor="{{borderColor}}" bindcropUpload="uploadCallback" bindcropClose="closeCallback" bindcropCrop="cropCallback"></simple-crop>
+  </view>
+</view>

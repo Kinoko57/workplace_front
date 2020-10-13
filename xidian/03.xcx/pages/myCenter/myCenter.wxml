@@ -1,0 +1,49 @@
+<!--pages/personCenter/personCenter.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class='p_center skeleton'>
+  <view class='pc_body'>
+    <view class='pc_info pc_avt' bindtap='edit' data-url="../editImg/editImg?code=image&codename=头像&value={{personInfo.image}}">
+      <text class='info_title'>头像</text>
+      <view class='info_more'>
+        <image wx:if="{{personInfo.image!=''}}" src="{{personInfo.image}}" class='pc_avatar' mode="scaleToFill"></image>
+        <image wx:if="{{personInfo.image==''||personInfo.image==undefined}}" src="../../image/icon/pc_avatar.png" class='pc_avatar' mode="scaleToFill"></image>
+        <icon class='iconfont iconright'></icon>
+      </view>
+    </view>
+    <view class='pc_info' data-url='../editInfo/editInfo?code=nickname&codename=昵称&isInput=0&value={{personInfo.nickname}}' bindtap='edit'>
+      <text class='info_title'>昵称</text>
+      <view class='info_more'>
+        <text>{{personInfo.nickname}}</text>
+        <icon class='iconfont iconright'></icon>
+      </view>
+    </view>
+    <view class='pc_info' data-url='../improveInfo/improveInfo?code=sex&codename=性别&isInput=0&sex={{personInfo.sex}}&visit=1&birth={{personInfo.birth}}' bindtap='editBirth'>
+      <text class='info_title'>性别</text>
+      <view class='info_more'>
+        <text>{{personInfo.sex==0?'保密':personInfo.sex==1?'男':'女'}}</text>
+        <icon class='iconfont iconright' wx:if="{{personInfo.birth==0}}"></icon>
+      </view>
+    </view>
+    <view class='pc_info' data-url='../improveInfo/improveInfo?code=birth&codename=生日&isInput=0&value={{personInfo.birth}}&visit=1' id='birth'>
+      <text class='info_title'>生日</text>
+      <view class='info_more'>
+        <text>{{personInfo.birth==0||personInfo.birth==undefined?'请选择生日':filters.formatDate(personInfo.birth)}}</text>
+      </view>
+    </view>
+    <view class='pc_info' data-url='../myChild/myChild?' bindtap='edit'>
+      <text class='info_title'>我的学员</text>
+      <view class='info_more'>
+        <text>查看</text>
+        <icon class='iconfont iconright'></icon>
+      </view>
+    </view>
+    <view class='pc_info' data-url='../bindPhone/bindPhone?type=change' bindtap='edit'>
+      <text class='info_title'>手机号</text>
+      <view class='info_more'>
+        <text>{{personInfo.tel}}</text>
+        <icon class='iconfont iconright'></icon>
+      </view>
+    </view>
+  </view>
+</view>

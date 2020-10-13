@@ -1,0 +1,129 @@
+/* pages/bind/bind.wxss */
+
+page {
+  background: #fff;
+}
+
+.bind {
+  margin: 58rpx 58rpx;
+  /* font-family: Arial, Helvetica, sans-serif, SimHei; */
+}
+
+.b_jump {
+  text-align: right;
+}
+
+.b_jump text {
+  /* font-size: 17pt; */
+  font-size: 30rpx;
+  color: #666;
+}
+
+.b_content {
+  width: 528rpx;
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 48rpx;
+}
+
+.b_content .b_title text {
+  color: #343434;
+  font-size: 44rpx;
+  display: inline;
+  /* font-family: Arial, Helvetica, sans-serif, SimHei; */
+}
+
+.b_content .b_tips {
+  margin-top: 28rpx;
+  padding: 0 20rpx;
+}
+
+.b_content .b_tips text {
+  color: #8f8f8f;
+  font-size: 26rpx;
+  display: inline;
+  line-height: 10rpx;
+  /* font-family: Arial, Helvetica, sans-serif, SimHei; */
+}
+
+.b_content .b_form {
+  text-align: left;
+}
+
+.b_form .section {
+  display: flex;
+  align-items: center;
+  margin-top: 66rpx;
+}
+
+.b_form .section text {
+  font-size: 30rpx;font-weight: bold;
+  color: #8c8c8c;
+  font-weight: bold;
+  float: left;
+  margin-right: 24rpx;
+}
+
+.b_form .section icon {
+  padding-top: 1px;
+  color: #bbb;
+  display: flex;
+  float: left;
+  margin-right: 24rpx;
+}
+
+.b_form .section input {
+  width: 290rpx;
+  float: left;
+  padding: 10rpx;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.b_form .section .width {
+  width: 100%;
+}
+
+.input-placeholder {
+  font-size: 30rpx;
+  /* font-weight: bold; */
+  color: #c7c7c7;
+}
+
+.b_form .mobile {
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.b_form .mobile input {
+  border: none;
+}
+
+.b_form .getcode button {
+  border: none;
+  background: #ff8d97;
+  color: #fff;
+  outline: none;
+  border-radius: 30rpx;
+  font-size: 26rpx;
+  min-width: 110rpx;
+  text-align: center;
+}
+
+.b_form .next {
+  margin-top: 110rpx;
+}
+
+.b_form .next  button {
+  width: 460rpx;
+  height: 86rpx;
+  line-height: 86rpx;
+  border: none;
+  background: #ff8d97;
+  color: #fff;
+  outline: none;
+  font-size: 40rpx;
+  border-radius: 20rpx;
+}
+
+.b_form .next .btn_default {
+  background: #c7c7c7;
+}

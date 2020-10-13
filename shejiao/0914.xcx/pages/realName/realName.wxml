@@ -1,0 +1,29 @@
+<!--pages/realName/realName.wxml-->
+<view class='realName'>
+  <view class='real_body'>
+   <navbar page-name="实名认证" bg-color="#fff" icon-color="#333333" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+      <view class='section'>
+        <text class='form_title text_left'>姓名</text>
+        <input placeholder='请输入姓名' placeholder-class="place-holder" bindinput="realInput" id="name" data-name="name" type='text' confirm-type="next" value="{{userInfo.name}}"></input>
+      </view>
+      <view class='section'>
+        <text class='form_title text_left'>身份证</text>
+         <input placeholder='请输入身份证号' id="idNumber" bindinput="realInput" data-name="idNumber" type='idcard' placeholder-class="place-holder" confirm-type="next" value="{{userInfo.id_card}}"></input>
+      </view>
+      <view class="upBank">
+        <view class="up_load" bindtap="upImg" data-type="front">
+          <view wx:if="{{frontImage==''}}"><icon class='iconfont icon-add'></icon>上传身份证头像面</view>
+          <image wx:if="{{frontImage==''}}" src="{{staticUrl}}vip/realName1.png" class="up_load_reverse"></image>
+          <image wx:if="{{frontImage!=''}}" src="{{filePath+frontImage}}" class="card_image"></image>
+        </view>
+        <view class="up_load" bindtap="upImg" data-type="back">
+          <view wx:if="{{backImage==''}}"><icon class='iconfont icon-add'></icon>上传身份证国徽面</view>
+          <image wx:if="{{backImage==''}}" src="{{staticUrl}}vip/realName.png" class="up_load_positive"></image>
+          <image wx:if="{{backImage!=''}}" src="{{filePath+backImage}}" class="card_image"></image>
+        </view>
+      </view>
+      <view class='saveInfo {{is_iphonex?"iphone_x_margin":""}}'>
+        <text bindtap="realSubmit" class="bg_theme_red" style="background:{{line_bg_color}}">提交</text>
+      </view>
+  </view>
+</view>

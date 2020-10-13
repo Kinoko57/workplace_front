@@ -1,0 +1,22 @@
+.null_bg {
+  width: 100%;
+  text-align: center;
+  color: #666;
+  font-size: 26rpx;
+  /* height: 60rpx;
+  line-height: 60rpx; */
+  padding: 40rpx 0;
+  overflow: hidden;
+}
+
+.loading {
+}
+
+.no_data {
+  height: 30vh;
+  padding: 200rpx 0;
+}
+
+.no_data .tips {
+  margin-top: 40rpx;
+}

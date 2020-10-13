@@ -1,0 +1,170 @@
+<!--pages/orderDetail/orderDetail.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="or_detail skeleton">
+    <scroll-view class="scroll" scroll-y  style="height:{{scrollHeight}}px">
+      <view class="order_body">
+        <view class="countdown_bg color_theme_red" wx:if="{{orderInfo.public.status==0&&endtime>0}}">
+          <view class="countdown_block">
+          订单将在
+          <text class="time">{{saleTime.hou}}</text>
+          <text>:</text>
+          <text class="time">{{saleTime.min}}</text>
+          <text>:</text>
+          <text class="time">{{saleTime.sec}}</text>
+          后自动取消，请尽快提交
+          </view>
+        </view>
+        <!-- 状态在3以后 -->
+        <view class='trank_block' wx:if="{{orderInfo.public.logistics!=''&&orderInfo.public.logistics!=undefined&&(orderInfo.public.status==2||orderInfo.public.status==3)}}">
+          <view class='order_track block_info'>
+            <image src="{{staticUrl}}my/order_2.png"></image>
+            <view style='margin-left:20rpx;' class="track_r">
+              <view class='order_track_l'>
+                <view class='order_track_l_l'>{{orderInfo.public.logistics}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='flash_chose_info'>
+          <view class='flash_sure_addr block_info'>
+            <image src="{{staticUrl}}my/order_1.png"></image>
+            <view style='margin-left:20rpx;'>
+              <view class='info_block'>
+                <text class='add_name'>{{orderInfo.public.ship_name}}</text>
+                <text style='margin-left:30rpx;'>{{orderInfo.public.ship_mobile}}</text>
+              </view>
+              <view class="add_address">
+                <text>{{orderInfo.public.ship_area}} {{orderInfo.public.ship_addr}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="or_wra">
+          <view class="or_cont block_info">
+            <view class="pay_body_other">
+              <view class="pay_other_cont">
+                <view class="pay_other_list" wx:for="{{orderInfo.rows.detail}}" wx:key="index">
+                  <view class="pay_other_list_flex">
+                    <image src="{{item.goods_image[0]}}" mode="scaleToFill" ></image>
+                    <view class="pay_other_cont_r">
+                      <view class="pay_other_cont_r_l">
+                        <view class="pay_other_tit">{{item.goods_name}}</view>
+                        <view class="pay_other_spec" wx:if="{{item.spec!=''}}">规格：{{item.spec}}</view>
+                        <view class="pay_other_spec" wx:if="{{item.spec==''}}">规格：默认规格</view>
+                      </view>
+                      <view class="pay_other_pri">
+                        <text> <text class="symbol">￥</text>{{filters.formatMoney(item.item_price)}}</text>
+                        <text class="pay_other_mun">共{{item.num}}件</text>
+                      </view>
+                    </view>
+                  </view>
+                  <view class="sale_after">
+                    <!-- <text bindtap="goSales" wx:if="{{item.is_after==1}}" data-link="../proSale/proSale?oid={{orderInfo.public.oid}}&supplierid={{blockitem.supplier_id}}&product_id={{item.product_id}}&goods_id={{item.goods_id}}&order_type=pro" >申请售后</text> -->
+                    <!-- <text class="active" bindtap="goBuy" >再次购买</text> -->
+                  </view>
+                </view>
+              </view>
+              <!-- <view class="pay_other_msg or_mssage" wx:if="{{orderInfo.rows.message!=''&&orderInfo.rows.message!=undefined}}">
+                <view class="or_msg_cont">
+                  <text class="text1">留言：</text><text class="text2">{{orderInfo.rows.message}}</text>
+                </view>
+              </view> -->
+            </view>
+          </view>
+          <view class="or_status block_info">
+            <view class="or_height" wx:if="{{orderInfo.public.status!=0}}">
+               <text>订单编号</text>
+               <text>{{orderInfo.public.oid}} </text>
+               <text class="copy" bindtap="copyOrd" id="{{orderInfo.public.oid}}">复制</text>
+            </view>
+            <view class="or_height" wx:if="{{orderInfo.public.status==0}}">
+               <text>支付单号</text>
+               <text>{{orderInfo.public.order_pay_id}} </text>
+               <text class="copy" bindtap="copyOrd" id="{{orderInfo.public.oid}}">复制</text>
+            </view>
+            <view class="or_height">
+              <text>下单时间</text>
+              <text>{{filters.formatDateTime(orderInfo.public.create_time)}}</text>
+            </view>
+            <view class="pay_other_msg" wx:if="{{orderInfo.rows.message!=''&&orderInfo.rows.message!=undefined}}">
+              <text class="text1">客户留言</text>
+              <text class="text2">{{orderInfo.rows.message}}</text>
+            </view>
+            <view class="or_height" wx:if="{{orderInfo.public.status!=5&&orderInfo.public.status!=0}}">
+              <text>支付方式</text>
+              <!-- /微信小程序支付 -->
+              <text wx:if="{{orderInfo.public.payment_type==1}}">微信支付</text>
+              <!-- 微信app支付 -->
+              <text wx:if="{{orderInfo.public.payment_type==2}}">微信支付</text>
+              <!-- 支付宝app支付 -->
+              <text wx:if="{{orderInfo.public.payment_type==3}}">支付宝支付</text>
+              <!-- 微信扫码支付 -->
+              <text wx:if="{{orderInfo.public.payment_type==4}}">微信支付</text>
+              <!-- 微信app序支付 -->
+              <text wx:if="{{orderInfo.public.payment_type==5}}">支付宝支付</text>
+              <!-- 余额支付 -->
+              <text wx:if="{{orderInfo.public.payment_type==6}}">余额支付</text>
+              <!-- 积分支付-->
+              <text wx:if="{{orderInfo.public.payment_type==7}}">积分支付</text>
+            </view>
+            <view class="or_height" wx:if="{{orderInfo.public.status!=5&&orderInfo.public.status!=0}}">
+              <text>支付时间</text>
+              <text>{{filters.formatDateTime(orderInfo.public.order_pay_time)}}</text>
+            </view>
+          </view>
+          <view class="or_status block_info">
+              <view class="pay_disc">
+                <text class="pub_lcolor">总商品金额</text>
+                <view class="pub_lcolor">￥{{filters.formatMoney(orderInfo.public.goods_price)}}</view>
+              </view>
+              <view class="pay_disc">
+                <text class="pub_lcolor">总运费</text>
+                <view class="pub_lcolor">￥{{filters.formatMoney(orderInfo.public.distribution_price)}}</view>
+              </view>
+              <view class="pay_disc">
+                <text class="pub_lcolor">实付款</text>
+                <view class="const_cash"><text class="symbol">￥</text>{{filters.formatMoney(orderInfo.public.price)}}</view>
+              </view>
+          </view>
+        </view>
+        <view style="height:34px;width;100%" wx:if="{{is_iphonex}}"></view>
+      </view>
+    </scroll-view>
+    <view class="or_fixed {{is_iphonex?'iphone_x_padding':''}}" wx:if="{{orderInfo.public.is_modif==1||orderInfo.public.is_after==1||orderInfo.public.status==0||orderInfo.public.status==2||orderInfo.public.status==3||orderInfo.public.view_track==1}}">
+       <view class="or_fixed_flex">
+        <!-- <button wx:if="{{orderInfo.public.is_modif==1}}" class="cancel_text button" bindtap="changeAdress">修改地址</button> -->
+        <button wx:if="{{orderInfo.public.status==1}}" class="cancel_text button" bindtap="sendOrder" data-oid="{{orderInfo.public.oid}}">去发货</button>
+        <!-- <button wx:if="{{orderInfo.public.status==0}}" class="cancel_text button" bindtap="cancelBtn">取消支付</button> -->
+        <!-- <button wx:if="{{orderInfo.public.status==0}}" class="color_theme_red active_text button" bindtap="buyBtn">立即支付</button> -->
+        <button wx:if="{{orderInfo.public.view_track==1}}"  bindtap="goLink" class="cancel_text button" data-link='../findLog/findLog' data-oid="{{orderInfo.public.oid}}">查看物流</button>
+        <!-- <button class="color_theme_red active_text button" wx:if="{{orderInfo.public.status==3}}" style="background:{{line_bg_color}}" bindtap="goLink" data-link='../evaluateOrder/evaluateOrder' data-supplier_id="{{orderInfo.rows[0].supplier_id}}" data-oid="{{orderInfo.rows[0].oid}}">评价晒单</button> -->
+        <!-- <button wx:if="{{orderInfo.public.status==2}}" class="color_theme_red active_text button"  bindtap="sureBtn">确认收货</button> -->
+        <!-- <button wx:if="{{orderInfo.public.is_after==1}}" class="color_theme_red active_text button" data-link="../proSale/proSale?oid={{orderInfo.public.oid}}&supplierid={{orderInfo.rows[0].supplier_id}}&order_type=order" bindtap="goSales">申请售后</button> -->
+       </view>
+    </view>
+</view>
+	<view class="model_bg" wx:if="{{showModel}}" bindtap="hidenModel" catchtouchmove="ture"></view>
+	<view class="view_addr model_style" wx:if="{{showSend&&showModel}}" catchtouchmove="ture">
+		<view class="model_title">发货信息</view>
+		<view class="model_body">
+			<view class="model_block ">
+				<text style="margin-right:20rpx">快递公司</text>
+				<picker bindchange="bindPickerChange" value="{{index}}" range="{{companyList}}" range-key="name">
+					<view class="picker_text">
+						<text wx:if="{{index!=''}}">{{companyList[index].name}}</text>
+						<text wx:else>请选择快递公司</text>
+						<icon class="iconfont icon-right"></icon>
+					</view>
+				</picker>
+			</view>
+			<view class="model_block after_tracking">
+				<text style="margin-right:20rpx">物流单号</text>
+				<input placeholder="请输入物流单号" placeholder-class="text_class" type='text' bindinput='saveTrackNumber' value='{{track_number}}' />
+			</view>
+		</view>
+		<view class="model_footer">
+			<button class="buy_disable_btn btn_clear short_width" bindtap="hidenModel">取消</button>
+			<button class="buy_btn btn_clear short_width" bindtap="submitTrack">确认</button>
+		</view>
+	</view>

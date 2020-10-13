@@ -1,0 +1,133 @@
+/* pages/bind/bind.wxss */
+
+page {
+  background: #fff;
+}
+
+.bind {
+  margin: 58rpx 58rpx;
+}
+
+.b_jump {
+  text-align: right;
+}
+
+.b_jump text {
+  font-size: 30rpx;
+  color: #666;
+}
+
+.b_content {
+  width: 528rpx;
+  margin: 0 auto;
+  padding-top: 48rpx;
+}
+
+.b_content .b_title text {
+  color: #343434;
+  font-size: 44rpx;
+  display: inline;
+}
+
+.b_content .b_tips text {
+  color: #8f8f8f;
+  font-size: 26rpx;
+  display: inline;
+  line-height: 10rpx;
+}
+
+.b_content .b_form {
+  text-align: left;
+  margin-bottom: 60rpx;
+}
+.input-placeholder {
+  font-size: 30rpx;
+  color: #c7c7c7;
+}
+.b_form .showW{
+  border-bottom: 1px solid #E8E8EF;
+}
+.b_form .showRed{
+  border-bottom: 1px solid #e13816 ;
+}
+ .b_form .form-item{
+   height: 140rpx;
+   box-sizing: border-box;
+   padding-top: 70rpx;
+   padding-left: 48rpx;
+   position: relative;
+ }
+ .b_form .form-item input{
+    height: 70rpx;
+    background:none;
+    outline:none;
+    border:0;
+    width: 90%;
+ }
+ .b_form .form-item image{
+    position: absolute;
+    left:0;
+    bottom: 14rpx;
+    width: 36rpx;
+    height: 36rpx;
+ }
+ .b_form .form-item .close{
+    position: absolute;
+    right:0;
+    bottom: 15rpx;
+ }
+ .b_form .form-item .close icon{
+  font-size: 28rpx;
+ }
+
+ .b_form .form-item:last-child{
+    margin-bottom: 30rpx;
+    padding-right: 168rpx;
+ }
+ .b_form .form-item:last-child .codeClick{
+   position: absolute;
+   right: 0;
+   background:linear-gradient(to right, #fc7b36, #f2362c);
+   bottom: 14rpx;
+   height: 52rpx;
+   width: 168rpx;
+   border-radius: 8rpx;
+   color: #fff;
+   font-size: 26rpx;
+   line-height: 54rpx;
+   padding: 0;
+ }
+ .b_form .form-item:last-child .codeTime{
+   position: absolute;
+   right: 0;
+   bottom: 14rpx;
+   height: 52rpx;
+   width: 168rpx;
+   background: #E8E8EF;
+   border-radius: 4rpx;
+   color: #000000;
+   font-size: 28rpx;
+   line-height: 54rpx;
+   padding: 0;
+ }
+ .login .noLogin{
+   width:100%;
+   height:80rpx;
+   background:linear-gradient(90deg,rgba(231,232,239,1) 0%,rgba(202,204,218,1) 100%);
+   border-radius:46rpx;
+   font-size: 36rpx;
+   font-weight: 400;
+   color: rgba(0,0,0,0.4);
+   line-height:80rpx;
+   text-align: center;
+ }
+ .login .okLogin{
+   width:100%;
+   height:80rpx;
+   border-radius:46rpx;
+   font-size: 36rpx;
+   font-weight: 400;
+   color: #ffffff;
+   line-height:80rpx;
+   text-align: center;
+ }

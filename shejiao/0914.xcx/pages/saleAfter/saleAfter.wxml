@@ -1,0 +1,83 @@
+<!--pages/saleAfter/saleAfter.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<view class="saleAfter skeleton">
+   <navbar page-name="{{pageName}}"  bg-color="#fff" icon-color="#333" show-title='true' show-nav='true' show-index='false'></navbar>
+   <view class="saleAfter_body">
+      <view class="saleAfter_body_top">
+         <view class="saleAfter_body_top_pro">
+             <view class="proSale_body_top_block" wx:for="{{proObj.goods}}" wx:key="index">
+               <image class="saleAfter_body_top_pro_img skeleton-rect" src="{{item.image}}"></image>
+               <view class="saleAfter_body_top_pro_r">
+                  <view class="saleAfter_body_top_pro_titi skeleton-rect">{{item.goods_name}}</view>
+                  <view class="saleAfter_body_top_pro_info skeleton-rect">
+                     <view class="proSale_info_pri">单价：<text class="info_style">￥{{filters.formatMoney(item.item_price)}}</text></view>
+                     <view class="proSale_info_num">数量：<text class="info_style">{{item.num}}</text></view>
+                  </view>
+               </view>
+             </view>
+         </view>
+         <view class="saleAfter_body_top_num" wx:if="{{options.type!='return_money'&&options.sale_type!='order'}}">
+            <text>申请数量：</text>
+            <view class="num_input">
+               <icon class="iconfont icon-less" id='0' bindtap='lessNum' data-value='less'></icon>
+               <input type="number" value="{{specNum}}" bindblur='changeValue'></input>
+               <icon class="iconfont icon-add" id='1' bindtap='addNum' data-value='add'></icon>
+            </view>
+         </view>
+      </view>
+      <view class="saleAter_cause saleAter_block">
+         <view class="saleAfter_tit">
+           <text class="text_left">申请原因</text>
+           <text class="text_right">请填写申请原因</text>
+         </view>
+         <view class="saleAfter_teaxtarea">
+            <textarea placeholder="请描述申请售后服务的具体原因" disabled="{{options.sale_type=='track'}}" placeholder-class="text_class" value='{{afterInput}}' maxlength='200' bindinput="inputAction" bindblur="lostblur"></textarea>
+            <view class="saleAfter_teax_num">{{inputLength}}/200</view>
+         </view>
+         <view class="saleAfter_upload">
+            <view class="saleAfter_upload_block">
+              <view class="upload_block" wx:for="{{imgList}}" wx:key="index">
+                <image class="saleAfter_upload_block_img" src="{{filePath+item}}" catchtap="findImg" data-index="{{index}}"></image>
+                <icon class="iconfont icon-cha" catchtap="clearImg" data-index="{{index}}"></icon>
+              </view>
+               <view class="saleAfter_upload_add" wx:if="{{imgList.length<9&&options.sale_type!='track'}}" bindtap="changeImg">
+                  <view class="saleAfter_upload_add_text">
+                     <icon class="iconfont icon-zhaoxiangji"></icon>
+                     <text>上传凭证</text>
+                     <text>（最多九张）</text>
+                  </view>
+               </view>
+            </view>
+           <view class="saleAfter_upload_tips color_theme_red">
+              为了帮您更好的解决问题，请务必上传照片凭证
+           </view>
+         </view>
+      </view>
+      <view class="saleAter_addre saleAter_block"  wx:if="{{options.type!='return_money'}}">
+        <view class="saleAfter_tit">
+           <text class="text_left">收货地址</text>
+         </view>
+         <view class="saleAter_addre_info" bindtap="changeAddress">
+            <icon class="iconfont icon-address"></icon>
+            <view class="saleAter_addre_info_text">
+              {{ship_area}}{{ship_addr}}
+            </view>
+             <icon class="iconfont icon-right" wx:if="{{options.sale_type!='track'}}"></icon>
+         </view>
+      </view>
+      <view class="saleAter_userInfo saleAter_block"  wx:if="{{options.type!='return_money'}}">
+         <view class="userInfo_block">
+            <icon class="iconfont icon-yonghu"></icon>
+            <input placeholder="请输入姓名" disabled="{{options.sale_type=='track'}}" placeholder-class="text_user" type='text' data-name='ship_name' bindinput='saveinput' bindblur="saveBlur" value='{{ship_name}}' />
+         </view>
+         <view class="userInfo_block">
+            <icon class="iconfont icon-dianhua"></icon>
+            <input placeholder="请输入手机号" disabled="{{options.sale_type=='track'}}" placeholder-class="text_user" type='number' data-name='ship_mobile' bindinput='saveinput' bindblur="saveBlur"  value='{{ship_mobile}}' />
+         </view>
+      </view>
+   </view>
+   <view class="sale_submit bg_theme_red" bindtap="submitorder">{{sumbit_text}}</view>
+   <view wx:if="{{is_iphonex}}" style="height:34px"></view>
+</view>
+

@@ -1,0 +1,23 @@
+<!--pages/Interested/Interested.wxml-->
+<view class='interested'>
+  <view class='i_header'>
+    <text class='header_title'>选择至少4个感兴趣的内容</text>
+    <text>私人订制，以后可随时更改</text>
+  </view>
+  <view class='i_body'>
+    <scroll-view class='i_likeList' scroll-y='true'>
+      <checkbox-group bindchange="checkLike">
+        <view class='i_like' wx:for='{{list}}' wx:key='index'>
+          <label for='{{item.id}}'>
+            <image src='{{item.img}}' class='i_like_img'></image>
+            <checkbox id='{{item.id}}' checked='{{item.selected}}' value='{{item.id}}'></checkbox>
+            <text>{{item.name}}</text>
+          </label>
+        </view>
+      </checkbox-group>
+    </scroll-view>
+    <view class='i_like_btn' bindtap='goInfo'>
+      <button size='default'>完成</button>
+    </view>
+  </view>
+</view>

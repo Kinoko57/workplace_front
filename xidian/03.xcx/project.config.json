@@ -1,0 +1,362 @@
+{
+  "description": "项目配置文件",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "useMultiFrameRuntime": false,
+    "useApiHook": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.11.0",
+  "appid": "wx389b8d76a4ab2d3f",
+  "projectname": "%E7%8F%8D%E9%80%89%E4%BC%98%E5%93%81%E7%BD%91",
+  "debugOptions": {
+    "hidedInDevtools": []
+  },
+  "isGameTourist": false,
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "plugin": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "currentL": -1,
+      "list": []
+    },
+    "gamePlugin": {
+      "current": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": 3,
+      "list": [
+        {
+          "id": 0,
+          "name": "pages/course/course",
+          "pathName": "pages/course/course",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 1,
+          "name": "pages/paymentGuide/paymentGuide",
+          "pathName": "pages/paymentGuide/paymentGuide",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 2,
+          "name": "pages/proDetail/proDetail",
+          "pathName": "pages/proDetail/proDetail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 3,
+          "name": "pages/myChild/myChild",
+          "pathName": "pages/myChild/myChild",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 4,
+          "name": "pages/messageCenter/messageCenter",
+          "pathName": "pages/messageCenter/messageCenter",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 5,
+          "name": "pages/course/course",
+          "pathName": "pages/course/course",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 6,
+          "name": "pages/myCenter/myCenter",
+          "pathName": "pages/myCenter/myCenter",
+          "query": "id=14",
+          "scene": null
+        },
+        {
+          "id": 7,
+          "name": "pages/editChildOrder/editChildOrder",
+          "pathName": "pages/editChildOrder/editChildOrder",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 8,
+          "name": "pages/saleList/saleList",
+          "pathName": "pages/saleList/saleList",
+          "query": "type=1",
+          "scene": null
+        },
+        {
+          "id": 9,
+          "name": "消息中心",
+          "pathName": "pages/messageCenter/messageCenter",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的收藏",
+          "pathName": "pages/myCollection/myCollection",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的足迹",
+          "pathName": "pages/myFootprint/myFootprint",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "关于我们",
+          "pathName": "pages/about/about",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "设置",
+          "pathName": "pages/setUp/setUp",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 14,
+          "name": "文章详情",
+          "pathName": "pages/articleDetail/articleDetail",
+          "query": "id=65",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "商品列表",
+          "pathName": "pages/proList/proList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "商品详情",
+          "pathName": "pages/proDetail/proDetail",
+          "query": "id=9",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/specialActivity/specialActivity",
+          "pathName": "pages/specialActivity/specialActivity",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/proSale/proSale",
+          "pathName": "pages/proSale/proSale",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/proSale/proSale",
+          "pathName": "pages/proSale/proSale",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/saleList/saleList",
+          "pathName": "pages/saleList/saleList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/saleList/saleList",
+          "pathName": "pages/saleList/saleList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "个人中心",
+          "pathName": "pages/myCenter/myCenter",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/myChild/myChild",
+          "pathName": "pages/myChild/myChild",
+          "query": "id=14",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/about",
+          "pathName": "pages/about/about",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/myCenter/myCenter",
+          "pathName": "pages/myCenter/myCenter",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的点赞",
+          "pathName": "pages/myCollection/myCollection",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的足迹",
+          "pathName": "pages/myFootprint/myFootprint",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 28,
+          "name": "团购详情",
+          "pathName": "pages/groupDetail/groupDetail",
+          "query": "id=62",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的拼团",
+          "pathName": "pages/myGroupBy/myGroupBy",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "确认订单",
+          "pathName": "pages/sureOrder/sureOrder",
+          "query": "num=1&type=group&curriculum_id=36&curriculum_camp_id=45&act_id=62&team_id=10",
+          "scene": null
+        },
+        {
+          "id": 31,
+          "name": "拼团详情",
+          "pathName": "pages/groupResult/groupResult",
+          "query": "type=view&group_id=330&team_id=2262",
+          "scene": null
+        },
+        {
+          "id": 32,
+          "name": "订单详情",
+          "pathName": "pages/orderDetail/orderDetail",
+          "query": "order_id=2020042636210493913",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "入伍通知书",
+          "pathName": "pages/viewImage/viewImage",
+          "query": "name=%E8%80%8C%E9%9D%9E%E4%B8%BA&time=%E7%89%B9%E7%A7%8D%E5%85%B5%E8%BF%9B%E9%98%B6%E8%AE%AD%E7%BB%83%E8%90%A5",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "阅读文章",
+          "pathName": "pages/viewArticle/viewArticle",
+          "query": "id=58",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/payOrder/payOrder",
+          "pathName": "pages/payOrder/payOrder",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/proDetail/proDetail",
+          "pathName": "pages/proDetail/proDetail",
+          "query": "id=90",
+          "scene": 1036,
+          "referrerInfo": {}
+        },
+        {
+          "id": -1,
+          "name": "pages/proDetail/proDetail",
+          "pathName": "pages/proDetail/proDetail",
+          "query": "id=90",
+          "scene": 1036,
+          "referrerInfo": {}
+        },
+        {
+          "id": -1,
+          "name": "添加文章",
+          "pathName": "pages/addArticle/addArticle",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/proDetail/proDetail",
+          "pathName": "pages/proDetail/proDetail",
+          "query": "id=111",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/proDetail/proDetail",
+          "pathName": "pages/proDetail/proDetail",
+          "query": "id=111",
+          "scene": 1036,
+          "referrerInfo": {}
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,49 @@
+<!--pages/footer/footer.wxml-->
+<view class='m_footer'>
+  <view>
+    <navigator url="/pages/index/index" open-type='switchTab' hover-class='none'>
+      <image src='../../static/img/member/home_c.png' class='footer_icon' mode='aspectFit' wx:if='{{navNtn==1}}'></image>
+      <image src='../../static/img/member/home.png' class='footer_icon' mode='aspectFit' wx:else></image>
+      <text class="{{navNtn==1?'active':''}}">首页</text>
+    </navigator>
+
+    <navigator url="/pages/hotPush/hotPush" open-type='switchTab' hover-class='none'>
+      <image src='../../static/img/member/coll_c.png' class='footer_icon' mode='aspectFit' wx:if='{{navNtn==6}}'></image>
+      <image src='../../static/img/member/coll.png' class='footer_icon' mode='aspectFit' wx:else></image>
+      <text class="{{navNtn==6?'active':''}}">发现</text>
+    </navigator>
+
+    <navigator url="/pages/proType/proType" open-type='switchTab' hover-class='none'>
+      <image src='../../static/img/member/type_c.png' class='footer_icon' mode='aspectFit' wx:if='{{navNtn==4}}'></image>
+      <image src='../../static/img/member/type.png' class='footer_icon' mode='aspectFit' wx:else></image>
+      <text class="{{navNtn==4?'active':''}}">分类</text>
+    </navigator>
+
+    <navigator url="/pages/myCar/myCar" open-type='switchTab' hover-class='none'>
+      <view class='carNum' wx:if='{{total_amout>0}}'>
+        <text wx:if='{{total_amout<999}}'>{{total_amout}}</text>
+        <text wx:else>...</text>
+      </view>
+      <image src='../../static/img/member/car_c.png' class='footer_icon' mode='aspectFit' wx:if='{{navNtn==3}}'></image>
+      <image src='../../static/img/member/car.png' class='footer_icon' mode='aspectFit' wx:else></image>
+      <text class="{{navNtn==3?'active':''}}">购物车</text>
+    </navigator>
+
+    <navigator url="/pages/memberCenter/memberCenter" open-type='switchTab' hover-class='none'>
+      <icon class='iconfont icon-yuandianzhong1 point' wx:if='{{newNews}}'></icon>
+      <image src='../../static/img/member/my_c.png' class='footer_icon' mode='aspectFit' wx:if='{{navNtn==5}}'></image>
+      <image src='../../static/img/member/my.png' class='footer_icon' mode='aspectFit' wx:else></image>
+      <text class="{{navNtn==5?'active':''}}">我的</text>
+    </navigator>
+  </view>
+  <view class='iphone_x' wx:if='{{is_iphonex}}'></view>
+</view>
+<!-- 弹出框-->
+<!-- <view class='login_model_bg' hidden='{{hiddenlogin}}' bindtap='exitLogin'>
+</view> -->
+<!-- <view class='login_model' hidden='{{hiddenlogin}}'>
+  <button open-type="getUserInfo" bindgetuserinfo='wx_login'>
+    <image src='../../static/img/member/wx_login.png'></image>
+    <text>微信一键登录</text>
+  </button>
+</view> -->

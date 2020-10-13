@@ -1,0 +1,8 @@
+<!--pages/protocol/protocol.wxml-->
+<import src="/wxParse/wxParse.wxml" />
+<view class="protocol_bg {{type=='about'?'protocol_bg_about':''}}">
+	<navbar page-name="{{pageTitle}}" bg-color="#fff" icon-color="#000" show-title='true' show-nav='true' show-index='false'></navbar>
+		<view class="info pro_img {{type=='about'?'info_about':''}}">
+			<template is="wxParse" data="{{wxParseData:proDetail.nodes}}" />
+		</view>
+</view>

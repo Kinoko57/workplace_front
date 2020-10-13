@@ -1,0 +1,53 @@
+<!--pages/myCoupon/myCoupon.wxml-->
+<view class='my_coupon'>
+  <view class='coupon_body'>
+    <view class='coupon_nav'>
+      <text bindtap='viewCouType' class="{{couType=='1'?'text_active':''}}" id='0'>可使用</text>
+      <text bindtap='viewCouType' class="{{couType=='2'?'text_active':''}}" id='1'>已使用</text>
+      <text bindtap='viewCouType' class="{{couType=='3'?'text_active':''}}" id='2'>已失效</text>
+    </view>
+    <view class='cou_list'>
+      <view class='cou_info' wx:for="{{couList}}" wx:key="index">
+        <image src='../../static/img/order/cop_bg.png' hidden="{{couType!='1'}}"></image>
+        <image src='../../static/img/order/cop_bg_01.png' hidden="{{couType=='1'}}"></image>
+        <view class='cou_more'>
+          <view class='cou_value'>￥
+            <text>{{item.cashworth}}</text>
+          </view>
+          <view class='cou_more_tips'>
+            <!-- <text>立即使用</text>
+            <icon class='iconfont icon-right'></icon> -->
+            <text wx:if='{{item.order_price>0}}'>满{{item.order_price}}可用</text>
+            <text wx:if='{{item.order_price<=0}}'>无门槛通用</text>
+          </view>
+        </view>
+        <view class=" cou_tips">
+          <text class='cou_title'>{{item.title}}</text>
+          <view class="{{item.state==1?'cou_type_normal cou_type':'cou_type'}}">
+            <text wx:if='{{item.type_name!=null}}' class='text_line'>适用于：{{item.type_name}}{{item.content}}</text>
+            <text wx:if='{{item.type_name==null}}'>全类目通用{{item.content}}</text>
+            <!-- <text wx:if="{{item.content!=null&&item.content!=''}}"></text> -->
+          </view>
+          <view class='cou_time' hidden="{{item.state!=1}}">
+            <text>有效期至{{item.totime}}</text> </view>
+          <view class='cou_time' hidden="{{item.state!=3}}">
+            <text>使用时间：{{item.usetime}}</text> </view>
+          <view class='cou_time' hidden="{{item.state!=2}}">
+            <text>过期时间：{{item.totime}}</text> </view>
+        </view>
+        <view class='cou_states'>
+          <icon class='iconfont icon-yishixiao' wx:if='{{item.state==2}}'></icon>
+          <icon class='iconfont icon-yishiyong' wx:if='{{item.state==3}}'></icon>
+        </view>
+      </view>
+      <view class='cou_list' wx:if='{{couList.length<=0}}' style='text-align:center;margin:30rpx 0;'>
+        <text class='nullTips'>当前分类下暂无优惠券</text>
+      </view>
+      <button type="default" size="default" loading plain hidden='{{viewList.length==couTotal}}||{{viewList.length==useTotal}}' class="loading_style">正在加载中，请稍后...</button>
+    </view>
+
+  </view>
+</view>
+<view class='goIndex' bindtap='goIndex' data-link='../index/index'>
+  <icon class='iconfont icon-home'></icon>
+</view>

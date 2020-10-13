@@ -1,0 +1,87 @@
+<!--pages/findList/findList.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="find_bg skeleton">
+  <navbar page-name="" bg-color="transparent" icon-color="#000000" show-search='false' show-title='false' show-nav='false' show-index='false'></navbar>
+  <view class="find_body_nav" style="height:{{navHeight}}px">
+    <view class="find_body_top" style="margin-top:{{navTop}}px;height:{{topHeight}}px" >
+      <image src="{{userInfo_image}}" wx:if="{{isLogin}}" bindtap="goCenter" data-link="../anchorPerson/anchorPerson"></image>
+      <image  wx:if="{{!isLogin}}" src="{{userInfo_image}}" bindtap="goLink" data-link="../login/login"></image>
+      <scroll-view class="find_nav" scroll-x="true" scroll-with-animation>
+        <view bindtap="choseNav" class="find_nav_text {{activeTab==index?'find_nav_active':''}}" wx:for="{{navList}}" wx:key="index" data-index="{{index}}" data-id="{{item.id}}">{{item.name}}</view>
+      </scroll-view>
+      <icon class="iconfont icon-sousuo" bindtap="goLink" data-link="../anchorSearch/anchorSearch"></icon>
+    </view>
+  </view>
+  <view class="find_body">
+    <view class="find_body_bottom">
+        <block wx:for="{{tabs}}" wx:key="index" id="{{item.id}}" wx:for-item="tabBlock" wx:if="{{activeTab==index}}">
+          <scroll-view class="anchorPer_scroll" wx:if="{{activeTab==index}}" refresher-enabled="{{true}}"  bindscroll="scroll" scroll-top='{{topNum}}'  bindrefresherpulling="onPulling" bindrefresherrefresh="onRefresh" bindrefresherrestore="onRestore" bindrefresherabort="onAbort" refresher-triggered="{{triggered}}" refresher-threshold="{{50}}" style="height:{{scrollHeight}}" scroll-y lower-threshold='140' bindscrolltolower="loadMore" scroll-with-animation>
+              <view class="anchorPer_block" wx:if="{{tabBlock.col1.length>0}}">
+                <view id="anchorPer_block_left" class="anchorPer_block_left anchorPer_block_left_{{index}}">
+                    <view class="anchorPer_block_list" wx:for="{{tabBlock.col1}}" wx:key="index">
+                      <view class="anchorPer_block_list_img" bindtap="goDetail" data-id="{{item.id}}" data-mid="{{item.anchor_id}}">
+                          <video id="myVideo"  wx:if="{{item.type==2}}" style="height:{{170/item.viewing[0].width*item.viewing[0].height}}px" show-fullscreen-btn="{{false}}" auto-pause-if-navigate auto-pause-if-open-native show-play-btn="{{false}}" show-center-play-btn="{{false}}" object-fit='fill' src="item.viewing[0].image"></video>
+                          <image lazy-load="true"  src="{{item.viewing[0].image}}" mode="widthFix" wx:if="{{item.type!=2}}"></image>
+                          <view class="video_mask" wx:if="{{item.type==2||tabBlock.id==4}}">
+                              <image src="{{staticUrl}}anchor/bofang.png"  wx:if="{{item.type==2}}"></image>
+                              <view class="anchor_remind" wx:if="{{tabBlock.id==4}}">
+                                <icon class="iconfont icon-naozhong"></icon>{{item.time}}
+                              </view>
+                          </view>
+                      </view>
+                      <view class="anchorPer_block_list_titi"  bindtap="goDetail" data-id="{{item.id}}" data-mid="{{item.anchor_id}}">{{item.content}}</view>
+                      <view class="anchorPer_block_list_info">
+                        <view class="anchorPer_block_list_info_l" bindtap="goLink" data-link="../anchorPerson/anchorPerson?member_id={{item.member_id}}">
+                          <image src="{{item.image}}"></image>
+                          <text>{{item.nickname}}</text>
+                        </view>
+                        <view class="anchorPer_block_list_info_r" bindtap="collView" data-id="{{item.id}}" data-index="{{index}}" data-position="left" data-like="{{item.is_like}}">
+                          <icon class="iconfont icon-coll" wx:if="{{item.is_like==0&&tabBlock.id!=3}}"></icon>
+                          <icon class="iconfont icon-coll1" wx:if="{{item.is_like==1&&tabBlock.id!=3}}"></icon>
+                          <icon class="iconfont icon-tianjiarenyuan" wx:if="{{tabBlock.id==3}}"></icon>
+                          <text wx:if="{{tabBlock.id!=3}}">{{item.like_num}}</text>
+                          <text wx:if="{{tabBlock.id==3}}">{{item.people_online}}</text>
+                        </view>
+                      </view>
+                    </view>
+                </view>
+                <view id="anchorPer_block_right" class="anchorPer_block_right anchorPer_block_right_{{index}}" >
+                    <view class="anchorPer_block_list" wx:for="{{tabBlock.col2}}" wx:key="index">
+                      <view class="anchorPer_block_list_img" bindtap="goDetail" data-id="{{item.id}}" data-mid="{{item.anchor_id}}">
+                          <video id="myVideo"  wx:if="{{item.type==2}}" style="height:{{170/item.viewing[0].width*item.viewing[0].height}}px" show-fullscreen-btn="{{false}}" auto-pause-if-navigate auto-pause-if-open-native show-play-btn="{{false}}" show-center-play-btn="{{false}}" object-fit='fill' src="item.viewing[0].image"></video>
+                          <image lazy-load="true"  src="{{item.viewing[0].image}}" mode="widthFix" wx:if="{{item.type!=2}}"></image>
+                          <view class="video_mask" wx:if="{{item.type==2||tabBlock.id==4}}">
+                              <image src="{{staticUrl}}anchor/bofang.png"  wx:if="{{item.type==2}}"></image>
+                              <view class="anchor_remind" wx:if="{{tabBlock.id==4}}">
+                                <icon class="iconfont icon-naozhong"></icon>{{item.time}}
+                              </view>
+                          </view>
+                      </view>
+                      <view class="anchorPer_block_list_titi"  bindtap="goDetail" data-id="{{item.id}}" data-mid="{{item.anchor_id}}">{{item.content}}</view>
+                      <view class="anchorPer_block_list_info">
+                        <view class="anchorPer_block_list_info_l"  bindtap="goLink" data-link="../anchorPerson/anchorPerson?member_id={{item.member_id}}">
+                          <image src="{{item.image}}"></image>
+                          <text>{{item.nickname}}</text>
+                        </view>
+                        <view class="anchorPer_block_list_info_r" bindtap="collView" data-id="{{item.id}}" data-index="{{index}}" data-position="right" data-like="{{item.is_like}}">
+                          <icon class="iconfont icon-coll" wx:if="{{item.is_like==0&&tabBlock.id!=3}}"></icon>
+                          <icon class="iconfont icon-coll1" wx:if="{{item.is_like==1&&tabBlock.id!=3}}"></icon>
+                          <icon class="iconfont icon-tianjiarenyuan" wx:if="{{tabBlock.id==3}}"></icon>
+                          <text wx:if="{{tabBlock.id!=3}}">{{item.like_num}}</text>
+                          <text wx:if="{{tabBlock.id==3}}">{{item.people_online}}</text>
+                        </view>
+                      </view>
+                    </view>
+                </view>
+              </view>
+             <null-data id="null-data" loadingText="加载中..." loadingShow="{{tabBlock.is_end==false&&tabBlock.hasData}}" bottomText="已经到底啦~" bottomShow="{{tabBlock.is_end&&tabBlock.hasData}}" dataText="暂无数据" dataShow="{{!tabBlock.hasData}}"></null-data>
+            <view style="width:2rpx;height:2rpx;bottom:-2rpx;position:absolute"></view>
+          </scroll-view>
+        </block>
+    </view>
+  </view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+  <icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

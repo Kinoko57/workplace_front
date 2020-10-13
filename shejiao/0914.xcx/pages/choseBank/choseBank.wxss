@@ -1,0 +1,59 @@
+/* pages/choseBank/choseBank.wxss */
+page{
+  background: #fff;
+}
+.bank_bg_body{
+  border-top: 1px solid #ccc;
+  padding: 0 24rpx;
+}
+.bank_info{
+  display: flex;
+  height: 129rpx;
+  padding: 0 6rpx;
+  width: 702rpx;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ECECEC;
+  align-items: center;
+  justify-content: space-between;
+}
+.bank_info .bank_more{
+  display: inline-flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #666;
+}
+.bank_info .bank_more image{
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+.bank_info .bank_more .bank_name view:nth-child(1){
+   padding-bottom: 10rpx;
+   color: #333;
+   font-size: 26rpx;
+}
+.bank_btn{
+  position: fixed;
+  bottom: 58rpx;
+  width: 100%;
+}
+.bank_btn text{
+  display: block;
+  width: 702rpx;
+  height: 80rpx;
+  color: #fff;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  margin: 0 auto;
+}
+/* radio的默认样式 */
+
+radio .wx-radio-input {
+  border-radius: 50%;
+  width: 34rpx;
+  height: 34rpx;
+  border: 1px solid #a1a1a1;
+}

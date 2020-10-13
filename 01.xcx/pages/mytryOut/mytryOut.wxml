@@ -1,0 +1,42 @@
+<!--pages/myflashSale/myflashSale.wxml-->
+<view class='my_flashSale' wx:if='{{isShow}}'>
+  <view class='flashSale_body'>
+    <view class='flashSale_nav'>
+      <text bindtap='viewflashType' class="{{flashType=='1'?'text_active':''}}" id='1'>已成功</text>
+      <text bindtap='viewflashType' class="{{flashType=='3'?'text_active':''}}" id='3'>进行中</text>
+      <text bindtap='viewflashType' class="{{flashType=='2'?'text_active':''}}" id='2'>已取消</text>
+    </view>
+    <view class='cou_tips' wx:if='{{orderList.length<=0}}'>
+      <text>{{tips}}</text>
+      <button class='btn_red' bindtap='goLink' data-link='../tryOut/tryOut'>去试用列表看看</button>
+    </view>
+    <view class='order_list' wx:if='{{orderList.length>0}}'>
+      <view class='order_info' wx:for="{{orderList}}" wx:key="index">
+        <view class='order_title'>
+          <view class='pro_img'>
+            <image src='{{item.img}}'></image>
+          </view>
+          <view class='pro_info'>
+            <view class='pro_title'>{{item.name}}</view>
+            <view class='pro_color'>申请时间：{{item.createtime}}</view>
+            <view class='order_btn' >
+              <!-- <button size='mini' class='btn_red' id='{{item.id}}' bindtap='goOrder' data-link='../sureOrder/sureOrder?addType=3&id={{item.pid}}' wx:if="{{item.try_status==2}}">已取消</button> -->
+              <button size='mini' class='btn_red' bindtap='goLink' data-link='../orderDetail/orderDetail?id={{item.order_id}}' wx:if="{{item.try_status==1}}">前往查看</button>
+              <button size='mini' class='btn_red' bindtap='goLink' data-link='../tryOutdetail/tryOutdetail?id={{item.activity_id}}&help_id={{item.help_id}}&model=true' wx:if="{{item.try_status=='help_try'&&item.help_num>item.yet_num}}">查看详情</button>
+              <button size='mini' class='btn_red' bindtap='goLink' data-link='../tryOutdetail/tryOutdetail?id={{item.activity_id}}&help_id={{item.help_id}}&model=true' wx:if="{{item.try_status=='help_try'&&item.help_num==item.yet_num}}">前往下单</button>
+              <button size='mini' wx:if="{{item.try_status==2}}" class='btn_red'>已取消</button>
+              <button wx:if="{{item.try_status==3}}" class='btn_red' size='mini'>已下架</button>
+            </view>
+          </view>
+        </view>
+      </view>
+      <button type="default" size="default" loading plain hidden='{{orderList.length==total}}' class="loading_style">正在加载中，请稍后...</button>
+    </view>
+    <view class='order-foot' hidden='{{orderList.length<total||total==0}}'>
+      <text>—————— 我是有底线的 ——————</text>
+    </view>
+  </view>
+</view>
+<view class='goIndex' bindtap='goIndex' data-link='../index/index'>
+  <icon class='iconfont icon-home'></icon>
+</view>

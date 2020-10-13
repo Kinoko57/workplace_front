@@ -1,0 +1,14 @@
+<view class="null_bg">
+  <view class="loading" wx:if="{{loadingShow}}">
+    {{loadingText}}
+  </view>
+  <view class="is_bottom" wx:if="{{bottomShow}}">
+    {{bottomText}}
+  </view>
+  <view class="no_data" wx:if="{{dataShow}}">
+    <!-- <icon class="iconfont iconzanwushuju1"></icon> -->
+    <!-- <ss-icon name="iconzanwushuju1" color="#888" size="140px" block="{{true}}" ></ss-icon> -->
+    <image src="../../image/my/warning.png" style="width:60%" mode="widthFix"></image>
+    <view class="tips">{{dataText}}</view>
+  </view>
+</view>

@@ -1,0 +1,39 @@
+<!--pages/orderTrack/orderTrack.wxml-->
+<view class='orderTrack'>
+  <view class='o_t_body'>
+    <view class='order_info'>
+      <view>
+        <!-- 运单号： -->
+        订单号：
+        <text>{{orderNo}}</text>
+      </view>
+      <view>
+        国内承运人：
+        <text>{{name}}</text>
+      </view>
+      <!-- <view>
+        国内承运人电话：
+        <text>95554</text>
+      </view> -->
+    </view>
+    <view class='track_infos'>
+      <view class='track_infos_info' wx:for='{{list}}' wx:key='index'>
+        <view class='track_time'>
+          <!-- <text class='track_date'>04-12</text> -->
+          <text>{{item.AcceptTime}}</text>
+        </view>
+        <view class='track_status'>
+          <!-- <view class='track_border'></view> -->
+          <image src='../../static/img/com/s_top1.png' class='t_states'></image>
+          <!-- <image src='../../static/img/com/s_top.png' class='t_active t_hide'></image> -->
+          <view class='track_location'>
+            <text>{{item.AcceptStation}}</text>
+          </view>
+        </view>
+        <!-- <view class='track_location'>
+          <text>{{item.AcceptStation}}</text>
+        </view> -->
+      </view>
+    </view>
+  </view>
+</view>

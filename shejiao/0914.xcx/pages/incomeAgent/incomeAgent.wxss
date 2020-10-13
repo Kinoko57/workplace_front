@@ -1,0 +1,168 @@
+/* pages/incomeAgent/incomeAgent.wxss */
+page{
+  background: #f9f9f9;
+}
+.income_bg_image{
+  position: absolute;
+  top: 0;
+  width: 750rpx;
+  background-color: rgba(45, 139, 200, 1);
+  overflow: hidden;
+}
+.income_top {
+  position: fixed;
+  top: 0;
+  z-index: 99;
+  width: 100%;
+}
+.income_info{
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  bottom: 0;
+}
+.income_info .income_info_allCount{
+   font-size: 72rpx;
+   text-align: center;
+   color: #fff;
+}
+.income_info_allText{
+  font-size: 28rpx;
+  text-align: center;
+  color: #fff;
+  padding-bottom: 30rpx;
+}
+.income_info .income_info_allCount text{
+  font-size: 48rpx;
+}
+.income_info_type{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #003FBE;
+  height: 150rpx;
+}
+.income_info_type image{
+  width: 6rpx;
+  height: 150rpx;
+}
+.income_info_type .income_info_type_list{
+  width: 49%;
+  text-align: center;
+  color: #fff;
+}
+.income_info_type .income_info_type_list text{
+  display: block;
+}
+.income_info_type .income_info_type_list text:nth-child(1){
+  display: block;
+  font-size: 36rpx;
+}
+.income_info_type .income_info_type_list text:nth-child(2){
+  display: block;
+  font-size:26rpx ;
+  color: #8CB1FF;
+  padding-top: 8rpx;
+}
+/* 收益明细 */
+.income_detail{
+  padding: 0 20rpx;
+}
+.income_detail_titi{
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 600;
+  padding-top: 40rpx;
+  padding-bottom: 28rpx;
+}
+.income_detail_type{
+  background: #fff;
+  padding:0 20rpx;
+  border-radius: 12rpx;
+  margin-bottom: 40rpx;
+  overflow: hidden;
+}
+.income_detail_type_block{
+  border-bottom: 2rpx solid #EAEAEA;
+}
+.income_detail_type_block:last-child{
+  border-bottom: 0;
+}
+.income_detail_type_list{
+  height: 157rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.income_detail_type_list_l{
+   font-size: 30rpx;
+   color: #333;
+}
+.income_detail_type_list_l text:nth-child(2){
+  font-size: 24rpx;
+  color: #999;
+  display: block;
+  padding-top: 20rpx;
+  padding-top: 26rpx;
+}
+.income_detail_type_list_r{
+  display: inline-flex;
+  align-items: center;
+}
+
+.income_detail_type_list_r .income_detail_type_list_r_l text:nth-child(1){
+  font-size: 32rpx;
+  color: #f00;
+  font-weight: 600;
+}
+.income_detail_type_list_r .income_detail_type_list_r_l text:nth-child(2){
+  font-size: 24rpx;
+  display: block;
+  padding-top: 26rpx;
+  color: #999;
+  display: block;
+}
+.income_detail_type_list_r .income_detail_type_list_r_l .disable_income{
+  color: #999 !important;
+  text-decoration: line-through;
+}
+.income_detail_type_list_r icon{
+  display: inline-flex;
+  color: #999;
+}
+.income_detail_type_list_find{
+  background-color: #f9f9f9;
+  padding: 15rpx;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 20rpx;
+}
+.find_income_num{
+  
+}
+.find_income_num text{
+   color: #f20;
+   font-size: 30rpx;
+}
+.find_income_info_titi{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  padding-top: 10rpx;
+}
+.find_income_info_block{
+  padding-top: 10rpx;
+  display: flex;
+  align-items: center;
+}
+.member_name{
+  max-width: 330rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.find_income_info_block view:nth-child(2){
+  padding-left: 25rpx;
+}

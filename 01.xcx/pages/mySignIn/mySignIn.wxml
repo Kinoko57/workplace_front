@@ -1,0 +1,64 @@
+<!--pages/mySignIn/mySignIn.wxml-->
+<import src="../../template/calendar/index.wxml" />
+<view class='sign_in'>
+  <view class='sign_body'>
+    <view class='sign_banner'>
+      <image src='../../static/img/member/sign_bg_02.jpg'></image>
+      <view class='banner_left' bindtap='sign'>
+        <text style='font-size:60rpx;' wx:if='{{!isSign}}'>签到</text>
+        <text style='font-size:50rpx;' wx:else>已签到</text>
+        <text style="font-size:30rpx;font-family:'DIN'">连续{{signDate}}天</text>
+      </view>
+      <view class='banner_right'>
+        <view style='font-size:42rpx;color:#fff;'>签到领积分</view>
+        <view class='banner_score'>
+          <icon class='iconfont icon-jifen1'></icon>
+          <text>{{score}}</text>
+        </view>
+        <view class='btn' bindtap='goScore'>
+          <icon class='iconfont icon-weibiaoti2fuzhi14'></icon>
+          <text>前往购物商城</text>
+        </view>
+      </view>
+    </view>
+    <view class='sign_date'>
+      <view class="flex box box-tb box-align-center">
+        <view class="calendar box box-tb">
+          <view class="top-handle box box-lr box-align-center box-pack-center head-color ">
+            <view class="date-area box box-lr box-align-center box-pack-center">{{curYear || "--"}} 年 {{curMonth || "--"}} 月</view>
+            <!-- <view class='icon_box'>
+              <view class="prev box box-rl" bindtap="handleCalendar" data-handle="prev">
+                <view class="prev-handle box box-lr box-align-center box-pack-center">
+                  <icon class='iconfont icon-jiantouarrowhead7'></icon>
+                </view>
+              </view>
+              <view class="next box box-lr" bindtap="handleCalendar" data-handle="next">
+                <view class="next-handle box box-lr box-align-center box-pack-center">
+                  <icon class='iconfont icon-jiantouarrow487'></icon>
+                </view>
+              </view>
+            </view> -->
+          </view>
+          <view class="days box box-lr box-wrap">
+            <view wx:if="{{hasEmptyGrid}}" class="grid white-color box box-align-center box-pack-center" wx:for="{{empytGrids}}" wx:key="{{index}}" data-idx="{{index}}">
+            </view>
+            <view class="grid white-color box box-align-center box-pack-center" wx:for="{{days}}" wx:key="{{index}}">
+              <image src='../../static/img/member/chose_date.jpg' wx:if="{{item.choosed==true&&item.beforeChoose==true&&item.nthWeek!=0}}" class='before'></image>
+              <view class="day {{item.choosed ? 'border-radius pink-bg' : ''}} box box-align-center box-pack-center">{{item.day}}</view>
+              <image src='../../static/img/member/chose_date.jpg' wx:if="{{item.choosed==true&&item.afterChoose==true&&item.nthWeek!=6}}" class='after'></image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='sign_info'>
+      <view class='info_title'>
+        <text>签到规则</text>
+        <view></view>
+      </view>
+      <view class='info_more'>
+        <text>{{sign_info}}</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,94 @@
+/* pages/myAdress/myAdress.wxss */
+page{
+  background: #fff
+}
+.e_add_body{
+  overflow-y: scroll;
+}
+.add_section {
+  padding: 24rpx 0;
+  border-bottom: 1px solid #e4e4e4;
+}
+.add_section .add_info {
+  padding: 0 26rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.add_info_l{
+ width: 630rpx;
+}
+.add_info_r{
+  padding: 26rpx 0 26rpx 26rpx;
+  display: inline-flex;
+  align-items: center;
+}
+.add_info_r image{
+  display: block;
+  width: 26rpx;
+  height: 26rpx;
+}
+.add_info .info_people {
+  display: flex;
+  color:#333;
+  align-items: center;
+}
+.info_people text{
+  display: inline-block;
+}
+.info_people .peop_name {
+  font-size:28rpx;
+  max-width: 400rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.info_people .peop_tel {
+  font-size: 28rpx;
+  padding-left: 38rpx;
+  padding-right:15rpx;
+}
+.info_people .default{
+  font-size: 20rpx;
+  padding: 0 15rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  border-radius: 18rpx;
+  margin-right: 10rpx;
+}
+.info_people .label{
+  font-size: 20rpx;
+  padding: 0 15rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  border-radius: 18rpx;
+  color: #9b9b9b;
+  margin-right: 10rpx;
+  
+}
+.add_info .info_addr {
+  font-size:22rpx;
+  padding-top: 10rpx;
+  word-break: break-all;
+}
+.info_addr .info_addr_l{
+ width: 660rpx;
+}
+
+.add_saveInfo {
+  position: fixed;
+  bottom: 0;
+  background: #fff;
+  width: 100%;
+  padding-bottom: 42rpx;
+}
+.add_saveInfo view{
+  width: 644rpx;
+  font-size: 30rpx;
+  color: #fff;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 40rpx;
+  margin: 0 auto;
+}

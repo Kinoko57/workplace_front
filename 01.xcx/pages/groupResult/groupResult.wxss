@@ -1,0 +1,278 @@
+/* pages/groupResult/groupResult.wxss */
+
+.result_group {
+}
+
+.result_title {
+  /* height: 180rpx; */
+  background: #ff8d97;
+  display: flex;
+  padding: 10rpx 26rpx;
+  align-items: center;
+}
+
+.result_null {
+  display: none;
+}
+
+.fail {
+  background: #999;
+}
+
+.result_title .iconfont {
+  font-size: 50rpx;
+  color: #fff;
+  margin-right: 40rpx;
+}
+
+.result_title text {
+  font-size: 26rpx;
+  color: #fff;
+}
+
+.result_title .title_top {
+  font-size: 34rpx;
+  margin-right: 14rpx;
+}
+
+.group_order {
+  background: #fff;
+  /* height: 310rpx; */
+  padding-top: 30rpx;
+}
+
+.group_order .sale_pro {
+  padding: 26rpx;
+  border: 1px solid #ebebeb;
+  display: flex;
+  align-items: center;
+  width: 84%;
+  border-radius: 12rpx;
+  margin: 0 auto;
+}
+
+.sale_pro .pro_img {
+  float: left;
+  margin-left: 18rpx;
+  margin-right: 30rpx;
+  position: relative;
+}
+
+.pro_img image {
+  width: 190rpx;
+  height: 186rpx;
+}
+
+.sale_pro .pro_info {
+  width: 100%;
+}
+
+.pro_info .pro_title {
+  font-size: 24rpx;
+  color: #444;
+  margin: 10rpx 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.pro_info .pro_spec {
+  /* width: 490rpx; */
+  overflow: hidden;
+  /* height: 64rpx; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6rpx;
+}
+
+.pro_spec .pro_price {
+  font-family: 'DIN';
+  /* width: 240rpx; */
+  display: flex;
+  align-items: center;
+}
+
+.pro_price .iconfont {
+  font-size: 38rpx;
+  display: inline-flex;
+  color: #ff8d97;
+}
+
+.pro_price .peo_nowprice {
+  color: #ff8d97;
+  font-size: 30rpx;font-weight: bold;
+}
+
+.pro_price .pro_integral {
+  font-size: 24rpx;
+  /* color: #ff8d97; */
+  color: #ff8d97;
+  margin-left: 8rpx;
+  margin-right: 20rpx;
+}
+
+.pro_price .pro_inter_img {
+  display: inline-flex;
+  align-items: flex-end;
+  margin-left: 9rpx;
+  /* margin-right: 30rpx; */
+}
+
+.pro_price .pro_inter_img image {
+  width: 24rpx;
+  height: 20rpx;
+}
+
+.pro_info .pro_orig {
+  font-size: 22rpx;
+  color: #b8b8b8;
+  /* margin-left: 6rpx; */
+}
+
+.pro_info .pro_orig text {
+  text-decoration: line-through;
+}
+
+.group_order .sale_time {
+  margin: 60rpx 0;
+}
+
+.group_spec {
+  text-align: center;
+  font-weight: bold;
+  font-family: 'DIN';
+}
+
+.group_spec text {
+  font-size: 28rpx;
+}
+
+.group_spec .spec_text {
+  color: #444;
+}
+
+.group_spec .spec_red {
+  color: #ff8d97;
+  margin: 0 4rpx;
+}
+
+.group_spec .sepc_block {
+  background: #343434;
+  border-radius: 5rpx;
+  color: #fff;
+  font-size: 30rpx;font-weight: bold;
+  font-family: 'DIN';
+  padding: 5rpx;
+  margin: 0 4rpx;
+  font-weight: normal;
+}
+
+.sale_time .group_person {
+}
+
+.group_person {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 60rpx;
+}
+
+.group_img {
+  margin: 0 10rpx;
+  position: relative;
+}
+
+.group_img .leader {
+  position: absolute;
+  top: -16rpx;
+  background: #ff8d97;
+  color: #fff;
+  height: 30rpx;
+  width: 60rpx;
+  font-size: 20rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.group_img .img_bg {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  background: #f7f7f7;
+  border: 2rpx solid #e0e0e0;
+}
+
+.group_img image {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  border: 2rpx solid #ff8d97;
+}
+
+.group_order .sale_btn {
+  width: 84%;
+  margin: 0 auto;
+  padding-bottom: 30rpx;
+  text-align: center;
+}
+
+.sale_btn view {
+  font-size: 28rpx;
+  color: #ff8d97;
+  margin-top: 20rpx;
+}
+
+.sale_btn button {
+  background: #ff8d97;
+  color: #fff;
+  font-size: 34rpx;
+  border-radius: 20rpx;
+}
+
+.sale_btn .width {
+  width: 46%;
+  display: inline-flex;
+  justify-content: center;
+  margin: 0 2%;
+}
+
+.sale_btn .goindex {
+  background: #ff8a00;
+}
+
+.sale_btn .fail {
+  background: #999;
+}
+
+.sale_btn button::after {
+  border: none;
+}
+
+.group_help {
+  margin-top: 20rpx;
+  background: #fff;
+  padding-bottom: 20rpx;
+}
+
+.help_title {
+  font-size: 32rpx;
+  padding: 26rpx;
+  border-bottom: 2rpx solid #f2f2f2;
+}
+
+.help_detail {
+  padding: 0 26rpx;
+}
+
+.help_detail text {
+  font-size: 24rpx;
+  display: block;
+  margin: 10rpx 0;
+  word-wrap: break-word;
+  color: #333;
+  line-height: 1.5;
+}

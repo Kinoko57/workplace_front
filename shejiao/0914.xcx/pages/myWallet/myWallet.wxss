@@ -1,0 +1,114 @@
+/* pages/myWallet/myWallet.wxss */
+.wa_head{
+  /* background: linear-gradient(to right, #e34c26, #e13816); */
+  /* padding: 30rpx 50rpx 80rpx; */
+  position: relative;
+  color: #fff;
+  height: 205rpx;
+}
+.weallet_bg_img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(45, 139, 200, 1);
+  z-index: 1;
+}
+.wa_head_block{
+ position: relative;
+ z-index: 3;
+ display: flex;
+ height: 100%;
+ justify-content: space-between;
+ align-items: center;
+}
+.wa_head_l{
+  padding-left:33rpx ;
+  font-size:60rpx;
+}
+.wa_head_l view:nth-child(1){
+  font-size: 28rpx;
+  padding-bottom: 15rpx;
+}
+.wa_head_r{
+  width:158rpx;
+  height:64rpx;
+  text-align: center;
+  line-height: 64rpx;
+  border-radius: 32rpx 0 0 32rpx; 
+  font-size: 26rpx;
+  background: #1368A1;
+  color: #fff;
+}
+.wa_head text{
+  display: block;
+}
+.wa_head text:nth-child(1){
+  font-size: 28rpx;
+  color: #fcfafa;
+  padding-bottom: 60rpx;
+}
+.wa_head text:nth-child(2){
+  font-size: 60rpx;
+  color: #fffefe
+}
+.wa_cont{
+  padding: 15rpx 40rpx 0;
+
+}
+.wa_section{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 144rpx;
+  border-bottom: 1px solid #ededed;
+}
+.wa_sec_l{
+  display: inline-flex;
+  align-items: center;
+}
+.wa_section .wa_sec_l .wa_sec_l_img{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+}
+.wa_section .wa_sec_l text{
+  font-size: 30rpx;
+  color: #333;
+}
+.wa_section .wa_sec_r text.none{
+  color: #999;
+  font-size: 24rpx;
+  display: inline-flex;
+  align-items: center;
+}
+.wa_section .wa_sec_r text.none .yuan{
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6rpx;
+  vertical-align: middle;
+}
+.wa_section .wa_sec_r text.bind{
+   color: #333;
+  font-size: 24rpx;
+}
+.wa_section .wa_sec_r text.bind .auth{
+  display: inline-flex;
+  width:80rpx;
+  height:32rpx;
+  border-radius: 4rpx;
+  align-items: center;
+  justify-content: center;
+  color: #0091FE;
+  font-size: 22rpx;
+  margin-left: 10rpx;
+  background:rgba(0,138,255,0.06);
+}
+.wa_section .wa_sec_r icon{
+   color: #999;
+   font-size: 30rpx;
+}

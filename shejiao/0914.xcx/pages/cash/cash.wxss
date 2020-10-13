@@ -1,0 +1,295 @@
+/* pages/cash/cash.wxss */
+/* pages/Cash/Cash.wxss */
+page{
+  background: #f9f9f9;
+}
+.cash_block{
+  padding: 26rpx 24rpx 0;
+}
+.cash_center{
+  background: #fff;
+  border-radius: 12rpx;
+  overflow:hidden;
+}
+.cash_center .cash_center_top{
+  padding:36rpx 52rpx ;
+}
+.cash_center .cash_t_bank{
+  display: flex;
+  font-size: 28rpx;
+  align-items: center;
+  justify-content: space-between;
+}
+.cash_center .cash_t_bank .cash_t_bank_name{
+  color: #999;
+}
+.cash_center .cash_t_bank .cash_t_bank_name text:nth-child(2){
+  color: #333;
+  padding-left: 10rpx;
+}
+.cash_center .cash_t_bank icon{
+ color: #B9B9B9;
+ font-size: 40rpx;
+}
+.cash_ipt{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ECECEC;
+  padding-top:50rpx;
+  align-items: center;
+}
+.cash_ipt .cash_money{
+   height: 86rpx;
+   display: inline-flex;
+   align-items: center;
+   font-size: 47rpx;
+   color: #333;
+}
+.cash_ipt .cash_money input{
+   font-size: 40rpx;
+   height: 76rpx;
+   display: inline-flex;
+   margin-left: 10rpx;
+   width: 400rpx;
+}
+.all_moeny{
+  font-size: 26rpx;
+  color: #139FF5;
+}
+.place-holder{
+  color: #333;
+  font-size:32rpx;
+}
+.cash_cash{
+  font-size: 22rpx;
+  color: #999;
+  padding-top: 15rpx;
+}
+.cash_cash view .money_bold{
+  color: #333;
+}
+.cash_cash view{
+  height: 42rpx;
+  line-height: 42rpx;
+}
+.cash_center_btn{
+  position: relative;
+  width: 100%;
+  height:152rpx;
+  box-shadow:0rpx 0rpx 22rpx 2rpx rgba(0, 0, 0, 0.13);
+}
+.cash_center_submit{
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width:656rpx;
+  height:80rpx;
+  line-height: 80rpx;
+  color: #fff;
+  font-size: 28rpx;
+  text-align: center;
+  display: block;
+  border-radius: 40rpx;
+}
+.cash_center_small{
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width:26rpx;
+  height:13rpx;
+  border-radius:0 0 13rpx 13rpx;
+  line-height:13rpx;
+  background: #f1f1f1;
+  overflow:hidden;
+}
+.cash_tips{
+  border:2px dotted rgba(181,181,181,1);
+  border-radius: 12rpx;
+   margin-top: 36rpx;
+   padding: 35rpx 33rpx;
+}
+.cash_tips .ca_titi{
+  font-size: 28rpx;
+  color: #333;
+  padding-bottom: 30rpx;
+}
+.cash_tips_cont{
+  color: #666;
+  font-size: 24rpx;
+  line-height: 41rpx;
+  margin-top: 22rpx;
+  display: flex;
+  align-items: flex-end;
+}
+.income_description{
+  font-size: 24rpx;
+  color: #139FF5;
+}
+.cash_tips_cont text.text{
+  display: block
+}
+/*验证码输入框*/
+.check_bg{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: rgba(0,0, 0, .5)
+}
+.checkCode{
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  background: #fff;
+  width: 598rpx;
+  padding: 40rpx 52rpx 20rpx;
+  z-index: 20;
+  transform:translate(-50%,-50%);
+  border-radius: 12rpx;
+}
+.content{
+  display: flex;
+  align-items: center;
+  margin-top:20rpx;
+  height: 92rpx;
+  margin: 60rpx auto 0;
+}
+.iptbox{
+  width: 92rpx;
+  height:92rpx;
+  display: flex;
+  background: #f3f3f3;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  margin-right: 8rpx;
+}
+.iptbox:last-child{
+  margin-right: 0;
+}
+.iptbox:last-child{
+  border-right:0;
+}
+.ipt{
+  width: 0;
+  height: 0;
+}
+.sure_block{
+  text-align: center;
+  padding-bottom: 20rpx;
+}
+.btn-area{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 470rpx !important;
+  height:80rpx;
+  border-radius: 40rpx;
+  color:white;
+}
+.check_close{
+  position: absolute;
+  right: 20rpx;
+  top: 22rpx;
+}
+.check_close icon{
+  color: #333;
+  font-size: 40rpx;
+}
+.iptCode{
+  width: 100%;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+}
+.dia_cash {
+ border-bottom:1px dotted #ececec;
+ padding-top:46rpx;
+ padding-bottom: 22rpx;
+ text-align: center;
+}
+.dia_cash text.text{
+  font-size: 28rpx;
+  color: #999;
+  padding-bottom: 6rpx;
+}
+.dia_cash view{
+  font-size:60rpx;
+  color: #333;
+}
+.dia_cash view .symbol{
+  font-size:36rpx;
+}
+.dia_ser_wra{
+  padding: 30rpx 10rpx 0;
+}
+.dia_ser{
+  font-size: 26rpx;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50rpx;
+}
+.dia_ser text:nth-child(1){
+   font-size: 26rpx;
+   color: #999;
+}
+
+/* 个税说明 */
+.discount_model {
+  height: 55vh;
+  top: calc(100% - 55vh);
+  animation: discountSheet 300ms ease-out;
+}
+
+.discount_model .model_body {
+  font-size: 26rpx;
+  padding: 0 25rpx;
+}
+@keyframes discountSheet {
+  from {
+    top: 100%;
+  }
+  to {
+    top: calc(100% - 55vh);
+  }
+}
+
+
+
+.help_block{
+  display: flex;
+  align-items: center;
+  border-right: 2rpx solid #e0e0e0;
+}
+.help_block text{
+  border-left: 2rpx solid #e0e0e0;
+  border-top: 2rpx solid #e0e0e0;
+  word-wrap: break-word;
+  color: #333;
+  line-height: 1.5;
+  font-size: 24rpx;
+  padding: 4rpx 10rpx;
+  text-align: center;
+}
+.help_block text:nth-child(1){
+  width: 18%;
+}
+.help_block text:nth-child(2){
+  width: 56%;
+}
+.help_block text:nth-child(3){
+  width: 24%;
+}
+.help_block_first text{
+  background: #f2f2f2;
+}
+.help_block:last-child{
+  border-bottom: 2rpx solid #e0e0e0;
+}

@@ -1,0 +1,58 @@
+<!--pages/editAddr/editAddr.wxml-->
+<!-- <reload bind:relaod="_relaod" id='reload'></reload> -->
+<view class='editAddr'>
+  <view class='ea_body'>
+    <form bindsubmit="formSubmit">
+      <view class='section'>
+        <text class='form_title text_left'>收货人</text>
+        <input placeholder="请输入收货人姓名" name='name' bindblur="validate" type="text" data-name="name" data-validator="required" confirm-type="next" value="{{addInfo.name}}"></input>
+        <view>
+          <icon wx:if="{{form.name!==undefined}}" type="{{form.name?'warn':'success'}}" size="16" />
+        </view>
+      </view>
+      <view class='section'>
+        <text class='form_title text_left'>联系电话</text>
+        <input placeholder="请输入手机号码" type='number' name='phone' bindblur="validate" data-name="phone" data-validator="required,phone" confirm-type="next" value="{{addInfo.phone}}"></input>
+        <view>
+          <icon wx:if="{{form.phone!==undefined}}" type="{{form.phone?'warn':'success'}}" size="16" />
+        </view>
+      </view>
+      <view class='section'>
+        <text class='form_title text_left'>所在区域</text>
+        <!-- <picker mode="region" name='area' data-name="area" bindchange="validate" value="{{areaShow}}" data-validator="required">
+          <text>{{areaShow[0]}}，{{areaShow[1]}}，{{areaShow[2]}}</text>
+        </picker> -->
+        <view bindtap='chooseAddress' name='area' class='picker' data-name="area" data-validator="required" value="{{areaShow}}">
+          <text wx:if="{{isChose==0}}" class="picker_placeholder">{{areaShow[0]}}，{{areaShow[1]}}，{{areaShow[2]}}</text>
+          <text wx:if="{{isChose==1}}">{{areaShow[0]}}，{{areaShow[1]}}，{{areaShow[2]}}</text>
+        </view>
+        <view>
+          <icon wx:if="{{form.area!==undefined}}" type="{{form.area?'warn':'success'}}" size="16" />
+        </view>
+        <!-- <icon class='iconfont icon-youjiantou1'></icon> -->
+      </view>
+      <view class='section'>
+        <text class='form_title text_left'>详细地址</text>
+        <input placeholder="请填写详细地址" name='addr' bindblur="validate" type="text" data-name="addr" data-validator="required" confirm-type="next" value="{{addInfo.addr}}"></input>
+        <view>
+          <icon wx:if="{{form.addr!==undefined}}" type="{{form.addr?'warn':'success'}}" size="16" />
+        </view>
+      </view>
+      <view class='section' wx:if='{{showswitch}}'>
+        <text class='form_title'>是否设为默认地址</text>
+        <switch checked='{{addInfo.is_default}}' name='is_default' data-name="required" />
+      </view>
+      <view class='saveInfo'>
+        <button formType="submit">保存</button>
+      </view>
+
+    </form>
+
+
+  </view>
+  <view wx:if="{{form.$invalidMsg && form.$dirty}}" class="invalid">
+    {{form.$invalidMsg}}
+  </view>
+</view>
+<nyz_area_picker show="{{show}}" bind:sureSelectArea="sureSelectAreaListener" data-name="area" data-validator="required" showValue="{{areaShow}}">
+</nyz_area_picker>

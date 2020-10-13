@@ -1,0 +1,110 @@
+/* pages/type/type.wxss */
+
+.type_bg {
+  background: #fff;
+}
+
+.type_bg .type_body {
+  border-top: 1rpx solid #d5d5d5;
+  display: flex;
+}
+
+/* 顶部导航 */
+
+.type_bg .type_body .type_left {
+  background: #f6f6f6;
+  height: 100vh;
+  width: 186rpx;
+  text-align: center;
+}
+
+.type_bg .type_body .type_left .type_left_nav {
+  padding: 35rpx 0;
+  text-align: centert;
+  color: #666;
+  font-size: 24rpx;
+  position: relative;
+}
+
+.type_bg .type_body .type_left .active {
+  background: #fff;
+}
+.type_bg .type_body .type_left .text_active{
+  color: #e13b18;
+}
+
+.type_bg .type_body .type_left .type_left_nav .line {
+  width: 8rpx;
+  height: 100%;
+  background: #e13b18;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.type_bg .type_body .type_left image{
+  /* position: absolute;
+  left: 0;
+  top: 0; */
+  width: 28rpx;
+  height: 32rpx;
+  margin-right: 6rpx;
+}
+.type_bg .type_body .type_right {
+  width: 586rpx;
+  background: #fdfdfd;
+}
+
+.type_bg .type_body .type_right .type_banner {
+  width: 546rpx;
+  margin: 0 20rpx;
+  margin-top: 30rpx;
+
+}
+
+.type_bg .type_body .type_right .type_banner image {
+  width: 546rpx;
+}
+
+.type_bg .type_body .type_right .type_navlist {
+  width: 546rpx;
+  margin: 40rpx 20rpx;
+  margin-bottom: 0;
+}
+.type_bg .type_body .type_right .type_navlist:last-child{
+  margin-bottom: 20rpx;
+}
+.type_bg .type_body .type_right .type_navlist .nav_title{
+  background: #fbfbfb;
+  font-size: 20rpx;
+  color: #0e050a;
+  font-weight: bold;
+  padding: 18rpx 10rpx;
+}
+.type_bg .type_body .type_right .type_navlist .nav_list{
+  background: #fff;
+  box-shadow: 4rpx 8rpx 60rpx 0px rgba(4, 0, 0, 0.08);
+  text-shadow: 4rpx 8rpx 60rpx rgba(4, 0, 0, 0.08);
+  padding: 20rpx 0;
+  padding-left: 4rpx;
+}
+.type_bg .type_body .type_right .type_navlist .nav_list .nav_block{
+  width: 140rpx;
+  height: 160rpx;
+  display: inline-block;
+  text-align: center;
+  margin: 0 20rpx;
+  margin-bottom: 20rpx;
+}
+.type_bg .type_body .type_right .type_navlist .nav_list .nav_block image{
+  width: 140rpx;
+  height: 140rpx;
+}
+.type_bg .type_body .type_right .type_navlist .nav_list .nav_block text{
+  font-size: 20rpx;
+  color: #0e050a;
+  font-weight: bold;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,0 +1,210 @@
+<wxs module="filters" src="../../filters.wxs"></wxs>
+
+<view class="_thematic_bg_style">
+	<view class="acticity_style acticity_02">
+		<view class="activity_title" wx:if="{{typeSort==5||typeSort==6||typeSort==8}}">
+			<view class="activity_left">
+				<!-- 活动标题为图片 宽高为 自适应*40rpx -->
+				<image src="{{flootItem.list[0].title_image}}" mode="heightFix"></image>
+			</view>
+			<view class="activity_right" bindtap="goMore" data-type="{{flootItem.list[0].type}}"
+				id="{{flootItem.list[0].special_activity_id}}">
+				<text>更多</text>
+				<ss-icon name="icon-right" color="{{iconColor}}" size="12px" block="{{true}}" class="navbar-action_item">
+				</ss-icon>
+			</view>
+		</view>
+		<view class="activity_banner" wx:if="{{typeSort==4||typeSort==5||typeSort==7||typeSort==8}}" bindtap="goMore"
+			data-type="{{flootItem.list[0].type}}" id="{{flootItem.list[0].special_activity_id}}">
+			<image src="{{flootItem.list[0].activity_banner}}" mode="widthFix"></image>
+		</view>
+		<view wx:if="{{typeSort==6||typeSort==7||typeSort==8}}">
+			<!-- 上图下文字 -->
+			<view class="activity_list activity_list_line" wx:if="{{listStyle==3}}">
+				<view class="activity_block" wx:for="{{flootItem.list[0].list}}" wx:key="index" bindtap="goDetail"
+					data-type="{{item.activity_type}}" id="{{item.activity_id}}">
+					<view class="pro_img">
+						<view class="pro_image_fixed" wx:if="{{item.type==1}}">
+							<text>距结束</text>
+							<text class="time_bg">12</text>
+							<text>天</text>
+							<text class="time_bg">1</text>
+							<text>时</text>
+							<text class="time_bg">2</text>
+							<text>分</text>
+							<text class="time_bg">30</text>
+							<text>秒</text>
+						</view>
+						<view class="pro_image_left">
+							<text class="pro_fixed_left_top">限购3份</text>
+						</view>
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==1}}" class="pro_icon"
+							style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==2}}" class="pro_icon"
+							style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==3}}" class="pro_icon"
+							style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==4}}" class="pro_icon"
+							style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image src="{{item.big_image}}" class="pro_main_img"></image>
+						<image src="{{item.tag.max_img}}" wx:if="{{item.tag.max_img!=undefined&&item.tag.max_img!=''}}"
+							class="pro_max_frame"></image>
+					</view>
+					<view class="pro_bottom">
+						<view class="pro_title">
+							<text class="title_tips" wx:if="{{item.type==5}}">2人团</text>
+							<text>{{item.goods_name}}</text>
+						</view>
+						<view class="pro_desc">
+							<text>欧莱雅（L'OREAL） 男士护肤套装 补水保湿洗面补水保湿洗面</text>
+						</view>
+						<!-- <view class="pro_tips">
+						<text style="background:{{list_style}};" class="tips_text_bg">低于市场价2元</text>
+						<text style="color:{{list_style}}" class="tips_text">低于市场价2元</text>
+					</view> -->
+						<view class="pro_discount">
+							<text>每200减50</text>
+						</view>
+						<view class="pro_price_btn">
+							<view class="pro_price_left">
+								<text class="price_icon">￥</text>
+								<text class="price">{{filters.formatMoney(item.original_price)}}</text>
+								<text>剩余{{item.total_count-item.count}}/{{item.total_count}}</text>
+							</view>
+							<view class="pro_btn">
+								<button class="btn_clear " hover-class="none"
+									style="background:{{flootItem.list[0].bg_color}};box-shadow:0rpx 0rpx 27rpx 0rpx {{flootItem.list[0].bg_color}}49">立即购买</button>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<!-- 两列 -->
+			<view class="activity_list activity_list_two_columns" wx:if="{{listStyle==1}}">
+				<view class="activity_block" wx:for="{{flootItem.list[0].list}}" wx:key="index" bindtap="goDetail"
+					data-type="{{item.activity_type}}" id="{{item.activity_id}}">
+					<view class="pro_img">
+						<image src="{{item.image}}"></image>
+					</view>
+					<view class="pro_title">
+						<text class="title_tips" wx:if="{{item.type==5}}">2人团</text>
+						<text class="title">{{item.goods_name}}</text>
+					</view>
+					<view class="pro_price">
+						<text class="price">￥{{filters.formatMoney(item.original_price)}}</text>
+						<text class="count">{{item.total_count-item.count}}人付款</text>
+					</view>
+				</view>
+			</view>
+			<!-- 三列 -->
+			<view class="activity_list activity_list_third_columns" wx:if="{{listStyle==4}}">
+				<view class="activity_block" wx:for="{{flootItem.list[0].list}}" wx:key="index" bindtap="goDetail"
+					data-type="{{item.activity_type}}" id="{{item.activity_id}}">
+					<view class="pro_img">
+						<image src="{{item.image}}"></image>
+					</view>
+					<view class="pro_title">
+						<text class="title_tips" wx:if="{{item.type==5}}">2人团</text>
+						<text class="title">{{item.goods_name}}</text>
+					</view>
+					<view class="pro_price">
+						<text class="price">￥{{filters.formatMoney(item.original_price)}}</text>
+						<text class="count">{{item.total_count-item.count}}人付款</text>
+					</view>
+				</view>
+			</view>
+			<!-- 左图右文字 -->
+			<view class="activity_list activity_list_img_left" wx:if="{{listStyle==2}}">
+				<view class="activity_block" wx:for="{{flootItem.list[0].list}}" wx:key="index" bindtap="goDetail"
+					data-type="{{item.activity_type}}" id="{{item.activity_id}}">
+					<view class="pro_img">
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==1}}" class="pro_icon"
+							style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==2}}" class="pro_icon"
+							style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==3}}" class="pro_icon"
+							style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==4}}" class="pro_icon"
+							style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image src="{{item.image}}" class="pro_main_image"></image>
+						<image src="{{item.tag.min_img}}" wx:if="{{item.tag.min_img!=undefined&&item.tag.min_img!=''}}"
+							class="pro_min_frame"></image>
+					</view>
+					<view class="pro_right">
+						<view class="pro_title">
+							<text class="title_tips" wx:if="{{item.type==5}}">2人团</text>
+							<text class="title">{{item.goods_name}}</text>
+						</view>
+						<view class="pro_desc">
+							<text>{{item.goods_intro}}</text>
+						</view>
+						<view class="pro_discount" wx:if="{{item.tag.button_tag!=undefined&&item.tag.button_tag.length>0}}">
+							<text wx:for="{{item.tag.button_tag}}" wx:key="index" wx:if="{{index<3}}"
+								class="tag_text">{{item.text}}</text>
+						</view>
+						<view class="pro_price">
+							<text class="price">￥{{filters.formatMoney(item.original_price)}}</text>
+							<text class="count">{{item.total_count-item.count}}人付款</text>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="activity_list activity_list_line_scroll" wx:if="{{listStyle==5||listStyle==6}}">
+				<scroll-view scroll-x class="list_scroll">
+					<!-- 一行滚动 -->
+					<view class="activity_block activity_block_01" wx:for="{{flootItem.list[0].list}}" wx:key="index"
+						wx:if="{{listStyle==6}}">
+						<view class="pro_img">
+							<image src="{{item.image}}"></image>
+						</view>
+						<view class="pro_title">
+							<text class="title_tips" wx:if="{{item.type==5}}">2人团</text>
+							<text class="title">{{item.goods_name}}</text>
+						</view>
+						<view class="pro_discount">
+							<text>每200减50</text>
+						</view>
+						<view class="pro_price">
+							<text class="price">￥{{filters.formatMoney(item.original_price)}}</text>
+							<text class="count">{{item.total_count-item.count}}人付款</text>
+						</view>
+					</view>
+					<!-- 一行不滚动 -->
+					<view class="activity_block activity_block_02" wx:for="{{flootItem.list[0].list}}" wx:key="index"
+						wx:if="{{listStyle==5&&index<4}}">
+						<view class="pro_img">
+							<image src="{{item.image}}"></image>
+						</view>
+						<view class="pro_title">
+							<text class="title_tips" wx:if="{{item.type==5}}">2人团</text>
+							<text class="title">{{item.goods_name}}</text>
+						</view>
+						<view class="pro_discount">
+							<text>每200减50</text>
+						</view>
+						<view class="pro_price">
+							<text class="price">￥{{filters.formatMoney(item.original_price)}}</text>
+							<text class="count">{{item.total_count-item.count}}人付款</text>
+						</view>
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+	</view>
+</view>

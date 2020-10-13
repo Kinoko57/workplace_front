@@ -1,0 +1,36 @@
+/* pages/reportType/reportType.wxss */
+page{
+  background: #333;
+}
+.report_body{
+  border-top:1px solid rgba(67,67,67,1);
+  padding: 0 24rpx;
+}
+.report_body_block{
+  border-bottom: 1px solid rgba(67,67,67,1);
+  padding: 0 17rpx;
+}
+.report_body_block:last-child{
+  border-bottom: 0;
+}
+.report_body_block_titi{
+  padding: 47rpx 17rpx 0;
+  font-size: 28rpx;
+  color: #999;
+}
+.report_body_block_list{
+  color: #fff;
+  font-size: 28rpx;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.report_body_block_list .report_body_block_list_l{
+  padding-left: 17rpx;
+}
+.report_body_block_list icon{
+ color: #B9B9B9;
+ font-size: 40rpx;
+ display: inline-flex;
+}

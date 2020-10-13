@@ -1,0 +1,57 @@
+<!--pages/news/news.wxml-->
+<view class='news'>
+  <view class='news_header'>
+    <text wx:if='{{choseType==2}}'>共有<text class='news_num'>{{total}}</text>条消息</text>
+    <text wx:if='{{choseType==1}}'>共有<text class='news_num'>{{total}}</text>条通知</text>
+    <text class='news_edit' bindtap='edit' hidden='{{isEdit||newList.length==0}}'>编辑</text>
+    <text class='news_edit' bindtap='edit' hidden='{{!isEdit||newList.length==0}}'>完成</text>
+  </view>
+  <view class="news_body">
+    <view class="news_nav">
+      <text class="{{choseType==2?'text_active':''}}" id='2' bindtap='choseNews'>消息</text>
+      <text class="{{choseType==1?'text_active':''}}" id='1' bindtap='choseNews'>通知</text>
+    </view>
+    <view class="news_list" wx:if='{{newList.length>0}}'>
+      <checkbox-group bindchange="chose">
+        <view class="new_info {{choseId==item.id&&newShow?'':'info_hidden'}}" wx:for='{{newList}}' wx:key='index'>
+          <view class='info_title' data-status='{{item.status_read}}'>
+            <view class='info_chose' wx:if='{{isEdit}}'>
+              <checkbox value="{{item.id}}" checked="{{item.checked}}" />
+            </view>
+            <view class='info_img' id='{{item.id}}' bindtap='viewNews' data-status='{{item.status_read}}'>
+              <icon class='iconfont icon-tongzhi' wx:if='{{choseType==1}}'></icon>
+              <icon class='iconfont icon-tongzhi1' wx:if='{{choseType==2}}'></icon>
+            </view>
+            <view class="news_more" id='{{item.id}}' bindtap='viewNews' data-status='{{item.status_read}}'>
+              <view class='news_tips'>
+                <text class='news_title'>{{item.title}}</text>
+                <text>{{item.createtime}}</text>
+                <icon class="iconfont icon-xiala {{choseId==item.id&&newShow?'':'iconopen'}}" wx:if='{{item.status_read==1}}'></icon>
+                <text wx:if='{{item.status_read==0}}'>未读</text>
+                <!-- <icon class="iconfont icon-xiala {{choseId==item.id&&newShow?'':'iconopen'}}" ></icon> -->
+              </view>
+            </view>
+          </view>
+          <view class='info_detail'>
+            {{item.nr}}
+          </view>
+        </view>
+      </checkbox-group>
+      <button type="default" size="default" loading plain hidden='{{newList.length==total}}}' class="loading_style">正在加载中，请稍后...</button>
+    </view>
+    <view class='news_list_null' wx:if='{{newList.length<=0}}'>
+      <text>当前分类暂无数据</text>
+    </view>
+  </view>
+  <view class='null_height' wx:if='{{isEdit&&newList.length>0}}'></view>
+  <view class='foot_edit_more' wx:if='{{isEdit&&newList.length>0}}'>
+    <view class='allCheck'>
+      <checkbox bindtap='checkAll' checked='{{allchose==1}}' />
+      <text>全选</text>
+    </view>
+    <button size='mini' bindtap='delNews'>删除</button>
+  </view>
+</view>
+<view class='goIndex' bindtap='goIndex' data-link='../index/index'>
+  <icon class='iconfont icon-home'></icon>
+</view>

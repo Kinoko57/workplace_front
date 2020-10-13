@@ -1,0 +1,140 @@
+<!--pages/afterDetail/afterDetail.wxml-->
+<view class='sale_after'>
+  <!-- <view class='detail_title'>
+    <text>售后申请待审核</text>
+  </view> -->
+  <view class='after_head'>
+    <text>本次售后服务由</text>
+    <text class='name'>公主购</text>为您提供
+  </view>
+  <view class='after_pro'>
+    <view class='title'>订单编号：{{orderInfo.order_id}}</view>
+    <view class='car_pro'>
+      <view class='pro_img'>
+        <image src='{{orderInfo.img}}' wx:if="{{orderInfo.img!=null&&orderInfo.img!=''}}"></image>
+        <image src='../../static/img/pro/static.png' wx:else></image>
+      </view>
+      <view class='pro_info'>
+        <view class='pro_title'>
+          <!-- <text class='title_icon' wx:if="{{order.order_refer=='tuangou'}}">拼购</text>
+          <text class='title_icon' wx:if="{{order.order_refer=='qianggou'}}">促销</text>
+          <text class='title_icon' wx:if="{{order.order_refer=='exchange'}}">抽奖</text>
+          <text class='title_icon' wx:if="{{order.order_refer=='try'}}">试用</text>
+          <text class='title_icon' wx:if="{{order.order_refer=='point'}}">兑换</text>
+          <text class='title_icon' wx:if="{{order.order_refer=='birthday'}}">生日兑换</text>
+          <text class='title_icon' wx:if="{{order.order_refer=='scan'}}">扫码抽奖</text> -->
+          <text>{{orderInfo.name}}</text>
+        </view>
+        <view class='pro_spec'>
+          <view class='pro_price'>
+            <view class='spec_info' wx:if="{{orderInfo.title!=''&&orderInfo.title!=null}}">规格:{{orderInfo.title}}</view>
+            <view style='display:flex;align-items:center;'>
+              <text class='peo_nowprice' wx:if='{{orderInfo.price>0}}'>￥{{orderInfo.price}}</text>
+              <text class='peo_nowprice' wx:if='{{orderInfo.price>0&&orderInfo.point>0}}'>+</text>
+              <view class='pro_inter_img' wx:if='{{orderInfo.point>0}}'>
+                <!-- <image src='../../static/img/pro/score.png'></image> -->
+                <icon class='iconfont icon-jifen1'></icon>
+              </view>
+              <text class='pro_integral' wx:if='{{orderInfo.point>0}}'>{{orderInfo.point}}</text>
+            </view>
+            <!-- <view style='margin-top:-10px;margin-left:10rpx;'>
+                <text class='pro_orig'>￥{{item.price_market}}</text>
+              </view> -->
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='after_progress'>
+    <view class='title'>售后进度</view>
+    <view class='progress_info'>
+      <view class='step' wx:if='{{orderInfo.flag>=-1}}'>
+        <icon class='iconfont icon-duigoudaibiankuang'></icon>
+        <text>提交申请</text>
+      </view>
+      <view class='step_line' wx:if='{{orderInfo.flag>=-1}}'>
+        <icon class='iconfont icon-progress'></icon>
+      </view>
+      <view class='step' wx:if='{{orderInfo.flag==-1}}'>
+        <icon class="iconfont icon-bohui" style='color:red'></icon>
+        <text style='color:red'>已驳回</text>
+      </view>
+      <view class='step' wx:if='{{orderInfo.flag>=1}}'>
+        <icon class="iconfont {{orderInfo.flag>=2?'icon-duigoudaibiankuang':'icon-wait'}}"></icon>
+        <text>等待审核</text>
+      </view>
+      <view class='step_line' wx:if='{{orderInfo.flag>=2}}'>
+        <icon class='iconfont icon-progress'></icon>
+      </view>
+      <view class='step' wx:if='{{orderInfo.flag>=2}}'>
+        <icon class="iconfont {{orderInfo.flag>=3?'icon-duigoudaibiankuang':'icon-wait'}}"></icon>
+        <text wx:if="{{orderInfo.refund_info.type=='refunds'}}">退款</text>
+        <text wx:else>确认收货</text>
+      </view>
+      <view class='step_line' wx:if='{{orderInfo.flag>=3}}'>
+        <icon class='iconfont icon-progress'></icon>
+      </view>
+      <view class='step' wx:if='{{orderInfo.flag>=3}}'>
+        <icon class="iconfont {{orderInfo.flag==3?'icon-duigoudaibiankuang':'icon-wait'}}"></icon>
+        <text>完成</text>
+      </view>
+    </view>
+  </view>
+  <view class='prob_descr'>
+    <view class='title'>
+      问题描述
+    </view>
+    <view class='after_com' wx:if='{{orderInfo.flag!=0}}'>
+      <text>{{orderInfo.refund_info.content}}</text>
+      <view class='com_imgList'>
+        <view class='imgBlock' wx:for="{{orderInfo.refund_info.img}}" wx:for-item="item" wx:key="*this">
+          <image src='{{item}}' data-index="{{index}}" bindtap="previewImg"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='prob_descr' wx:if='{{orderInfo.flag==-1}}'>
+    <view class='title'>驳回理由</view>
+    <view class='after_com'>
+      <text>{{orderInfo.refund_info.reject_reason}}</text>
+    </view>
+  </view>
+  <view class='after_info'>
+    <view class='title'>售后信息</view>
+    <view class='after_info_list'>
+      <view>
+        <text>服务类型：</text>
+        <text class='text_active' wx:if="{{orderInfo.refund_info.type=='refunds'}}">退款</text>
+        <text class='text_active' wx:if="{{orderInfo.refund_info.type=='reship'}}">退货退款</text>
+        <text class='text_active' wx:if="{{orderInfo.refund_info.type=='barter'}}">换货</text>
+      </view>
+      <view>
+        <text>申请时间：</text>
+        <text class='text_active'>{{orderInfo.refund_info.create_time}}</text>
+      </view>
+      <view wx:if="{{orderInfo.refund_info.type!='refunds'&&orderInfo.flag>=2}}">
+        <text>卖家留言：</text>
+        <text class='text_active'>{{orderInfo.refund_info.reject_reason}}</text>
+      </view>
+      <view wx:if="{{orderInfo.refund_info.type!='refunds'&&orderInfo.refund_info.express!=''}}">
+        <text>快递公司：</text>
+        <text>{{track_name}}</text>
+      </view>
+      <view wx:if="{{orderInfo.refund_info.type!='refunds'&&orderInfo.refund_info.express_no!=''}}">
+        <text>快递单号：</text>
+        <text>{{track_number}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class='comBtn' wx:if='{{flag>=0&&flag<3}}'>
+    <text bindtap='afterSale' id='{{pid}}' data-orderid='{{order_Id}}' wx:if="{{orderInfo.refund_info.type!='refunds'&&orderInfo.flag==2&&orderInfo.refund_info.express==''}}">填写物流</text>
+    <text bindtap='afterSale' id='{{pid}}' data-orderid='{{order_Id}}' wx:else>修改申请</text>
+    <text bindtap='afterCancel' id='{{pid}}' data-orderid='{{order_Id}}'>取消申请</text>
+  </view>
+    <view class='comBtn' wx:if='{{flag==-1&&orderInfo.is_apply==0}}'>
+    <text bindtap='afterSale' id='{{pid}}' data-orderid='{{order_Id}}'>重新申请</text>
+    <!-- <text bindtap='afterCancel' id='{{pid}}' data-orderid='{{order_Id}}'>取消申请</text> -->
+  </view>
+</view>
+<!-- <reload bind:relaod="_relaod" id='reload'></reload> -->

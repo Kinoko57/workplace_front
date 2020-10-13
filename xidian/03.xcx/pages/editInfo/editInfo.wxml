@@ -1,0 +1,16 @@
+<!--pages/editInfo/editInfo.wxml-->
+<view class='editInfo'>
+  <view class="e_body">
+    <view class="section">
+      <input placeholder="请输入{{placeholder}}" type='text' value='{{value}}' bindinput='editInfo' />
+    </view>
+    <view class='info_tips'>
+      <text wx:if="{{editcode=='wx_number'}}">提示：{{editTit}}由6-20位数字、字母组成且必须以字母开头或者11位手机号组成</text>
+      <text wx:if="{{editcode!='wx_number'}}">提示：{{editTit}}由2-35位中文，英文字母和数字及点号下划线组成</text>
+    </view>
+    <view class="section saveInfo">
+      <view size='default' class=" bg_theme_blue" bindtap='saveInfo'>保存</view>
+      <simple-crop wx:if="{{visible}}" size="{{size}}" src="{{src}}" cropSizePercent="{{cropSizePercent}}" borderColor="{{borderColor}}" bindcropUpload="uploadCallback" bindcropClose="closeCallback" bindcropCrop="cropCallback"></simple-crop>
+    </view>
+  </view>
+</view>

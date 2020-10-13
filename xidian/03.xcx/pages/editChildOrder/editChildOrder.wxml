@@ -1,0 +1,81 @@
+<!--pages/editClientInfo/editClientInfo.wxml-->
+<view class='edit_student_bg'>
+    <view class="student_titi">
+       填写学员资料
+    </view>
+    <view class='edit_info_t'>
+      <view class='section'>
+        <text class='form_title text_left'>姓名</text>
+        <view class="section_r">
+          <input placeholder="请输入姓名" bindinput="inputCheck"  bindblur="validate" type="text" data-name="name"  confirm-type="next" value="{{name}}"></input>
+        </view>
+      </view>
+      <view class='section'>
+        <text class='form_title text_left'>性别</text>
+        <view class="section_r">
+         <picker bindchange="bindPickerChangeType" value="{{index}}" id="{{modeList[index].id}}" class="pick_gebder" range="{{modeList}}" name='gender' data-name="gender" range-key="name">
+              <text wx:if='{{gender!=""}}'>{{modeList[index].name}}</text>
+              <icon class="iconfont iconright"/>
+          </picker>
+        </view>
+      </view>
+      <view class='section'>
+        <text class='form_title text_left'>生日</text>
+        <view class="section_r">
+          <picker mode="date" value="{{birthday}}" start="1900-01-01" bindchange="bindDateChange" end='{{endDate}}' name='birthday' type="text" data-name="birthday" data-validator="required">
+            <text wx:if='{{birthday!=""}}'>{{birthday}}</text>
+            <icon class="iconfont iconright"/>
+          </picker>
+        </view>
+      </view>
+      <view class='section'>
+        <text class='form_title text_left'>家长姓名</text>
+        <view class="section_r">
+          <input placeholder="请输入家长姓名" bindinput="inputCheck"  bindblur="validate" type="text" data-name="patriarch_name"  confirm-type="next" value="{{patriarch_name}}"></input>
+        </view>
+      </view>
+       <view class='section'>
+        <text class='form_title text_left'>家长电话</text>
+        <view class="section_r">
+          <input placeholder="请输入家长电话" bindinput="inputCheck"  bindblur="validate" type="text" data-name="mobile"  confirm-type="next" value="{{mobile}}"></input>
+        </view>
+      </view>
+    </view>
+     <view class='saveInfo'>
+        <view bindtap="submit" disabled="{{!showSubmit}}" class="oBtn bg_theme_blue {{is_iphonex?'iphone_x':''}}">保存</view>
+      </view>
+</view>
+<nyz_area_picker show="{{show}}" bind:sureSelectArea="sureSelectAreaListener" data-name="area" data-validator="required" showValue="{{areaShow}}">
+</nyz_area_picker>
+
+<!-- /* 监护人弹框 */ -->
+<view class="model_bg" wx:if="{{showAddInfo}}" bindtap="goBack"></view>
+<view class="addInfo_style" wx:if="{{showAddInfo}}">
+  <view class="super_dia_titi">
+      添加监护人
+  </view>
+  <view class="super_info">
+     <view class='super_section'>
+        <input placeholder="请输入姓名" bindblur="validate" type="text" data-name="super_name"  confirm-type="next" value="{{super_name}}"></input>
+      </view>
+     <view class='super_section'>
+        <input placeholder="请输入电话" bindblur="validate" type="text" data-name="super_phone"  confirm-type="next" value="{{super_phone}}"></input>
+      </view>
+      <view class='super_section'>
+        <picker bindchange="bindPickerSuper" value="{{superindex}}" id="{{superModeList[superindex].id}}" class="pick_gebder" range="{{superModeList}}" name='gender' bindblur="validate" type="text" data-name="gender" range-key="name">
+            <text wx:if='{{super_gender!=""}}'>{{superModeList[superindex].name}}</text>
+            <text wx:if='{{super_gender==""}}' class="section_color">请选择性别（选填）</text>
+        </picker>
+      </view>
+       <view class='super_section super_section_bot'>
+        <picker bindchange="bindPickerConcat" disabled="{{type=='complement'}}" value="{{consctindex}}" id="{{concatModeList[consctindex].id}}" class="pick_gebder" range="{{concatModeList}}" data-name="gender" range-key="name">
+            <text wx:if='{{super_concat!=""}}'>{{concatModeList[consctindex].name}}</text>
+            <text wx:if='{{super_concat==""}}' class="section_color">请选择与学员关系（选填）</text>
+        </picker>
+      </view>
+      <view class="super_btn">
+         <text class="back" bindtap="goBack">返回</text>
+         <text class="save bg_theme_blue" bindtap="saveSuper">保存</text>
+      </view>
+  </view>
+</view>

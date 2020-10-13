@@ -1,0 +1,72 @@
+<!--pages/specialActivity/specialActivity.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="special_bg skeleton" style="background:{{specialObj.bg_color}}">
+	<navbar page-name="{{specialObj.title}}" bg-color="#fff" icon-color="#333333" show-search='false' show-title='true'
+		show-nav='true' show-index='false'></navbar>
+	<view class="spec_block">
+		<view class="spe_ban">
+			<image src="{{specialObj.poster}}" class="spe_ban_img" mode="widthFix"></image>
+			<view class="spe_show_block spe_show_bg" wx:if="{{specialObj.introduce!=''}}">
+				<view class="spe_show_titi">
+					<text class="tit_small"></text>
+					<text class="tit_big"></text>
+					<text>活动介绍</text>
+					<text class="tit_big"></text>
+					<text class="tit_small"></text>
+				</view>
+				<view class="spe_discri">{{specialObj.introduce}}</view>
+			</view>
+		</view>
+		<view class="spe_pro">
+			<view class="spe_pro_block">
+				<view class="spe_pro_list" wx:for="{{specialList}}" wx:key="index" bindtap="goLink" id="{{item.goods_id}}">
+					<view class="pro_img">
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==1}}" class="pro_icon"
+							style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==2}}" class="pro_icon"
+							style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==3}}" class="pro_icon"
+							style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==4}}" class="pro_icon"
+							style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image src="{{item.image}}" class="pro_main_image"></image>
+						<image src="{{item.tag.min_img}}" wx:if="{{item.tag.min_img!=undefined&&item.tag.min_img!=''}}"
+							class="pro_min_frame"></image>
+					</view>
+					<view class="spe_pro_list_titi"> {{item.goods_name}}</view>
+					<view class="spe_pro_list_dis" wx:if="{{item.tag.button_tag!=undefined&&item.tag.button_tag.length>0}}">
+						<text wx:for="{{item.tag.button_tag}}" wx:key="index" wx:if="{{index<4}}">{{item.text}}</text>
+					</view>
+					<view class="spe_pro_list_dis" wx:else>
+						<text class="hidden">隐藏</text>
+					</view>
+					<view class="spe_pro_list_pri">
+						<view class="spe_pro_list_pri_l">
+							<text class="spe_pro_list_pri_num color_theme_red"><text
+									class="pri_fu">￥</text>{{filters.formatMoney(item.buy_price)}}</text>
+						</view>
+						<view class="spe_pro_list_pri_l">
+							<!-- item.total_count-item.count -->
+							{{filters.formatInt(item.sales_volume)}}人付款
+						</view>
+					</view>
+				</view>
+			</view>
+			<null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false&&hasData}}" bottomText="已经到底啦~"
+				bottomShow="{{is_end&&hasData}}" dataText="暂无数据" dataShow="{{!hasData}}"></null-data>
+		</view>
+	</view>
+	<image src="{{specialObj.image}}" class="special_bg_image" mode="widthFix"></image>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+	<icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

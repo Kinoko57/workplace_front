@@ -1,0 +1,97 @@
+<!--pages/messageCenter/messageCenter.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="message_bg skeleton">
+  <view class="message_body">
+    <view class="message_top">
+      <view class="skeleton-rect">
+        <text>共{{total}}条消息</text>
+      </view>
+      <view class="skeleton-rect" bindtap="clearNews">
+        <icon class="iconfont iconqingkong"></icon>
+        <text>清除已读消息</text>
+      </view>
+    </view>
+    <view class="message_top_null" style="height:76rpx"></view>
+    <view class="message_list">
+      <view class="message_list_block">
+        <view class="message_block {{item.status_read==0?'message_unread':''}}" wx:for="{{messageList}}" wx:key="index">
+          <movable-area>
+            <movable-view damping="100" out-of-bounds="true" direction="horizontal" x="{{item.x}}" animation="false" bindchange="handleMovableChange" touchend="handleTouchend({{index}})" touchstart="handleTouchestart">
+              <view class="main_item_content {{item.status_read==0?'main_unread':''}}" bindtap="showDetail" id="{{item.id}}">
+                <view class="message_left skeleton-rect">
+                  <view class="icon_bg" wx:if="{{item.type!=2}}">
+                    <icon class="iconfont icontongzhi"></icon>
+                    <!-- <icon class="iconfont iconyouhui" wx:if="{{item.type==2}}"></icon>
+                    <icon class="iconfont iconxiaoxi2" wx:if="{{item.type==3}}"></icon> -->
+                  </view>
+                  <view class="icon_bg" wx:if="{{item.type==2}}">
+                    <icon class="iconfont iconkaituan"></icon>
+                  </view>
+                  <!-- <view class="icon_bg type03" wx:if="{{item.message_type==3}}">
+                    <icon class="iconfont iconyouhui"></icon>
+                  </view>
+                  <view class="icon_bg type04" wx:if="{{item.message_type==4}}">
+                    <icon class="iconfont iconwuliu"></icon>
+                  </view> -->
+                </view>
+                <view class="message_right">
+                  <view class="message_title">
+                    <text class="title skeleton-rect">{{item.title}}</text>
+                    <!-- <text class="skeleton-rect">{{item.create_time}}</text> -->
+                    <text class="skeleton-rect">{{filters.formatDateTime(item.create_time)}}</text>
+                  </view>
+                  <view class="message_desc skeleton-rect">
+                    {{item.content}}
+                  </view>
+                </view>
+                <text class="unread_msg bg_theme_red1"></text>
+              </view>
+            </movable-view>
+          </movable-area>
+          <view class="delete_btn" id="{{item.id}}" data-index="{{index}}" bindtap="handleDelete">删除</view>
+        </view>
+      </view>
+      <!-- <view class="page_footer" wx:if="{{is_end&&hasData}}">已经到底啦~</view>
+      <view class="page_footer" wx:if="{{hasData==false}}">暂无数据~</view>
+      <view class="list_bottom page_footer_loading" wx:if="{{is_end==false}}">加载中……</view> -->
+      <null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="{{type==1?'暂无消息推送':'暂无系统通知'}}" dataShow="{{!hasData}}"></null-data>
+    </view>
+  </view>
+  <view class="model_bg" wx:if="{{showModel}}" bindtap="hidenModel" catchtouchmove="ture"></view>
+  <view class="message_model model_style" hidden="{{!messageShow||!showModel}}" catchtouchmove="ture">
+    <!-- <view class="model_title">消息详情</view> -->
+    <view class="model_body">
+      <view class="detail_type">
+        <view class="icon_bg type01" wx:if="{{messageDetail.type!=2}}">
+          <icon class="iconfont icontongzhi"></icon>
+        </view>
+        <view class="icon_bg type02" wx:if="{{messageDetail.type==2}}">
+          <icon class="iconfont iconkaituan"></icon>
+        </view>
+        <!-- <view class="icon_bg type03" wx:if="{{messageDetail.sender_type==3}}">
+          <icon class="iconfont iconyouhui"></icon>
+        </view>
+        <view class="icon_bg type04" wx:if="{{messageDetail.sender_type==4}}">
+          <icon class="iconfont iconwuliu"></icon>
+        </view> -->
+      </view>
+      <scroll-view class="detail" scroll-y>
+        <view class="detail_title">
+          <!-- <text class="title">标题：</text>  -->
+          {{messageDetail.title}}
+        </view>
+        <view class="detail_time">
+          <text class="title">时间：</text>{{filters.formatDateTime(messageDetail.create_time)}}</view>
+        <view class="detail_desc">
+          <text class="title">内容：</text>{{messageDetail.content}}</view>
+      </scroll-view>
+    </view>
+    <view class="model_footer">
+      <view class="sure_btn {{messageDetail.type==2?'type02':'type01'}}" bindtap="hidenModel">我知道了</view>
+    </view>
+  </view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+  <icon class="iconfont iconhuidaodingbuxianxing"></icon>
+</view>

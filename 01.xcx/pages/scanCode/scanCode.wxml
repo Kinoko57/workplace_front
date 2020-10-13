@@ -1,0 +1,55 @@
+<!--pages/scanCode/scanCode.wxml-->
+<view class='scan' wx:if='{{isShow}}'>
+  <view class='scan_body'>
+    <swiper indicator-dots="true" autoplay='true' indicator-color='rgba(0, 0, 0, .3)' indicator-active-color='#ff8d97' interval='3000'>
+      <block wx:for="{{showPro.img}}" wx:key='index'>
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" width="355" height="150" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class='pro_info'>
+      <view class='pro_price'>￥{{showPro.price}}</view>
+      <view class='pro_name'>{{showPro.name}}</view>
+      <!-- <view class='pro_code' wx:if='{{showPro.spec!=null}}'>货号：{{showPro.spec}}</view> -->
+      <view class='pro_desc' wx:if='{{showPro.describe!=null}}'>{{showPro.describe}}</view>
+    </view>
+
+    <!-- <view class='pro_tips' wx:if="{{winType==2}}">
+      您将获得积分
+      <text>{{winValue}}</text>
+    </view> -->
+    <view class='pro_tips_reset' wx:if="{{winType==-1}}">
+      抱歉，本商品已经被扫过！
+    </view>
+    <!-- <view class='pro_tips_win' wx:if="{{scantype=='win'}}">
+    </view> -->
+  </view>
+  <!-- <view class='scan_foot_wx' wx:if="{{scantype=='wx'}}">
+    <text>还不是公主购积分商城会员？立即注册领取积分</text>
+  </view> -->
+  <!-- <view class='scan_foot_app'> -->
+  <!-- open-type="getUserInfo" bindgetuserinfo="goScore" -->
+  <!-- </view> -->
+  <view class="scan_foot_win {{is_iphonex?'scan_foot_win_height':''}}">
+    <button size='mini' bindtap='scan' wx:if="{{winType<0}}">重新扫描</button>
+    <button size='mini' bindtap='goScore' wx:if="{{winType>0}}">立即领取</button>
+    <button size='mini' class='go-Index' bindtap='goLink'>商城首页</button>
+    <!-- <button bindtap="goLogin" wx:if="{{scantype=='wx'}}">立即加入</button> -->
+  </view>
+</view>
+<view class='scan_win_bg' wx:if='{{winhidden}}' catchtouchmove="ture"></view>
+<view class='scan_win' wx:if='{{winhidden}}' catchtouchmove="ture">
+  <image src='../../static/img/pro/win_bg_03.png'></image>
+  <icon class='iconfont icon-guanbi2' bindtap='hiddenWin'></icon>
+  <text class='win_price' wx:if='{{winType==1}}'><text class='win_price_name'>{{winName}}</text> </text>
+  <text class='win_price' wx:if='{{winType==2}}'><text class='win_price_name'>{{winValue}}积分</text> </text>
+  <text class='win_price' wx:if='{{winType==3}}'>￥<text class='win_price_num'>{{winValue}}</text> </text>
+  <text class='win_tips'>恭喜，您将获得{{winName}}</text>
+  <view class='win_text' bindtap='goCou'>
+    <image src='../../static/img/member/r_btn.png'></image>
+  </view>
+</view>
+<view class='gift_box' bindtap='openWin' wx:if='{{winhidden==false&&winType!=-1&&isShow}}'>
+  <image src='../../static/img/pro/gift.png' animation="{{animationMiddleHeaderItem}}"></image>
+</view>

@@ -1,0 +1,60 @@
+<!--pages/editAdress/editAdress.wxml-->
+<!--pages/editClientInfo/editClientInfo.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class='editClientInfo skeleton'>
+  <navbar page-name="修改主播信息" bg-color="#fff" icon-color="#333" show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class='edit_info_t'>
+      <view class="edit_top">
+        <view class='section section_image'>
+          <text class='info_title'>头像</text>
+          <view class='info_more' bindtap='changeImage'>
+            <image src="{{addInfo.image}}" class='card_avatar' mode="scaleToFill"></image>
+            <icon class='iconfont icon-right'></icon>
+          </view>
+        </view>
+        <view class='section'>
+          <input placeholder="请输入姓名" name='name' bindblur="validate" type="text" data-name="name" confirm-type="next" value="{{addInfo.name}}" placeholder-class="placeholder-class"></input>
+            <view class="text_right">
+            <image src="{{staticUrl}}my/name.png"></image>
+          </view>
+        </view>
+        <view class='section'>
+          <picker class='chose_pick' value="{{index}}" range-key="{{'sex'}}" range="{{arrSex}}" bindchange="bindSexChange">
+            <view name='area' class='picker' data-name="area" data-validator="required" value="{{areaShow}}">
+              <text wx:if="{{addInfo.sex===''}}" class="placeholder-class">请选择性别</text>
+              <text wx:if="{{addInfo.sex!==''}}">{{arrSex[index].sex}}</text>
+            </view>
+            <view class="text_right">
+              <icon class="iconfont icon-right"></icon>
+            </view>
+          </picker>
+        </view>
+        <view class='section'>
+          <picker mode="date" class='chose_pick' value="{{birthday}}" start="1900-01-01" bindchange="bindDateChange" end='{{endDate}}'>
+            <view name='area' class='picker' data-name="area" data-validator="required" value="{{areaShow}}">
+              <text wx:if="{{addInfo.birthday===''}}" class="placeholder-class}">请选择生日</text>
+              <text wx:if="{{addInfo.birthday!==''}}">{{addInfo.birthday}}</text>
+            </view>
+            <view class="text_right">
+              <icon class="iconfont icon-right"></icon>
+            </view>
+          </picker>
+        </view>
+        <view class='section' bindtap='chooseAddress'>
+          <view name='area' class='picker' data-name="area" data-validator="required" value="{{areaShow}}">
+            <text wx:if="{{isChose==0}}" class="placeholder-class">请选择省市区</text>
+            <text wx:if="{{isChose==1}}">{{areaShow[0]}}，{{areaShow[1]}}，{{areaShow[2]}}</text>
+          </view>
+          <view class="text_right">
+            <icon class="iconfont icon-right"></icon>
+          </view>
+        </view>
+      </view>
+      <view class='saveInfo {{is_iphonex?"iphone_x_margin":""}}'>
+        <view bindtap="formSubmit" disabled="{{!showSubmit}}" style="background:{{line_bg_color}};color:{{color}}">保存</view>
+      </view>
+  </view>
+</view>
+<nyz_area_picker show="{{show}}" class="model_style area_chose" bind:sureSelectArea="sureSelectAreaListener" data-name="area" data-validator="required" showValue="{{areaShowId}}">
+</nyz_area_picker>
+ <simple-crop wx:if="{{visible}}" size="{{size}}" src="{{src}}" cropSizePercent="{{cropSizePercent}}" borderColor="{{borderColor}}" bindcropUpload="uploadCallback" bindcropClose="closeCallback" bindcropCrop="cropCallback"></simple-crop>

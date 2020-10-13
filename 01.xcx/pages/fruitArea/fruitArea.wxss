@@ -1,0 +1,173 @@
+/* pages/fruitArea/fruitArea.wxss */
+
+.fruit_head {
+  height: 450rpx;
+}
+
+.fruit_head swiper {
+  height: 450rpx;
+}
+
+.fruit_head swiper image {
+  width: 100%;
+}
+
+.fruit_list {
+  padding: 26rpx;
+  background: #fff;
+}
+
+.fruit_list .fruit_pro {
+  height: 342rpx;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  border-radius: 12rpx;
+  box-shadow: 0 3rpx 4rpx 2rpx #e4e4e4;
+  padding: 0 40rpx;
+  margin-bottom: 30rpx;
+}
+
+.fruit_pro .pro_img {
+  float: left;
+  margin-right: 40rpx;
+  position: relative;
+}
+
+.pro_img image {
+  width: 260rpx;
+  height: 260rpx;
+}
+
+.fruit_pro .pro_info {
+  width: 100%;
+}
+
+.pro_info .pro_title {
+  font-size: 32rpx;
+  color: #121212;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  min-height: 64rpx;
+}
+
+.pro_title  .pro_level {
+  width: 80rpx;
+  border: 2rpx solid #ff8d97;
+  border-radius: 16rpx;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 6rpx;
+  padding: 0 4rpx;
+  justify-content: center;
+}
+
+.pro_level .iconfont {
+  color: #ff8d97;
+  display: inline-flex;
+}
+
+.pro_level text {
+  color: #ff8d97;
+}
+
+.pro_info .pro_spec {
+  overflow: hidden;
+}
+
+.pro_info .pro_tips {
+  font-size: 26rpx;
+  color: #999;
+  padding: 20rpx 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 318rpx;
+}
+
+.pro_spec .pro_price {
+  font-family: 'DIN';
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.pro_price .peo_nowprice {
+  color: #ff8d97;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.pro_price .pro_integral {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #ff8d97;
+}
+
+.pro_price .pro_inter_img {
+  display: inline-flex;
+  /* align-items: flex-end; */
+  align-items: center;
+}
+
+.pro_price .pro_inter_img .iconfont {
+  font-size: 30rpx;
+  font-weight: bold;
+  display: inline-flex;
+  color: #ff8d97;
+}
+
+.pro_spec .pro_orig {
+  font-size: 20rpx;
+  color: #989898;
+}
+
+.pro_spec .line {
+  text-decoration: line-through;
+  margin-left: 6rpx;
+}
+
+.pro_spec .pro_icon {
+  margin-right: 4rpx;
+  display: flex;
+}
+
+.pro_icon image {
+  width: 50rpx;
+  height: 46rpx;
+}
+
+.pro_icon .active {
+  width: 160rpx;
+  height: 52rpx;
+  background: #ff8d97;
+  color: #fff;
+  font-size: 24rpx;
+  padding: 0rpx 20rpx;
+  line-height: 52rpx;
+  border-radius: 12rpx;
+}
+
+.pro_icon .start {
+  width: 160rpx;
+  height: 52rpx;
+  background: #d3d3d3;
+  color: #fff;
+  font-size: 24rpx;
+  padding: 0rpx 20rpx;
+  line-height: 52rpx;
+  border-radius: 12rpx;
+}
+
+.order-foot {
+  height: 84rpx;
+  line-height: 84rpx;
+  text-align: center;
+}
+
+.order-foot text {
+  font-size: 23.97rpx;
+  color: #bebebe;
+}

@@ -1,0 +1,47 @@
+<!--pages/viewArticle/viewArticle.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="view_bg skeleton">
+  <navbar page-name="{{viewDetail.create_time}}" bg-color="#000000" icon-color="#ffffff" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+	<view class="view_banner" style="height:{{scrollHeight}}px">
+		<swiper indicator-dots="true" wx:if="{{viewDetail.type==1}}" style="height:{{scrollHeight}}px" indicator-color='rgba(255, 255, 255, .3)' indicator-active-color='#ff2200' interval='5000' class="skeleton-rect" circular='true'>
+			<block wx:for="{{viewDetail.viewing}}" wx:key="index">
+				<swiper-item>
+					<image lazy-load="true" src="{{item.image}}" mode="widthFix" class="skeleton-rect"></image>
+				</swiper-item>
+			</block>
+		</swiper>
+		<view class="view_video" wx:if="{{viewDetail.type==2}}">
+		   <video id="myVideo" style="height:{{375/viewDetail.viewing[0].width*viewDetail.viewing[0].height}}px" show-fullscreen-btn auto-pause-if-navigate auto-pause-if-open-native show-play-btn show-center-play-btn object-fit='fill' src="{{viewDetail.viewing[0].image}}"></video>
+		</view>
+    <view class="view_fiexd_follow">
+		  <image class="follow_image" lazy-load="true"  src="{{viewDetail.image}}" bindtap="goLink" data-link="../anchorPerson/anchorPerson"></image>
+			<view class="follow_name">
+			  <text>{{viewDetail.nickname}}</text>
+				<text>{{filters.formatCount(viewDetail.like_num)}} 点赞</text>
+			</view>
+			<view class="folow_btn" wx:if="{{userInfo_id!=viewDetail.member_id}}">
+			  <text wx:if="{{viewDetail.is_anchor==0}}" bindtap="followView" data-type='follow'>关注</text>
+				<text wx:if="{{viewDetail.is_anchor==1}}" bindtap="followView" data-type='cancelfollow'>取消关注</text>
+			</view>
+		</view>
+		<view class="view_fiexd_descri">
+		   {{viewDetail.content}}
+		</view>
+	</view>
+	<view class="view_fiexd {{is_iphonex?'view_fiexd_bottom':''}}">
+	  <view class="view_fiexd_overflow">
+			<view class="view_fiexed_left" bindtap="goLink" data-link="../reportType/reportType?id={{viewDetail.id}}&scene=1">
+				<icon class='iconfont icon-jubao'></icon> 举报
+			</view>
+			<view class="view_fiexed_right">
+			  <view bindtap="collView" id="{{viewDetail.id}}" class="view_fiexed_right_l">
+				  <icon class='iconfont icon-coll' wx:if="{{viewDetail.is_like==0}}"></icon>
+					<icon class='iconfont icon-coll1' wx:if="{{viewDetail.is_like==1}}"></icon> 
+				 	<text>{{filters.formatCount(viewDetail.like_num)}}</text>
+				</view>
+				<text  bindtap="goLink" data-link="../sociaDetail/sociaDetail?id={{viewDetail.id}}">评论 {{filters.formatCount(viewDetail.evaluate_num)}}</text>
+			</view>
+		</view>
+	</view>
+</view>

@@ -1,0 +1,71 @@
+<!--pages/articleDetail/articleDetail.wxml-->
+<import src="/wxParse/wxParse.wxml" />
+
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="detail_bg skeleton">
+  <navbar page-name="{{page_name}}" bg-color="{{bgColor}}" icon-color="#333333" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class="detail_body" style="margin-top:{{-navHeight+statusBarHeight}}px">
+    <view class='hot_info'>
+      <view class="hot_list_image">
+        <image src="{{articleDetail.image}}" mode="widthFix"></image>
+      </view>
+      <view class='hot_title'>
+        {{articleDetail.title}}
+      </view>
+      <view class="hot_desc_bg">
+        <view class="hot_desc">
+        {{articleDetail.desc}}
+        </view>
+      </view>
+      <view class='hot_other'>
+        <view class='other_time'>{{articleDetail.update_time}}</view>
+        <view class='other_icon'>
+          <icon class="iconfont icon-16pxyuedu"></icon>
+          <text>{{articleDetail.read_num==null?0:articleDetail.read_num}}人已阅读</text>
+        </view>
+      </view>
+      <view class='hot_content'>
+        <view class='hot_rich'>
+          <template is="wxParse" data="{{wxParseData:articleImg.nodes}}" />
+        </view>
+      </view>
+      <null-data id="null-data" bottomText="已经到底啦~" bottomShow="true" ></null-data>
+    </view>
+  </view>
+</view>
+<view class="hideBg" bindtap="hideNav" wx:if="{{show_nav&&isShow}}"></view>
+<view class='fastNav' bindtap="showNav" wx:if="{{!show_nav&&isShow}}">
+  <text>快捷导航</text>
+</view>
+<view class='closeNav' bindtap="hideNav" wx:if="{{show_nav&&isShow}}">
+  <icon class="iconfont icon-left"></icon>
+  <text>收起</text>
+</view>
+
+<view class="nav_show_bg" animation="{{navAnimation}}" scroll-with-animation='true' wx:if="{{isShow}}">
+  <view class="hideNav">
+    <view class="hide_nav_block" bindtap='goIndex' data-link='../search/search' data-type="1">
+      <icon class='iconfont icon-sousuo' style="color:#f06c9b"></icon>
+      <text>搜索</text>
+    </view>
+    <button open-type='share' class='hide_nav_block share_btn' hover-class="none">
+      <icon class='iconfont icon-zhuanfa' style="color:#edbc53"></icon>
+      <text>转发</text>
+    </button>
+    <view class="hide_nav_block"  >
+      <icon class='iconfont icon-coll'style="color:#ffa85e" ></icon>
+      <!-- <icon class='iconfont icon-coll1' style="color:#ffa85e"></icon> -->
+      <text>收藏</text>
+    </view>
+    <view class="hide_nav_block" bindtap='goIndex' data-link='../index/index' data-type="0">
+      <icon class='iconfont icon-shouye' style="color:#f37974" ></icon>
+      <text>首页</text>
+    </view>
+    <view style="height:80rpx;">
+
+    </view>
+  </view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+  <icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

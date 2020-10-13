@@ -1,0 +1,272 @@
+<!--index.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="i_bg skeleton">
+	<navbar page-name="夷购商城" bg-color="{{bannerType==2?imgUrls[swiperIndex].bg_color:topBg}}" icon-color="#fff"
+		show-title='{{!isChange}}' show-nav='false' show-index='{{isChange}}' un-read="{{unread}}"></navbar>
+	<view class="i_top_nav" style='top:{{navHeight}}px;background:{{bannerType==2?imgUrls[swiperIndex].bg_color:topBg}}'>
+		<view class="i_top_search" wx:if="{{!isChange}}">
+			<view class="nav_warp_l">
+				<!-- <icon class='iconfont icon-saoma'></icon> -->
+				<text>夷购</text>
+			</view>
+			<view class="nav_warp_m" bindtap="goLink" data-link="/pages/search/search">
+				<icon class='iconfont icon-sousuo'></icon>
+				<text bindtap='searchHis'>搜索喜欢的商品</text>
+			</view>
+			<view class="nav_warp_r" bindtap="goLink" data-link="/pages/messageCenter/messageCenter">
+				<view class="log_news">
+					<icon class="iconfont icon-xiaoxi1"></icon>
+				</view>
+				<view class="news_num" wx:if="{{unread>0}}">
+					<text class="num">{{unread}}</text>
+				</view>
+			</view>
+		</view>
+		<view class="i_top_hot" wx:if="{{hotList.length>0}}">
+			<text>热门</text>
+			<view class="hot_list" wx:for="{{hotList}}" wx:key="index" bindtap='goLink'
+				data-link='../proList/proList?type=key&value={{item.name}}'>
+				<text>{{item.name}}</text>
+			</view>
+		</view>
+	</view>
+	<!-- 背景栏变色 -->
+	<view class="banner_bg" style="height:{{bgHeight}}px">
+		<view class="banner_bg_swiper"
+			style="background:{{bannerType==2?imgUrls[swiperIndex].bg_color:(bannerType==3?bannerBg:'')}};height:{{bgHeight}}px">
+			<image src="{{imgUrls[swiperIndex].image}}" mode="scaleToFill" wx:if="{{bannerType==1}}"
+				style="height:{{bgHeight}}px"></image>
+		</view>
+	</view>
+	<view class="num_top_height" style='height:{{searchHeight}}px'></view>
+	<!-- 样式一 banner不占满屏幕，和菜单栏共用一个背景图 -->
+	<view class="i_top_block01">
+		<view class="i_banner width702">
+			<!-- 轮播图宽718rpx高300rpx固定 -->
+			<swiper indicator-dots="true" autoplay='{{isPlay}}' current="{{swiperIndex}}"
+				indicator-color='rgba(255, 255, 255, .3)' indicator-active-color='#fff' interval='3000' circular='true'
+				wx:if="{{imgUrls.length>0}}" bindchange="swiperChange">
+				<block wx:for="{{imgUrls}}" wx:key="index">
+					<swiper-item>
+						<image lazy-load="true" src="{{item.image}}" mode="scaleToFill" class="index_radius" bindtap="visitLink"
+							data-pid="{{item.detail_id}}" data-type="{{item.type}}" id="{{item.id}}" data-activityid="{{item.url}}">
+						</image>
+					</swiper-item>
+				</block>
+			</swiper>
+		</view>
+		<view class="i_nav_block width702 block_padding_bottom">
+			<view class="i_nav_list">
+				<view class="i_nav_style" bindtap="visitLink" data-type="{{item.type}}" id="{{item.id}}"
+					data-pid="{{item.detail_id}}" data-activityid="{{item.url}}" wx:for="{{navList}}" wx:key="index"
+					style="width:{{navWidth}}%">
+					<image src="{{item.icon}}" mode="aspectFill" lazy-load="true" class="skeleton-radius"></image>
+					<text class="skeleton-rect">{{item.title}}</text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<!-- 楼层样式排版 -->
+	<view class="i_floor">
+		<view class="i_floor_block floor_{{item.number}}" wx:for="{{floorList}}" wx:key="index">
+			<!-- 特定活动样式 -->
+			<thematic typeSort="{{item.style}}" flootItem="{{item.show_data}}" listStyle="{{item.goods_style}}"
+				wx:if="{{item.style<=3}}" systimestamp="{{systimestamp}}"></thematic>
+			<!-- 专题活动样式 -->
+			<designated typeSort="{{item.style}}" flootItem="{{item.show_data}}" listStyle="{{item.goods_style}}"
+				wx:if="{{item.style>=4}}"></designated>
+		</view>
+	</view>
+	<!-- 推荐商品 -->
+	<view class="i_recommend" wx:if="{{typeList.length>0}}">
+		<view class="i_recommend_head {{recommendFixed?'i_recommend_fixed':''}}" style="top:{{hotHeight+navHeight}}px">
+			<scroll-view class="scroll_head" scroll-x="true" style="width: 100%">
+				<view class="scroll_block {{item.id==category_id?'scroll_block_active':''}}" wx:for="{{typeList}}"
+					wx:key="index" data-id="{{item.id}}" bindtap="changeType">
+					<text class="title">{{item.title}}</text>
+					<text class="sub">{{item.subtitle}}</text>
+					<!-- <view class="right_line" wx:if="{{index<typeList.length-1}}"></view> -->
+				</view>
+			</scroll-view>
+		</view>
+		<view style="height:140rpx" wx:if="{{recommendFixed}}"></view>
+		<view class="i_recommend_body" style="min-height:{{scrollViewHeight}}">
+			<!-- 一整行的数据 -->
+			<!-- <view class="i_recomend_list activity_list_line" wx:for="{{recommendList}}" wx:key="index" wx:for-item="blocklist">
+				<view class="activity_block" wx:for="{{blocklist}}" wx:key="index" bindtap="goProDetail" data-type="{{item.activity_type}}" id="{{item.activity_type==0?item.goods_id:item.activity_id}}">
+					<view class="pro_image">
+						<view class="pro_image_fixed">
+									<text>距结束</text>
+									<text class="time_bg">12</text>
+									<text>天</text>
+									<text class="time_bg">1</text>
+									<text>时</text>
+									<text class="time_bg">2</text>
+									<text>分</text>
+									<text class="time_bg">30</text>
+									<text>秒</text>
+								</view>
+								<view class="pro_image_left">
+									<text class="pro_fixed_left_top">限购3份</text>
+								</view>
+						<image src="{{item.big_image}}"></image>
+					</view>
+					<view class="pro_bottom">
+						<view class="pro_title">
+							<text wx:if="{{item.activity_type==1}}"  class="title_tips">限时促销</text>
+							<text wx:if="{{item.activity_type==2}}"  class="title_tips">体验专区</text>
+							<text wx:if="{{item.activity_type==3}}"  class="title_tips">礼盒商品</text>
+							<text wx:if="{{item.activity_type==4}}" class="title_tips">每日秒杀</text>
+							<text wx:if="{{item.activity_type==5}}"  class="title_tips">拼团</text>
+							<text>{{item.goods_name}}</text>
+						</view>
+						<view class="pro_desc">
+							<text>{{item.name}}</text>
+						</view>
+						<view class="pro_discount">
+							<text>每200减50</text>
+						</view>
+						<view class="pro_price_btn">
+							<view class="pro_price_left">
+								<text class="price_icon">￥</text>
+								<text class="price">{{filters.formatMoney(item.original_price)}}</text>
+								<text>剩余{{item.sales_volume}}/{{item.sales_volume}}</text>
+							</view>
+							<view class="pro_btn">
+								<button class="btn_clear " hover-class="none" style="background:#cd2f54;box-shadow:0rpx 0rpx 27rpx 0rpx #cd2f5449">立即购买</button>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view> -->
+			<!-- 一行两列的数据 -->
+			<view class="i_recomend_list activity_list_two_columns" wx:for="{{recommendList}}" wx:key="index"
+				wx:for-item="blocklist">
+				<view class="i_recommend_block pro_block_style" wx:for="{{blocklist}}" wx:key="index" bindtap="goProDetail"
+					data-type="{{item.activity_type}}" id="{{item.activity_type==0?item.goods_id:item.activity_id}}">
+					<view class="pro_top">
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==1}}" class="pro_icon"
+							style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==2}}" class="pro_icon"
+							style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;top:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==3}}" class="pro_icon"
+							style="left:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image src="{{item.tag.ico_img}}"
+							wx:if="{{item.tag.ico_img!=undefined&&item.tag.ico_img!=''&&item.tag.location==4}}" class="pro_icon"
+							style="right:{{filters.StrToArr(item.tag.distance,',')[0]}}rpx;bottom:{{filters.StrToArr(item.tag.distance,',')[1]}}rpx">
+						</image>
+						<image class="pro_img" src="{{item.image}}"></image>
+						<image src="{{item.tag.min_img}}" wx:if="{{item.tag.min_img!=undefined&&item.tag.min_img!=''}}"
+							class="pro_min_frame"></image>
+					</view>
+					<view class="pro_middle">
+						<view class="title">
+							<text wx:if="{{item.activity_type==1}}" class="pro_tag_list_style red_gradient">限时促销</text>
+							<text wx:if="{{item.activity_type==2}}" class="pro_tag_list_style blue_gradient">体验专区</text>
+							<text wx:if="{{item.activity_type==3}}" class="pro_tag_list_style red_gradient">礼盒商品</text>
+							<text wx:if="{{item.activity_type==4}}" class="pro_tag_list_style blue_gradient">每日秒杀</text>
+							<text wx:if="{{item.activity_type==5}}" class="pro_tag_list_style blue_gradient">拼团</text>
+							{{item.goods_name}}
+						</view>
+						<view class="pro_tags" wx:if="{{item.tag.button_tag!=undefined&&item.tag.button_tag.length>0}}">
+							<view class="pro_tab_block" wx:for="{{item.tag.button_tag}}" wx:key="index" wx:if="{{index<4}}">{{item.text}}</view>
+						</view>
+						<view class="pro_tags" wx:else>
+							<view class="pro_tab_block_null">默认</view>
+						</view>
+					</view>
+					<view class="pro_bottom" wx:if="{{item.activity_type==0}}">
+						<view class="pro_bottom_left">
+							<text class="price_icon color_theme_red">￥</text>
+							<text class="price color_theme_red">{{filters.formatMoney(item.original_price)}}</text>
+						</view>
+						<view class="pro_bottom_right">
+							<text>{{item.sales_volume}}人已付款</text>
+						</view>
+					</view>
+					<view class="pro_bottom" wx:if="{{item.activity_type!=0}}">
+						<view class="pro_bottom_left">
+							<text class="price_icon color_theme_red">￥</text>
+							<text class="price color_theme_red">{{filters.formatMoney(item.original_price)}}</text>
+						</view>
+						<view class="pro_bottom_right">
+							<text>{{item.sales_volume}}人已付款</text>
+						</view>
+					</view>
+				</view>
+			</view>
+			<!-- 一行三列的数据 -->
+			<!-- <view class="i_recomend_list activity_list_third_columns" wx:for="{{recommendList}}" wx:key="index" wx:for-item="blocklist">
+				<view class="activity_block" wx:for="{{blocklist}}" wx:key="index" bindtap="goProDetail" data-type="{{item.activity_type}}" id="{{item.activity_type==0?item.goods_id:item.activity_id}}">
+					<view class="pro_img">
+						<image src="{{item.image}}"></image>
+					</view>
+					<view class="pro_title">
+						<text wx:if="{{item.activity_type==1}}"  class="title_tips">限时促销</text>
+						<text wx:if="{{item.activity_type==2}}"  class="title_tips">体验专区</text>
+						<text wx:if="{{item.activity_type==3}}"  class="title_tips">礼盒商品</text>
+						<text wx:if="{{item.activity_type==4}}" class="title_tips">每日秒杀</text>
+						<text wx:if="{{item.activity_type==5}}"  class="title_tips">拼团</text>
+						<text>{{item.goods_name}}</text>
+					</view>
+					<view class="pro_price">
+						<text class="price">￥{{filters.formatMoney(item.original_price)}}</text>
+						<text class="count">{{item.sales_volume}}人付款</text>
+					</view>
+				</view>
+			</view> -->
+			<!-- 左图右文字 -->
+			<!-- <view class="i_recomend_list activity_list_img_left" wx:for="{{recommendList}}" wx:key="index" wx:for-item="blocklist">
+				<view class="activity_block" wx:for="{{blocklist}}" wx:key="index" bindtap="goProDetail" data-type="{{item.activity_type}}" id="{{item.activity_type==0?item.goods_id:item.activity_id}}">
+					<view class="pro_img">
+						<image src="{{item.goods_name}}"></image>
+					</view>
+					<view class="pro_right">
+						<view class="pro_title">
+							<text wx:if="{{item.activity_type==1}}"  class="title_tips">限时促销</text>
+							<text wx:if="{{item.activity_type==2}}"  class="title_tips">体验专区</text>
+							<text wx:if="{{item.activity_type==3}}"  class="title_tips">礼盒商品</text>
+							<text wx:if="{{item.activity_type==4}}" class="title_tips">每日秒杀</text>
+							<text wx:if="{{item.activity_type==5}}"  class="title_tips">拼团</text>
+							<text>{{item.name}}</text>
+						</view>
+						<view class="pro_desc">
+							<text>{{item.name}}</text>
+						</view>
+						<view class="pro_discount">
+							<text>每满200减50</text>
+						</view>
+						<view class="pro_price">
+							<text class="price">￥{{filters.formatMoney(item.original_price)}}</text>
+							<text class="count">{{item.sales_volume}}人付款</text>
+						</view>
+					</view>
+				</view>
+			</view> -->
+			<null-data id="null-data" loadingText="加载中..." loadingShow="{{hasData&&!is_end}}" bottomText="已经到底啦~"
+				bottomShow="{{is_end&&hasData}}" dataText="暂无推荐商品" dataShow="{{!hasData}}"></null-data>
+		</view>
+	</view>
+	<!-- 推荐商品带下面一起滚动的 -->
+	<!-- <mp-tabs tabs="{{tabs}}" tabNav="{{true}}" activeTab="{{activeTab}}" swiperClass="weui-tabs-swiper" swiperHeight="{{scrollViewHeight}}" bindtabclick="onTabCLick" bindchange="onChange" activeClass="tab-bar-title__selected" class="i_recommend_head">
+		<block wx:for="{{tabs}}" wx:key="index" id="{{item.id}}" wx:for-item="tabBlock">
+			<scroll-view class="tab-content" scroll-y="{{recommendFixed}}" slot="tab-content-{{index}}" style="height:{{scrollViewHeight}}" scroll-y bindscrolltolower="loadRecommendMore" wx:if="{{activeTab==index}}">
+				<view class="recommend_body">
+
+					<null-data id="null-data" loadingText="加载中..." loadingShow="{{hasData&&!is_end}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无推荐商品" dataShow="{{!hasData}}"></null-data>
+				</view>
+			</scroll-view>
+		</block>
+	</mp-tabs> -->
+	<view style="height:{{tabbarHeight}}px"></view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+	<icon class="iconfont icon-huidaodingbuxianxing"></icon>
+</view>

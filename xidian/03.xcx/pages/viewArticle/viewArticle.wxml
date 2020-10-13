@@ -1,0 +1,38 @@
+<!--pages/viewArticle/viewArticle.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="view_bg skeleton">
+	<view class="view_banner">
+		<swiper indicator-dots="true" indicator-color='rgba(255, 255, 255, .3)' indicator-active-color='#0d8d37' interval='5000' class="skeleton-rect" circular='true'>
+			<block wx:for="{{articleDetail.images}}" wx:key="index">
+				<swiper-item>
+					<image lazy-load="true" src="{{item}}" mode="aspectFit" class="skeleton-rect"></image>
+				</swiper-item>
+			</block>
+		</swiper>
+	</view>
+	<view class="view_title">
+		<text>{{articleDetail.title}}</text>
+	</view>
+	<view class="view_fiexd {{is_iphonex?'view_fiexd_bottom':''}}">
+		<view class="view_fiexed_left">
+			<view class="icon_block article_read">
+				<icon class="iconfont icon16pxyuedu"></icon>
+				<text>{{filters.formatCount(articleDetail.read_num==null?0:articleDetail.read_num)}}浏览</text>
+			</view>
+			<view class="icon_block article_coll" bindtap="collArticle" id="{{articleDetail.id}}">
+				<icon class='iconfont iconcoll' wx:if="{{articleDetail.isCollect==0}}"></icon>
+				<icon class='iconfont iconcoll1' style="color:#ffa85e" wx:if="{{articleDetail.isCollect==1}}"></icon>
+				<text>{{filters.formatCount(articleDetail.like_num)}}点赞</text>
+			</view>
+			<view class="icon_block article_comm">
+		<icon class='iconfont iconxiaoxi3'></icon>
+		<text>{{filters.formatCount(articleDetail.comment_num)}}</text>
+	</view>
+		</view>
+		<view class="view_fiexed_right" bindtap="goLink">
+      <text>详情</text>
+      <icon class='iconfont iconright'></icon>
+    </view>
+	</view>
+</view>

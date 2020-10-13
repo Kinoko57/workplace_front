@@ -1,0 +1,103 @@
+<!--pages/cash/cash.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="cash skeleton">
+  <navbar page-name="提现" bg-color="#fff" icon-color="#333333" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class="cash_block">
+    <view class="cash_center">
+      <view class="cash_center_top">
+        <view class="cash_t_bank" bindtap="goLink" wx:if="{{cashObj.bankCard!=''}}" data-url="../choseBank/choseBank">
+          <view class="cash_t_bank_name">
+            <text>提现到</text>
+            <text>{{cashObj.bankName}}(尾号{{cashObj.bankCard}})</text>
+          </view>
+          <icon class="iconfont icon-right"></icon>
+        </view>
+        <view class="cash_t_bank_null" wx:if="{{cashObj.bankCard==''}}" bindtap="goLink" data-url="../choseBank/choseBank">
+            暂无银行卡，请先去添加银行卡 <icon class="iconfont icon-right"></icon>
+        </view>
+        <view class="cash_ipt">
+          <view class="cash_money">
+            ￥<input placeholder='请输入金额' type="digit" placeholder-class="place-holder" bindinput="inputValue" bindblur="blurValue"  value="{{cash_moey}}"></input>
+          </view>
+          <view class="all_moeny" bindtap="allCash">全部提现</view>
+        </view>
+        <view class="cash_cash">
+          <view>可用余额 <text class="money_bold">￥{{filters.formatMoney(cashObj.balance)}}</text>，本次提现 <text class="money_bold">{{cashObj.charge}}</text></view>
+          <view>本月已提现 <text class="money_bold">￥{{filters.formatMoney(cashObj.month_withdraw_money)}}</text>， 还能提现 <text class="money_bold">￥{{filters.formatMoney(cashObj.max_withdraw)}}</text></view>
+        </view>
+      </view>
+      <view class="cash_center_btn">
+          <text style="background:{{line_bg_color}}" bindtap="sureCash" class="cash_center_submit">确认提现</text>
+          <text class="cash_center_small"></text>
+      </view>
+    </view>
+    <view class="cash_tips">
+        <view class="cash_titi">提现须知</view>
+        <view class="cash_tips_cont">
+          <view class="cash_tips_l">
+            <text class="text">每人每月可免手续费提现{{cashObj.month_frequency}}次</text>
+            <text class="text">提现最高收取￥{{filters.formatMoney(cashObj.max_charge)}}的手续费，最低收取￥{{filters.formatMoney(cashObj.min_charge)}}提现手续费</text>
+            <view class="text" bindtap="findDetail">暂时每人每月提现不能超过￥{{filters.formatMoney(cashObj.max_month_withdraw)}} <text class="income_description">个税说明</text></view>
+          </view>
+        </view>
+    </view>
+  </view>
+</view>
+<view class='check_bg' wx:if="{{showCkeck}}" bindtap='closeCheck'></view>
+<view class='checkCode'  wx:if="{{showCkeck}}">
+  <!--请输入验证码 -->
+  <view class="check">
+    <view class='iptCode'>请输入支付密码</view>
+    <view class="dia_cash">
+      <text class="text">提现</text>
+      <view><text class="symbol">￥</text>{{cash_moey}}</view>
+    </view>
+    <view class="dia_ser_wra">
+      <view class="dia_ser">
+        <text>提现手续费</text>
+        <text>￥{{filters.formatMoney(show_dia_info.charge)}}</text>
+      </view>
+      <view class="dia_ser">
+        <text>代缴个税</text>
+        <text>￥{{filters.formatMoney(show_dia_info.peopleTaxMoney)}}</text>
+      </view>
+      <view class="dia_ser">
+        <text>到账金额</text>
+        <text>￥{{filters.formatMoney(show_dia_info.money)}}</text>
+      </view>
+    </view>
+      <view class='content'>
+        <block wx:for="{{length}}" wx:key="item">
+          <input class='iptbox' type='number' value="{{value.length>=index+1?value[index]:''}}" disabled password='{{ispassword}}' catchtap='tap'></input>
+        </block>
+      </view>  
+      <input name="password" type='number' password="{{ispassword}}" class='ipt' maxlength="{{length}}" focus="{{isFocus}}" bindinput="focus"></input>  
+  </view>
+  <view class='check_close' bindtap='closeCheck'>
+    <icon class='iconfont icon-guanbicopy'></icon>
+  </view>
+</view>
+	<view class="model_bg" wx:if="{{showModel}}" bindtap="hidenModel" catchtouchmove="ture"  bindtap="closeModel"></view>
+	<!-- 商品优惠弹框 -->
+	<view class="discount_model model_style" hidden="{{!showModel}}" catchtouchmove="ture">
+		<view class="model_title">个税说明</view>
+		<view class="model_body">
+			<scroll-view style="height:34vh;" scroll-y>
+				<view class="help_block help_block_first">
+				<text>个税梯度</text>
+				<text>金额范围</text>
+				<text>税收（%）</text>
+			</view>
+			<view wx:for="{{tatList}}" wx:key="index" class="help_block">
+				<text>第{{index+1}}梯度</text>
+				<text >￥{{filters.formatMoney(item.start_tax)}}~￥{{filters.formatMoney(item.end_tax)}}</text>
+				<text>{{filters.formatMoney(item.rate)}}%</text>
+			</view>
+			</scroll-view>
+		</view>
+		<view class="model_footer">
+			<view class="sure_btn bg_theme_linear_red" bindtap="closeModel">我知道了</view>
+       <view wx:if="{{is_iphonex}}" style="height:40px"></view>
+		</view>
+	</view>

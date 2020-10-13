@@ -1,0 +1,405 @@
+{
+    "@platforms" : [ "android", "iPhone", "iPad" ],
+    "id" : "H51C58F39",
+    /*应用的标识，创建应用时自动生成，勿手动修改*/
+    "name" : "公主购",
+    /*应用名称，程序桌面图标名称*/
+    "version" : {
+        "name" : "1.1.14",
+        /*应用版本名称*/
+        "code" : 2019090501
+    },
+    "description" : "严选易购，尽在公主购",
+    /*应用描述信息*/
+    "icons" : {
+        "72" : "icon.png"
+    },
+    "launch_path" : "index.html",
+    /*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+    "developer" : {
+        "name" : "",
+        /*开发者名称*/
+        "email" : "",
+        /*开发者邮箱地址*/
+        "url" : ""
+    },
+    "permissions" : {
+        "Cache" : {
+            "description" : "管理应用缓存"
+        },
+        "Console" : {
+            "description" : "跟踪调试输出日志"
+        },
+        "Events" : {
+            "description" : "应用扩展事件"
+        },
+        "Camera" : {
+            "description" : "摄像头"
+        },
+        "File" : {
+            "description" : "文件系统"
+        },
+        "Zip" : {
+            "description" : "压缩与解压"
+        },
+        "Barcode" : {
+            "description" : "二维码"
+        },
+        "Webview" : {
+            "description" : "窗口管理"
+        },
+        "Navigator" : {
+            "description" : "浏览器信息"
+        },
+        "Runtime" : {
+            "description" : "运行环境"
+        },
+        "NativeUI" : {
+            "description" : "原生UI控件"
+        },
+        "XMLHttpRequest" : {
+            "description" : "跨域网络连接"
+        },
+        "Invocation" : {
+            "description" : "Native.js"
+        },
+        "OAuth" : {},
+        "Payment" : {},
+        "Share" : {},
+        "Contacts" : {},
+        "Messaging" : {},
+        "Push" : {}
+    },
+    "plus" : {
+        "splashscreen" : {
+            "autoclose" : false,
+            /*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+            "waiting" : false
+        },
+        "launchwebview" : {
+            "statusbar" : {
+                "immersed" : false,
+                "background" : "#F3F3F3", //系统状态栏背景颜色，字符串类型，#RRGGBB格式 
+                "style" : "dark"
+            }
+        },
+        "popGesture" : "close",
+        /*设置应用默认侧滑返回关闭Webview窗口，"none"为无侧滑返回功能，"hide"为侧滑隐藏Webview窗口。参考http://ask.dcloud.net.cn/article/102*/
+        "runmode" : "normal",
+        /*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+        "signature" : "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",
+        /*可选，保留给应用签名，暂不使用*/
+        "distribute" : {
+            "plugins" : {
+                "payment" : {
+                    "weixin" : {
+                        "description" : "微信支付",
+                        "appid" : "wxbc7c7b9255f2935b"
+                    }
+                },
+                "share" : {
+                    "weixin" : {
+                        "appid" : "wxbc7c7b9255f2935b",
+                        "appsecret" : "b4fc7a4de840a8a88c7b191675ecce3f"
+                    }
+                },
+                "oauth" : {
+                    "weixin" : {
+                        "appid" : "wxbc7c7b9255f2935b",
+                        "appsecret" : "b4fc7a4de840a8a88c7b191675ecce3f"
+                    }
+                },
+                "statics" : {},
+                "push" : {
+                    "unipush" : {}
+                }
+            },
+            "apple" : {
+                "appid" : "",
+                /*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
+                "mobileprovision" : "",
+                /*iOS应用打包配置文件*/
+                "password" : "",
+                /*iOS应用打包个人证书导入密码*/
+                "p12" : "",
+                /*iOS应用打包个人证书，打包配置文件关联的个人证书*/
+                "devices" : "universal",
+                /*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
+                "frameworks" : []
+            },
+            "google" : {
+                "packagename" : "",
+                /*Android应用包名，如io.dcloud.HelloH5*/
+                "keystore" : "",
+                /*Android应用打包使用的密钥库文件*/
+                "password" : "",
+                /*Android应用打包使用密钥库中证书的密码*/
+                "aliasname" : "",
+                /*Android应用打包使用密钥库中证书的别名*/
+                "permissions" : [
+                    "<uses-feature android:name=\"android.hardware.camera\"/>",
+                    "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
+                    "<uses-permission android:name=\"android.permission.CAMERA\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+                    "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+                    "<uses-permission android:name=\"android.permission.INTERNAL_SYSTEM_WINDOW\"/>",
+                    "<uses-permission android:name=\"android.permission.INTERNET\"/>",
+                    "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_SMS\"/>",
+                    "<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>",
+                    "<uses-permission android:name=\"android.permission.SEND_SMS\"/>",
+                    "<uses-permission android:name=\"android.permission.SYSTEM_ALERT_WINDOW\"/>",
+                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_SMS\"/>"
+                ]
+            },
+            "orientation" : [ "portrait-primary" ],
+            /*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
+            "icons" : {
+                "ios" : {
+                    "prerendered" : true,
+                    /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*//*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
+                    "iphone" : {
+                        "normal" : "",
+                        /*iPhone3/3GS程序图标，分辨率：57x57*/
+                        "retina" : "",
+                        /*iPhone4程序图标，分辨率：114x114*//*iPhone4S/5/6程序图标，分辨率：120x120*//*iPhone6 Plus程序图标，分辨率：180x180*/
+                        "spotlight-normal" : "",
+                        /*iPhone3/3GS Spotlight搜索程序图标，分辨率：29x29*/
+                        "spotlight-retina" : "",
+                        /*iPhone4 Spotlight搜索程序图标，分辨率：58x58*//*iPhone4S/5/6 Spotlight搜索程序图标，分辨率：80x80*/
+                        "settings-normal" : "",
+                        /*iPhone4设置页面程序图标，分辨率：29x29*//*iPhone4S/5/6设置页面程序图标，分辨率：58x58*/
+                        "app@2x" : "unpackage/res/icons/120x120.png",
+                        "app@3x" : "unpackage/res/icons/180x180.png",
+                        "settings@3x" : "unpackage/res/icons/87x87.png",
+                        "settings@2x" : "unpackage/res/icons/58x58.png",
+                        "spotlight@2x" : "unpackage/res/icons/80x80.png",
+                        "spotlight@3x" : "unpackage/res/icons/120x120.png",
+                        "notification@3x" : "unpackage/res/icons/60x60.png",
+                        "notification@2x" : "unpackage/res/icons/40x40.png"
+                    },
+                    "ipad" : {
+                        "normal" : "",
+                        /*iPad普通屏幕程序图标，分辨率：72x72*/
+                        "retina" : "",
+                        /*iPad高分屏程序图标，分辨率：144x144*//*iPad iOS7程序图标，分辨率：76x76*//*iPad iOS7高分屏程序图标，分辨率：152x152*/
+                        "spotlight-normal" : "",
+                        /*iPad Spotlight搜索程序图标，分辨率：50x50*/
+                        "spotlight-retina" : "",
+                        /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*//*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*//*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*//*iPad设置页面程序图标，分辨率：29x29*/
+                        "app" : "unpackage/res/icons/76x76.png",
+                        "app@2x" : "unpackage/res/icons/152x152.png",
+                        "settings" : "unpackage/res/icons/29x29.png",
+                        "proapp@2x" : "unpackage/res/icons/167x167.png",
+                        "spotlight" : "unpackage/res/icons/40x40.png",
+                        "settings@2x" : "unpackage/res/icons/58x58.png",
+                        "notification" : "unpackage/res/icons/20x20.png",
+                        "spotlight@2x" : "unpackage/res/icons/80x80.png",
+                        "notification@2x" : "unpackage/res/icons/40x40.png"
+                    },
+                    "appstore" : "unpackage/res/icons/1024x1024.png"
+                },
+                "android" : {
+                    "mdpi" : "unpackage/res/icons/48x48.png",
+                    /*普通屏程序图标，分辨率：48x48*/
+                    "ldpi" : "unpackage/res/icons/48x48.png",
+                    /*大屏程序图标，分辨率：48x48*/
+                    "hdpi" : "unpackage/res/icons/72x72.png",
+                    /*高分屏程序图标，分辨率：72x72*/
+                    "xhdpi" : "unpackage/res/icons/96x96.png",
+                    /*720P高分屏程序图标，分辨率：96x96*/
+                    "xxhdpi" : "unpackage/res/icons/144x144.png",
+                    "xxxhdpi" : "unpackage/res/icons/192x192.png"
+                }
+            },
+            "splashscreen" : {
+                "ios" : {
+                    "iphone" : {
+                        "default" : "",
+                        /*iPhone3启动图片选，分辨率：320x480*/
+                        "retina35" : "",
+                        /*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+                        "retina40" : "",
+                        /*4.0 英寸设备(iPhone5/iPhone5s)启动图片，分辨率：640x1136*/
+                        "retina47" : "",
+                        /*4.7 英寸设备(iPhone6)启动图片，分辨率：750x1334*/
+                        "retina55" : "",
+                        /*5.5 英寸设备(iPhone6 Plus)启动图片，分辨率：1242x2208*/
+                        "retina55l" : ""
+                    },
+                    "ipad" : {
+                        "portrait" : "",
+                        /*iPad竖屏启动图片，分辨率：768x1004*/
+                        "portrait-retina" : "",
+                        /*iPad高分屏竖屏图片，分辨率：1536x2008*/
+                        "landscape" : "",
+                        /*iPad横屏启动图片，分辨率：1024x748*/
+                        "landscape-retina" : "",
+                        /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+                        "portrait7" : "",
+                        /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+                        "portrait-retina7" : "",
+                        /*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+                        "landscape7" : "",
+                        /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+                        "landscape-retina7" : ""
+                    }
+                },
+                "android" : {
+                    "mdpi" : "unpackage/res/icons/240_282.9.png",
+                    /*普通屏启动图片，分辨率：240x282*/
+                    "ldpi" : "unpackage/res/icons/320_442.9.png",
+                    /*大屏启动图片，分辨率：320x442*/
+                    "hdpi" : "unpackage/res/icons/480_762.9.png",
+                    /*高分屏启动图片，分辨率：480x762*/
+                    "xhdpi" : "unpackage/res/icons/720_1242.9.png",
+                    /*720P高分屏启动图片，分辨率：720x1242*/
+                    "xxhdpi" : "unpackage/res/icons/1080_1882.9.png"
+                }
+            },
+            "debug" : false
+        },
+        "ads" : {
+            "rp" : true,
+            "splash" : true,
+            "push" : true
+        },
+        "adid" : ""
+    },
+    "dependencies" : {
+        "pages" : {
+            "index.html" : {
+                "href" : "index.html",
+                "priority" : 0,
+                "resources" : [],
+                "refer" : []
+            }
+        },
+        "idle" : {
+            "resources" : [
+                "static/js/6.a9b99871c1ac63e095e9.js.map",
+                "static/js/app.3ab05a75d8787608abd9.js",
+                "static/js/16.e9886269b1bd0a9abbda.js",
+                "static/js/24.64363d4648005f0aeeb2.js",
+                "static/js/21.7c73b58ecc8cf8f132ea.js",
+                "static/js/0.66f31835b6ebc1fb5d2e.js",
+                "static/js/23.958c2c4d69d581a1c6aa.js.map",
+                "static/js/25.c73aa8b1adafb411f392.js",
+                "static/js/17.a499798d59e17f1b33c8.js",
+                "static/js/39.ebab646db4b57c7ed692.js",
+                "static/js/6.a9b99871c1ac63e095e9.js",
+                "static/img/win_bg_03.b9e27d6.png",
+                "static/js/37.00afce50e1262ebff9fc.js.map",
+                "static/js/40.09108a8ede582f11f8c1.js",
+                "static/js/36.64ef13a9cec869080b30.js",
+                "static/js/13.61876b8a4dd0d4ffcafa.js.map",
+                "static/js/0.66f31835b6ebc1fb5d2e.js.map",
+                "static/js/25.c73aa8b1adafb411f392.js.map",
+                "static/js/22.a20c1d4f24c8227b07b1.js.map",
+                "static/js/3.d3c28c8b6432842a668e.js.map",
+                "static/js/18.8c56e374e8501047c61d.js",
+                "static/js/32.8f18ba59e7be9c1274ae.js.map",
+                "static/js/9.d7d22383d89b6fbe939a.js",
+                "static/js/36.64ef13a9cec869080b30.js.map",
+                "static/js/29.e4bb0ec03d1ea2decc0e.js.map",
+                "static/js/39.ebab646db4b57c7ed692.js.map",
+                "static/js/2.aa278fc25c890569512b.js",
+                "static/js/14.ed4e86cf8e2bb525f301.js",
+                "static/js/19.14c1da9ca79c9d63bbce.js.map",
+                "static/js/20.d533026b40dbff8c6a96.js",
+                "static/js/4.936a0cdd803c48f6c873.js",
+                "static/js/33.e871e8f5381842100535.js",
+                "static/js/45.ed225d77d75e16b90484.js",
+                "static/js/13.61876b8a4dd0d4ffcafa.js",
+                "static/js/11.2b139bc34090b2bdcbd9.js",
+                "static/js/40.09108a8ede582f11f8c1.js.map",
+                "static/css/animate.css",
+                "static/js/2.aa278fc25c890569512b.js.map",
+                "static/js/1.99249546fb892e9dc8a4.js",
+                "static/js/17.a499798d59e17f1b33c8.js.map",
+                "static/js/34.006c3d3203ecb600ee15.js",
+                "static/js/22.a20c1d4f24c8227b07b1.js",
+                "static/js/10.4c092751456097e64b37.js",
+                "static/js/42.ad6c8abc2cf8d359f1bf.js",
+                "static/css/app.226770b87d4b0b56c3d317856b9bdb5c.css.map",
+                "static/js/5.c8ef4f5352091e15aeb0.js",
+                "static/img/gift.7813a36.png",
+                "static/js/4.936a0cdd803c48f6c873.js.map",
+                "static/js/38.4dd49def681235c53130.js.map",
+                "static/img/l_t_01.e8be3cc.png",
+                "static/js/31.7edcf8538313a372d839.js",
+                "static/css/app.226770b87d4b0b56c3d317856b9bdb5c.css",
+                "static/js/31.7edcf8538313a372d839.js.map",
+                "static/js/33.e871e8f5381842100535.js.map",
+                "static/js/41.8aadee03d393d082fda9.js",
+                "static/js/8.f2fa9280b1005db27c1e.js",
+                "static/js/45.ed225d77d75e16b90484.js.map",
+                "static/js/12.8d6dd0c685f0d8a0a134.js",
+                "static/img/l_t.0e18a83.png",
+                "static/js/35.90be1747b5a21c97b177.js.map",
+                "static/img/r_01.3491f88.png",
+                "static/js/11.2b139bc34090b2bdcbd9.js.map",
+                "static/js/8.f2fa9280b1005db27c1e.js.map",
+                "static/js/manifest.7d7eae58246cea852838.js",
+                "static/js/manifest.7d7eae58246cea852838.js.map",
+                "static/js/44.bcae8782cc421dbecfac.js",
+                "static/js/27.591c15b8b20fe0708b78.js.map",
+                "static/js/14.ed4e86cf8e2bb525f301.js.map",
+                "static/js/7.e799641e49f79985d5d7.js",
+                "static/js/32.8f18ba59e7be9c1274ae.js",
+                "static/js/29.e4bb0ec03d1ea2decc0e.js",
+                "static/js/10.4c092751456097e64b37.js.map",
+                "static/js/35.90be1747b5a21c97b177.js",
+                "static/js/30.bfc47bf083f64278a3bc.js",
+                "static/js/3.d3c28c8b6432842a668e.js",
+                "static/js/41.8aadee03d393d082fda9.js.map",
+                "static/js/15.19555f219e280c02679a.js",
+                "static/js/5.c8ef4f5352091e15aeb0.js.map",
+                "static/js/7.e799641e49f79985d5d7.js.map",
+                "static/img/l_03.129dca8.png",
+                "static/js/37.00afce50e1262ebff9fc.js",
+                "static/js/vendor.d39bde6eda9fbc842336.js",
+                "static/js/24.64363d4648005f0aeeb2.js.map",
+                "static/js/vendor.d39bde6eda9fbc842336.js.map",
+                "static/js/38.4dd49def681235c53130.js",
+                "static/js/12.8d6dd0c685f0d8a0a134.js.map",
+                "static/js/30.bfc47bf083f64278a3bc.js.map",
+                "static/js/18.8c56e374e8501047c61d.js.map",
+                "static/js/28.f6d2c1c45cab4714d106.js",
+                "static/js/27.591c15b8b20fe0708b78.js",
+                "static/js/26.34eb724e47bda37c1cd0.js",
+                "static/js/9.d7d22383d89b6fbe939a.js.map",
+                "static/js/16.e9886269b1bd0a9abbda.js.map",
+                "static/js/42.ad6c8abc2cf8d359f1bf.js.map",
+                "static/js/20.d533026b40dbff8c6a96.js.map",
+                "static/js/19.14c1da9ca79c9d63bbce.js",
+                "static/js/28.f6d2c1c45cab4714d106.js.map",
+                "static/js/flexible.js",
+                "static/js/1.99249546fb892e9dc8a4.js.map",
+                "static/js/23.958c2c4d69d581a1c6aa.js",
+                "static/js/app.3ab05a75d8787608abd9.js.map",
+                "static/js/34.006c3d3203ecb600ee15.js.map",
+                "static/js/26.34eb724e47bda37c1cd0.js.map",
+                "static/js/44.bcae8782cc421dbecfac.js.map",
+                "static/js/15.19555f219e280c02679a.js.map",
+                "static/js/43.b6fba7167306d029ec80.js.map",
+                "static/js/21.7c73b58ecc8cf8f132ea.js.map",
+                "static/js/43.b6fba7167306d029ec80.js"
+            ]
+        }
+    },
+    "fullscreen" : false
+}
+/*应用描述信息*/
+

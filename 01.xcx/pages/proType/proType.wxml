@@ -1,0 +1,140 @@
+<!--pages/redeem/redeem.wxml-->
+<!-- <reload bind:relaod="_relaod" id='reload'></reload> -->
+
+<view class='redeem' style="height:{{height}}px">
+  <view class='fixed_top'>
+    <!-- 搜索框 -->
+    <view class="i_header">
+      <view class='serach'>
+        <icon class='iconfont icon-search'></icon>
+        <input value='{{searchkey}}' bindinput='searchInput' confirm-type="search" bindconfirm='searchList' placeholder='搜索喜欢的商品'></input>
+        <icon class='iconfont icon-guanbi2 close' bindtap='clearSearch' style='float:right' wx:if="{{searchkey!=''}}"></icon>
+      </view>
+      <!-- <text bindtap='searchList'>搜索</text> -->
+    </view>
+    <!-- 滚动菜单栏 -->
+    <view class='scroll_nav' wx:if="{{source=='menu'}}">
+      <scroll-view scroll-x class='nav_list' scroll-into-view='{{active_type_id}}' scroll-with-animation='true'>
+        <view class="nav_block" bindtap='choseTopNav' id='type0' data-tid='-1'>
+          <text class="{{chose_nav_id==-1?'active_nav':''}}">推荐</text>
+          <icon class='iconfont icon-subtract active_nav' wx:if='{{chose_nav_id==-1}}'></icon>
+        </view>
+        <view class="nav_block" wx:for='{{fifterList[0].fifteroptions}}' wx:key='index' bindtap='choseTopNav' id='{{item.type_id}}' data-tid='{{item.id}}'>
+          <text class="{{chose_nav_id==item.id?'active_nav':''}}">{{item.name}}</text>
+          <icon class='iconfont icon-subtract active_nav' wx:if='{{chose_nav_id==item.id}}'></icon>
+        </view>
+      </scroll-view>
+    </view>
+    <!-- 筛选条件 -->
+    <view class="red_fifter" wx:if='{{hiddenFix}}'>
+      <view class='fifter_sort' bindtap='pointSort'>
+        <text class="{{searchFifter[0].point!=''?'icon_active ':''}}">积分</text>
+        <view class='fifter_icon'>
+          <icon class="{{searchFifter[0].point=='asc'?'iconfont icon-asc sort_asc':'iconfont icon-desc sort_desc'}} {{searchFifter[0].point!=''?'icon_active ':''}}"></icon>
+        </view>
+      </view>
+      <view class='fifter_sort' bindtap='priceSort'>
+        <text class="{{searchFifter[0].price!=''?'icon_active ':''}}">价格</text>
+        <view class='fifter_icon'>
+          <icon class="{{searchFifter[0].price=='asc'?'iconfont icon-asc sort_asc':'iconfont icon-desc sort_desc'}} {{searchFifter[0].price!=''?'icon_active ':''}}"></icon>
+        </view>
+      </view>
+      <view class='fifter_sort' bindtap='quantitySort'>
+        <text class="{{searchFifter[0].quantity!=''?'icon_active ':''}}">销量</text>
+        <view class='fifter_icon'>
+          <icon class="{{searchFifter[0].quantity=='asc'?'iconfont icon-asc sort_asc':'iconfont icon-desc sort_desc'}} {{searchFifter[0].quantity!=''?'icon_active ':''}}"></icon>
+        </view>
+      </view>
+      <view class="fifter_sort {{searchFifter[0].type_id!=''||searchFifter[0].deal_type!=''||searchFifter[0].price_range!=''?'fifter_brand_active':''}}'" bindtap='fifterAll'>
+        <text class="{{(searchFifter[0].type_id!=''||searchFifter[0].deal_type!=''||searchFifter[0].price_range!='')?'icon_active ':''}}">筛选</text>
+        <icon class="iconfont icon-shaixuan1 {{(searchFifter[0].type_id!=''||searchFifter[0].deal_type!=''||searchFifter[0].price_range!='')?'icon_active ':''}}"></icon>
+      </view>
+    </view>
+  </view>
+  <scroll-view class='red_body' style='height:{{height}}px' scroll-y='{{allowScorll}}' bindscroll="scroll" bindscrolltolower="{{is_load?'loadMore':''}}" scroll-top='{{topNum}}' scroll-with-animation='true'>
+    <view class='head_top'></view>
+    <view class='red_list' wx:if='{{hasData}}'>
+      <view class="red_list_block" wx:for="{{redList}}" wx:key="blockindex" wx:for-item="listblock">
+        <form class='red_pro' wx:for="{{listblock}}" wx:key="index" bindsubmit='goPro' data-link='../proDetail/proDetail?type=normal&id={{item.goods_id}}' id='{{item.goods_id}}' report-submit="true">
+          <button formType="submit" hover-class='none'>
+          </button>
+          <view class='pro_img'>
+            <image src='{{item.img}}'></image>
+          </view>
+          <view class='pro_info'>
+            <view class='pro_title'>
+              <view class='pro_level' wx:if='{{item.promotion==1}}'>
+                <image src='../../static/img/member/cu.png' mode='aspectFit'></image>
+                <text>限时购</text>
+              </view>
+              {{item.name}}</view>
+            <view class='pro_spec'>
+              <view class='pro_price'>
+                <view style='display:flex;align-items:center;line-height:48rpx;'>
+                  <text class='peo_nowprice' wx:if='{{item.deal_type==1||item.deal_type==3}}'>￥{{item.price_sell}} </text>
+                  <text class='peo_nowprice' wx:if='{{item.deal_type>=4}}'>￥{{item.price_sell}} </text>
+                  <text class='pro_integral' wx:if='{{item.deal_type!=1&&item.deal_type!=2&&item.deal_type!=3}}'>+</text>
+                  <view class='pro_inter_img' wx:if='{{item.deal_type!=1&&item.deal_type!=3}}'>
+                    <icon class='iconfont icon-jifen1'></icon>
+                  </view>
+                  <text class='pro_integral' wx:if='{{item.deal_type==2}}'>{{item.point}}</text>
+                  <text class='pro_integral' wx:if='{{item.deal_type!=1&&item.deal_type!=2&&item.deal_type!=3}}'>{{item.point}}</text>
+                </view>
+                <view style='display:flex;align-items:center;justify-content:space-between;'>
+                  <view style='display:inline-flex;align-items:center;'>
+                    <text class='pro_orig pro_bg'>{{item.price_market_from}}</text>
+                    <text class='pro_orig line'>￥{{item.price_market}}</text>
+                  </view>
+                  <view class='pro_count'>销量:{{item.buy_count}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </form>
+      </view>
+
+      <!-- </view> -->
+    </view>
+    <button type="default" size="default" loading plain hidden='{{(is_end&&is_load==false)||hasData==false}}' class="loading_style">正在加载中，请稍后...</button>
+    <view class='red_list_null' wx:if='{{!hasData}}'>
+      <text>暂无数据</text>
+    </view>
+    <view class='order-red' wx:if="{{hasData&&is_end}}">
+      <text>—————— 我是有底线的 ——————</text>
+    </view>
+    <view class='null_height'></view>
+  </scroll-view>
+  <view class='fifter_more_bg' bindtap='hiddenFifterBg' hidden='{{!fifter}}'>
+  </view>
+  <scroll-view class='fifter_more' scroll-y style="height: 100%" animation="{{animation}}">
+    <view class='fifter_price'>
+      <text>价格区间</text>
+      <view>
+        <input placeholder='最低价' type='number' value='{{lowPrice}}' bindinput='low'></input>
+        <icon class='iconfont icon-jian'></icon>
+        <input placeholder='最高价' type='number' value='{{highPrice}}' bindinput='high'></input>
+      </view>
+    </view>
+    <scroll-view class='fifter_other' scroll-y style='height:{{brandHeight}}px'>
+      <view class='fifter_info' wx:for='{{fifterList}}' wx:key='index'>
+        <view class='fifter_head'>
+          <text>{{item.fifter_name}}</text>
+          <view wx:if='{{item.fifter_id!=1}}' id='{{item.fifter_id}}' bindtap='openfifter'>
+            <text>全部</text>
+            <icon class="iconfont icon-xiajiantou {{item.isopen?'icon_open':''}}"></icon>
+          </view>
+        </view>
+        <view class="fifter_options {{item.isopen?'':'fifter_options_hidden'}}">
+          <text wx:for='{{item.fifteroptions}}' data-pid='{{item.fifter_id}}' wx:key='{{index}}' wx:for-item="item_fifter" class="{{item_fifter.checked?'chose_text':''}}" id='{{item_fifter.id}}' bindtap='chosefifterList'>{{item_fifter.name}}</text>
+        </view>
+      </view>
+    </scroll-view>
+    <view class='fifter_more_btn'>
+      <button size='mini' bindtap='resetFifter'>重置</button>
+      <button size='mini' class='btn_red' bindtap='hiddenFifter'>确定</button>
+    </view>
+  </scroll-view>
+  <view class='goTop' hidden='{{isSign}}' bindtap='returnTop'>
+    <icon class='iconfont icon-huidaodingbu'></icon>
+  </view>
+</view>

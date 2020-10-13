@@ -1,0 +1,69 @@
+.barrage-area {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  pointer-events: auto;
+}
+
+.barrage-tunnel {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #CCB24D;
+  width: 100%;
+}
+
+.tunnel-tips {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.bullet-item {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 0;
+  left: 100%;
+  white-space: nowrap;
+  /* 自己复写的样式 */
+  background: rgba(255, 255, 255, .5);
+  font-size: 22rpx;
+  border-radius: 50rpx;
+  margin: 20rpx 0;
+}
+
+.bullet-item.paused {
+  background: #000;
+  opacity: 0.6;
+  padding: 0 10px;
+  z-index: 1001;
+
+}
+
+.bullet-item_img {
+  max-height: 100%;
+  border-radius: 50%;
+}
+
+.bullet-item_text {
+  display: inline-block;
+  margin: 0;
+
+}
+
+.bullet-move {
+  animation: 0s linear slidein
+}
+
+@keyframes slidein {
+  0% {
+    transform: translate3d(0, 0, 0)
+  }
+
+  100% {
+    transform: translate3d(-2000px, 0, 0)
+  }
+}

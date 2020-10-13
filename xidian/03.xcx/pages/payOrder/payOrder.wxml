@@ -1,0 +1,124 @@
+<!--pages/orderDetail/orderDetail.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="or_detail skeleton">
+	<scroll-view class="scroll" scroll-y style="height:{{scrollHeight}}px">
+		<view class="bg_theme_blue or_top">
+			<icon class="iconfont icondaifukuan" wx:if="{{orderInfo.status==0}}"></icon>
+			<icon class="iconfont icondengdai" wx:if="{{(orderInfo.status==1||orderInfo.status==3)&&orderInfo.class_status==0}}"></icon>
+			<view>
+				<view class="or_top_status" wx:if="{{orderInfo.status==0}}">等待付款</view>
+				<view class="or_top_status" wx:if="{{orderInfo.status!=0}}">
+					<text wx:if="{{(orderInfo.status==1||orderInfo.status==3)&&orderInfo.class_status==0}}">已付定金<text wx:if="{{orderInfo.status==1&&orderInfo.rush_purchase_id<=0}}">(可补充尾款)</text></text>
+					<text wx:if="{{(orderInfo.status==1||orderInfo.status==3)&&orderInfo.class_status==1}}">等待开课</text>
+					<text wx:if="{{orderInfo.status==10}}">订单已完成</text>
+					<text wx:if="{{orderInfo.status==5}}">订单已取消</text>
+				</view>
+				<view class="or_top_pay" wx:if="{{orderInfo.status!=5}}">
+					<text wx:if="{{orderInfo.status==0}}">需要支付{{orderInfo.is_front==1?'定金':''}}￥{{orderInfo.is_front==1?filters.formatMoney(orderInfo.total_front_money):filters.formatMoney(orderInfo.total_amount)}}</text>
+					<text wx:if="{{orderInfo.status==1&&orderInfo.rush_purchase_id<=0}}">已支付￥{{filters.formatMoney(orderInfo.payed_money)}}，剩余尾款￥{{filters.formatMoney(orderInfo.pay_money)}}</text>
+					<text wx:if="{{orderInfo.status!=0&&orderInfo.rush_purchase_id>0}}">实际支付￥{{filters.formatMoney(orderInfo.payed_money)}}</text>
+				</view>
+			</view>
+		</view>
+		<view class="countdown_bg color_theme_blue" wx:if="{{orderInfo.status==0&&endtime!=0}}">
+			<view class="countdown_block">
+				订单将在
+				<text class="time">{{saleTime.day}}</text>
+				<text>天</text>
+				<text class="time">{{saleTime.hou}}</text>
+				<text>:</text>
+				<text class="time">{{saleTime.min}}</text>
+				<text>:</text>
+				<text class="time">{{saleTime.sec}}</text>
+				后自动取消，请尽快支付
+			</view>
+		</view>
+		<view class="or_wra">
+			<view class="or_cont">
+				<view class="pay_other_list">
+					<view class="pay_other_list_flex">
+						<image src="{{orderInfo.currImage[0]}}" mode="scaleToFill"></image>
+						<view class="pay_other_cont_r">
+							<view class="pay_other_tit"><text wx:if="{{orderInfo.rush_purchase_id>0}}" class="pro_type color_theme_blue">团购</text>{{orderInfo.currName}}</view>
+							<view class="pay_other_spec">营期：{{filters.formatDate(orderInfo.camp.camp_time)}}【{{orderInfo.camp.camp_day}}天】</view>
+							<view class="pay_other_spec" wx:if="{{orderInfo.is_front==1}}">金额：￥{{filters.formatMoney(orderInfo.price_sell)}}</view>
+							<view class="pay_other_pri">
+								<view wx:if="{{orderInfo.is_front!=0}}">
+									<text class="pay_other_mun" wx:if="{{orderInfo.is_front==1}}">定金：</text>
+									<text class="color_theme_red" wx:if="{{orderInfo.rush_purchase_id>0}}">￥{{filters.formatMoney(orderInfo.discount_price)}}</text>
+									<text class="color_theme_red" wx:if="{{orderInfo.rush_purchase_id<=0}}">￥{{filters.formatMoney(orderInfo.front_money)}}</text>
+								</view>
+								<view wx:if="{{orderInfo.is_front==0}}">
+									<text class="pay_other_mun">金额：</text>
+									<text class="color_theme_red">￥{{filters.formatMoney(orderInfo.price_sell)}}</text>
+								</view>
+								<text class="pay_other_mun">x{{orderInfo.num}}</text>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="or_status">
+				<view class="pay_disc">
+					<text class="pub_lcolor">付款方式</text>
+					<view class="pub_lcolor" wx:if="{{orderInfo.is_front==1&&type==1}}">定金</view>
+					<view class="pub_lcolor" wx:if="{{type==2}}">尾款</view>
+					<view class="pub_lcolor" wx:if="{{orderInfo.is_front==0&&type==1}}">全款</view>
+				</view>
+			</view>
+			<view class="or_status">
+				<view class="pay_child_title">
+					<text>我的学员</text>
+				</view>
+				<view class="pay_child_list">
+					<view class="child_block" wx:for="{{orderInfo.item}}" wx:key="index">
+						<view class="block_left">
+							<icon class="iconfont iconnan add_info_l_ku add_info_l_ku_man" wx:if="{{item.gender==1&&item.image==''}}"></icon>
+							<icon class="iconfont icongirl add_info_l_ku add_info_l_ku_sex" wx:if="{{item.gender==0&&item.image==''}}"></icon>
+							<image wx:if="{{item.image!=''}}" class="{{item.gender==0?'add_info_l_ku_sex':'add_info_l_ku_man'}} add_info_l_ku" src="{{item.image}}"></image>
+							<view class="people_name">{{item.student_name}}</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="or_status" wx:if="{{isShow_pay==true}}">
+				<view class="pay_child_title">
+					<text>支付方式</text>
+				</view>
+				<radio-group bindchange="chose">
+					<view class="pay_type">
+						<label for="1" class="pay_info">
+							<view class="pay_more skeleton-rect" id='1'>
+								<icon class="iconfont iconbig-WeChat green"></icon>
+								<view class="pay_name">微信支付</view>
+							</view>
+							<radio class='info_chose skeleton-radius' value="1" checked="{{choseId=='1'}}" id="1" color='#0d8d37'>
+							</radio>
+						</label>
+						<label for="6" class="pay_info" wx:if="{{orderInfo.is_alipay==1}}">
+							<!-- <label for="6" class="pay_info"> -->
+							<view class="pay_more skeleton-rect" id='6'>
+								<icon class="iconfont iconumidd17 blue"></icon>
+								<view class="pay_name">支付宝支付</view>
+							</view>
+							<radio class='info_chose skeleton-radius' value="6" checked="{{choseId==6}}" id="6" color='#0d8d37'>
+							</radio>
+						</label>
+					</view>
+				</radio-group>
+			</view>
+			<view class="zhifubao_btn" wx:if="{{isShow_pay==false}}">
+				<view class="pay_btn pay_color_yellow bg_theme_blue" bindtap="paycomplete">支付完成</view>
+				<view class="pay_btn pay_color_blue bg_theme_blue" bindtap="rePay">重新支付</view>
+			</view>
+		</view>
+		<view class="fixed_btn bg_theme_blue" bindtap="surePay" wx:if="{{isShow_pay==true}}">
+			<text wx:if="{{pay_endtime>0}}">{{payTime.hou}}:{{payTime.min}}:{{payTime.sec}}</text>
+			<text wx:if="{{pay_endtime>0}}">后再次支付</text>
+			<text wx:if="{{pay_endtime==0}}">确认支付</text>
+		</view>
+		<view style="height:60rpx;width:100%"></view>
+		<view style="height:34px;width;100%" wx:if="{{is_iphonex}}"></view>
+	</scroll-view>
+</view>

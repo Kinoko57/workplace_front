@@ -1,0 +1,94 @@
+<!--pages/personCenter/personCenter.wxml-->
+<view class='p_center'>
+  <view class='pc_body'>
+    <view class='pc_info'>
+      <text class='info_title'>头像</text>
+      <view class='info_more' bindtap='editavatat'>
+        <image src="{{personInfo.image}}" class='pc_avatar' mode="scaleToFill"></image>
+        <icon class='iconfont icon-youjiantou1'></icon>
+      </view>
+    </view>
+    <view class='pc_info'>
+      <text class='info_title'>昵称</text>
+      <view class='info_more' data-url='../editInfo/editInfo?code=nickname&codename=修改昵称&isInput=0&value={{personInfo.nickname}}' bindtap='edit'>
+        <text>{{personInfo.nickname==null?'':personInfo.nickname}}</text>
+        <icon class='iconfont icon-youjiantou1'></icon>
+      </view>
+    </view>
+    <!-- <view class='pc_info'>
+      <text class='info_title'>账户</text>
+      <view class='info_more'>
+        <text>{{personInfo.username}}</text>
+         <icon class='iconfont icon-youjiantou1'></icon> 
+      </view>
+    </view> -->
+    <view class='pc_info'>
+      <text class='info_title'>性别</text>
+      <view class='info_more'>
+        <text>{{personInfo.sex==null?'':(personInfo.sex=='male'?'男':'女')}}</text>
+        <!-- <icon class='iconfont icon-youjiantou1'></icon> -->
+      </view>
+    </view>
+    <view class='pc_info'>
+      <text class='info_title'>生日</text>
+      <view class='info_more' data-url='../improveInfo/improveInfo?visit=1' bindtap='edit' id='birthday'>
+        <text>{{personInfo.birthday!=null?personInfo.birthday:''}}</text>
+        <icon class='iconfont icon-youjiantou1' wx:if='{{personInfo.birthday==null}}'></icon>
+      </view>
+    </view>
+    <view class='pc_info'>
+      <text class='info_title'>电子邮箱</text>
+      <view class='info_more' data-url='../editInfo/editInfo?code=email&codename=修改电子邮箱&isInput=0&value={{personInfo.email}}' bindtap='edit'>
+        <text>{{personInfo.email==null?'':personInfo.email}}</text>
+        <icon class='iconfont icon-youjiantou1'></icon>
+      </view>
+    </view>
+    <view class='pc_info'>
+      <text class='info_title'>收货地址</text>
+      <view class='info_more' data-url='../editInfo/editInfo?code=address&codename=我的地址&isInput=1' bindtap='edit'>
+        <text>{{personInfo.ship_area==null?'':personInfo.ship_area}}{{personInfo.ship_addr==null?'':personInfo.ship_addr}}</text>
+        <icon class='iconfont icon-youjiantou1'></icon>
+      </view>
+    </view>
+    <view class='pc_info'>
+      <text class='info_title'>绑定手机</text>
+      <view class='info_more' bindtap='edit' data-url='../bind/bind?code=tel&visit=1'>
+        <text>{{personInfo.mobile==null?'':personInfo.mobile}}</text>
+        <icon class='iconfont icon-youjiantou1'></icon>
+      </view>
+    </view>
+    <view class='pc_info'>
+      <text class='info_title'>我的关注</text>
+      <view class='info_attList' data-url='../Interested/Interested?visit=1' bindtap='edit'>
+        <view class='info_att'>
+          <text wx:if="{{personInfo.tag_ids!=''}}" wx:for='{{personInfo.tag_list}}' wx:key='index'>{{item.name}}</text>
+          <!-- <text>肌肤护理</text>
+          <text>精油芳疗</text>
+          <text>家居家装</text>
+          <text>靓丽饰品</text> -->
+        </view>
+        <icon class='iconfont icon-youjiantou1'></icon>
+
+      </view>
+    </view>
+
+  </view>
+
+
+  <!-- 弹出框 -->
+  <view class='avatar_model_bg' hidden='{{hiddenavatar}}' bindtap='hiddenModel'>
+  </view>
+  <view class='avatar_model' hidden='{{hiddenavatar}}'>
+    <view class='avatar_title'>
+      <text>修改头像</text>
+    </view>
+    <view class='avatar_info' bindtap='choseAlbum'>
+      <image src='../../static/img/com/cra.png'></image>
+      <text>相册</text>
+    </view>
+    <view class='avatar_info' bindtap='choseCra'>
+      <image src='../../static/img/com/cra1.png'></image>
+      <text>拍照</text>
+    </view>
+  </view>
+</view>

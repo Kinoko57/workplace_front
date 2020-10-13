@@ -1,0 +1,67 @@
+<!--pages/personCenter/personCenter.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<view class='p_center skeleton'>
+  <navbar page-name="个人资料"  bg-color="#ffffff" icon-color="#000000" show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class='pc_body'>
+    <view class='pc_info pc_avt' bindtap='edit' data-url="../editImg/editImg?code=image&codename=头像&value={{personInfo.wx_image}}">
+      <text class='info_title'>头像</text>
+      <view class='info_more'>
+        <image wx:if="{{personInfo.wx_image!=''}}" src="{{personInfo.wx_image}}" class='pc_avatar' mode="scaleToFill"></image>
+        <icon class='iconfont icon-right'></icon>
+      </view>
+    </view>
+    <view class='pc_info' data-url='../editInfo/editInfo?code=nickname&codename=昵称&isInput=0&value={{personInfo.nickname}}' bindtap='edit'>
+      <text class='info_title'>昵称</text>
+      <view class='info_more'>
+        <text>{{personInfo.nickname}}</text>
+        <icon class='iconfont icon-right'></icon>
+      </view>
+    </view>
+    <view class='pc_info' data-url='../improveInfo/improveInfo?code=sex&codename=性别&isInput=0&sex={{personInfo.sex}}&visit=1&birth={{personInfo.birth}}' bindtap='editBirth'>
+      <text class='info_title'>性别</text>
+      <view class='info_more'>
+        <text>{{personInfo.sex==0?'女':'男'}}</text>
+        <icon class='iconfont icon-right'></icon>
+      </view>
+    </view>
+    <view class='pc_info' bindtap='editBirth' data-url='../improveInfo/improveInfo?code=birth&codename=生日&isInput=0&sex={{personInfo.sex}}&visit=1&birth={{personInfo.birth}}' id='birth'>
+      <text class='info_title'>生日</text>
+      <view class='info_more'>
+        <text>{{personInfo.birth==0?'请选择生日':filters.formatDate(personInfo.birth)}}</text>
+        <icon class='iconfont icon-right'></icon>
+      </view>
+    </view>
+    <view class='pc_info' data-url='../editInfo/editInfo?code=address&codename=我的地址&&value={{personInfo.address}}&&valueId={{personInfo.province}},{{personInfo.country}},{{personInfo.city}}' bindtap='edit'>
+      <text class='info_title'>地区</text>
+      <view class='info_more'>
+        <text>{{personInfo.address}}</text>
+        <icon class='iconfont icon-right'></icon>
+      </view>
+    </view>
+    <view class='pc_info' data-url='../bindPhone/bindPhone?type=change' bindtap='edit'>
+      <text class='info_title'>手机号</text>
+      <view class='info_more'>
+        <text>{{personInfo.tel}}</text>
+        <icon class='iconfont icon-right'></icon>
+      </view>
+    </view>
+  </view>
+  <view style="width:750rpx;height:18rpx;background:#ececec"></view>
+  <!-- <view class="pc_body pc_top">
+  bindtap='edit' data-url='../editInfo/editInfo?code=inviter_name&codename=邀请人昵称&isInput=0&value={{personInfo.inviter_name}}'
+    <view class='pc_info'>
+      <text class='info_title'>邀请人昵称</text>
+      <view class='info_more'>
+        <text>{{personInfo.inviter_name}}</text>
+      </view>
+    </view>
+    bindtap='edit' data-url='../editInfo/editInfo?code=inviter_tel&codename=邀请人手机号&isInput=0&value={{personInfo.inviter_tel}}'
+    <view class='pc_info'>
+      <text class='info_title'>邀请人手机号</text>
+      <view class='info_more'>
+        <text>{{personInfo.inviter_tel}}</text>
+      </view>
+    </view>
+  </view> -->
+</view>

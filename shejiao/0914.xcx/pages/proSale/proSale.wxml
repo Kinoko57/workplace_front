@@ -1,0 +1,62 @@
+<!--pages/proSale/proSale.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<view class="proSale_bg skeleton">
+   <navbar page-name="商品售后"  bg-color="#fff" icon-color="#333" show-title='true' show-nav='true' show-index='false'></navbar>
+   <view class="proSale_body">
+      <view class="proSale_body_top">
+          <view class="proSale_body_top_pro">
+            <view class="proSale_body_top_block" wx:for="{{proObj.goods}}" wx:key="index">
+               <image class="proSale_body_top_pro_img" src="{{item.goods_image}}"></image>
+               <view class="proSale_body_top_pro_r">
+                  <view class="proSale_body_top_pro_titi ">{{item.goods_name}}</view>
+                  <view class="proSale_body_top_pro_info ">
+                     <view class="proSale_info_pri">单价：<text class="info_style">￥{{filters.formatMoney(item.item_price)}}</text></view>
+                     <view class="proSale_info_num">数量：<text class="info_style">{{item.num}}</text></view>
+                  </view>
+               </view>
+            </view>
+          </view>
+      </view>
+      <view class="proSale_body_type">
+         <view class="proSale_body_type_titi">
+           <image src="{{staticUrl}}sales/sale_1.png" class="type_tit_img"></image>
+           <text>售后类型</text>
+         </view>
+         <view class="proSale_body_type_block">
+            <!-- 0 不可以申请类型 1可以申请类型 -->
+            <view class="proSale_body_type_block_list {{proObj.status.return_goods==0?'noChange':''}}" data-status="{{proObj.status.return_goods}}" bindtap="goSale" data-link="../saleAfter/saleAfter?type=return_goods&page_name=退货">
+                <view class="proSale_type_l">
+                    <image src="{{staticUrl}}sales/sale_2.png"></image>
+                    <text class="{{is_show?'cancel_color':''}}">退货</text>
+                </view>
+                <view class="proSale_type_r">
+                   <text class="proSale_type_r_tips">此项仅在已收到货，需要退换已收到的货物的情况下进行</text>
+                   <icon class="iconfont icon-right" wx:if="{{proObj.status.return_goods==1}}"></icon>
+                </view>
+            </view>
+            <view class="proSale_body_type_block_list {{proObj.status.exchange_goods==0?'noChange':''}}" data-status="{{proObj.status.exchange_goods}}" bindtap="goSale" data-link="../saleAfter/saleAfter?type=exchange_goods&page_name=换货">
+                <view class="proSale_type_l">
+                    <image src="{{staticUrl}}sales/sale_3.png"></image>
+                    <text class="{{is_show?'cancel_color':''}}">换货</text>
+                </view>
+                <view class="proSale_type_r">
+                    <text class="proSale_type_r_tips">此项仅在已收到货，联系卖家协商换货的情况下进行</text>
+                   <icon class="iconfont icon-right" wx:if="{{proObj.status.exchange_goods==1}}"></icon>
+                </view>
+            </view>
+            <view class="proSale_body_type_block_list {{proObj.status.return_money==0?'noChange':''}}" data-status="{{proObj.status.return_money}}" bindtap="goSale" data-link="../saleAfter/saleAfter?type=return_money&page_name=退款">
+                <view class="proSale_type_l">
+                    <image src="{{staticUrl}}sales/sale_4.png"></image>
+                    <text class="{{is_show?'cancel_color':''}}">退款</text>
+                </view>
+                <view class="proSale_type_r">
+                  <text class="proSale_type_r_tips">此项可申请未发货订单极速退款，或卖家协商同意前提下申请已完成订单退款</text>
+                    <!-- <text class="proSale_type_r_tips">此项仅在未收到货，或卖家协商同意前提下进行</text> -->
+                   <icon class="iconfont icon-right" wx:if="{{proObj.status.return_money==1}}"></icon>
+                </view>
+            </view>
+         </view>
+      </view>
+   </view>
+</view>

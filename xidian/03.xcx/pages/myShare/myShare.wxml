@@ -1,0 +1,95 @@
+<!--pages/myCollection/myCollection.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+
+<!-- <skeleton wx:if="{{showSkeleton}}"></skeleton> -->
+<view class='my_collection skeleton'>
+	<view class='tab_coll_header'>
+		<view class="tab_block" bindtap="choseType" id="0" >
+			<text class="{{type==0?'color_theme_blue active':''}}">课程</text>
+		</view>
+		<view class="tab_block"  bindtap="choseType" id="2">
+			<text class="{{type==2?'color_theme_blue active':''}}">社圈</text>
+		</view>
+		<view class="tab_block"  bindtap="choseType" id="1">
+			<text class="{{type==1?'color_theme_blue active':''}}">关于西点</text>
+		</view>
+	</view>
+	<view class="coll_header_null"></view>
+	<view class="coll_body" wx:if="{{type==0}}">
+		<view class="article_lists" wx:if="{{collList.length>0}}">
+			<view class="article_block_left">
+				<view class="article_block" wx:for="{{col1}}" wx:key="index" bindtap="goProDetail" data-type="{{item.type}}" id="{{item.type==1?item.g_id:item.c_id}}">
+					<view class="article_img">
+						<image src="{{item.curriculum.image[0]}}" mode="widthFix" style="width:100%;height:{{item.height}}rpx" wx:if="{{type==0}}"></image>
+					</view>
+					<view class="article_title">
+						<text wx:if="{{item.type==1}}" class="pro_tag_list_style bg_theme_blue_line">拼团</text>
+						{{item.curriculum.name}}
+					</view>
+					<view class="article_price">
+						￥{{filters.formatMoney(item.curriculum.price_sell)}} 
+					</view>
+				</view>
+			</view>
+			<view class="article_block_right">
+				<view class="article_block" wx:for="{{col2}}" wx:key="index" bindtap="goProDetail" data-type="{{item.type}}" id="{{item.type==1?item.g_id:item.c_id}}">
+					<view class="article_img">
+						<image src="{{item.curriculum.image[0]}}" mode="widthFix" style="width:100%;height:{{item.height}}rpx" wx:if="{{type==0}}"></image>
+					</view>
+					<view class="article_title" wx:if="{{type==0}}">
+						<text wx:if="{{item.type==1}}" class="pro_tag_list_style bg_theme_blue_line">拼团</text>
+						{{item.curriculum.name}}</view>
+						<view class="article_price">
+						￥{{filters.formatMoney(item.curriculum.price_sell)}} 
+					</view>
+				</view>
+			</view>
+		</view>
+		<null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false&&(col2.length>0||col1.length>0)}}" bottomText="已经到底啦~" bottomShow="{{is_end&&(col2.length>0||col1.length>0)}}" dataText="暂无数据" dataShow="{{collList.length==0}}"></null-data>
+	</view>
+		<view class="coll_body" wx:if="{{type==2}}">
+		<view class="article_lists" wx:if="{{collList.length>0}}">
+			<view class="article_block_left">
+				<view class="article_block" wx:for="{{col1}}" wx:key="index" bindtap="goArticleDetail" id="{{item.c_id}}">
+					<view class="article_img">
+						<image wx:if="{{type==2}}" src="{{item.article.images[0]}}" mode="widthFix" style="width:100%;height:{{item.height}}rpx"></image>
+					</view>
+					<view class="article_title" wx:if="{{type==2}}">{{item.article.title}}</view>
+				</view>
+			</view>
+			<view class="article_block_right">
+				<view class="article_block" wx:for="{{col2}}" wx:key="index" bindtap="goArticleDetail" id="{{item.c_id}}">
+					<view class="article_img">
+						<image wx:if="{{type==2}}" src="{{item.article.images[0]}}" mode="widthFix" style="width:100%;height:{{item.height}}rpx"></image>
+					</view>
+					<view class="article_title" wx:if="{{type==2}}">{{item.article.title}}</view>
+				</view>
+			</view>
+		</view>
+		<null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false&&(col2.length>0||col1.length>0)}}" bottomText="已经到底啦~" bottomShow="{{is_end&&(col2.length>0||col1.length>0)}}" dataText="暂无数据" dataShow="{{collList.length==0}}"></null-data>
+	</view>
+	<view class="coll_body" wx:if="{{type==1}}">
+		<view class="article_lists" wx:if="{{collList.length>0}}">
+			<view class="article_block_left">
+				<view class="article_block" wx:for="{{col1}}" wx:key="index" bindtap="goArticleDetail" id="{{item.c_id}}">
+					<view class="article_img">
+						<image wx:if="{{type==1}}" src="{{item.article.images[0]}}" mode="widthFix" style="width:100%;height:{{item.height}}rpx"></image>
+					</view>
+					<view class="article_title" wx:if="{{type==1}}">{{item.article.title}}</view>
+				</view>
+			</view>
+			<view class="article_block_right">
+				<view class="article_block" wx:for="{{col2}}" wx:key="index" bindtap="goArticleDetail" id="{{item.c_id}}">
+					<view class="article_img">
+						<image wx:if="{{type==1}}" src="{{item.article.images[0]}}" mode="widthFix" style="width:100%;height:{{item.height}}rpx"></image>
+					</view>
+					<view class="article_title" wx:if="{{type==1}}">{{item.article.title}}</view>
+				</view>
+			</view>
+		</view>
+		<null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false&&(col2.length>0||col1.length>0)}}" bottomText="已经到底啦~" bottomShow="{{is_end&&(col2.length>0||col1.length>0)}}" dataText="暂无数据" dataShow="{{collList.length==0}}"></null-data>
+	</view>
+</view>
+<view class="return_top" bindtap="returnTop" hidden="{{isTop}}">
+	<icon class="iconfont iconhuidaodingbuxianxing"></icon>
+</view>

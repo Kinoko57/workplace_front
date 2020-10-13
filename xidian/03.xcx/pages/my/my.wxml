@@ -1,0 +1,78 @@
+<!--pages/my/my.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="my_bg skeleton">
+  <view class="my_top">
+    <view class="my_info bg_theme_blue {{isLogin&&is_show.status==1?'my_info_tips':''}}">
+      <view class="m_order_wraper_new" wx:if="{{isLogin&&is_show.status==1}}">
+        <view class='m_title_new'>
+          <view class='m_title_new_l'>请尽快完善学员信息</view>
+          <view class='m_title_new_r'>
+              <text bindtap='toGo' data-link="../myChild/myChild">立即前往</text>
+          </view>
+        </view>
+      </view>
+      <view class="info_left {{!isLogin?'info_left_top':''}}">
+        <image class="info_user skeleton-radius" wx:if="{{!isLogin}}" src="../../image/icon/avatar.png"></image>
+        <image class="info_user skeleton-radius" wx:if="{{isLogin}}" src="{{userInfo.image}}" bindtap="goLink" data-url="../myCenter/myCenter"></image>
+        <text class="info_name" wx:if="{{isLogin}}">{{userInfo.nickname}}</text>
+        <text class="info_name" wx:if="{{!isLogin}}" bindtap="goLogin">请登录</text>
+      </view>
+      <!-- <view class="info_right" bindtap="goLink" data-url='../setUp/setUp'>
+        <icon class="iconfont iconshezhi"></icon>
+      </view> -->
+    </view>
+    <view class="my_about skeleton-rect {{isLogin&&is_show.status==1?'my_about_tips':''}}">
+      <view class="about_pro" bindtap="goLink" data-url="../myCollection/myCollection">
+        <text class="num color_theme_blue">{{userInfo.collect}}</text>
+        <text class="title">我的点赞</text>
+      </view>
+      <view class="about_pro" bindtap="goLink" data-url="../myFootprint/myFootprint">
+        <text class="num color_theme_blue">{{userInfo.footprint}}</text>
+        <text class="title">浏览足迹</text>
+      </view>
+      <view class="about_pro" bindtap="goLink" data-url="../myShare/myShare">
+        <text class="num color_theme_blue">{{userInfo.share}}</text>
+        <text class="title">我的分享</text>
+      </view>
+    </view>
+  </view>
+  <view class="my_order skeleton-rect">
+    <view class="my_order_title" bindtap="goLink" data-url="../orderManage/orderManage?status=type_-1">
+      <view class="order_title color_theme_blue">我的订单</view>
+      <view class="order_more">
+        <text>全部订单</text>
+        <icon class="iconfont iconright"></icon>
+      </view>
+    </view>
+    <view class="my_order_block">
+      <view wx:for="{{orderType}}" bindtap="goLink" data-url="{{item.link}}" wx:key="index" class="skeleton-radius">
+        <view class="order_num bg_theme_red1" wx:if="{{item.num!=undefined&&item.num>0}}">
+          {{item.num}}
+        </view>
+        <image src="{{item.icon}}" class="order_img"></image>
+        <text class="order_text">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+  <image src="{{banner_img.image}}" class="my_banner" wx:if="{{banner_img.image!=undefiend&&banner_img.image!=''}}" bindtap="visitLink" data-type="{{banner_img.skip_type}}" data-activityid="{{banner_img.skip_id}}" ></image>
+  <view class="my_use skeleton-rect">
+    <view class="my_use_title">
+      <view class="title color_theme_blue">常用功能</view>
+    </view>
+    <view class="my_use_block">
+      <view wx:for="{{useList}}" wx:key="index" class="my_use_block_list skeleton-radius" data-url='{{item.link}}' bindtap="goLink">
+        <view wx:if="{{item.id!=4}}" class="text">
+          <image src="{{item.img}}" class="use_img"></image>
+          <text class="use_name">{{item.name}}</text>
+        </view>
+        <view wx:if="{{item.id==4}}" class="text">
+          <button open-type="contact" class="contact" >
+            <image src="{{item.img}}" class="use_img"></image>
+            <text class="use_name">{{item.name}}</text>
+          </button>
+        </view>
+        <!-- <text class="new_unread bg_theme_red1" wx:if="{{item.status==1&&userInfo.is_read==1}}">{{}}</text> -->
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,43 @@
+<!--pages/conformOrder/conformOrder.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="or_detail skeleton">
+   <navbar page-name="确认订单"  bg-color=" linear-gradient(to right, #ff9b05, #fe6702)" icon-color="#fff" show-title='true' show-nav='false' show-index='false'></navbar>
+     <view>
+        <view class="red_gradient or_top">
+            <view class="or_top_status">
+              订单<text>已付款</text>
+            </view>
+          <view class="or_top_pay">实际支付￥{{filters.formatMoney(conformInfo.price)}}</view>
+        </view>
+        <view class='flash_chose_info'>
+          <view class='flash_sure_addr'>
+            <view class='flash_sure_addr_info'>
+              <view class="flash_sure_addr_l">
+                <icon class='iconfont icon-address'></icon>
+                <view style='margin-left:20rpx;'>
+                  <view class='info_block'>
+                    <view class="info_add_name">收货人</view>
+                    <view>
+                      <text class='add_name'>{{conformInfo.ship_name}}</text>
+                      <text class="add_phone">{{conformInfo.ship_mobile}}</text>
+                    </view>
+                  </view>
+                  <view class="add_address">
+                    <view class="info_add_name">收货人地址</view>
+                    <text class="info_add_cont">{{conformInfo.ship_area}} {{conformInfo.ship_addr}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="conform_btn">
+          <view size="mini" class="color_theme_red" bindtap="goHome">返回首页</view>
+          <view size="mini" class="color_theme_red" bindtap="goDetail">查看详情</view>
+        </view>
+     </view>
+      <view class="conform_banner">
+        <image src="{{staticUrl}}flash/banner_03.jpg"></image>
+    </view>
+</view>

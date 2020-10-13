@@ -1,0 +1,40 @@
+<!--pages/bind/bind.wxml-->
+<view class='bind'>
+  <view class='b_content'>
+    <view class='b_title'>
+      <!-- <text wx:if="{{visited==-2}}">登录</text> -->
+      <text>绑定手机号</text>
+    </view>
+    <view class='b_tips'>
+      <!-- <text wx:if="{{visited==-2}}">未注册过的手机将自动注册</text> -->
+      <text>为了体验更多功能，请先绑定手机号</text>
+    </view>
+    <view class="phoneFrom">
+      <form bindsubmit="formSubmit" bindreset="formReset">
+        <view class='b_form'>
+          <view class="{{mobile!=''?'form-item showRed':'form-item showW'}}" style="padding-right:32rpx">
+              <image src="../../image/com/phone_logo.png" style='width:36rpx;height:36rpx'></image>
+              <input name="input" type='text' style="padding-left: 16rpx" data-name="mobile" bindinput='getMobile' value='{{mobile}}' placeholder="请输入11位手机号" bindblur='getIsShow'></input>
+              <view class="close" bindtap="clearInfo" wx:if="{{mobile!=''}}" data-id="mobile">
+                 <icon class='iconfont iconziyuan'></icon>
+              </view>
+          </view>
+          <view class="{{code!=''?'form-item showRed':'form-item showW'}}">
+            <image src="../../image/com/yanzheng.png"></image>
+              <input name="input" type='number' style="padding-left: 16rpx" bindblur='sureContent' data-name="code" bindinput='getMobile' placeholder="请输入6位验证码"></input>
+              <button disabled='{{isDisabled}}' class="{{!isShowTime ? 'codeClick':'codeTime'}}" size="small" bindtap='sendCode'>{{text}}</button>
+          </view>
+        </view>
+        <view class="login">
+          <view class="okLogin bg_theme_blue" bindtap="goRegister" wx:if="{{type!='change'}}">完成</view>
+          <view class="okLogin bg_theme_blue" bindtap="changePhone" wx:if="{{type=='change'}}">完成</view>
+        </view>
+        <view class="argessInfo" wx:if="{{visited=='-1'||visited=='-2'}}">
+            <view class="info">
+                <view>点击完成表示您同意<text bindtap="goProtocol">《西点军校服务协议》</text></view>
+            </view>
+          </view>
+      </form>
+    </view>
+  </view>
+</view>

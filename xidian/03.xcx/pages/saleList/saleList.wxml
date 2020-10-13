@@ -1,0 +1,51 @@
+<!--pages/proSale/proSale.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="Sale_bg skeleton">
+   <view class="Sale_body">
+      <view class="sale_nav">
+         <scroll-view scroll-x scroll-with-animation="true" class="nav_scroll">
+            <view wx:for="{{navList}}" wx:key="index" bindtap="choseNavId" id="{{item.id}}" class="{{choseId==item.id?'nav_active color_theme_blue':''}} nav_text">{{item.name}}</view>
+         </scroll-view>
+      </view>
+      <view class="sale_list">
+          <scroll-view class="sale_list_scroll" style="height:{{scrollHeight}}px" scroll-y lower-threshold='120' bindscrolltolower="loadMore" bindscroll="scroll" scroll-top='{{topNum}}' scroll-with-animation>
+             <view class="sale_list_block" wx:for="{{saleList}}" wx:for-item="blockitem" wx:for-index="blockindex" wx:key="blockindex">
+                 <view class="sale_list_block_list" wx:for="{{blockitem}}" wx:key="index" bindtap="goDetail" data-id="{{item.id}}">
+                   <view class="sale_list_block_list_border">
+                     <text>服务单号：{{item.after_no}}</text><text>{{filters.formatDateTime(item.create_time)}}</text>
+                   </view>
+                    <view class="sale_list_block_list_top">
+                      <image class="sale_list_img" src="{{item.curriculum.image[0]}}"></image>
+                      <view class="sale_list_block_list_top_r">
+                         <view class="sale_list_pro_titi">
+                           <text>{{item.curriculum.name}}</text>
+                         </view>
+                         <view class="sale_list_pro_num">
+                           <text>营期：{{filters.formatDate(item.camp.camp_time)}}【{{item.camp.camp_day}}天】</text>
+                         </view>
+                         <view class="sale_list_pro_num sale_list_pro_pri">
+                           <text>实际支付金额：{{filters.formatMoney(item.order.amount_payed)}}</text>
+                         </view>
+                         <!-- <view class="sale_list_pro_num">
+                           <text>退款数量：{{item.back_num}}</text>
+                         </view> -->
+                      </view>
+                      <view class="sale_status">
+                          <text wx:if="{{item.status==0}}" class="color_theme_blue">待审核</text>
+                           <text wx:if="{{item.status==1||item.status==4}}" class="color_theme_blue">处理中</text>
+                           <text wx:if="{{item.status==2}}" class="color_theme_blue">已完成</text>
+                           <text wx:if="{{item.status==3}}" class="color_theme_blue">已取消</text>
+                           <!-- <text wx:if="{{item.status==4}}" class="color_theme_blue">退款中</text> -->
+                           <text wx:if="{{item.status==5}}" class="color_theme_blue">已驳回</text>
+                      </view>
+                    </view>
+                    <!-- <view class="sale_pri">退款数量：{{item.back_num}}，退款金额：￥{{filters.formatMoney(item.back_money)}}</view> -->
+                 </view>
+                 <!-- <view>取消售后</view> -->
+             </view>
+              <null-data id="null-data" loadingText="加载中..." loadingShow="{{is_end==false&&hasData}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无数据" dataShow="{{!hasData}}"></null-data>
+          </scroll-view>
+      </view>
+   </view>
+</view>

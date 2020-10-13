@@ -1,0 +1,125 @@
+/* pages/editClientInfo/editClientInfo.wxss */
+/* pages/editAddr/editAddr.wxss */
+page{
+  background: #ffffff
+}
+.edit_info_t {
+  padding: 0 0rpx 20rpx;
+  height: 100%;
+}
+
+.edit_info_t  {
+  overflow: hidden;
+}
+.edit_info_t .placeholder-class{
+  color: #333;
+  font-size: 24rpx;
+}
+.input-placeholder{
+  color: #999;
+  font-size: 24rpx;
+}
+.edit_info_t .section {
+  border-bottom:1px solid #e4e4e4;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  min-height: 120rpx;
+  padding:0 20rpx;
+  background:#fff;
+}
+.edit_info_t .section_image{
+  min-height: 140rpx;
+}
+.edit_top{
+  /* padding-top: 10rpx; */
+}
+.edit_c{
+  /* margin-top: 20rpx; */
+  background: #fff;
+  padding: 10rpx 20rpx 30rpx;
+}
+.edit_top .section:last-child{
+   border-bottom:0
+}
+.edit_bott .section:last-child{
+   border-bottom:0
+}
+.section ._title {
+  font-size: 28rpx;
+  display: inline-flex;
+  color: #999;
+  justify-content: flex-start;
+}
+.edit_bott .section ._title {
+  font-size: 28rpx;
+  color: #333;
+}
+.section .text_left {
+  width: 140rpx;
+}
+.section icon {
+  color: #b6b6b6;
+}
+.section  input {
+  width:500rpx;
+  font-size:26rpx;
+  color: #333;
+}
+.section input.addr_input{
+  width: 700rpx;
+}
+.text_right{
+  width:80rpx; 
+  color: #333;
+  justify-content: flex-end;
+  display: inline-flex;
+}
+
+.section .picker{
+  width: 630rpx;
+  font-size:26rpx;
+  color: #333;
+  display: inline-flex;
+}
+.section .picker .picker_placeholder{
+  font-size:26rpx;
+  color: #333;
+}
+.section image{
+ width: 36rpx;
+ height: 38rpx;
+}
+.concat{
+  display: inline-flex;
+  font-size: 28rpx;
+  align-items: center;
+  justify-content: flex-end;
+}
+.concat icon{
+  display: inline-flex;
+  align-items: center
+}
+.saveInfo{
+  display: flex;
+  justify-content: center;
+  margin-top: 70rpx;
+}
+.saveInfo view {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 644rpx;
+  font-size: 30rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+}
+.info_title{
+  color: #333;
+  font-size: 26rpx;
+}
+.section .info_more .card_avatar{
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 50%;
+}

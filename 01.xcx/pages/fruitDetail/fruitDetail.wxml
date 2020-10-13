@@ -1,0 +1,347 @@
+<!--pages/proDetail/proDetail.wxml-->
+<import src="/wxParse/wxParse.wxml" />
+<view class='pro_detail' wx:if='{{isShow}}'>
+  <view class='head_top'></view>
+  <view class='pro_header'>
+    <view class='pro_header_nav'>
+      <text class="{{choseName=='pro'?'text_active':''}}" bindtap='chose' data-value='pro'>商品</text>
+      <text class="{{choseName=='com'?'text_active':''}}" bindtap='chose' data-value='com'>评价</text>
+      <text class="{{choseName=='more'?'text_active':''}}" bindtap='chose' data-value='more'>详情</text>
+      <text class="{{choseName=='recommend'?'text_active':''}}" bindtap='chose' data-value='recommend' wx:if="{{recomList.length>0}}">推荐</text>
+    </view>
+    <view class='pro_header_icon'>
+      <button hidden="{{(isColl=='')?false:true}}" bindtap='addColl' id='{{proInfo.goods_id}}' hover-class="none">
+        <icon class='iconfont icon-shoucang'></icon>
+      </button>
+      <button hidden="{{(isColl!='')?false:true}}" bindtap='addColl' style="color:#ff8d97" id='{{isColl}}' hover-class="none">
+        <icon class='iconfont icon-yishoucang'></icon>
+      </button>
+      <!-- <button open-type="share" hover-class="none">
+        <icon class='iconfont icon-iconfontfenxiang3'></icon>
+      </button> -->
+    </view>
+  </view>
+  <!-- hidden="{{choseName!='com'?false:true}}" -->
+  <scroll-view scroll-y bindscroll="scroll" style="height:{{height}}px" scroll-into-view="{{toView}}" scroll-top='{{topNum}}'>
+    <view class='pro_body' wx:if='{{!allCom}}' id='top'>
+      <view class='pro_info' id="pro">
+        <view class='pro_swiper'>
+          <swiper indicator-dots="true" interval="3000" duration="1000" indicator-color='#ccc' indicator-active-color='#ff8d97' autoplay='true'>
+            <block wx:for="{{imgUrls}}" wx:key='index'>
+              <swiper-item>
+                <image src="{{item}}" class="slide-image"/>
+              </swiper-item>
+            </block>
+          </swiper>
+        </view>
+        <view class='pro_title'>
+          <view class='pro_price' >
+            <!-- <view class='pro_price_left'>
+              <text class='peo_nowprice' wx:if='{{price_type==1}}'>￥{{default_spec.price_sell}}</text>
+              <text class='peo_nowprice' wx:if='{{price_type==4}}'>￥{{default_spec.price_combine}}+</text>
+              <view class='pro_inter_img' wx:if='{{price_type!=1}}'>
+                <icon class='iconfont icon-jifen1'></icon>
+              </view>
+              <text class='pro_integral' wx:if='{{price_type==4&&isFlash==0}}'>{{default_spec.point_combine}}</text>
+              <text class='pro_integral' wx:if='{{price_type==2&&isFlash==0}}'>{{default_spec.point}}</text>
+              <text>{{price_market_from}}</text>
+              <text class='pro_orig'>￥{{price_market}}</text>
+            </view> -->
+            <view class='pro_price_third'>
+              <text wx:if="{{proInfo.is_third>0}}">[{{proInfo.third_name}}]</text>
+              <text wx:else>[平台自营]</text>
+            </view>
+            <view class='pro_sale_num'>已售出{{proInfo.buy_count}}件</view>
+          </view>
+          <view class="pro_name">
+            <text>{{proInfo.name}}</text>
+          </view>
+          <view class='pro_tips' wx:if="{{proType!='group'}}">
+            <text>{{summary}}</text>
+          </view>
+          <view class='pro_pay_type' >
+            <view class='pay_spec' wx:if="{{proType=='group'&&buyType!=-2}}">
+              <button size='mini' wx:if='{{sale_type>=4}}' id='4' class="{{price_type==4? 'button_click': ''}}" bindtap='chosePriceType'>
+                ￥{{activity.price_combine}}+<icon class='iconfont icon-jifen1'></icon>{{activity.point_combine}}</button>
+              <button size='mini' wx:if='{{sale_type!=2&&sale_type!=6&&sale_type!=4}}' id='1' class="{{price_type==1? 'button_click': ''}}" bindtap='chosePriceType'>￥{{activity.price}}</button>
+              <button size='mini' wx:if='{{sale_type!=1&&sale_type!=5&&sale_type!=4}}' id='2' class="{{price_type==2? 'button_click': ''}}" bindtap='chosePriceType'>
+                <icon class='iconfont icon-jifen1'></icon>{{activity.point}}</button>
+            </view>
+            <view class='pay_spec' wx:else>
+              <button size='mini' wx:if='{{sale_type>=4}}' id='4' class="{{default_price_type==4? 'button_click': ''}}" bindtap='chosePriceType' data-type='1'>
+                ￥{{default_spec.price_combine}}+
+                <icon class='iconfont icon-jifen1'></icon>{{default_spec.point_combine}}</button>
+              <button size='mini' wx:if='{{sale_type!=2&&sale_type!=6&&sale_type!=4}}' id='1' class="{{default_price_type==1? 'button_click': ''}}" bindtap='chosePriceType' data-type='1'>￥{{default_spec.price_sell}}</button>
+              <button size='mini' wx:if='{{sale_type!=1&&sale_type!=5&&sale_type!=4}}' id='2' class="{{default_price_type==2? 'button_click': ''}}" bindtap='chosePriceType' data-type='1'>
+                <icon class='iconfont icon-jifen1'></icon> {{default_spec.point}}</button>
+            </view>
+          </view>
+          <view class="pro_market">
+            <text>{{price_market_from}}</text>
+            <text class='pro_orig'>￥{{price_market}}</text>
+          </view>
+        </view>
+        <view class="pro_sup_tag" wx:if="{{proInfo.view_third_intro==1}}">
+        <text>{{proInfo.third_intro}}</text>
+        </view>
+        <view class='pro_title_tips' wx:if="{{title_tips!=''}}">
+          <text>{{title_tips}}</text>
+        </view>
+        <view class="pro_spec">
+          <view style='display:inline-flex'>
+            已选
+          </view>
+          <view style='display:inline-flex;width:460rpx;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>
+            <text wx:for='{{showSpec}}' wx:key='index'>{{item}}</text>
+          </view>
+          <view style='display:inline-flex;margin-right:20rpx;'>
+            <text>{{specNum}}件</text>
+          </view>
+          <view class='spec_icon' bindtap='showModel'>
+            <icon class='iconfont icon-yuandianzhong'></icon>
+            <icon class='iconfont icon-yuandianzhong'></icon>
+            <icon class='iconfont icon-yuandianzhong'></icon>
+          </view>
+        </view>
+      </view>
+      <view class='pro_com' id='com'>
+        <view class='com_head'>
+          <text>精选评价</text>
+          <view class='head_right' bindtap='viewAllCom' wx:if='{{comList.length>0}}'>
+            好评度
+            <text>{{rate}}</text>
+            <icon class='iconfont icon-iconfontjiantou5'></icon>
+          </view>
+        </view>
+        <view class='com_list' wx:if='{{comList.length==0}}'>
+          <view class='com_tips'>暂无评价</view>
+        </view>
+        <view class='com_list' wx:if='{{comList.length>0}}'>
+          <view class='com_info' wx:for='{{comList}}' wx:key='index'>
+            <view class='com_info_head'>
+              <view class='user_info'>
+                <image src='{{item.image}}'></image>
+                <text>{{item.nickname}}</text>
+              </view>
+              <view class='star_level'>
+                <icon class='iconfont icon-star' wx-if="{{item.score<1}}"></icon>
+                <icon class='iconfont icon-xingping light' wx-if="{{item.score>=1}}"></icon>
+                <icon class='iconfont icon-star' wx-if="{{item.score<2}}"></icon>
+                <icon class='iconfont icon-xingping light' wx-if="{{item.score>=2}}"></icon>
+                <icon class='iconfont icon-star' wx-if="{{item.score<3}}"></icon>
+                <icon class='iconfont icon-xingping light' wx-if="{{item.score>=3}}"></icon>
+                <icon class='iconfont icon-star' wx-if="{{item.score<4}}"></icon>
+                <icon class='iconfont icon-xingping light' wx-if="{{item.score>=4}}"></icon>
+                <icon class='iconfont icon-star' wx-if="{{item.score<5}}"></icon>
+                <icon class='iconfont icon-xingping light' wx-if="{{item.score>=5}}"></icon>
+              </view>
+            </view>
+            <view class='com_content'>
+              <text>{{item.comment}}</text>
+            </view>
+            <view class='com_img'>
+              <image src='{{com}}' wx:for='{{item.pic}}' wx:key='index' data-index="{{index}}" wx:for-item="com" bindtap='previewImg' data-comid='{{item.id}}'></image>
+            </view>
+          </view>
+          <view class='com_btn' bindtap='viewAllCom'>
+            <button>查看全部评价</button>
+          </view>
+        </view>
+      </view>
+      <view class='pro_show' id='more'>
+        <view class='show_head'>
+          <!-- <icon class='iconfont icon-iconset0418'></icon>向下拉查看图文详情 -->
+          <view class='header_nav'>
+            <text class="{{choseid=='p'?'nav_text_active':''}}" id='p' data-type='p' bindtap='choseTab'>商品介绍</text>|
+            <text class="{{choseid=='s'?'nav_text_active':''}}" id='s' data-type='s' bindtap='choseTab'>规格参数</text>|
+            <text class="{{choseid=='a'?'nav_text_active':''}}" id='a' data-type='a' bindtap='choseTab'>包装售后</text>
+          </view>
+        </view>
+        <view class='pro_img' style="min-height:{{min_height}}px">
+          <template is="wxParse" data="{{wxParseData:proDetail.nodes}}" />
+          <!-- <image src='../../static/img/pro/show_detail.jpg' mode='widthFix'></image> -->
+        </view>
+      </view>
+            <view class='pro_recomm' id='recommend' wx:if="{{recomList.length>0}}">
+        <text class='i_title'>—————— 你可能还喜欢 ——————</text>
+        <view class='recom_list'>
+          <view class='i_pro' wx:for="{{recomList}}" wx:key="index">
+            <view class='pro_img' bindtap='goPro' data-link='../fruitDetail/fruitDetail?type=fruits&id={{item.goods_id}}' id='{{item.goods_id}}'>
+              <image src='{{item.img}}'></image>
+            </view>
+            <view class='pro_title pro_line_two' bindtap='goPro' data-link='../fruitDetail/fruitDetail?type=fruits&id={{item.goods_id}}' id='{{item.goods_id}}'>
+              <view class='pro_level' wx:if='{{item.promotion==1}}'>
+                <image src='../../static/img/member/cu.png' mode='aspectFit'></image>
+                <text>限时购</text>
+              </view>
+              {{item.name}}</view>
+            <view class='pro_price'>
+              <view style='display:flex;align-items:center;line-height:48rpx;'>
+                <view class='pro_flex' hidden='{{item.deal_type==2}}'>
+                  <text class='peo_nowprice' wx:if='{{item.deal_type==1}}'>￥{{item.price_sell}} </text>
+                  <text class='peo_nowprice' wx:if='{{item.deal_type>=4}}'>￥{{item.price_sell}}+</text>
+                </view>
+                <view class='pro_flex' hidden='{{item.deal_type==1}}'>
+                  <view class='pro_inter_img'>
+                    <icon class='iconfont icon-jifen1'></icon>
+                  </view>
+                  <text class='pro_integral' wx:if='{{item.deal_type==2||item.deal_type==3}}'>{{item.point}}</text>
+                  <text class='pro_integral' wx:if='{{item.deal_type!=1&&item.deal_type!=2&&item.deal_type!=3}}'>{{item.point}}</text>
+                </view>
+              </view>
+              <view style='display:flex;align-items:center;justify-content:space-between;'>
+                <view style='display:inline-flex;align-items:center;'>
+                  <text class='pro_bg'>{{item.price_market_from}}</text>
+                  <text class='pro_orig line'>￥{{item.price_market}}</text>
+                </view>
+                <view class='pro_count'>销量:{{item.buy_count}}</view>
+              </view>
+              <!-- <view class='pro_flex'>
+                <icon class='iconfont icon-car' bindtap='addPro' id='{{item.product_id}}' data-type='{{item.deal_type}}'></icon>
+              </view> -->
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='pro_com_detail' wx:if="{{allCom}}">
+      <view class='com_detail_head'>
+        <view class='com_head_left'>
+          <text>共{{comDetail.length}}条评论</text>
+        </view>
+        <view class='com_head_right'>
+          <text>好评{{rate}}</text> </view>
+      </view>
+      <view class='com_detail_list'>
+        <view class='com_detail_info' wx:for='{{comDetail}}' wx:key='index'>
+          <view class='com_detail_userinfo'>
+            <image src='{{item.image}}'></image>
+            <view class='com_detail_name'>
+              <text>{{item.nickname}}</text>
+              <view class='com_detail_star'>
+                <icon class='iconfont icon-star' wx-if="{{item.score<1}}"></icon>
+                <icon class='iconfont icon-xingping light' wx-if="{{item.score>=1}}"></icon>
+                <icon class='iconfont icon-star' wx-if="{{item.score<2}}"></icon>
+                <icon class='iconfont icon-xingping light' wx-if="{{item.score>=2}}"></icon>
+                <icon class='iconfont icon-star' wx-if="{{item.score<3}}"></icon>
+                <icon class='iconfont icon-xingping light' wx-if="{{item.score>=3}}"></icon>
+                <icon class='iconfont icon-star' wx-if="{{item.score<4}}"></icon>
+                <icon class='iconfont icon-xingping light' wx-if="{{item.score>=4}}"></icon>
+                <icon class='iconfont icon-star' wx-if="{{item.score<5}}"></icon>
+                <icon class='iconfont icon-xingping light' wx-if="{{item.score>=5}}"></icon>
+              </view>
+            </view>
+          </view>
+          <view class='com_detail_com'>
+            {{item.comment}}
+          </view>
+          <view class='com_detail_imglist'>
+            <image src='{{com}}' wx:for='{{item.pic}}' wx:key='index' data-index="{{index}}" wx:for-item="com" bindtap='previewImg1' data-comid='{{item.id}}'></image>
+          </view>
+          <view class='com_detail_pro'>
+            <view class='com_detail_pro_info'>
+              <text wx:if="{{item.title!=null&&item.title!=''}}">规格：{{item.title}}</text>
+              <text>购买日期：{{item.date}}</text>
+            </view>
+            <view class='com_detaul_oper'>
+            </view>
+          </view>
+          <view class='com_replay' wx:if="{{item.reply!=null&&item.reply!=''}}">
+            <view class='replay_info'>卖家回复:{{item.reply}}</view>
+            <view class='replay_time'>{{item.reply_date}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <view class='null_view'></view>
+  <view class="pro_btn {{is_iphonex?'iphone_height':''}}" hidden='{{hiddenFix}}'>
+    <view class='btn_blcok'>
+      <button open-type="contact" class='contact' session-from="sobot|{{userInfo.nickName}}|{{userInfo.avatarUrl}}|{{params}}">
+        <icon class='iconfont icon-kefu1'></icon>
+      </button>
+    </view>
+    <button class='btn_blcok width pro_buy' bindtap='buyNow' id='0' wx:if="{{maxNum>0&&is_up=='true'}}">立即购买</button>
+    <button class='btn_blcok width pro_buy' wx:if="{{maxNum<=0&&is_up=='true'}}">已售完</button>
+    <button class='btn_blcok width pro_buy' wx:if="{{is_up=='false'}}">已下架</button>
+  </view>
+  <view class='pro_spec_model' hidden='{{modelShow}}' bindtap='closeModel' catchtouchmove="ture">
+  </view>
+  <view class='pro_spec_detail' hidden='{{modelShow}}' catchtouchmove="ture">
+    <view class='spec_head'>
+      <view class='spec_pro_img' bindtap='viewImg' data-url='{{staticImg}}'>
+        <image src='{{staticImg}}' mode='widthFix'></image>
+      </view>
+      <view class='spec_close' bindtap='closeModel'>
+        <icon class='iconfont icon-guanbi'></icon>
+      </view>
+      <view class='spec_pro_price' wx:if="{{proType=='group'&&buyType!=-2}}">
+        <text class='spec_pro_nowprice' wx:if='{{price_type==1}}'>￥{{activity.price}}</text>
+        <text class='spec_pro_nowprice' wx:if='{{price_type==4}}'>￥{{activity.price_combine}}+</text>
+        <view class='spec_pro_inter_img' wx:if='{{price_type!=1}}'>
+          <icon class='iconfont icon-jifen1'></icon>
+        </view>
+        <text class='spec_pro_integral' wx:if='{{price_type==4}}'>{{activity.point_combine}}</text>
+        <text class='spec_pro_integral' wx:if='{{price_type==2}}'>{{activity.point}}</text>
+      </view>
+      <view class='spec_pro_price' wx:else>
+        <text class='spec_pro_nowprice' wx:if='{{default_price_type==1}}'>￥{{default_spec.price_sell}}</text>
+        <text class='spec_pro_nowprice' wx:if='{{default_price_type>=4}}'>￥{{default_spec.price_combine}}+</text>
+        <view class='spec_pro_inter_img' wx:if='{{default_price_type!=1}}'>
+          <icon class='iconfont icon-jifen1'></icon>
+        </view>
+        <text class='spec_pro_integral' wx:if='{{default_price_type>=4}}'>{{default_spec.point_combine}}</text>
+        <text class='spec_pro_integral' wx:if='{{default_price_type==2||default_price_type==3}}'>{{default_spec.point}}</text>
+      </view>
+      <view class='spec_pro_code'>
+        <view>
+          <text>{{price_market_from}}</text>
+          <text class='spec_pro_orig'>￥{{price_market}}</text>
+        </view>
+      </view>
+    </view>
+    <scroll-view class='spec_body' scroll-y scroll-with-animation='true'>
+      <view wx:for='{{specList}}' wx:key='index' hidden='{{!hasSpec}}'>
+        <view class='spec_title'>
+          {{item.name}}
+        </view>
+        <view class='spec_type'>
+          <button size='mini' bindtap="choseType" wx:for="{{item.list}}" wx:key='index' id='{{item.tid}}' data-pid='{{item.pid}}' class="{{item.ischose? 'button_click': ''}}">{{item.name}}</button>
+        </view>
+      </view>
+      <view class='spec_num' wx:if="{{proType!='birthday'}}">
+        <text>数量</text>
+        <view class='pro_icon'>
+          <button size='mini' class='pro_spec_btn' id='0' bindtap='lessNum' data-value='less'>-</button>
+          <input value='{{specNum}}' type='number' bindblur='changeValue' />
+          <button size='mini' class='pro_spec_btn' id='1' bindtap='addNum' data-value='add'>+</button>
+        </view>
+      </view>
+    </scroll-view>
+    <view wx:if="{{maxNum>0&&is_up=='true'&&spec_up==true}}">
+      <view class="spec_btn {{is_iphonex?'spec_btn_height':''}}">
+        <button bindtap='addCar' class='surebtn'>确认</button>
+      </view>
+    </view>
+    <view wx:if='{{maxNum<=0||spec_up==false}}'>
+      <view class="spec_btn {{is_iphonex?'spec_btn_height':''}}">
+        <button class='surebtn'>已售完</button>
+      </view>
+    </view>
+    <view wx:if="{{is_up=='false'}}">
+      <view class="spec_btn {{is_iphonex?'spec_btn_height':''}}">
+        <button class='surebtn'>已下架</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='goTop' hidden='{{isSign}}' bindtap='returnTop'>
+  <icon class='iconfont icon-huidaodingbu'></icon>
+</view>
+<view class='goIndex' bindtap='goIndex' data-link='../index/index'>
+  <icon class='iconfont icon-home'></icon>
+</view>
+<button open-type='share' class='goShare'>
+  <icon class='iconfont icon-fenxiang2'></icon>
+</button>
+<!-- <reload bind:relaod="_relaod" id='reload'></reload> -->

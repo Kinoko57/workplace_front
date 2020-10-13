@@ -1,0 +1,33 @@
+<!--pages/mycard/mycard.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class='my_card skeleton'>
+  <navbar page-name="银行卡"  bg-color="#ffffff" icon-color="#000000" show-title='true' show-nav='true' show-index='false'></navbar>
+  <view class="my_card_bg">
+    <scroll-view class="order_scroll" style="height:{{scrollHeight}}px" scroll-y scroll-with-animation>
+      <view wx:for="{{cardList}}" class='my_card_block' wx:key="index">
+        <image src='{{item.image}}' class="card_image"></image>
+        <view class="my_card_block_cont">
+            <view class="my_card_block_cont_flex">
+              <view class="my_card_block_cont_flex_l">
+                <image src='{{item.icon}}' class="image_icon"></image>
+              </view>
+              <view class="my_card_block_cont_flex_r">
+                 <text>{{item.bankName}}</text>
+                 <text>{{item.bankCard}}</text>
+              </view>
+            </view>
+        </view>
+      </view>
+      <null-data id="null-data" loadingShow="{{false}}" bottomShow="{{false}}" dataText="暂无银行卡" dataShow="{{cardList.length==0}}"></null-data>
+    </scroll-view>
+  </view>
+</view>
+  <view class='addmycard'>
+    <text style="background:{{line_bg_color}}" bindtap='addMyCard' data-link="../addBank/addBank"> 添加银行卡</text>
+    <view style="height:68rpx" wx:if='{{is_iphonex}}'></view>
+  </view>
+
+
+
+
+

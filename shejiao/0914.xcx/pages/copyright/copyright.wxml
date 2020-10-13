@@ -1,0 +1,9 @@
+<!--pages/copyright/copyright.wxml-->
+<view class="copy_right">
+    <navbar page-name="版本信息"  bg-color="#fff" icon-color="#000" show-title='true' show-nav='true' show-index='false'></navbar>
+   <view class="copy_cont">
+     <image src="{{staticUrl}}my/copy.png" wx:if="{{imgSrc==''}}"></image>
+     <image src="{{imgSrc}}" wx:if="{{imgSrc!=''}}"></image>
+     <view class="copy_num">版本号：v13.0.0.1</view>
+   </view>
+</view>

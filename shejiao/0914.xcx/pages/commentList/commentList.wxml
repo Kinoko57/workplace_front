@@ -1,0 +1,56 @@
+<!--pages/commentList/commentList.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+
+<view class="comment_bg skeleton">
+	<navbar page-name="商品评论" bg-color="#fff" icon-color="#333333" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+	<view class="comment_body">
+		<view class="comment_head">
+			<view class="comment_type_list {{!show_more?'':'short_height'}}">
+				<text class="skeleton-rect {{label==item.key?'text_active':''}}" wx:for="{{typeList}}" wx:key="index" bindtap="choseCommentType" id="{{item.key}}">{{item.name}}（{{item.num}}）</text>
+			</view>
+			<!-- <view class="comment_type_more" bindtap="changeType" wx:if="{{show_open}}">
+				<text wx:if="{{show_more}}">点击展开</text>
+				<text wx:if="{{!show_more}}">点击收起</text>
+				<icon class="iconfont icon-right {{!show_more?'up':'down'}}"></icon>
+			</view> -->
+		</view>
+		<view class="comment_list">
+			<view class="comment_block" wx:for="{{commentList}}" wx:key="index">
+				<view class="comment_example">
+					<view class="example_left">
+						<image src="{{item.member_image}}"></image>
+					</view>
+					<view class="example_right">
+						<view class="user_name">{{item.username}}</view>
+						<view class="user_spec">
+							<view class="spec">
+								<text>{{filters.formatDateTime(item.create_time)}}</text>
+								|
+								<text>{{item.spec}}</text>
+							</view>
+							<view class="comm_star">
+								<icon class="iconfont icon-gray-star {{item.goods_mark>=1?'color_theme_red':''}}"></icon>
+								<icon class="iconfont icon-gray-star {{item.goods_mark>=2?'color_theme_red':''}}"></icon>
+								<icon class="iconfont icon-gray-star {{item.goods_mark>=3?'color_theme_red':''}}"></icon>
+								<icon class="iconfont icon-gray-star {{item.goods_mark>=4?'color_theme_red':''}}"></icon>
+								<icon class="iconfont icon-gray-star {{item.goods_mark==5?'color_theme_red':''}}"></icon>
+							</view>
+						</view>
+						<view class="comm_text">
+							{{item.content}}
+						</view>
+						<view class="comm_img">
+							<image src="{{block}}" wx:for="{{item.image}}" wx:for-item="block" wx:key="index" bindtap="viewImage" id="{{index}}" data-pindex="{{item.com_id}}"></image>
+						</view>
+						<view class="comm_replay_list" wx:if="{{item.reply.length>0}}">
+							<view class="replay_block" wx:for="{{item.reply}}" wx:for-item="block">
+								<view>商家回复：{{block.content}}</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<null-data id="null-data" loadingText="加载中..." loadingShow="{{hasData&&!is_end}}" bottomText="已经到底啦~" bottomShow="{{is_end&&hasData}}" dataText="暂无评论~" dataShow="{{!hasData}}"></null-data>
+		</view>
+	</view>
+</view>

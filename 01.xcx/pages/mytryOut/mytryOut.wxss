@@ -1,0 +1,152 @@
+/* pages/myflashSale/myflashSale.wxss */
+
+.my_flashSale {
+  /* font-family: SimHei; */
+  background: #f2f2f2;
+  overflow-x: hidden;
+}
+
+.flashSale_body {
+  height: 100%;
+}
+
+.flashSale_nav {
+  height: 90rpx;
+  background: #f6f6f6;
+  width: 100%;
+  z-index: 50;
+  position: fixed;
+  top: 0;
+}
+
+.flashSale_nav text {
+  width: 33%;
+  display: inline-block;
+  color: #999;
+  font-size: 32rpx;
+  text-align: center;
+  border-bottom: 4rpx solid transparent;
+  border-top: 4rpx solid transparent;
+  height: 82rpx;
+  line-height: 82rpx;
+}
+
+.flashSale_nav .text_active {
+  border-bottom: 4rpx solid #e21f11;
+  color: #333;
+}
+
+.cou_tips {
+  text-align: center;
+  margin-top: 140rpx;
+}
+
+.cou_tips text {
+  font-size: 28rpx;
+  color: #555;
+}
+
+.cou_tips .btn_red {
+  margin-top: 20rpx;
+  display: inline-flex;
+  height: 66rpx;
+  line-height: 66rpx;
+  border: none;
+  background: #ff8d97;
+  color: #fff;
+  outline: none;
+  font-size: 32rpx;
+  border-radius: 20rpx;
+}
+
+/* 订单商品信息 */
+
+.order_list {
+  padding: 0 26rpx;
+  margin-top: 116rpx;
+}
+
+.order_list .order_info {
+  /* height: 252rpx; */
+  background: #fff;
+  margin: 16rpx 0;
+}
+
+.order_info .order_title {
+  /* border-bottom: 2rpx solid #e0e0e0; */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  justify-content: space-between;
+}
+
+.order_title .pro_img {
+  float: left;
+  /* margin-top: 30rpx; *//* margin-left: 18rpx; */
+  margin-right: 30rpx;
+}
+
+.order_title .pro_img image {
+  width: 190rpx;
+  height: 190rpx;
+  vertical-align: middle;
+}
+
+.order_title .pro_info {
+  float: left;
+  width: 440rpx;
+}
+
+.pro_info .pro_title {
+  width: 100%;
+  font-size: 24rpx;
+  color: #444;
+  /* margin-top: 90rpx; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  /* margin-top: 18rpx; */
+}
+
+.pro_info .pro_color {
+  width: 100%;
+  font-size: 20rpx;
+  color: #999;
+  margin-top: 22rpx;
+}
+
+.pro_info .order_btn {
+  /* text-align: right;
+  padding: 10rpx 26rpx; */
+  text-align: right;
+  margin-top: 20rpx;
+  width: 100%;
+}
+
+.pro_info .order_btn button {
+  border: 1px solid #808080;
+  border-color: #f06b90;
+  color: #f06b90;
+  background: transparent;
+  border-radius: 20rpx;
+  font-size: 26rpx;
+  width: 160rpx;
+  padding: 4rpx 16rpx;
+  line-height: 1.6;
+}
+
+.order-foot {
+  height: 84rpx;
+  line-height: 84rpx;
+  /* background: #fff; */
+  text-align: center;
+  margin-top: -18rpx;
+}
+
+.order-foot text {
+  font-size: 23.97rpx;
+  color: #bebebe;
+}

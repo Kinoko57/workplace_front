@@ -1,0 +1,910 @@
+page {
+  background: #f8f8f8;
+}
+
+image {
+  display: block;
+}
+
+._thematic_bg_style {}
+
+._thematic_bg_style .acticity_style {
+  width: 720rpx;
+  margin: 0 auto;
+}
+
+/* 样式一 */
+._thematic_bg_style .acticity_01 {
+  overflow: hidden;
+}
+
+._thematic_bg_style .acticity_01 .show_banner {
+  width: 340rpx;
+  height: 220rpx;
+  float: left;
+  background: linear-gradient(90deg, rgba(251, 227, 207, 1) 0%, rgba(249, 208, 166, 1) 100%);
+  border-radius: 12rpx;
+  margin-bottom: 25rpx;
+  position: relative;
+}
+
+._thematic_bg_style .acticity_01 .show_banner image {
+  width: 100%;
+  height: 100%;
+  border-radius: 12rpx;
+}
+
+._thematic_bg_style .acticity_01 .show_banner .banner_right_tag {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0rpx 5rpx 5rpx 0rpx rgba(0, 0, 0, 0.09);
+  /* border-radius: 12rpx; */
+  color: rgba(255, 0, 0, 1);
+  font-size: 23rpx;
+  line-height: 33rpx;
+  border-bottom-left-radius: 50rpx;
+}
+
+._thematic_bg_style .acticity_01 .show_banner .banner_right_tag text {
+  display: inline-block;
+  padding: 0 8rpx;
+}
+
+._thematic_bg_style .acticity_01 .show_banner .banner_right_tag text:first-child {
+  background: #ff0000;
+  color: #fff;
+  line-height: 33rpx;
+  border-bottom-left-radius: 50rpx;
+}
+
+._thematic_bg_style .acticity_01 .show_banner:nth-child(even) {
+  float: right;
+}
+
+/* 样式二 */
+.acticity_02 {
+  border-radius: 12rpx;
+  margin-bottom: 25rpx !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.acticity_02 .activity_banner {
+  width: 100%;
+  border-top-right-radius: 12rpx;
+  border-top-right-radius: 12rpx;
+}
+
+.acticity_02 .activity_banner image {
+  width: 100%;
+  border-top-left-radius: 12rpx;
+  border-top-right-radius: 12rpx;
+}
+.acticity_02 .activity_bg{
+  width: 100%;
+  border-top-right-radius: 12rpx;
+  border-top-right-radius: 12rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 90;
+}
+.acticity_02 .activity_bg image {
+  width: 100%;
+  border-top-left-radius: 12rpx;
+  border-top-right-radius: 12rpx;
+}
+.acticity_02 .activity_list{
+  width: 660rpx;
+  margin: 0 auto;
+  position: relative;
+  z-index: 99;
+}
+
+/* 特定活动的单列表排版 */
+.acticity_02 .activity_list_line {
+
+}
+
+.acticity_02 .activity_list_line .activity_block {
+  border-radius: 12rpx;
+  padding: 20rpx 0;
+}
+
+.acticity_02 .activity_list_line .activity_block .pro_img {
+  border-top-left-radius: 12rpx;
+  border-top-right-radius: 12rpx;
+  position: relative;
+}
+
+.acticity_02 .activity_list_line .activity_block .pro_img .pro_image_left {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.acticity_02 .activity_list_line .activity_block .pro_img .pro_fixed_left_top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  color: #fff;
+  padding: 0 4rpx;
+  font-size: 20rpx;
+  margin-right: 6rpx;
+  background: linear-gradient(to right, #10b9ea, #46e4a5);
+  padding: 2rpx 6rpx;
+  border-bottom-right-radius: 12rpx;
+  border-top-left-radius: 12rpx;
+}
+
+.acticity_02 .activity_list_line .activity_block .pro_img .pro_image_fixed {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 342rpx;
+  height: 50rpx;
+  background: linear-gradient(90deg, rgba(255, 234, 180, 1) 0%, rgba(250, 191, 127, 1) 100%);
+  border-bottom-left-radius: 6rpx;
+  border-top-right-radius: 12rpx;
+  color: #3a393a;
+  font-size: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.acticity_02 .activity_list_line .activity_block .pro_img .pro_image_fixed .time_bg {
+  color: #fff;
+  background: linear-gradient(90deg, rgba(70, 70, 70, 1) 0%, rgba(47, 47, 47, 1) 100%);
+  box-shadow: 2rpx 3rpx 0rpx 0rpx rgba(0, 0, 0, 0.35);
+  border-radius: 3rpx;
+  padding: 4rpx 8rpx;
+  margin: 0 4rpx;
+  min-width: 20rpx;
+  text-align: center;
+}
+
+.acticity_02 .activity_list_line .activity_block .pro_img .pro_icon{
+  position: absolute;
+  width: 50rpx;
+  height: 50rpx;
+}
+.acticity_02 .activity_list_line .activity_block .pro_img .pro_icon_left_top{
+  top: 0;
+  left: 0;
+}
+.acticity_02 .activity_list_line .activity_block .pro_img .pro_icon_right_top{
+  top: 0;
+  left: 0;
+}
+.acticity_02 .activity_list_line .activity_block .pro_img .pro_icon_left_bottom{
+  top: 0;
+  left: 0;
+}
+.acticity_02 .activity_list_line .activity_block .pro_img .pro_icon_right_bottom{
+  top: 0;
+  left: 0;
+}
+.acticity_02 .activity_list_line .activity_block .pro_img .pro_main_img {
+  border-top-left-radius: 12rpx;
+  border-top-right-radius: 12rpx;
+  width: 660rpx;
+  height: 236rpx;
+}
+.acticity_02 .activity_list_line .activity_block .pro_img .pro_max_frame{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.acticity_02 .activity_list_line .activity_block .pro_bottom {
+  background: #fff;
+  border-bottom-left-radius: 12rpx;
+  border-bottom-right-radius: 12rpx;
+}
+
+.acticity_02 .activity_list_line .activity_block .pro_bottom .pro_title {
+  width: 607rpx;
+  margin: 0 auto;
+  font-size: 28rpx;
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+  overflow: hidden;
+  /*超出部分隐藏*/
+  white-space: nowrap;
+  /*不换行*/
+  text-overflow: ellipsis;
+  /*超出部分文字以...显示*/
+  padding-top: 26rpx;
+  padding-bottom: 23rpx;
+}
+
+.acticity_02 .activity_list_line .activity_block .pro_bottom .pro_title .title_tips {
+  background: rgba(220, 0, 0, 1);
+  font-size: 20rpx;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  border-radius: 50rpx;
+  padding: 2rpx 10rpx;
+  margin-right: 14rpx;
+}
+
+.acticity_02 .activity_list_line .activity_block .pro_bottom .pro_tips {
+  width: 607rpx;
+  margin: 0 auto;
+  overflow: hidden;
+  margin-bottom: 10rpx;
+  position: relative;
+}
+
+.acticity_02 .activity_list_line .activity_block .pro_bottom .pro_tips .tips_text_bg {
+  color: transparent;
+  opacity: 0.1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  padding: 2rpx 0;
+}
+
+.acticity_02 .activity_list_line .activity_block .pro_bottom .pro_tips .tips_text {
+  padding: 2rpx 8rpx;
+}
+
+.acticity_02 .activity_list_line .activity_block .pro_bottom .pro_tips .pro_tips_block {
+  border-radius: 2rpx;
+  font-size: 22rpx;
+  font-weight: 400;
+  float: left;
+  margin-right: 8rpx;
+  position: relative;
+}
+
+.acticity_02 .activity_list_line .activity_block .pro_bottom .pro_price_btn {
+  width: 607rpx;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20rpx;
+}
+
+.acticity_02 .activity_list_line .activity_block .pro_bottom .pro_price_btn .pro_price_left {
+  font-size: 18rpx;
+  font-weight: 400;
+  color: rgba(142, 142, 142, 1);
+}
+
+.acticity_02 .activity_list_line .activity_block .pro_bottom .pro_price_btn .pro_price_left .price_icon {
+  font-size: 24rpx;
+  font-weight: 400;
+  color: rgba(255, 0, 0, 1);
+}
+
+.acticity_02 .activity_list_line .activity_block .pro_bottom .pro_price_btn .pro_price_left .price {
+  font-size: 45rpx;
+  font-weight: 400;
+  color: rgba(255, 0, 0, 1);
+  margin-right: 18rpx;
+}
+
+.acticity_02 .activity_list_line .activity_block .pro_bottom .pro_price_btn .pro_btn {}
+
+.acticity_02 .activity_list_line .activity_block .pro_bottom .pro_price_btn .pro_btn button {
+  width: 156rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  /* box-shadow:0rpx 0rpx 27rpx 0rpx rgba(242,75,121,0.49); */
+  font-size: 26rpx;
+  font-weight: 400;
+  color: rgba(254, 254, 254, 1);
+  border-radius: 50rpx;
+  padding: 0;
+  margin: 0;
+
+}
+
+.acticity_style .activity_more {
+  width: 607rpx;
+  margin: 0 auto;
+  font-size: 20rpx;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20rpx;
+}
+/* 特定活动列表两列排序 */
+.acticity_style .activity_list_two_columns{
+  overflow: hidden;
+  padding-top: 20rpx;
+}
+
+.activity_list_two_columns .activity_block{
+  width: 320rpx;
+  float: left;
+  margin-bottom: 24rpx;
+  background: #fff;
+  border-radius: 12rpx;
+}
+.activity_list_two_columns .activity_block:nth-child(even){
+  float: right;
+}
+.activity_list_two_columns .activity_block .pro_img{
+  width: 320rpx;
+  height: 320rpx;
+}
+.activity_list_two_columns .activity_block .pro_img image{
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 12rpx;
+  border-top-right-radius: 12rpx;
+}
+
+.activity_list_two_columns .activity_block .pro_title{
+  width:300rpx;
+  font-size:26rpx;
+  font-weight:400;
+  color:rgba(51,51,51,1);
+  padding: 0 10rpx;
+  margin: 10rpx 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  word-break: break-all;
+  height: 70rpx;
+}
+.activity_list_two_columns .activity_block .pro_title .title_tips{
+  background: rgba(220, 0, 0, 1);
+  font-size: 20rpx;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  border-radius: 50rpx;
+  padding: 2rpx 10rpx;
+  margin-right: 14rpx;
+}
+.activity_list_two_columns .activity_block .pro_price{
+  display: flex;
+  align-items: center;
+  width: 300rpx;
+  padding: 0 10rpx;
+  justify-content: space-between;
+  padding-bottom: 10rpx;
+}
+.activity_list_two_columns .activity_block .pro_price .price{
+  font-size:32rpx;
+  font-weight:bold;
+  color:rgba(255,0,0,1);
+}
+.activity_list_two_columns .activity_block .pro_price .count{
+  font-size:22rpx;
+  font-weight:400;
+  color:rgba(193,193,193,1);
+}
+
+/* 特定活动列表三列排序 */
+.acticity_style .activity_list_third_columns{
+  overflow: hidden;
+}
+
+.activity_list_third_columns .activity_block{
+  width: 214rpx;
+  display: inline-block;
+  margin-bottom: 24rpx;
+  background: #fff;
+  border-radius: 12rpx;
+  margin-right: 9rpx;
+}
+
+.activity_list_third_columns .activity_block:nth-child(3n+3){
+  margin-right: 0;
+}
+
+.activity_list_third_columns .activity_block .pro_img{
+  width: 214rpx;
+  height: 214rpx;
+}
+.activity_list_third_columns .activity_block .pro_img image{
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 12rpx;
+  border-top-right-radius: 12rpx;
+}
+
+.activity_list_third_columns .activity_block .pro_title{
+  width:194rpx;
+  font-size: 24rpx;
+  font-weight:400;
+  color:rgba(51,51,51,1);
+  padding: 0 10rpx;
+  margin: 10rpx 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  word-break: break-all;
+}
+.activity_list_third_columns .activity_block .pro_title .title_tips{
+  background: rgba(220, 0, 0, 1);
+  font-size: 18rpx;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  border-radius: 50rpx;
+  padding: 2rpx 10rpx;
+  margin-right: 14rpx;
+}
+.activity_list_third_columns .activity_block .pro_price{
+  display: flex;
+  align-items: center;
+  width: 194rpx;
+  padding: 0 10rpx;
+  justify-content: space-between;
+  padding-bottom: 10rpx;
+}
+.activity_list_third_columns .activity_block .pro_price .price{
+  font-size:24rpx;
+  font-weight:bold;
+  color:rgba(255,0,0,1);
+}
+.activity_list_third_columns .activity_block .pro_price .count{
+  font-size:18rpx;
+  font-weight:400;
+  color:rgba(193,193,193,1);
+}
+
+/* 指定列表样式左图右文字 */
+.acticity_style .activity_list_img_left{
+  overflow: hidden;
+}
+
+.activity_list_img_left .activity_block{
+  /* width: 100%; */
+  margin-bottom: 24rpx;
+  background: #fff;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+}
+
+.activity_list_img_left .activity_block .pro_img{
+  position: relative;
+  width: 250rpx;
+  height: 250rpx;
+}
+.activity_list_img_left .activity_block .pro_img .pro_icon{
+  position: absolute;
+  width: 50rpx;
+  height: 50rpx;
+}
+.activity_list_img_left .activity_block .pro_img .pro_icon_left_top{
+  top: 0;
+  left: 0;
+}
+.activity_list_img_left .activity_block .pro_img .pro_icon_right_top{
+  top: 0;
+  left: 0;
+}
+.activity_list_img_left .activity_block .pro_img .pro_icon_left_bottom{
+  top: 0;
+  left: 0;
+}
+.activity_list_img_left .activity_block .pro_img .pro_icon_right_bottom{
+  top: 0;
+  left: 0;
+}
+.activity_list_img_left .activity_block .pro_img .pro_main_image {
+  width: 100%;
+  height: 100%;
+  border-radius: 12rpx;
+}
+.activity_list_img_left .activity_block .pro_img .pro_min_frame{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.activity_list_img_left .activity_block .pro_right{
+  width:350rpx;
+}
+.activity_list_img_left .activity_block .pro_right .pro_title{
+  width:350rpx;
+  font-size: 26rpx;
+  font-weight:400;
+  color:rgba(51,51,51,1);
+  padding: 0 10rpx;
+  margin: 10rpx 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  word-break: break-all;
+}
+.activity_list_img_left .activity_block .pro_right .pro_title .title_tips{
+  background: rgba(220, 0, 0, 1);
+  font-size: 18rpx;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  border-radius: 50rpx;
+  padding: 2rpx 10rpx;
+  margin-right: 14rpx;
+
+}
+.activity_list_img_left .activity_block .pro_right .pro_desc{
+  width:350rpx;
+  font-size:24rpx;
+  font-weight:400;
+  color:rgba(153,153,153,1);
+  padding: 0 10rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  word-break: break-all;
+}
+.activity_list_img_left .activity_block .pro_right .pro_discount{
+  width:350rpx;
+  font-size:24rpx;
+  font-weight:400;
+  color:rgba(153,153,153,1);
+  padding: 4rpx 10rpx;
+  overflow: hidden;
+  margin:10rpx 0;
+}
+.activity_list_img_left .activity_block .pro_right .pro_discount .tag_text{
+  background:rgba(255,255,255,1);
+  border:2rpx solid rgba(240,65,27,1);
+  border-radius:6rpx;
+  padding: 2rpx 6rpx;
+  font-size:20rpx;
+  font-weight:400;
+  color:rgba(255,0,0,1);
+  margin-right: 4rpx;
+}
+.activity_list_img_left .activity_block .pro_right .pro_discount .tag_text:last-child{
+  margin-right: 0;
+}
+.activity_list_img_left .activity_block .pro_right .pro_price{
+  display: flex;
+  align-items: center;
+  width: 350rpx;
+  padding: 0 10rpx;
+  justify-content: space-between;
+  padding-bottom: 10rpx;
+}
+.activity_list_img_left .activity_block .pro_right .pro_price .price{
+  font-size:32rpx;
+  font-weight:bold;
+  color:rgba(255,0,0,1);
+}
+.activity_list_img_left .activity_block .pro_right .pro_price .count{
+  font-size:22rpx;
+  font-weight:400;
+  color:rgba(193,193,193,1);
+}
+
+/* 特定活动列表横向滚动样式 */
+
+.acticity_style .activity_list_line_scroll{
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.activity_list_line_scroll .list_scroll .activity_block{
+  display: inline-block;
+  margin-bottom: 24rpx;
+  background: #fff;
+  border-radius: 12rpx;
+  margin-right: 14rpx;
+}
+.activity_list_line_scroll .list_scroll .activity_block_01{
+  width: 182rpx;
+}
+.activity_list_line_scroll .list_scroll .activity_block_02{
+  width: 24%;
+  margin-right: 1%;
+  overflow: hidden;
+  min-width: 160rpx;
+}
+.activity_list_line_scroll .list_scroll .activity_block_02:last-child{
+  margin-right:0;
+}
+.activity_list_line_scroll .list_scroll .activity_block_01 .pro_img{
+  width: 182rpx;
+  height: 182rpx;
+}
+.activity_list_line_scroll .list_scroll .activity_block_02 .pro_img{
+  width: 160rpx;
+  height: 160rpx;
+}
+.activity_list_line_scroll .list_scroll .activity_block .pro_img image{
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 12rpx;
+  border-top-right-radius: 12rpx;
+}
+
+.activity_list_line_scroll .list_scroll .activity_block_01 .pro_title{
+  width:160rpx;
+  font-size: 24rpx;
+  font-weight:400;
+  color:rgba(51,51,51,1);
+  padding: 0 10rpx;
+  margin: 10rpx 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  word-break: break-all;
+  white-space:normal;
+}
+.activity_list_line_scroll .list_scroll .activity_block_02 .pro_title{
+  font-size: 24rpx;
+  font-weight:400;
+  color:rgba(51,51,51,1);
+  padding: 0 10rpx;
+  margin: 10rpx 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  word-break: break-all;
+  white-space:normal;
+}
+.activity_list_line_scroll .list_scroll .activity_block .pro_title .title_tips{
+  background: rgba(220, 0, 0, 1);
+  font-size: 18rpx;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  border-radius: 50rpx;
+  padding: 2rpx 10rpx;
+  margin-right: 14rpx;
+}
+.activity_list_line_scroll .list_scroll .activity_block_01 .pro_price{
+  display: flex;
+  align-items: center;
+  width: 182rpx;
+  padding: 0 10rpx;
+  justify-content: space-between;
+  padding-bottom: 10rpx;
+}
+.activity_list_line_scroll .list_scroll .activity_block_02 .pro_price{
+  display: flex;
+  align-items: center;
+  padding: 0 10rpx;
+  justify-content: space-between;
+  padding-bottom: 10rpx;
+}
+.activity_list_line_scroll .list_scroll .activity_block .pro_price .price{
+  font-size:24rpx;
+  font-weight:bold;
+  color:rgba(255,0,0,1);
+}
+.activity_list_line_scroll .list_scroll .activity_block .pro_price .count{
+  font-size:18rpx;
+  font-weight:400;
+  color:rgba(193,193,193,1);
+}
+
+
+/* 第三种特定活动格式 */
+.acticity_03 {
+  overflow: hidden;
+  background: #fff;
+  border-radius: 20rpx;
+  margin-bottom: 25rpx !important;
+}
+
+.acticity_03 .activity_top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22rpx 20rpx;
+}
+
+.acticity_03 .activity_top .top_title {
+  height: 30rpx;
+}
+
+.acticity_03 .activity_top .top_title image {
+  height: 30rpx;
+}
+
+.acticity_03 .activity_top .top_more {
+  width: 100rpx;
+  font-size: 22rpx;
+  font-weight: 400;
+  color: rgba(153, 153, 153, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.acticity_03 .activity_scroll_view {
+  white-space: nowrap;
+  padding: 0 20rpx;
+}
+
+.acticity_03 .activity_scroll_view .pro_list_scroll {
+  width: 100%;
+}
+
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block {
+  display: inline-block;
+  /* margin-right: 40rpx; */
+}
+
+/* 滚动srcoll-view样式可滚动列表一 */
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_01 {
+  /* width: 25%; */
+  margin-left: 14rpx;
+  margin-bottom: 24rpx;
+  text-align: center;
+}
+
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_01:first-child {
+  margin-left: 0;
+}
+
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_01 image {
+  height: 182rpx;
+  width: 182rpx;
+  margin: 0 auto;
+}
+
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_01 .price_line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6rpx;
+
+}
+
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_01 .price_line .group_num {
+  background: rgba(220, 0, 0, 1);
+  color: #ffffff;
+  font-size: 20rpx;
+  padding: 2rpx 8rpx;
+  border-radius: 50rpx;
+}
+
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_01 .price_line .price {
+  font-size: 30rpx;
+  font-weight: 400;
+  color: rgba(220, 0, 0, 1);
+  margin-left: 18rpx;
+}
+
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_01 .price_market {
+  font-size: 22rpx;
+  font-weight: 400;
+  color: rgba(194, 194, 194, 1);
+  text-align: center;
+}
+/* 限时促销的样式start */
+
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_01 .price_line_02{
+  background:rgba(255,255,255,1);
+  display: inline-flex;
+  align-items: center;
+  border-radius: 50rpx;
+  height: 40rpx;
+  border:1px solid rgba(220,0,0,1);
+  justify-content: center;
+  margin:0 auto;
+  margin-top: 10rpx;
+}
+
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_01 .price_line_02 .tips{
+  font-size:24rpx;
+  font-weight:400;
+  color:rgba(255,254,254,1);
+  background:rgba(220,0,0,1);
+  padding: 0 10rpx;
+  border-top-left-radius: 50rpx;
+  border-bottom-left-radius: 50rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+}
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_01 .price_line_02 .price{
+  font-size:26rpx;
+  font-weight:400;
+  color:rgba(220,0,0,1);
+  padding: 0 12rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+}
+/* 限时促销的样式 end */
+
+
+
+/* 滚动srcoll-view样式不可滚动列表一 */
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_02 {
+  width: 25%;
+  text-align: center;
+  /* margin-left: 24rpx;
+  margin-bottom: 24rpx; */
+}
+
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_02:first-child {
+  margin-left: 0;
+}
+
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_02 image {
+  height: 128rpx;
+  width: 128rpx;
+  margin: 0 auto;
+}
+
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_02 .price_line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6rpx;
+
+}
+
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_02 .price_line .group_num {
+  background: rgba(220, 0, 0, 1);
+  color: #ffffff;
+  font-size: 18rpx;
+  padding: 2rpx 8rpx;
+  border-radius: 50rpx;
+}
+/* 拼团的样式start */
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_02 .price_line .price {
+  font-size: 24rpx;
+  font-weight: 400;
+  color: rgba(220, 0, 0, 1);
+  margin-left: 9rpx;
+}
+
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_02 .price_market {
+  font-size: 20rpx;
+  font-weight: 400;
+  color: rgba(194, 194, 194, 1);
+  text-align: center;
+}
+/* 拼团的样式end */
+/* 限时促销的样式start */
+
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_02 .price_line_02{
+  background:rgba(255,255,255,1);
+  display: inline-flex;
+  align-items: center;
+  border-radius: 50rpx;
+  height: 34rpx;
+  border:1px solid rgba(220,0,0,1);
+  justify-content: center;
+  margin:0 auto;
+  margin-bottom: 20rpx;
+}
+
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_02 .price_line_02 .tips{
+  font-size: 20rpx;
+  font-weight:400;
+  color:rgba(255,254,254,1);
+  background:rgba(220,0,0,1);
+  padding: 0 6rpx;
+  border-top-left-radius: 50rpx;
+  border-bottom-left-radius: 50rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+}
+.acticity_03 .activity_scroll_view .pro_list_scroll .pro_block_style_02 .price_line_02 .price{
+  font-size:22rpx;
+  font-weight:400;
+  color:rgba(220,0,0,1);
+  padding: 0 6rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+}
+/* 限时促销的样式 end */
+

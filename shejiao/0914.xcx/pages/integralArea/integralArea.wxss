@@ -1,0 +1,172 @@
+/* pages/flashSale/flashSale.wxss */
+
+page {
+  background: #f6f6f6;
+}
+.integral_bg {
+  position: relative;
+}
+.integral_body{
+  position: relative;
+  z-index: 2;
+  /* padding: 0rpx 24rpx; */
+}
+.integral_poster_image{
+  width: 750rpx;
+  height: 482rpx;
+}
+.integral_wraper{
+  padding-top: 20rpx;
+}
+.integral_scroll{
+ 
+}
+.integral_body_block{
+  position: relative;
+  z-index: 2;
+  display: flex;
+  padding: 0 24rpx;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom:20rpx ;
+  /* overflow: hidden; */
+}
+.integral_body_list{
+  background: #fff;
+  width:340rpx ;
+  padding-bottom:20rpx;
+  margin-bottom: 20rpx;
+  border-radius: 12rpx;
+  overflow:hidden;
+  /* float: left; */
+}
+/* .integral_body_list:nth-child(odd){
+  margin-right: 10rpx;
+}
+.integral_body_list:nth-child(even){
+  margin-left: 10rpx;
+} */
+.integral_body_list .integral_img{
+  width: 340rpx;
+  height: 340rpx;
+}
+.integral_body_list_wra{
+  padding: 0 20rpx;
+}
+.integral_body_list .integral_body_titi{
+  width: 306rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 26rpx;
+  line-height: 60rpx;
+  height: 60rpx;
+  color: #333;
+}
+.integral_body_pri{
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+}
+.integral_body_pri .sale_pri{
+   font-size: 32rpx;
+}
+.pri_num .sale_pri .pri_count{
+  font-size: 20rpx;
+  color: #999;
+  padding-left:10rpx ;
+}
+.integral_buy{
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  padding-top: 10rpx;
+}
+.integral_buy_num{
+  color: #C1C1C1;
+  font-size:22rpx ;
+}
+.integral_buy .right_buy{
+  padding: 0 15rpx;
+  height: 48rpx;
+  color: #fff;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  border-radius: 24rpx;
+}
+.integral_buy .right_buy text{
+
+}
+.integral_buy .right_buy icon{
+  display: inline-flex;
+  font-size: 26rpx;
+}
+.integral_buy .car_img{
+  width: 39rpx;
+  height: 37rpx;
+}
+
+.area_fixed{
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  left: 0;
+  bottom: 0;
+  height: 102;
+  line-height: 102rpx;
+  box-shadow: 0 0 50rpx #666;
+}
+.use_integral{
+  display: inline-block;
+  padding-left: 24rpx;
+  color: #333;
+  font-size: 26rpx;
+}
+.integral_num{
+  font-size: 38rpx;
+}
+.area_view{
+  display: inline-block;
+  padding-right: 24rpx;
+  color: #999;
+}
+.check_text{
+  display: inline-block;
+  font-size: 24rpx;
+  color: #333;
+}
+/* 重置样式 */
+checkbox .wx-checkbox-input {
+  border-radius:4rpx;
+  width: 24rpx;
+  height: 24rpx;
+  border: 1px solid #999;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  border: 1px solid #999;
+  background: transparent;
+}
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  border-radius:4rpx;
+  width: 24rpx;
+  height: 24rpx;
+  line-height: 24rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #999;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+.special_bg_image{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 750rpx;
+  z-index: 1;
+}

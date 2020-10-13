@@ -1,0 +1,13 @@
+<!--pages/userAuz/userAuz.wxml-->
+<view class='auth'>
+  <view class='head_icon'>
+    <icon class='iconfont icon-weixin'></icon>
+  </view>
+  <view class='head_title'>微信授权页面</view>
+  <view class='view_tips'>此页面为微信授权页面，点击下方按钮弹出授权或跳转页面</view>
+  <view class='auth_btn'>
+    <!-- <button type='primary' bindtap='wx_login'>点击微信授权</button> -->
+    <button type='primary' open-type="getUserInfo" bindgetuserinfo='wx_login'>点击微信授权</button>
+    <!-- <button type='primary' open-type="openSetting" bindopensetting='refuse_login' wx:if='{{refuse}}'>点击微信授权</button> -->
+  </view>
+</view>

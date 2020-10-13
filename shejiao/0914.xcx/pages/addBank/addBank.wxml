@@ -1,0 +1,33 @@
+<!--pages/addCar/addCar.wxml-->
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class='c_addcar skeleton'>
+   <navbar page-name="添加银行卡" bg-color="#fff" icon-color="#333333" show-search='false' show-title='true' show-nav='true' show-index='false'></navbar>
+   <view class="c_addCar_body">
+      <view class='section'>
+        <text class='form_title text_left'>持卡人</text>
+        <input placeholder='只能使用当前实名用户' disabled placeholder-class="place-holder" name="card_name" data-name="card_name" type='text' confirm-type="next" value="{{card_name}}"></input>
+      </view>
+      <view class='section'>
+        <text class='form_title text_left'>卡号</text>
+        <input placeholder='请输入银行卡号' bindblur="inputValue" name="bankCard" bindinput="inputValue" data-name="bankCard" type='number' placeholder-class="place-holder" confirm-type="next" value="{{realInfo.bankCard}}"></input>
+        <!-- <image src="{{staticUrl}}vip/camer.png"></image> -->
+      </view>
+      <view class='section'>
+        <text class='form_title text_left'>开户行</text>
+        <picker  class="picker" bindchange="bindPickerChange" value="{{index}}" range="{{bankList}}" range-key="{{'name'}}">
+          <view >
+             <text wx:if="{{show_bank}}">{{bankList[index].name}}</text>
+             <text wx:if="{{!show_bank}}">请选择开户行</text>
+          </view>
+          <icon class="iconfont icon-right"></icon>
+        </picker>
+      </view>
+      <view class='section'>
+        <text class='form_title text_left'>预留手机号</text>
+        <input placeholder='请输入开户时预留手机号' bindblur="inputValue" name="mobile" bindinput="inputValue" data-name="mobile" type='number' placeholder-class="place-holder" confirm-type="next" value="{{realInfo.mobile}}"></input>
+      </view>
+   </view>
+    <view class='sub {{is_iphonex?"iphone_x_margin":""}}'>
+        <text style="background:{{line_bg_color}}" bindtap="sureBind">确认</text>
+    </view>
+</view>

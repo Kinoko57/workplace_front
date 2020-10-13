@@ -1,0 +1,6 @@
+{
+    "enablePullDownRefresh": false,
+    "usingComponents": {
+      "skeleton": "/components/skeleton/skeleton"
+    }
+}

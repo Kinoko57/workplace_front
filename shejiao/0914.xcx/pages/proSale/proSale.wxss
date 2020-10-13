@@ -1,0 +1,144 @@
+/* pages/proSale/proSale.wxss */
+page{
+  background: #f6f6f6;
+}
+.proSale_body{
+  padding-top: 4rpx;
+}
+.proSale_body_top{
+  background: #fff;
+  padding: 0 27rpx;
+}
+.proSale_body_top_sup{
+  font-size: 16rpx;
+  color: #666;
+  padding-top: 10rpx;
+  padding-bottom: 20rpx;
+}
+.proSale_body_top_sup_text{
+  height: 28rpx;
+  line-height: 28rpx;
+  background: #eee;
+  width: 276rpx;
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 14rpx;
+}
+.proSale_body_top_pro{
+  padding-bottom: 26rpx;
+}
+.proSale_body_top_block{
+  display: flex;
+  align-items: center;
+  padding: 30rpx 0 20rpx;
+  border-bottom: 1px solid #f1f1f1;
+}
+.proSale_body_top_block:last-child{
+  border-bottom:0
+}
+.proSale_body_top_pro_img{
+  width: 130rpx;
+  height: 130rpx;
+}
+.proSale_body_top_pro_r{
+   padding-left: 20rpx;
+   /* padding-top:6rpx; */
+}
+.proSale_body_top_pro_r .proSale_body_top_pro_titi{
+   color: #333;
+   font-size: 24rpx;
+   width: 530rpx;
+   line-height: 1.4;
+   display: -webkit-box;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   word-wrap: break-word;
+   word-break: break-all;
+   white-space: normal !important;
+   -webkit-line-clamp: 2;
+   -webkit-box-orient: vertical;
+}
+.proSale_body_top_pro_spec{
+  color: #666;
+  font-size: 24rpx;
+}
+.proSale_body_top_pro_r .proSale_body_top_pro_info{
+  color: #666;
+  font-size: 22rpx;
+  display: flex;
+  padding-top: 6rpx;
+}
+.proSale_info_pri{
+  padding-right: 30rpx;
+}
+/* .info_style{
+   color: #333;
+   font-size: 33rpx;
+} */
+.proSale_body_type{
+   padding:46rpx 20rpx 0 ;
+   margin-bottom: 40rpx;
+}
+.proSale_body_type_titi{
+  font-size: 24rpx;
+  color: #000;
+  padding-bottom: 26rpx;
+  padding-left: 8rpx;
+  display: flex;
+  align-items: center;
+}
+.type_tit_img{
+   width: 34rpx;
+   height: 34rpx;
+   margin-right:12rpx ;
+}
+.proSale_body_type_block{
+   background: #fff;
+   border-radius: 20rpx;
+   padding: 0 12rpx;
+}
+.proSale_body_type_block_list{
+  border-bottom: 1px solid #ededed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 121rpx;
+  font-size: 24rpx;
+  color: #000;
+}
+/* 不可以选择的售后类型样式 */
+.proSale_body_type_block .noChange{
+  color: #999;
+}
+.proSale_body_type_block_list:last-child{
+  border-bottom: 0;
+}
+.proSale_type_l{
+  
+}
+.proSale_type_l image{
+  width: 65rpx;
+  height: 66rpx;
+  margin-right:16rpx ;
+  margin-left: 20rpx;
+}
+.proSale_type_r{
+   font-size:20rpx;
+   display: inline-flex;
+   align-items: center;
+}
+.proSale_type_r_tips{
+  display: block;
+  width: 360rpx;
+  text-align: left;
+}
+.proSale_type_r icon{
+  font-size: 22rpx;
+  display: inline-flex;
+  align-items: center;
+  color: #000;
+  padding-left: 6rpx;
+}
+.proSale_body_type_block_list .cancel_color{
+  color: #999;
+}

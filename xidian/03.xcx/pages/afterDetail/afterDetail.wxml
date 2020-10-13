@@ -1,0 +1,123 @@
+<!--pages/saleAfter/saleAfter.wxml-->
+<wxs module="filters" src="../../filters.wxs"></wxs>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<view class="After_detail skeleton">
+   <view class="after_detail_body">
+     <view class="after_detail_top bg_theme_blue">
+        <view class="after_detail_status">
+          <text wx:if="{{saleInfo.after.status==0}}">待审核</text>
+          <text wx:if="{{saleInfo.after.status==1||saleInfo.after.status==4}}">处理中</text>
+          <text wx:if="{{saleInfo.after.status==2}}">已完成</text>
+          <text wx:if="{{saleInfo.after.status==3}}">已取消</text>
+          <!-- <text wx:if="{{saleInfo.after.status==4}}">退款中</text> -->
+          <text wx:if="{{saleInfo.after.status==5}}">已驳回</text>
+        </view>
+        <view class="after_datail_progress">
+            <view class="vip_sign_date_wraper skeleton-rect">
+              <view class="vip_sign_block" wx:for="{{signList}}" wx:key="index">
+                  <view class="vip_sign_t">
+                    <icon class="iconfont iconduihao"></icon>
+                    <text class="progress_line"></text>
+                  </view>
+                  <view class="vip_sign_b">{{item.data}}</view>
+              </view>
+            </view>
+        </view>
+     </view>
+     <view class="after_detail_bot">
+      <view class="after_detail_block" wx:if="{{saleInfo.after.status!=0}}">
+         <view class="server_msg">
+            <text wx:if="{{saleInfo.after.status==2}}">服务已完成，感谢您对西点军校的支持</text>
+            <text wx:if="{{saleInfo.after.status==4}}">正在退款中，感谢您对西点军校的支持</text>
+            <text wx:if="{{saleInfo.after.status==1}}">审核已通过，感谢您对西点军校的支持</text>
+             <text wx:if="{{saleInfo.after.status==3}}">售后已取消，感谢您对西点军校的支持</text>
+            <text wx:if="{{saleInfo.after.status==5}}">审核被驳回，感谢您对西点军校的支持</text>
+            <text wx:if="{{saleInfo.after.cause!=null&&saleInfo.after.cause!=''}}">审核留言：{{saleInfo.after.cause}}</text>
+         </view>
+      </view>
+      <view class="after_detail_block">
+         <view class="pro_block">
+            <view class="pro_block_titi">课程信息</view>
+            <view class="pro_block_list">
+               <image class="pro_block_list_img" src="{{saleInfo.curriculum.image[0]}}"></image>
+               <view class="pro_block_list_info">
+                 <view class="pro_block_list_titi">
+                   {{saleInfo.curriculum.name}}
+                 </view>
+                  <view class="pro_block_list_pri">
+                   营期：{{filters.formatDate(saleInfo.camp.camp_time)}}【{{saleInfo.camp.camp_day}}天】
+                 </view>
+                 <view class="pro_block_list_pri">
+                    <view class="list_pri">金额：<text class="pri">￥{{filters.formatMoney(saleInfo.curriculum.price_sell)}}</text></view>
+                    <view class="list_pri">申请数量：<text class="pri">{{saleInfo.after.back_num}}</text></view>
+                 </view>
+               </view>
+            </view>
+         </view>
+      </view>
+       <view class="after_detail_block">
+         <view class="server_order">
+            <view class="server_order_block">
+              <text class="server_order_block_l">退款金额：</text>
+              <text class="server_order_block_r">￥{{filters.formatMoney(saleInfo.after.back_money)}}</text>
+            </view>
+            <view class="server_order_block">
+              <text class="server_order_block_l">服务单号：</text>
+              <view class="server_order_block_r">
+               <text>{{saleInfo.after.after_no}}</text>
+               <text class="server_order_block_copy" id="{{saleInfo.after.after_no}}" bindtap="copyafter">复制</text>
+              </view>
+            </view>
+            <view class="server_order_block">
+              <text class="server_order_block_l">订单号：</text>
+              <text class="server_order_block_r">{{saleInfo.after.oid}}</text>
+            </view>
+            <view class="server_order_block">
+              <text class="server_order_block_l">申请时间：</text>
+              <text class="server_order_block_r">{{filters.formatDateTime(saleInfo.after.create_time)}}</text>
+            </view>
+             <view class="server_order_block">
+              <text class="server_order_block_l">服务类型：</text>
+              <text class="server_order_block_r">{{saleInfo.after.type==1?'退款':'修改营期'}}</text>
+            </view>
+            <view class="server_order_block" wx:if="{{saleInfo.after.remark!=''}}">
+              <text class="server_order_block_l">申请原因：</text>
+              <text class="server_order_block_r">{{saleInfo.after.remark}}</text>
+            </view>
+            <view class="server_order_block">
+              <text class="server_order_block_l">退款方式：</text>
+              <text class="server_order_block_r">原返</text>
+            </view>
+         </view>
+         <view class="server_order">
+             <view class="server_order_block">
+              <text class="server_order_block_l">下单人：</text>
+              <text class="server_order_block_r">{{saleInfo.member.nickname}}</text>
+            </view>
+            <view class="server_order_block">
+              <text class="server_order_block_l">下单人电话：</text>
+              <text class="server_order_block_r">{{saleInfo.member.tel}}</text>
+            </view>
+            <view class="server_order_block">
+              <text class="server_order_block_l">我的学员：</text>
+              <view>
+                <view class="child_block" wx:for="{{saleInfo.student}}" wx:key="index">
+                  <view class="block_left">
+                    <icon class="iconfont iconnan add_info_l_ku add_info_l_ku_man" wx:if="{{item.gender==1&&item.image==''}}"></icon>
+                    <icon class="iconfont icongirl add_info_l_ku add_info_l_ku_sex" wx:if="{{item.gender==0&&item.image==''}}"></icon>
+							      <image wx:if="{{item.image!=''&&item.image!=null}}" class="{{item.gender==0?'add_info_l_ku_sex':'add_info_l_ku_man'}} add_info_l_ku" src="{{item.image}}"></image>
+                    <view class="people_name">{{item.name}}</view>
+                  </view>
+                </view>
+              </view>
+              <!-- <text class="server_order_block_r">{{saleInfo.member.studentName}}</text> -->
+            </view>
+         </view>
+      </view>
+     </view>
+     <view class="after_server" wx:if="{{saleInfo.after.status==0&&saleInfo.after.type!=1}}">
+        <view class="server_delet" bindtap="cancelSale">取消售后</view>
+     </view>
+   </view>
+   <view style="height:50px"></view>
+</view>

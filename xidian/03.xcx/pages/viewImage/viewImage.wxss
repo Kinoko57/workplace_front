@@ -1,0 +1,20 @@
+/* pages/viewImage/viewImage.wxss */
+page{
+  background: rgba(0, 0, 0, 0.8);
+  width: 750rpx;
+  position: relative;
+}
+
+button{
+  position: fixed;
+  bottom:100rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 300rpx;
+  border-radius: 24rpx;
+  font-size: 30rpx;
+  color: #fff;
+  background:rgba(255, 255, 255, 0.1);
+  border:1px solid #fff;
+}

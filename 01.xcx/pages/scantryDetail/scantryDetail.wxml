@@ -1,0 +1,218 @@
+<!--pages/tryOutdetail/tryOutdetail.wxml-->
+<import src="/wxParse/wxParse.wxml" />
+<!-- <reload bind:relaod="_relaod" id='reload'></reload> -->
+<view wx:if='{{isShow}}'>
+  <scroll-view class='try_detail' scroll-y style="height:{{height}}px" bindscroll="scroll" scroll-top='{{topNum}}'>
+    <view class='try_body'>
+      <view class='try_pro_info'>
+        <view class='pro_img'>
+          <view class='pro_swiper'>
+            <swiper indicator-dots="true" interval="2000" duration="1000" indicator-color='#ccc' indicator-active-color='#ff8d97' autoplay='true' circular='true'>
+              <block wx:for="{{proInfo.pic}}" wx:key='index'>
+                <swiper-item>
+                  <!-- bindtap='viewImg' data-url='{{item}}' -->
+                  <image src='{{item}}'></image>
+                </swiper-item>
+              </block>
+            </swiper>
+          </view>
+          <view class='pro_down' wx:if='{{endTime>0}}'>
+            <text>距结束还剩：</text>
+            <text class='time_bg'>{{saleTime.day}}</text>天
+            <text class='time_bg'>{{saleTime.hou}}</text>小时
+            <text class='time_bg'>{{saleTime.min}}</text>分
+            <text class='time_bg'>{{saleTime.sec}}</text>秒
+          </view>
+        </view>
+        <view class='pro_title'>
+          <icon class='iconfont icon-shiyong'></icon>
+          <text>{{proInfo.name}}</text>
+        </view>
+        <view class='pro_other'>
+          <view>
+            <text>限量</text>
+            <text class='num'>{{proInfo.num}}</text>份</view>
+          <view>
+            <text class='peo_num'>{{proInfo.count}}</text>人申请
+          </view>
+          <view style='display:inline-flex;align-items:center;'>
+            <text class='nowPrice' wx:if='{{proInfo.deal_type!=2}}'>¥{{proInfo.price}}</text>
+            <!-- <text class='price' wx:if='{{proInfo.deal_type!=2}}'>¥{{proInfo.price_market}}</text> -->
+          </view>
+        </view>
+      </view>
+      <view class='try_pro_game' wx:if='{{proInfo.is_help==1}}'>
+        <view class='try_pro_title'>领取规则</view>
+        <view class='try_pro_intrduce'>
+          <icon class='iconfont icon-yaoqing'></icon>
+          <text>邀请好友</text>
+          <icon class='iconfont icon-peoples'></icon>
+          <text>{{proInfo.help_num}}人助力</text>
+          <icon class='iconfont icon-weibiaoti2fuzhi03'></icon>
+          <text>人满领取</text>
+        </view>
+      </view>
+      <view class='try_pro_more'>
+        <view class='pro_more_nav'>
+          <text class="{{choseid==0?'nav_text_active':''}}" id='0' data-type='p' bindtap='choseTab'>商品详情</text>|
+          <text class="{{choseid==1?'nav_text_active':''}}" id='1' data-type='a' bindtap='choseTab'>活动规则</text>
+        </view>
+        <view class='peo_more_tab'>
+          <!-- <image src='../../static/img/pro/try_info.jpg' mode='widthFix'></image> -->
+          <template is="wxParse" data="{{wxParseData:proDetail.nodes}}" />
+        </view>
+      </view>
+    </view>
+    <view class="null_block {{is_iphonex?'null_view_height':''}}"></view>
+  </scroll-view>
+  <view class="try_btn {{is_iphonex?'iphone_height':''}}" wx:if='{{hiddenFix}}'>
+    <!-- 共同按钮 status为0，1，2，未开始，进行中，已结束 -->
+    <!-- <button id='{{proInfo.id}}' class='pro_buy' bindtap='openSpec'>积分兑换</button> -->
+    <button wx:if='{{proInfo.status==2&&proInfo.is_get==0}}' class='end_time'>已结束</button>
+    <button wx:if='{{proInfo.status==0}}' class='end_time'>活动未开始</button>
+    <!-- <button wx:if='{{proInfo.num==proInfo.count&&endTime>0}}' class='end_time'>已领取完</button> -->
+
+    <!-- 免费领取按钮 is_help是0是免费领取 is_get是1是免费领取已领取，是0则未领取-->
+    <button bindtap='getTry' id='{{proInfo.id}}' wx:if='{{proInfo.is_help==0&&proInfo.status==1&&proInfo.is_get==0}}' class='application' data-link='../sureOrder/sureOrder?addType=3&id={{proInfo.good_id}}&try_id={{proInfo.id}}'>免费申领</button>
+    <button wx:if='{{proInfo.is_get==1&&proInfo.is_help==0&&proInfo.status!=0}}' class='end_time'>已领取</button>
+
+    <!-- 助力领取按钮 form_share为0代表助力本人进入此页面，1是助力者访问页面，is_help是1助力试用-->
+    <!-- <form bindsubmit="initiate" report-submit="true" id='{{proInfo.id}}' wx:if='{{proInfo.num>proInfo.count&&proInfo.help_list.length<proInfo.help_num&&proInfo.is_help==1&&proInfo.status==1&&form_share==0}}' style='width:60%;'>
+      <button class='application' formType="submit">邀请{{proInfo.help_num}}人免费领（已邀{{proInfo.help_list.length}}人）</button>
+    </form>
+    <button class='application' bindtap='showModel' wx:if='{{proInfo.num>proInfo.count&&proInfo.help_list.length==proInfo.help_num&&proInfo.help_list.length>0&&proInfo.status==1&&form_share==0}}'>邀请成功</button>
+    <button class='application' bindtap='showModel' wx:if='{{proInfo.num>proInfo.count&&proInfo.help_list.length<proInfo.help_num&&form_share==1&&proInfo.status==1}}'>为他助力</button>
+    <button class='application' bindtap='showModel' wx:if='{{proInfo.num>proInfo.count&&form_share==1&&proInfo.help_list.length==proInfo.help_num&&proInfo.help_list.length>0&&proInfo.status==1}}'>助力成功</button> -->
+
+  </view>
+  <view class='goTop' hidden='{{isSign}}' bindtap='returnTop'>
+    <icon class='iconfont icon-huidaodingbu'></icon>
+  </view>
+  <view class='goIndex' bindtap='goIndex' data-link='../index/index'>
+    <icon class='iconfont icon-home'></icon>
+  </view>
+  <!-- <button open-type='share' class='goShare'>
+  <icon class='iconfont icon-fenxiang2'></icon>
+</button> -->
+  <!-- <view class='share_bg' wx:if='{{showShare}}' catchtouchmove="ture"></view>
+  <view class="share_info {{is_iphonex?'share_info_iphone':''}}" wx:if='{{showShare}}' catchtouchmove="ture">
+    <view class='close' bindtap='closeShare'>
+      <icon class='iconfont icon-guanbi'></icon>
+    </view>
+    <view class='share_title' wx:if='{{form_share==0&&proInfo.help_list.length<proInfo.help_num}}'>
+      <text class=''>邀请好友助力</text> 免费领
+    </view>
+    <view class='share_title' wx:if='{{form_share==1&&proInfo.help_list.length<proInfo.help_num}}'>
+      <text class='over_hidden'>{{proInfo.nickname}}</text>邀请你为他助力
+    </view>
+    <view class='share_time'>
+      <text style='margin-right:20rpx;'>剩余时间</text>
+      <text class='time'>{{saleTime.day}}</text>
+      <text>天</text>
+      <text class='time'>{{saleTime.hou}}</text>
+      <text>小时</text>
+      <text class='time'>{{saleTime.min}}</text>
+      <text>分</text>
+      <text class='time'>{{saleTime.sec}}</text>
+      <text>秒</text>
+    </view>
+    <view class='share_people'>
+      <view class='share_img_list'>
+        <view class='share_img' wx:for='{{proInfo.help_list}}' wx:for-item="img" wx:key='index'>
+          <image src='{{img.image}}' wx:if="{{item.image!=null||item.image!=''}}"></image>
+        </view>
+        <view class='share_img' wx:for='{{proInfo.help_num-proInfo.help_list.length}}' wx:key='index'>
+          <image src='../../static/img/com/add_img.png'></image>
+        </view>
+      </view>
+      <text class='people_tips' wx:if='{{proInfo.help_list.length<proInfo.help_num}}'>再邀请<text class='num'>{{proInfo.help_num-proInfo.help_list.length}}</text>人助力，即可免费得</text>
+      <text class='people_tips' wx:if='{{proInfo.help_list.length==proInfo.help_num}}'>助力成功</text>
+    </view>
+    <view class='share_btn'>
+      <button id='{{proInfo.id}}' wx:if='{{form_share==1&&proInfo.help_list.length<proInfo.help_num}}' bindtap='boost' style='width:90%'>为他助力</button>
+    </view>
+    <view class='share_btn' style='margin-top:20rpx;'>
+      <button open-type='share' id='{{proInfo.id}}' wx:if='{{form_share==0&&proInfo.help_list.length<proInfo.help_num}}'>邀请助力</button>
+      <button open-type='share' id='{{proInfo.id}}' wx:if='{{form_share==1&&proInfo.help_list.length<proInfo.help_num}}' class='two_width'>更多助力</button>
+      <button wx:if='{{form_share==1&&proInfo.help_list.length<proInfo.help_num}}' class='two_width' data-link='../tryOut/tryOut' bindtap='goLink'>我要领取</button>
+      
+       <button wx:if='{{form_share==0&&proInfo.help_list.length==proInfo.help_num&&proInfo.selected==1}}' class='width' data-link='../sureOrder/sureOrder?addType=3&id={{proInfo.good_id}}&try_id={{proInfo.id}}' bindtap='getTry' id='{{proInfo.id}}'>助力成功，立即下单</button>
+      <button wx:if='{{form_share==0&&proInfo.help_list.length==proInfo.help_num&&proInfo.selected==2}}' class='width'>助力成功，已领取</button>
+      <button wx:if='{{form_share==1&&proInfo.help_list.length==proInfo.help_num}}' class='two_width'>助力成功</button>
+      <button wx:if='{{form_share==1&&proInfo.help_list.length==proInfo.help_num}}' class='two_width' data-link='../tryOut/tryOut' bindtap='goLink'>我要领取</button>
+    </view>
+  </view> -->
+  <!-- <view class='spec_bg' hidden='{{modelShow}}' bindtap='closeSpec' catchtouchmove="ture"></view>
+  <view class='spec_info' hidden='{{modelShow}}' catchtouchmove="ture">
+    <view class='spec_head'>
+      <view class='spec_pro_img' bindtap='viewImg' data-url='{{default_spec.img}}'>
+        <image src='{{default_spec.img}}' mode='widthFix'></image>
+      </view>
+      <view class='spec_close' bindtap='closeSpec'>
+        <icon class='iconfont icon-guanbi'></icon>
+      </view>
+      <view class='spec_pro_price'>
+        <text class='spec_pro_nowprice' wx:if='{{price_type==4}}'>￥{{default_spec.price_combine}}+</text>
+        <text class='spec_pro_nowprice' wx:if='{{price_type==1}}'>￥{{default_spec.price_sell}}</text>
+        <view class='spec_pro_inter_img' wx:if='{{price_type!=1}}'>
+          <icon class='iconfont icon-jifen1'></icon>
+        </view>
+        <text class='spec_pro_integral' wx:if='{{price_type==4}}'>{{default_spec.point_combine}}</text>
+        <text class='spec_pro_integral' wx:if='{{price_type==2}}'>{{default_spec.point}}</text>
+      </view>
+      <view class='spec_pro_code'>
+        <view>
+          <text>{{default_spec.price_market_from}}</text>
+          <text class='spec_pro_orig'>￥{{default_spec.price_market}}</text>
+        </view>
+      </view>
+    </view>
+    <scroll-view scroll-y class='spec_body'>
+      <view>
+        <view class='spec_title'>
+          结算方式
+        </view>
+        <view class='spec_type'>
+          <button size='mini' wx:if='{{sale_type!=1&&sale_type!=2&&sale_type!=3}}' id='4' class="{{price_type==4? 'button_click': ''}}" bindtap='chosePriceType'>
+            ￥{{default_spec.price_combine}}+
+            <icon class='iconfont icon-jifen1'></icon>{{default_spec.point_combine}}
+          </button>
+          <button size='mini' wx:if='{{sale_type!=2&&sale_type!=6}}' id='1' class="{{price_type==1? 'button_click': ''}}" bindtap='chosePriceType'>￥{{default_spec.price_sell}}</button>
+          <button size='mini' wx:if='{{sale_type!=1&&sale_type!=5}}' id='2' class="{{price_type==2? 'button_click': ''}}" bindtap='chosePriceType'>
+            <icon class='iconfont icon-jifen1'></icon>{{default_spec.point}}</button>
+        </view>
+      </view>
+      <view wx:for='{{specList}}' wx:key='index' hidden='{{!hasSpec}}'>
+        <view class='spec_title'>
+          {{item.name}}
+        </view>
+        <view class='spec_type'>
+          <button size='mini' bindtap="choseType" wx:for="{{item.list}}" wx:key='index' id='{{item.tid}}' data-pid='{{item.pid}}' class="{{item.ischose? 'button_click': ''}}">{{item.name}}</button>
+        </view>
+      </view>
+      <view class='spec_num' wx:if="{{proType!='birthday'}}">
+        <text>数量</text>
+        <view class='pro_icon'>
+          <button size='mini' class='pro_spec_btn' id='0' bindtap='lessNum' data-value='less'>-</button>
+          <input value='{{specNum}}' type='number' bindblur='changeValue' />
+          <button size='mini' class='pro_spec_btn' id='1' bindtap='addNum' data-value='add'>+</button>
+        </view>
+      </view>
+    </scroll-view>
+    <view wx:if="{{maxNum>0&&is_up=='true'}}">
+      <view  class="spec_btn {{is_iphonex?'spec_btn_height':''}}">
+        <button bindtap='addCar' class='surebtn'>确认</button>
+      </view>
+    </view>
+    <view wx:if='{{maxNum<=0}}'>
+      <view class="spec_btn {{is_iphonex?'spec_btn_height':''}}">
+        <button class='surebtn'>缺货</button>
+      </view>
+    </view>
+    <view wx:if="{{is_up=='false'}}">
+      <view class="spec_btn {{is_iphonex?'spec_btn_height':''}}">
+        <button class='surebtn'>已下架</button>
+      </view>
+    </view>
+  </view> -->
+</view>
